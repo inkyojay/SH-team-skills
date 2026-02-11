@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feed Ad 04 - Benefit Driven</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  .ad-container {
+    width: 1080px;
+    height: 1350px;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Noto Sans KR', sans-serif;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .bg-image {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(250,248,245,0.3) 0%,
+      rgba(250,248,245,0.5) 30%,
+      rgba(250,248,245,0.88) 55%,
+      rgba(250,248,245,0.97) 70%,
+      #FAF8F5 85%
+    );
+    z-index: 2;
+  }
+
+  .content {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .top-section {
+    padding: 48px 60px 0;
+    flex: 0 0 auto;
+  }
+
+  .brand-logo {
+    font-size: 16px;
+    font-weight: 300;
+    color: #8C7E72;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .main-copy {
+    font-size: 44px;
+    font-weight: 700;
+    color: #3D3229;
+    line-height: 1.3;
+    letter-spacing: -1.5px;
+  }
+
+  .main-copy em {
+    font-style: normal;
+    color: #8BAE6A;
+  }
+
+  .spacer {
+    flex: 1;
+  }
+
+  .benefits-section {
+    padding: 0 52px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 36px;
+  }
+
+  .benefit-card {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 26px 32px;
+    border: 1px solid rgba(61,50,41,0.06);
+  }
+
+  .benefit-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+
+  .icon-bamboo { background: #E8F0DA; }
+  .icon-zipper { background: #DAE8F0; }
+  .icon-season { background: #F0E8DA; }
+  .icon-diaper { background: #F0DAE8; }
+
+  .benefit-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .benefit-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #3D3229;
+    letter-spacing: -0.5px;
+  }
+
+  .benefit-desc {
+    font-size: 18px;
+    font-weight: 400;
+    color: #8C7E72;
+    letter-spacing: -0.2px;
+  }
+
+  .bottom-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 60px 44px;
+    background: #3D3229;
+    border-radius: 28px 28px 0 0;
+  }
+
+  .bottom-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .bottom-product {
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .bottom-price {
+    font-size: 32px;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: -0.5px;
+  }
+
+  .bottom-cta {
+    background: #FFFFFF;
+    color: #3D3229;
+    padding: 18px 44px;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .review-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.8);
+    font-size: 16px;
+    margin-top: 4px;
+  }
+
+  .review-badge .stars {
+    color: #E8A838;
+  }
+</style>
+</head>
+<body>
+<div class="ad-container">
+  <img class="bg-image" src="file:///Users/inkyo/Downloads/슬리핑백/im_yoohyun_1759984598_3739344290968706140_66310175573.jpg" alt="배경">
+  <div class="overlay"></div>
+
+  <div class="content">
+    <div class="top-section">
+      <div class="brand-logo">SUNDAY HUG</div>
+      <h1 class="main-copy">이불 100번 덮어줘도<br>소용없다면? <em>정답은 이거</em></h1>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="benefits-section">
+      <div class="benefit-card">
+        <div class="benefit-icon icon-bamboo">&#127795;</div>
+        <div class="benefit-text">
+          <span class="benefit-title">실키 밤부 소재</span>
+          <span class="benefit-desc">실크처럼 부드러운 대나무 원단, 민감한 아기 피부에 안심</span>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon icon-zipper">&#128274;</div>
+        <div class="benefit-text">
+          <span class="benefit-title">양방향 지퍼</span>
+          <span class="benefit-desc">위아래로 열리는 지퍼, 기저귀 교체 간편</span>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon icon-season">&#9728;&#65039;</div>
+        <div class="benefit-text">
+          <span class="benefit-title">사계절 사용 가능</span>
+          <span class="benefit-desc">통기성 좋은 밤부 소재로 여름에도 쾌적</span>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon icon-diaper">&#128150;</div>
+        <div class="benefit-text">
+          <span class="benefit-title">안전한 수면 환경</span>
+          <span class="benefit-desc">이불 걱정 없이 아기가 밤새 편안하게</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <div class="bottom-left">
+        <span class="bottom-product">꿀잠 슬리핑백 실키 밤부</span>
+        <span class="bottom-price">54,900원</span>
+        <div class="review-badge">
+          <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <span>4.9 (227 리뷰)</span>
+        </div>
+      </div>
+      <div class="bottom-cta">구매하기</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

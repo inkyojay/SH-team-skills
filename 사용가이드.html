@@ -449,6 +449,7 @@
       <div><div class="stat-num">5</div><div class="stat-label">템플릿</div></div>
     </div>
     <nav>
+      <div class="nav-item" data-cat="teammate-mode" onclick="document.getElementById('teammate-mode').scrollIntoView({behavior:'smooth'})"><span>🤝 팀메이트 모드</span><span class="badge" style="background:rgba(0,188,212,0.2);color:#00BCD4">NEW</span></div>
       <div class="nav-item active" data-cat="all"><span>전체</span><span class="badge">39</span></div>
       <div class="nav-item" data-cat="content-creation"><span>콘텐츠 제작</span><span class="badge">2</span></div>
       <div class="nav-item" data-cat="video"><span>영상 제작</span><span class="badge">2</span></div>
@@ -479,6 +480,57 @@
       </div>
     </div>
 
+    <!-- 팀메이트 모드 접속 가이드 -->
+    <section class="section" id="teammate-mode">
+      <h3 class="section-title" style="border-color: #00BCD4">🤝 팀메이트 모드 (Agent Teams)</h3>
+      <div style="background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px;">
+        <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 20px;">
+          여러 Claude가 동시에 각자 다른 작업을 수행하는 협업 모드입니다.<br>
+          tmux 분할 창에서 각 팀메이트의 작업을 실시간으로 확인할 수 있습니다.
+        </p>
+
+        <h4 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 16px;">빠른 시작 (바이패스 모드)</h4>
+
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <span style="background: var(--primary); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; flex-shrink: 0;">1</span>
+            <div>
+              <div style="color: var(--text); font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">tmux 세션 접속</div>
+              <code style="background: rgba(163,128,104,0.2); color: var(--primary-light); padding: 6px 12px; border-radius: 6px; font-family: Monaco, monospace; font-size: 0.8rem; display: inline-block;">tmux attach -t sundayhug-content</code>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <span style="background: var(--primary); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; flex-shrink: 0;">2</span>
+            <div>
+              <div style="color: var(--text); font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">팀메이트 모드로 Claude 시작 (바이패스)</div>
+              <code style="background: rgba(163,128,104,0.2); color: var(--primary-light); padding: 6px 12px; border-radius: 6px; font-family: Monaco, monospace; font-size: 0.8rem; display: inline-block;">claude --teammate-mode tmux --dangerously-skip-permissions</code>
+              <p style="color: var(--muted); font-size: 0.75rem; margin-top: 6px;">⚠️ 바이패스 모드: 모든 권한 확인을 건너뜁니다 (신뢰할 수 있는 환경에서만 사용)</p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <span style="background: var(--primary); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; flex-shrink: 0;">3</span>
+            <div>
+              <div style="color: var(--text); font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">자연어로 팀 생성 요청</div>
+              <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; margin-top: 4px;">
+                <span style="color: var(--primary-light); font-family: Monaco, monospace; font-size: 0.8rem;">"3명으로 팀 만들어줘 - 광고카피, 영상편집, 브랜드분석 각각 담당"</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: rgba(0,188,212,0.1); border: 1px solid rgba(0,188,212,0.2); border-radius: 8px; padding: 14px; margin-top: 20px;">
+          <h5 style="color: #00BCD4; font-size: 0.8rem; margin-bottom: 8px;">tmux 단축키</h5>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 0.75rem;">
+            <span style="color: var(--muted);"><code style="color: var(--primary-light);">Shift+Up/Down</code> 팀메이트 선택</span>
+            <span style="color: var(--muted);"><code style="color: var(--primary-light);">Ctrl+B, D</code> tmux 나가기(유지)</span>
+            <span style="color: var(--muted);"><code style="color: var(--primary-light);">Shift+Tab</code> 위임 모드 전환</span>
+            <span style="color: var(--muted);"><code style="color: var(--primary-light);">Ctrl+T</code> 작업 목록 토글</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section class="section" data-cat="content-creation">
       <h3 class="section-title" style="border-color: #4CAF50">📝 콘텐츠 제작 (2)</h3>
@@ -827,6 +879,18 @@
         <div class="content">
           <h4>파일 전달하기</h4>
           <p>이미지나 파일 경로를 함께 전달하면 해당 파일을 활용해 작업합니다.</p>
+        </div>
+      </div>
+      <div class="modal-step">
+        <span class="num">5</span>
+        <div class="content">
+          <h4>팀메이트 모드 (협업)</h4>
+          <p>여러 Claude가 동시에 작업합니다. tmux 세션에서 바이패스 모드로 시작하세요.</p>
+          <div class="modal-examples">
+            <h5>접속 명령어</h5>
+            <div class="example">tmux attach -t sundayhug-content</div>
+            <div class="example">claude --teammate-mode tmux --dangerously-skip-permissions</div>
+          </div>
         </div>
       </div>
       <div class="modal-step">

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Story Ad 02 - Review Social Proof</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    font-family: 'Noto Sans KR', sans-serif;
+    position: relative;
+    background: #F9F5F0;
+  }
+
+  .bg-image {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .bg-gradient {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 65%;
+    background: linear-gradient(
+      180deg,
+      transparent 40%,
+      rgba(249,245,240,0.4) 70%,
+      #F9F5F0 100%
+    );
+    z-index: 1;
+  }
+
+  /* Review card overlay on photo */
+  .review-badge-top {
+    position: absolute;
+    top: 148px;
+    left: 70px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 18px 28px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+
+  .review-badge-top .stars {
+    font-size: 28px;
+    color: #F5A623;
+    letter-spacing: 2px;
+  }
+
+  .review-badge-top .score {
+    font-size: 30px;
+    font-weight: 800;
+    color: #4A3728;
+  }
+
+  .review-badge-top .count {
+    font-size: 24px;
+    font-weight: 500;
+    color: #8B7B6B;
+  }
+
+  /* Bottom content area */
+  .bottom-area {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 52%;
+    z-index: 2;
+    padding: 0 70px 340px 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 36px;
+  }
+
+  .section-label {
+    font-size: 24px;
+    font-weight: 700;
+    color: #C49A6C;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .headline {
+    font-size: 46px;
+    font-weight: 800;
+    color: #4A3728;
+    line-height: 1.4;
+    letter-spacing: -2px;
+    word-break: keep-all;
+  }
+
+  /* Review cards */
+  .review-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .review-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 28px 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .review-card .reviewer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .reviewer-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #E8DDD3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .reviewer-name {
+    font-size: 24px;
+    font-weight: 600;
+    color: #8B7B6B;
+  }
+
+  .reviewer-stars {
+    margin-left: auto;
+    color: #F5A623;
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+
+  .review-text {
+    font-size: 28px;
+    font-weight: 500;
+    color: #4A3728;
+    line-height: 1.5;
+    letter-spacing: -0.5px;
+  }
+
+  .cta-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 8px;
+  }
+
+  .cta-button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #4A3728;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 700;
+    padding: 26px 40px;
+    border-radius: 60px;
+    letter-spacing: -0.5px;
+  }
+
+  .cta-sub {
+    font-size: 24px;
+    font-weight: 500;
+    color: #8B7B6B;
+    white-space: nowrap;
+  }
+
+  .logo {
+    position: absolute;
+    bottom: 360px;
+    right: 70px;
+    z-index: 3;
+    font-size: 22px;
+    font-weight: 600;
+    color: #C4B5A5;
+    letter-spacing: 3px;
+  }
+</style>
+</head>
+<body>
+  <img class="bg-image" src="file:///Users/inkyo/Downloads/슬리핑백/__minchebaby_1760266569_3741709635683298010_70841086281.jpg" alt="UGC">
+  <div class="bg-gradient"></div>
+
+  <div class="review-badge-top">
+    <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+    <span class="score">4.9</span>
+    <span class="count">/ 227 리뷰</span>
+  </div>
+
+  <div class="bottom-area">
+    <span class="section-label">REAL REVIEW</span>
+    <h1 class="headline">227명의 엄마가 증명한<br>우리 아기 꿀잠의 비밀</h1>
+
+    <div class="review-cards">
+      <div class="review-card">
+        <div class="reviewer">
+          <div class="reviewer-avatar">&#128102;</div>
+          <span class="reviewer-name">8개월 아기맘</span>
+          <span class="reviewer-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        </div>
+        <p class="review-text">"첫째 때 써보고 둘째도 바로 재구매!<br>밤새 안 깨고 꿀잠 자요"</p>
+      </div>
+      <div class="review-card">
+        <div class="reviewer">
+          <div class="reviewer-avatar">&#128118;</div>
+          <span class="reviewer-name">신생아맘</span>
+          <span class="reviewer-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        </div>
+        <p class="review-text">"실키 밤부 원단이 진짜 부드러워요.<br>아기 피부가 먼저 알아요"</p>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <div class="cta-button">
+        227개 후기 확인하기 &rarr;
+      </div>
+    </div>
+  </div>
+
+  <div class="logo">SUNDAY HUG</div>
+</body>
+</html>

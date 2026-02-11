@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Card News Guide 01 - Title</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    font-family: 'Noto Sans KR', sans-serif;
+    position: relative;
+    background: #FBF7F2;
+  }
+
+  /* Top decorative bar */
+  .top-bar {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, #E8D5C0, #C49A6C, #A8C4A0, #9BB8D0, #C4A8D4);
+  }
+
+  /* Page indicator */
+  .page-indicator {
+    position: absolute;
+    top: 130px;
+    left: 70px;
+    display: flex;
+    gap: 10px;
+    z-index: 2;
+  }
+
+  .page-dot {
+    width: 48px;
+    height: 8px;
+    border-radius: 4px;
+    background: #E0D5C8;
+  }
+
+  .page-dot.active {
+    background: #4A3728;
+    width: 72px;
+  }
+
+  .content {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 200px 70px 340px 70px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+  }
+
+  .top-label {
+    font-size: 26px;
+    font-weight: 700;
+    color: #C49A6C;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+  }
+
+  .main-title {
+    font-size: 68px;
+    font-weight: 900;
+    color: #4A3728;
+    line-height: 1.35;
+    letter-spacing: -3px;
+    word-break: keep-all;
+    margin-bottom: 40px;
+  }
+
+  .subtitle {
+    font-size: 32px;
+    font-weight: 500;
+    color: #8B7B6B;
+    line-height: 1.6;
+    letter-spacing: -0.5px;
+    margin-bottom: 50px;
+  }
+
+  /* Photo section */
+  .photo-section {
+    flex: 1;
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(74,55,40,0.12);
+  }
+
+  .photo-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .photo-overlay {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    padding: 40px;
+    background: linear-gradient(transparent, rgba(74,55,40,0.7));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .photo-tag {
+    background: rgba(255,255,255,0.9);
+    border-radius: 50px;
+    padding: 14px 28px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #4A3728;
+  }
+
+  .swipe-hint {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .swipe-arrow {
+    font-size: 28px;
+    animation: swipeRight 1.5s infinite;
+  }
+
+  @keyframes swipeRight {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(8px); }
+  }
+
+  .logo {
+    position: absolute;
+    bottom: 354px;
+    right: 70px;
+    z-index: 2;
+    font-size: 22px;
+    font-weight: 600;
+    color: #C4B5A5;
+    letter-spacing: 3px;
+  }
+</style>
+</head>
+<body>
+  <div class="top-bar"></div>
+
+  <div class="page-indicator">
+    <div class="page-dot active"></div>
+    <div class="page-dot"></div>
+    <div class="page-dot"></div>
+    <div class="page-dot"></div>
+    <div class="page-dot"></div>
+  </div>
+
+  <div class="content">
+    <span class="top-label">SLEEPING BAG GUIDE</span>
+    <h1 class="main-title">
+      우리 아기<br>
+      첫 슬리핑백,<br>
+      이렇게 고르세요
+    </h1>
+    <p class="subtitle">
+      초보맘을 위한 슬리핑백 선택 가이드 5단계
+    </p>
+
+    <div class="photo-section">
+      <img src="file:///Users/inkyo/Downloads/슬리핑백/ss__honeys__ss_1758256537_3724848265812841821_51850137427.jpg" alt="UGC">
+      <div class="photo-overlay">
+        <span class="photo-tag">SUNDAY HUG</span>
+        <span class="swipe-hint">다음 <span class="swipe-arrow">&rarr;</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="logo">SUNDAY HUG</div>
+</body>
+</html>

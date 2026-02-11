@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Story Ad 05 - Lifestyle Emotional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    font-family: 'Noto Sans KR', sans-serif;
+    position: relative;
+  }
+
+  .bg-image {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+  }
+
+  /* Warm gradient overlay */
+  .warm-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(255,240,220,0.15) 0%,
+      rgba(255,235,210,0.1) 20%,
+      transparent 40%,
+      rgba(74,55,40,0.2) 60%,
+      rgba(74,55,40,0.65) 80%,
+      rgba(74,55,40,0.88) 100%
+    );
+    z-index: 1;
+  }
+
+  /* Top vignette for dreamy feel */
+  .top-glow {
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255,230,200,0.25) 0%, transparent 70%);
+    z-index: 1;
+  }
+
+  .content {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 140px 70px 340px 70px;
+  }
+
+  .top-badge {
+    position: absolute;
+    top: 148px;
+    left: 70px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50px;
+    padding: 14px 26px;
+  }
+
+  .moon-icon {
+    font-size: 24px;
+  }
+
+  .badge-text {
+    font-size: 24px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 0.5px;
+  }
+
+  .bottom-content {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .headline {
+    font-size: 64px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.4;
+    letter-spacing: -2px;
+    word-break: keep-all;
+    text-shadow: 0 2px 30px rgba(0,0,0,0.2);
+  }
+
+  .headline .zzz {
+    color: #FFE4B5;
+    font-size: 56px;
+    opacity: 0.8;
+  }
+
+  .divider-line {
+    width: 60px;
+    height: 3px;
+    background: rgba(255,255,255,0.35);
+    border-radius: 2px;
+  }
+
+  .desc {
+    font-size: 30px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.6;
+    letter-spacing: -0.5px;
+  }
+
+  .product-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .product-tag {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 14px 22px;
+    font-size: 24px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .rating-mini {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #F5A623;
+  }
+
+  .rating-mini span {
+    color: rgba(255,255,255,0.6);
+    font-weight: 500;
+  }
+
+  /* Swipe up CTA */
+  .swipe-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .swipe-line {
+    width: 40px;
+    height: 4px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 2px;
+    animation: swipeUp 2s infinite;
+  }
+
+  @keyframes swipeUp {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(-8px); opacity: 1; }
+  }
+
+  .swipe-text {
+    font-size: 22px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+  }
+
+  .logo {
+    position: absolute;
+    bottom: 355px;
+    right: 70px;
+    z-index: 3;
+    font-size: 22px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 3px;
+  }
+</style>
+</head>
+<body>
+  <img class="bg-image" src="file:///Users/inkyo/Downloads/슬리핑백/ddidong2_m21_1760173473_3740928689001534611_44615471898.jpg" alt="UGC">
+  <div class="warm-overlay"></div>
+  <div class="top-glow"></div>
+
+  <div class="top-badge">
+    <span class="moon-icon">&#127769;</span>
+    <span class="badge-text">Good Night</span>
+  </div>
+
+  <div class="content">
+    <div class="bottom-content">
+      <h1 class="headline">
+        엄마도 아기도<br>
+        오늘 밤은 꿀잠 <span class="zzz">&#128164;</span>
+      </h1>
+
+      <div class="divider-line"></div>
+
+      <p class="desc">
+        실키 밤부 소재가 감싸는 부드러운 잠자리<br>
+        뒤척여도 벗겨지지 않는 안심 슬리핑백
+      </p>
+
+      <div class="product-row">
+        <span class="product-tag">꿀잠 슬리핑백 실키 밤부</span>
+        <span class="product-tag">54,900원</span>
+        <span class="rating-mini">&#9733; 4.9 <span>(227)</span></span>
+      </div>
+
+      <div class="swipe-cta">
+        <div class="swipe-line"></div>
+        <span class="swipe-text">자세히 보기</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="logo">SUNDAY HUG</div>
+</body>
+</html>

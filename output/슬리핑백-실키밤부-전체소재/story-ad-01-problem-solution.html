@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Story Ad 01 - Problem Solution</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    font-family: 'Noto Sans KR', sans-serif;
+    position: relative;
+  }
+
+  .bg-image {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    filter: brightness(0.55);
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(0,0,0,0.15) 0%,
+      rgba(0,0,0,0.05) 30%,
+      rgba(0,0,0,0.05) 55%,
+      rgba(74,55,40,0.75) 80%,
+      rgba(74,55,40,0.92) 100%
+    );
+    z-index: 1;
+  }
+
+  .content {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Safe zones: top 108px, bottom 320px, left 60px, right 120px */
+    padding: 140px 130px 340px 70px;
+  }
+
+  .top-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    padding: 14px 28px;
+    width: fit-content;
+  }
+
+  .badge-dot {
+    width: 12px;
+    height: 12px;
+    background: #FF6B6B;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .badge-text {
+    font-size: 26px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+
+  .headline {
+    font-size: 62px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.35;
+    letter-spacing: -2px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    word-break: keep-all;
+  }
+
+  .headline em {
+    font-style: normal;
+    color: #FFE4B5;
+    position: relative;
+  }
+
+  .bottom-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .sub-text {
+    font-size: 32px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    letter-spacing: -0.5px;
+    word-break: keep-all;
+  }
+
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 2px;
+  }
+
+  .product-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .product-name {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+
+  .product-price {
+    font-size: 28px;
+    font-weight: 600;
+    color: #FFE4B5;
+  }
+
+  .cta-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: #fff;
+    color: #4A3728;
+    font-size: 32px;
+    font-weight: 700;
+    padding: 28px 50px;
+    border-radius: 60px;
+    letter-spacing: -0.5px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+    width: fit-content;
+  }
+
+  .cta-arrow {
+    font-size: 28px;
+  }
+
+  .logo {
+    position: absolute;
+    bottom: 360px;
+    right: 130px;
+    z-index: 2;
+    font-size: 22px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 3px;
+  }
+</style>
+</head>
+<body>
+  <img class="bg-image" src="file:///Users/inkyo/Downloads/슬리핑백/mming_kkong__1760015410_3739602762645870166_3587164260.jpg" alt="UGC">
+  <div class="overlay"></div>
+
+  <div class="content">
+    <div class="top-section">
+      <div class="badge">
+        <div class="badge-dot"></div>
+        <span class="badge-text">육아맘 공감 100%</span>
+      </div>
+      <h1 class="headline">
+        이불 걷어차는<br>
+        우리 아기,<br>
+        <em>해결됐어요</em>
+      </h1>
+    </div>
+
+    <div class="bottom-section">
+      <p class="sub-text">
+        양방향 지퍼로 입히기 쉽고<br>
+        입은 채로 기저귀 갈기까지 OK
+      </p>
+      <div class="divider"></div>
+      <div class="product-info">
+        <span class="product-name">꿀잠 슬리핑백 실키 밤부</span>
+        <span class="product-price">54,900원</span>
+      </div>
+      <div class="cta-button">
+        지금 확인하기 <span class="cta-arrow">&rarr;</span>
+      </div>
+      <p class="sub-text" style="font-size:26px; opacity:0.7; margin-top:-16px;">
+        '이걸 왜 이제야 샀지' 후회되실 거예요
+      </p>
+    </div>
+  </div>
+
+  <div class="logo">SUNDAY HUG</div>
+</body>
+</html>

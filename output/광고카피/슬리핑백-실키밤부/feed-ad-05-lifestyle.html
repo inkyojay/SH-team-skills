@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feed Ad 05 - Emotional Lifestyle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  .ad-container {
+    width: 1080px;
+    height: 1350px;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Noto Sans KR', sans-serif;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .bg-image {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    filter: brightness(0.95);
+  }
+
+  .warm-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(245,230,210,0.15) 0%,
+      rgba(245,230,210,0.05) 40%,
+      rgba(245,230,210,0.1) 60%,
+      rgba(61,50,41,0.55) 85%,
+      rgba(61,50,41,0.85) 100%
+    );
+    z-index: 2;
+  }
+
+  .content {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 44px 52px;
+  }
+
+  .brand-logo {
+    font-size: 20px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+  }
+
+  .review-pill {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(12px);
+    border-radius: 50px;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .review-pill .stars {
+    color: #E8A838;
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+
+  .review-pill .text {
+    color: rgba(255,255,255,0.9);
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .bottom-content {
+    padding: 0 60px 56px;
+  }
+
+  .emotion-copy {
+    font-size: 48px;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.35;
+    letter-spacing: -2px;
+    margin-bottom: 14px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.12);
+  }
+
+  .emotion-sub {
+    font-size: 22px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.5;
+    margin-bottom: 36px;
+    letter-spacing: -0.3px;
+  }
+
+  .bottom-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .product-tag {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .product-name {
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .product-price {
+    font-size: 32px;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: -0.5px;
+  }
+
+  .color-options {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .color-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.5);
+  }
+
+  .color-label {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    margin-left: 6px;
+  }
+
+  .cta-button {
+    background: #FFFFFF;
+    color: #3D3229;
+    padding: 20px 48px;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+</style>
+</head>
+<body>
+<div class="ad-container">
+  <img class="bg-image" src="file:///Users/inkyo/Downloads/슬리핑백/mongdol.zip_1762759114_3762618618485122406_69437222169.jpg" alt="아기 수면 장면">
+  <div class="warm-overlay"></div>
+
+  <div class="content">
+    <div class="top-bar">
+      <div class="brand-logo">SUNDAY HUG</div>
+      <div class="review-pill">
+        <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span class="text">4.9</span>
+      </div>
+    </div>
+
+    <div class="bottom-content">
+      <h1 class="emotion-copy">엄마도 아기도<br>오늘 밤은 꿀잠</h1>
+      <p class="emotion-sub">실키 밤부가 감싸는 세상에서 가장 부드러운 잠자리</p>
+
+      <div class="bottom-row">
+        <div class="product-tag">
+          <span class="product-name">꿀잠 슬리핑백 실키 밤부</span>
+          <span class="product-price">54,900원</span>
+          <div class="color-options">
+            <div class="color-circle" style="background:#F5F0E8;"></div>
+            <div class="color-circle" style="background:#D4C5A9;"></div>
+            <div class="color-circle" style="background:#E8C4C4;"></div>
+            <div class="color-circle" style="background:#8BAE6A;"></div>
+            <div class="color-circle" style="background:#A8C8D8;"></div>
+            <div class="color-circle" style="background:#C8B8D8;"></div>
+            <span class="color-label">6 colors</span>
+          </div>
+        </div>
+        <div class="cta-button">지금 만나기</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

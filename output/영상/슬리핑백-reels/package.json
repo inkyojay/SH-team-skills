@@ -1,0 +1,23 @@
+{
+  "name": "sundayhug-sleeping-bag-reels",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "remotion studio",
+    "build:a": "remotion render ReelsA out/reels-a.mp4",
+    "build:b": "remotion render ReelsB out/reels-b.mp4",
+    "build:c": "remotion render ReelsC out/reels-c.mp4",
+    "setup": "bash setup.sh"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.242",
+    "@remotion/transitions": "4.0.242",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "4.0.242"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "typescript": "^5.7.2"
+  }
+}

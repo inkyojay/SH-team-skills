@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Card News Guide 05 - CTA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    font-family: 'Noto Sans KR', sans-serif;
+    position: relative;
+    background: #4A3728;
+  }
+
+  .top-bar {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, #E8D5C0, #C49A6C, #A8C4A0, #9BB8D0, #C4A8D4);
+    z-index: 3;
+  }
+
+  .page-indicator {
+    position: absolute;
+    top: 130px;
+    left: 70px;
+    display: flex;
+    gap: 10px;
+    z-index: 3;
+  }
+
+  .page-dot {
+    width: 48px;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.25);
+  }
+
+  .page-dot:nth-child(5) {
+    background: #fff;
+    width: 72px;
+  }
+
+  /* Background photo */
+  .bg-photo {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+    object-position: center top;
+    opacity: 0.4;
+  }
+
+  .bg-gradient {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 55%;
+    background: linear-gradient(180deg, rgba(74,55,40,0.3) 0%, #4A3728 100%);
+    z-index: 1;
+  }
+
+  .content {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 200px 70px 340px 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .brand-logo {
+    font-size: 32px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 6px;
+    margin-bottom: 10px;
+  }
+
+  .product-name {
+    font-size: 38px;
+    font-weight: 600;
+    color: #C49A6C;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+
+  .headline {
+    font-size: 64px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.35;
+    letter-spacing: -2px;
+    word-break: keep-all;
+  }
+
+  /* Rating section */
+  .rating-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 24px 40px;
+  }
+
+  .rating-stars {
+    font-size: 32px;
+    color: #F5A623;
+    letter-spacing: 2px;
+  }
+
+  .rating-score {
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .rating-count {
+    font-size: 26px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* Price */
+  .price-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .price-label {
+    font-size: 26px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .price-value {
+    font-size: 72px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -2px;
+  }
+
+  .price-value .won {
+    font-size: 48px;
+    font-weight: 600;
+  }
+
+  /* Color dots */
+  .color-dots {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .color-dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.3);
+  }
+
+  .color-dot.c1 { background: #FEFCF8; }
+  .color-dot.c2 { background: #D4C8B8; }
+  .color-dot.c3 { background: #F0C8C8; }
+  .color-dot.c4 { background: #9CC49C; }
+  .color-dot.c5 { background: #A8C8DC; }
+  .color-dot.c6 { background: #C4A8D4; }
+
+  .color-label {
+    font-size: 24px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.5);
+    margin-left: 8px;
+  }
+
+  /* CTA */
+  .cta-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: #fff;
+    color: #4A3728;
+    font-size: 36px;
+    font-weight: 800;
+    padding: 32px 80px;
+    border-radius: 60px;
+    letter-spacing: -0.5px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    margin-top: 10px;
+  }
+
+  .cta-sub {
+    font-size: 24px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.45);
+    margin-top: -10px;
+  }
+</style>
+</head>
+<body>
+  <div class="top-bar"></div>
+
+  <div class="page-indicator">
+    <div class="page-dot"></div>
+    <div class="page-dot"></div>
+    <div class="page-dot"></div>
+    <div class="page-dot"></div>
+    <div class="page-dot"></div>
+  </div>
+
+  <img class="bg-photo" src="file:///Users/inkyo/Downloads/슬리핑백/mongdol.zip_1762759114_3762618618485122406_69437222169.jpg" alt="UGC">
+  <div class="bg-gradient"></div>
+
+  <div class="content">
+    <span class="brand-logo">SUNDAY HUG</span>
+    <span class="product-name">꿀잠 슬리핑백 실키 밤부</span>
+
+    <h1 class="headline">
+      오늘 밤부터<br>
+      엄마도 아기도<br>
+      꿀잠
+    </h1>
+
+    <div class="rating-section">
+      <span class="rating-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span class="rating-score">4.9</span>
+      <span class="rating-count">227 리뷰</span>
+    </div>
+
+    <div class="price-section">
+      <span class="price-label">실키 밤부 슬리핑백</span>
+      <span class="price-value">54,900<span class="won">원</span></span>
+    </div>
+
+    <div class="color-dots">
+      <div class="color-dot c1"></div>
+      <div class="color-dot c2"></div>
+      <div class="color-dot c3"></div>
+      <div class="color-dot c4"></div>
+      <div class="color-dot c5"></div>
+      <div class="color-dot c6"></div>
+      <span class="color-label">6 colors</span>
+    </div>
+
+    <div class="cta-button">
+      지금 구매하기 &rarr;
+    </div>
+    <span class="cta-sub">무료 배송 | 교환/반품 무료</span>
+  </div>
+</body>
+</html>
