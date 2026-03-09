@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>프로모션 워크플로우 가이드 — SUNDAYHUG</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --beige: #F5E6D3;
+    --brown: #8B7355;
+    --cream: #FAFAF7;
+    --soft-gray: #E8E4DE;
+    --dark: #333333;
+    --mid-gray: #666666;
+    --light-gray: #999999;
+    --sale-red: #D4534A;
+    --soft-pink: #F2D4C4;
+    --white: #FFFFFF;
+  }
+
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(139,115,85,.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  nav .inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    height: 56px;
+  }
+  nav .logo { font-weight: 700; font-size: 15px; color: #fff; letter-spacing: 2px; }
+  nav .links { display: flex; gap: 28px; }
+  nav .links a {
+    font-size: 13px; color: rgba(255,255,255,.7); text-decoration: none;
+    transition: color .2s;
+  }
+  nav .links a:hover { color: #fff; }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(160deg, var(--brown) 0%, #6b573f 100%);
+    padding: 100px 32px 80px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 20%, rgba(245,230,211,.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 80%, rgba(245,230,211,.06) 0%, transparent 50%);
+  }
+  .hero > * { position: relative; }
+  .hero .badge {
+    display: inline-block;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.18);
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 16px;
+  }
+  .hero p {
+    font-size: 17px;
+    color: rgba(255,255,255,.7);
+    max-width: 560px;
+    margin: 0 auto 40px;
+  }
+  .hero-cards {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .hero-card {
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 14px;
+    padding: 20px 28px;
+    min-width: 200px;
+    backdrop-filter: blur(8px);
+  }
+  .hero-card .num { font-size: 28px; font-weight: 700; }
+  .hero-card .label { font-size: 13px; color: rgba(255,255,255,.6); margin-top: 4px; }
+
+  /* ─── SECTIONS ─── */
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+  section { padding: 80px 0; }
+  section + section { border-top: 1px solid var(--soft-gray); }
+
+  .section-label {
+    font-size: 12px; font-weight: 600; color: var(--brown);
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: clamp(26px, 3.5vw, 36px);
+    font-weight: 700; color: var(--brown); margin-bottom: 12px;
+  }
+  .section-desc {
+    font-size: 16px; color: var(--mid-gray); max-width: 640px; margin-bottom: 48px;
+  }
+
+  /* ─── FLOW DIAGRAM ─── */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .flow-step {
+    display: flex;
+    gap: 24px;
+    align-items: stretch;
+    position: relative;
+  }
+  .flow-line {
+    width: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .flow-dot {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: #fff;
+    flex-shrink: 0;
+  }
+  .flow-dot.plan { background: var(--brown); }
+  .flow-dot.design { background: var(--sale-red); }
+  .flow-connector {
+    flex: 1;
+    width: 2px;
+    background: var(--soft-gray);
+    min-height: 20px;
+  }
+  .flow-content {
+    flex: 1;
+    background: var(--white);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(0,0,0,.04);
+    box-shadow: 0 2px 12px rgba(0,0,0,.03);
+  }
+  .flow-content h3 {
+    font-size: 18px; font-weight: 600; color: var(--dark); margin-bottom: 4px;
+  }
+  .flow-content .phase-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+  .phase-tag.plan-tag { background: var(--beige); color: var(--brown); }
+  .phase-tag.design-tag { background: #fdeaea; color: var(--sale-red); }
+  .flow-content p { font-size: 14px; color: var(--mid-gray); }
+
+  /* ─── SKILL CARDS ─── */
+  .skill-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+    gap: 32px;
+  }
+  .skill-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,.04);
+    box-shadow: 0 4px 20px rgba(0,0,0,.04);
+  }
+  .skill-card-header {
+    padding: 32px 32px 24px;
+    position: relative;
+  }
+  .skill-card-header.plan-bg {
+    background: linear-gradient(135deg, var(--beige) 0%, #f0dcc5 100%);
+  }
+  .skill-card-header.design-bg {
+    background: linear-gradient(135deg, #fdeaea 0%, var(--soft-pink) 100%);
+  }
+  .skill-cmd {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0,0,0,.06);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    color: var(--dark);
+    margin-bottom: 16px;
+  }
+  .skill-cmd .slash { color: var(--brown); }
+  .skill-card-header h2 { font-size: 22px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+  .skill-card-header p { font-size: 14px; color: var(--mid-gray); }
+  .skill-card-body { padding: 28px 32px 32px; }
+
+  .phase-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+  .phase-item { display: flex; gap: 16px; align-items: flex-start; }
+  .phase-num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .phase-num.p { background: var(--beige); color: var(--brown); }
+  .phase-num.d { background: #fdeaea; color: var(--sale-red); }
+  .phase-item-text h4 { font-size: 15px; font-weight: 600; color: var(--dark); margin-bottom: 2px; }
+  .phase-item-text p { font-size: 13px; color: var(--light-gray); }
+
+  /* ─── CONVERSATION EXAMPLE ─── */
+  .chat-box {
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .chat-msg {
+    max-width: 85%;
+    padding: 14px 20px;
+    border-radius: 18px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .chat-msg.user {
+    align-self: flex-end;
+    background: var(--brown);
+    color: #fff;
+    border-bottom-right-radius: 6px;
+  }
+  .chat-msg.ai {
+    align-self: flex-start;
+    background: var(--white);
+    color: var(--dark);
+    border: 1px solid var(--soft-gray);
+    border-bottom-left-radius: 6px;
+  }
+  .chat-msg .sender {
+    font-size: 11px; font-weight: 600; margin-bottom: 4px;
+    opacity: .6;
+  }
+  .chat-msg code {
+    background: rgba(0,0,0,.06);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'SF Mono', monospace;
+  }
+
+  /* ─── CHANNEL TABLE ─── */
+  .channel-table-wrap {
+    overflow-x: auto;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,.04);
+    box-shadow: 0 2px 12px rgba(0,0,0,.03);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    font-size: 14px;
+  }
+  thead { background: var(--brown); color: #fff; }
+  th { padding: 14px 20px; text-align: left; font-weight: 600; font-size: 13px; white-space: nowrap; }
+  td { padding: 12px 20px; border-bottom: 1px solid #f0ede8; white-space: nowrap; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #faf8f5; }
+  .ch-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .ch-insta { background: #fce4ec; color: #c2185b; }
+  .ch-naver { background: #e8f5e9; color: #2e7d32; }
+  .ch-own { background: #e3f2fd; color: #1565c0; }
+  .ch-kakao { background: #fff9c4; color: #f57f17; }
+  .ch-live { background: #f3e5f5; color: #7b1fa2; }
+  .size-tag {
+    font-family: 'SF Mono', monospace;
+    font-size: 13px;
+    color: var(--mid-gray);
+  }
+  .ref-count {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--beige); color: var(--brown);
+    width: 28px; height: 28px; border-radius: 50%;
+    font-size: 12px; font-weight: 700;
+  }
+
+  /* ─── OUTPUT ─── */
+  .output-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .output-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 24px;
+    border: 1px solid rgba(0,0,0,.04);
+    box-shadow: 0 2px 8px rgba(0,0,0,.02);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .output-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .output-icon.pen { background: var(--beige); }
+  .output-icon.json { background: #e3f2fd; }
+  .output-icon.team { background: #fce4ec; }
+  .output-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .output-card p { font-size: 13px; color: var(--light-gray); }
+  .output-card code {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--mid-gray);
+    background: #f8f6f3;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-family: 'SF Mono', monospace;
+    word-break: break-all;
+  }
+
+  /* ─── ARCHITECTURE ─── */
+  .arch-diagram {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 40px;
+    border: 1px solid rgba(0,0,0,.04);
+    box-shadow: 0 4px 20px rgba(0,0,0,.04);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--mid-gray);
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .arch-diagram .hl { color: var(--brown); font-weight: 600; }
+  .arch-diagram .rd { color: var(--sale-red); font-weight: 600; }
+  .arch-diagram .gr { color: #2e7d32; }
+  .arch-diagram .dim { opacity: .5; }
+
+  /* ─── TIP BOX ─── */
+  .tip-box {
+    background: var(--beige);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-top: 32px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .tip-box .icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .tip-box h4 { font-size: 14px; font-weight: 600; color: var(--brown); margin-bottom: 4px; }
+  .tip-box p { font-size: 13px; color: var(--mid-gray); }
+
+  /* ─── DESIGN SYSTEM PREVIEW ─── */
+  .ds-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .ds-swatch {
+    width: 80px;
+    text-align: center;
+  }
+  .ds-swatch .color {
+    width: 80px; height: 56px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(0,0,0,.06);
+  }
+  .ds-swatch .name { font-size: 11px; font-weight: 600; color: var(--dark); }
+  .ds-swatch .hex { font-size: 11px; color: var(--light-gray); font-family: monospace; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 48px 32px;
+    background: var(--brown);
+    color: rgba(255,255,255,.5);
+    font-size: 13px;
+  }
+  footer strong { color: #fff; font-weight: 600; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 640px) {
+    .skill-grid { grid-template-columns: 1fr; }
+    .hero-cards { flex-direction: column; align-items: center; }
+    nav .links { display: none; }
+    .output-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="inner">
+    <div class="logo">SUNDAYHUG</div>
+    <div class="links">
+      <a href="#overview">워크플로우</a>
+      <a href="#skills">스킬 상세</a>
+      <a href="#example">사용 예시</a>
+      <a href="#channels">채널 사양</a>
+      <a href="#architecture">시스템 구조</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge">PROMOTION WORKFLOW SYSTEM</div>
+  <h1>프로모션 워크플로우 가이드</h1>
+  <p>기획부터 디자인 제작까지, 두 개의 슬래시 커맨드로 완성하는 프로모션 시스템</p>
+  <div class="hero-cards">
+    <div class="hero-card">
+      <div class="num">2</div>
+      <div class="label">슬래시 커맨드</div>
+    </div>
+    <div class="hero-card">
+      <div class="num">14</div>
+      <div class="label">채널 포맷</div>
+    </div>
+    <div class="hero-card">
+      <div class="num">67</div>
+      <div class="label">레퍼런스 이미지</div>
+    </div>
+    <div class="hero-card">
+      <div class="num">8</div>
+      <div class="label">디자인 템플릿</div>
+    </div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="container">
+    <div class="section-label">WORKFLOW</div>
+    <div class="section-title">전체 워크플로우</div>
+    <div class="section-desc">6단계의 흐름으로 프로모션 기획서 작성부터 채널별 디자인 병렬 제작까지 완료됩니다.</div>
+
+    <div class="flow">
+      <!-- Step 1 -->
+      <div class="flow-step">
+        <div class="flow-line">
+          <div class="flow-dot plan">1</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-content">
+          <span class="phase-tag plan-tag">/promotion-plan</span>
+          <h3>프로모션 컨셉 논의</h3>
+          <p>자연어 대화로 프로모션명, 컨셉, 타겟, 채널, 혜택 등 핵심 항목을 하나씩 확정합니다. 이미 알려준 정보는 건너뛰고 부족한 부분만 질문합니다.</p>
+        </div>
+      </div>
+      <!-- Step 2 -->
+      <div class="flow-step">
+        <div class="flow-line">
+          <div class="flow-dot plan">2</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-content">
+          <span class="phase-tag plan-tag">/promotion-plan</span>
+          <h3>.pen 기획서 + .json 데이터 생성</h3>
+          <p>확정된 내용을 시각적 기획서(.pen)와 구조화된 데이터(.json)로 자동 생성합니다. 기획서는 1680×1188 사이즈의 브랜드 톤 문서입니다.</p>
+        </div>
+      </div>
+      <!-- Step 3 -->
+      <div class="flow-step">
+        <div class="flow-line">
+          <div class="flow-dot design">3</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-content">
+          <span class="phase-tag design-tag">/promotion-design</span>
+          <h3>채널별 디자인 산출물 논의</h3>
+          <p>기획서를 로드한 뒤, 각 채널에서 제작 가능한 포맷을 제시합니다. 사용자가 원하는 디자인을 선택하면 레퍼런스 이미지를 보여줍니다.</p>
+        </div>
+      </div>
+      <!-- Step 4 -->
+      <div class="flow-step">
+        <div class="flow-line">
+          <div class="flow-dot design">4</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-content">
+          <span class="phase-tag design-tag">/promotion-design</span>
+          <h3>레퍼런스 확인 + 소재 수집</h3>
+          <p>기존 레퍼런스 이미지(67장)를 참고하고, 사용자의 새 제품 사진이 있으면 경로를 수집합니다. 없으면 AI로 생성합니다.</p>
+        </div>
+      </div>
+      <!-- Step 5 -->
+      <div class="flow-step">
+        <div class="flow-line">
+          <div class="flow-dot design">5</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-content">
+          <span class="phase-tag design-tag">/promotion-design</span>
+          <h3>병렬 디자인 제작</h3>
+          <p>팀을 생성하고 <code>promotion-designer</code> 에이전트를 산출물 수만큼 병렬 스폰합니다. 각 에이전트가 독립적으로 .pen 파일을 제작합니다.</p>
+        </div>
+      </div>
+      <!-- Step 6 -->
+      <div class="flow-step">
+        <div class="flow-line">
+          <div class="flow-dot design">6</div>
+        </div>
+        <div class="flow-content">
+          <span class="phase-tag design-tag">/promotion-design</span>
+          <h3>스크린샷 검토 + 피드백 반영</h3>
+          <p>완성된 디자인의 스크린샷을 보여주고, 수정 요청이 있으면 바로 반영합니다. 모든 디자인이 확정되면 팀을 해체하고 완료합니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <div class="icon">💡</div>
+      <div>
+        <h4>핵심 포인트</h4>
+        <p><code>/promotion-plan</code>이 생성한 .json 파일을 <code>/promotion-design</code>이 읽어서 사용합니다. 기획이 확정되어야 디자인 제작이 가능합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label">SKILLS</div>
+    <div class="section-title">스킬 상세</div>
+    <div class="section-desc">두 개의 스킬이 순차적으로 연결되어 완전한 프로모션 파이프라인을 구성합니다.</div>
+
+    <div class="skill-grid">
+      <!-- Plan Skill -->
+      <div class="skill-card">
+        <div class="skill-card-header plan-bg">
+          <div class="skill-cmd"><span class="slash">/</span>promotion-plan</div>
+          <h2>프로모션 기획</h2>
+          <p>자연어 대화 → .pen 기획서 + .json 데이터</p>
+        </div>
+        <div class="skill-card-body">
+          <ul class="phase-list">
+            <li class="phase-item">
+              <div class="phase-num p">1</div>
+              <div class="phase-item-text">
+                <h4>브랜드 컨텍스트 로딩</h4>
+                <p>brand-guide, products.json 등 썬데이허그 기본 정보를 자동으로 읽어옵니다</p>
+              </div>
+            </li>
+            <li class="phase-item">
+              <div class="phase-num p">2</div>
+              <div class="phase-item-text">
+                <h4>대화형 기획</h4>
+                <p>프로모션명, 컨셉, 톤앤매너, 목적, 타겟, 기간, 채널, 메시지, 제품, 혜택을 논의합니다</p>
+              </div>
+            </li>
+            <li class="phase-item">
+              <div class="phase-num p">3</div>
+              <div class="phase-item-text">
+                <h4>확정 요약</h4>
+                <p>모든 항목을 테이블로 정리하여 사용자 확인을 받습니다</p>
+              </div>
+            </li>
+            <li class="phase-item">
+              <div class="phase-num p">4</div>
+              <div class="phase-item-text">
+                <h4>.pen 기획서 생성</h4>
+                <p>Pencil MCP로 1680×1188 시각적 기획서를 자동 생성합니다</p>
+              </div>
+            </li>
+            <li class="phase-item">
+              <div class="phase-num p">5</div>
+              <div class="phase-item-text">
+                <h4>.json 데이터 저장</h4>
+                <p>구조화된 플랜 데이터를 companion 파일로 저장합니다</p>
+              </div>
+            </li>
+            <li class="phase-item">
+              <div class="phase-num p">6</div>
+              <div class="phase-item-text">
+                <h4>핸드오프</h4>
+                <p>/promotion-design으로 이어가도록 안내합니다</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Design Skill -->
+      <div class="skill-card">
+        <div class="skill-card-header design-bg">
+          <div class="skill-cmd"><span class="slash">/</span>promotion-design</div>
+          <h2>프로모션 디자인</h2>
+          <p>기획서 로드 → 디자인 논의 → 병렬 .pen 제작</p>
+        </div>
+        <div class="skill-card-body">
+          <ul class="phase-list">
+            <li class="phase-item">
+              <div class="phase-num d">1</div>
+              <div class="phase-item-text">
+                <h4>기획서 로딩</h4>
+                <p>기획서 폴더에서 .json 파일을 찾아 프로모션 데이터를 추출합니다</p>
+              </div>
+            </li>
+            <li class="phase-item">
+              <div class="phase-num d">2</div>
+              <div class="phase-item-text">
+                <h4>디자인 논의</h4>
+                <p>채널별 포맷을 제시하고, 레퍼런스 이미지를 보여주며 소재를 수집합니다</p>
+              </div>
+            </li>
+            <li class="phase-item">
+              <div class="phase-num d">3</div>
+              <div class="phase-item-text">
+                <h4>산출물 확정</h4>
+                <p>최종 디자인 목록을 테이블로 작성하고 사용자 확인을 받습니다</p>
+              </div>
+            </li>
+            <li class="phase-item">
+              <div class="phase-num d">4</div>
+              <div class="phase-item-text">
+                <h4>병렬 디자인 실행</h4>
+                <p>팀 생성 → promotion-designer 에이전트를 병렬 스폰하여 동시에 제작합니다</p>
+              </div>
+            </li>
+            <li class="phase-item">
+              <div class="phase-num d">5</div>
+              <div class="phase-item-text">
+                <h4>검토 + 피드백</h4>
+                <p>스크린샷으로 결과를 확인하고, 수정 사항을 즉시 반영합니다</p>
+              </div>
+            </li>
+            <li class="phase-item">
+              <div class="phase-num d">6</div>
+              <div class="phase-item-text">
+                <h4>완료 + 팀 해체</h4>
+                <p>최종 파일 정리 후 팀을 해체합니다</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXAMPLE -->
+<section id="example" style="background: var(--beige);">
+  <div class="container">
+    <div class="section-label">EXAMPLE</div>
+    <div class="section-title">실제 사용 예시</div>
+    <div class="section-desc">"봄 슬리핑백 특가" 프로모션을 기획하고 디자인하는 전체 흐름입니다.</div>
+
+    <div style="margin-bottom: 48px;">
+      <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 20px; color: var(--brown);">Step 1 — 기획 시작</h3>
+      <div class="chat-box">
+        <div class="chat-msg user">
+          <div class="sender">사용자</div>
+          /promotion-plan
+        </div>
+        <div class="chat-msg ai">
+          <div class="sender">Claude</div>
+          프로모션 기획을 시작하겠습니다!<br><br>
+          어떤 프로모션을 기획하고 계신가요?<br>
+          제품, 시기, 혜택 등 알고 계신 내용을 자유롭게 알려주세요.
+        </div>
+        <div class="chat-msg user">
+          <div class="sender">사용자</div>
+          3월에 봄맞이 슬리핑백 20% 할인 프로모션 하려고 해.<br>
+          인스타랑 네이버, 카카오톡으로 진행하고 싶어.
+        </div>
+        <div class="chat-msg ai">
+          <div class="sender">Claude</div>
+          좋은 기획이네요! 몇 가지만 더 확인할게요.<br><br>
+          1. 할인 대상은 슬리핑백 전 라인업인가요, 특정 제품만인가요?<br>
+          2. 핵심 메시지나 강조하고 싶은 포인트가 있나요?<br>
+          3. 프로모션 기간은 어느 정도로 생각하세요?
+        </div>
+        <div class="chat-msg user">
+          <div class="sender">사용자</div>
+          전 라인업 할인이고, 3/1~3/15 2주간. <br>
+          "우리 아기 첫 봄잠" 이런 느낌으로 가고 싶어.
+        </div>
+        <div class="chat-msg ai">
+          <div class="sender">Claude</div>
+          모든 정보가 확정되었습니다! 요약을 확인해주세요.<br><br>
+          <strong>프로모션 기획 요약</strong><br>
+          ━━━━━━━━━━━━━━━━<br>
+          프로모션명: 봄 슬리핑백 특가<br>
+          컨셉: 봄맞이 슬리핑백 전 라인업 20% 할인<br>
+          기간: 3.1(금) ~ 3.15(토)<br>
+          채널: 인스타그램, 네이버, 카카오톡<br>
+          핵심 메시지: 우리 아기 첫 봄잠, 썬데이허그와 함께<br>
+          혜택: 슬리핑백 전 라인업 20% OFF<br>
+          ━━━━━━━━━━━━━━━━<br><br>
+          이 내용으로 기획서를 생성할까요?
+        </div>
+        <div class="chat-msg user">
+          <div class="sender">사용자</div>
+          응 좋아!
+        </div>
+        <div class="chat-msg ai">
+          <div class="sender">Claude</div>
+          ✓ 기획서 생성 완료!<br><br>
+          • 프로젝트 폴더: <code>output/spring-sleeping-bag-sale/</code><br>
+          • .pen: <code>output/.../plan.pen</code><br>
+          • .json: <code>output/.../plan.json</code><br><br>
+          디자인 제작을 시작하려면 <code>/promotion-design</code>을 실행하세요.
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 20px; color: var(--sale-red);">Step 2 — 디자인 제작</h3>
+      <div class="chat-box">
+        <div class="chat-msg user">
+          <div class="sender">사용자</div>
+          /promotion-design
+        </div>
+        <div class="chat-msg ai">
+          <div class="sender">Claude</div>
+          기획서를 로드했습니다: <strong>봄 슬리핑백 특가</strong><br><br>
+          제작 가능한 디자인 목록입니다:<br><br>
+          1. 인스타그램 스토리 (1080×1920) — 레퍼런스 5장<br>
+          2. 인스타그램 피드 (1080×1350) — 레퍼런스 2장<br>
+          3. 네이버 PC 배너 (1920×860) — 레퍼런스 3장<br>
+          4. 네이버 모바일 배너 (750×1308) — 레퍼런스 3장<br>
+          5. 카카오톡 리스트형 (400×400) — 레퍼런스 8장<br>
+          6. 카카오톡 캐로셀 (1080×1350) — 레퍼런스 9장<br><br>
+          어떤 디자인을 제작할까요?
+        </div>
+        <div class="chat-msg user">
+          <div class="sender">사용자</div>
+          1, 3, 5번으로 해줘. 제품 사진은 ~/제품사진/슬리핑백.png 사용해.
+        </div>
+        <div class="chat-msg ai">
+          <div class="sender">Claude</div>
+          3개 디자인을 병렬로 제작합니다!<br><br>
+          🔄 팀 생성: <code>promo-spring-sleeping-bag-sale</code><br>
+          🔄 designer-1: 인스타 스토리 제작 중...<br>
+          🔄 designer-2: 네이버 PC 배너 제작 중...<br>
+          🔄 designer-3: 카카오 리스트형 제작 중...<br><br>
+          <em>잠시 기다려주세요...</em>
+        </div>
+        <div class="chat-msg ai">
+          <div class="sender">Claude</div>
+          ✓ 3개 디자인 모두 완성되었습니다!<br><br>
+          각 디자인의 스크린샷을 확인해주세요.<br>
+          수정이 필요하면 알려주세요!
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHANNELS -->
+<section id="channels">
+  <div class="container">
+    <div class="section-label">CHANNELS</div>
+    <div class="section-title">채널별 디자인 사양</div>
+    <div class="section-desc">5개 채널, 14개 포맷, 67장의 레퍼런스 이미지가 준비되어 있습니다.</div>
+
+    <div class="channel-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>채널</th>
+            <th>포맷</th>
+            <th>사이즈</th>
+            <th>레퍼런스</th>
+            <th>용도</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="ch-badge ch-insta">인스타그램</span></td>
+            <td>스토리</td>
+            <td><span class="size-tag">1080 × 1920</span></td>
+            <td><span class="ref-count">5</span></td>
+            <td>프로모션 알림, 이벤트 공지</td>
+          </tr>
+          <tr>
+            <td><span class="ch-badge ch-insta">인스타그램</span></td>
+            <td>이벤트</td>
+            <td><span class="size-tag">1080 × 1350</span></td>
+            <td><span class="ref-count">2</span></td>
+            <td>이벤트/기획전 소식</td>
+          </tr>
+          <tr>
+            <td><span class="ch-badge ch-insta">인스타그램</span></td>
+            <td>재입고</td>
+            <td><span class="size-tag">1080 × 1350</span></td>
+            <td><span class="ref-count">1</span></td>
+            <td>재입고/리스톡 알림</td>
+          </tr>
+          <tr>
+            <td><span class="ch-badge ch-insta">인스타그램</span></td>
+            <td>체험단</td>
+            <td><span class="size-tag">1080 × 1350</span></td>
+            <td><span class="ref-count">1</span></td>
+            <td>체험단/리뷰어 모집</td>
+          </tr>
+          <tr>
+            <td><span class="ch-badge ch-naver">네이버</span></td>
+            <td>브랜드홈 카드</td>
+            <td><span class="size-tag">240 × 240</span></td>
+            <td><span class="ref-count">12</span></td>
+            <td>브랜드홈 카드 노출</td>
+          </tr>
+          <tr>
+            <td><span class="ch-badge ch-naver">네이버</span></td>
+            <td>모바일 배너</td>
+            <td><span class="size-tag">750 × 1308</span></td>
+            <td><span class="ref-count">3</span></td>
+            <td>스마트스토어 모바일 메인</td>
+          </tr>
+          <tr>
+            <td><span class="ch-badge ch-naver">네이버</span></td>
+            <td>PC 배너</td>
+            <td><span class="size-tag">1920 × 860</span></td>
+            <td><span class="ref-count">3</span></td>
+            <td>스마트스토어 PC 메인</td>
+          </tr>
+          <tr>
+            <td><span class="ch-badge ch-naver">네이버</span></td>
+            <td>네쇼라 스토리</td>
+            <td><span class="size-tag">755 × 698</span></td>
+            <td><span class="ref-count">6</span></td>
+            <td>쇼핑라이브 프로모션</td>
+          </tr>
+          <tr>
+            <td><span class="ch-badge ch-own">자사몰</span></td>
+            <td>PC 배너</td>
+            <td><span class="size-tag">1920 × 860</span></td>
+            <td><span class="ref-count">5</span></td>
+            <td>쇼핑몰 메인 배너</td>
+          </tr>
+          <tr>
+            <td><span class="ch-badge ch-own">자사몰</span></td>
+            <td>모바일 배너</td>
+            <td><span class="size-tag">720 × 950</span></td>
+            <td><span class="ref-count">6</span></td>
+            <td>쇼핑몰 모바일 메인</td>
+          </tr>
+          <tr>
+            <td><span class="ch-badge ch-kakao">카카오톡</span></td>
+            <td>단일</td>
+            <td><span class="size-tag">800 × 400</span></td>
+            <td><span class="ref-count">1</span></td>
+            <td>비즈메시지 단일 이미지</td>
+          </tr>
+          <tr>
+            <td><span class="ch-badge ch-kakao">카카오톡</span></td>
+            <td>리스트형</td>
+            <td><span class="size-tag">400 × 400</span></td>
+            <td><span class="ref-count">8</span></td>
+            <td>비즈메시지 와이드 리스트</td>
+          </tr>
+          <tr>
+            <td><span class="ch-badge ch-kakao">카카오톡</span></td>
+            <td>캐로셀</td>
+            <td><span class="size-tag">1080 × 1350</span></td>
+            <td><span class="ref-count">9</span></td>
+            <td>비즈메시지 캐로셀</td>
+          </tr>
+          <tr>
+            <td><span class="ch-badge ch-live">라이브</span></td>
+            <td>페이지</td>
+            <td><span class="size-tag">197 × 714</span></td>
+            <td><span class="ref-count">5</span></td>
+            <td>쇼핑라이브 혜택 페이지</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN SYSTEM -->
+<section style="background: var(--white);">
+  <div class="container">
+    <div class="section-label">DESIGN SYSTEM</div>
+    <div class="section-title">브랜드 디자인 시스템</div>
+    <div class="section-desc">모든 프로모션 디자인에 적용되는 썬데이허그 컬러와 타이포그래피 규칙입니다.</div>
+
+    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px;">브랜드 컬러</h3>
+    <div class="ds-row">
+      <div class="ds-swatch">
+        <div class="color" style="background: #F5E6D3;"></div>
+        <div class="name">썬데이 베이지</div>
+        <div class="hex">#F5E6D3</div>
+      </div>
+      <div class="ds-swatch">
+        <div class="color" style="background: #8B7355;"></div>
+        <div class="name">허그 브라운</div>
+        <div class="hex">#8B7355</div>
+      </div>
+      <div class="ds-swatch">
+        <div class="color" style="background: #FAFAF7;"></div>
+        <div class="name">크림</div>
+        <div class="hex">#FAFAF7</div>
+      </div>
+      <div class="ds-swatch">
+        <div class="color" style="background: #E8E4DE;"></div>
+        <div class="name">소프트 그레이</div>
+        <div class="hex">#E8E4DE</div>
+      </div>
+      <div class="ds-swatch">
+        <div class="color" style="background: #D4534A;"></div>
+        <div class="name">세일 레드</div>
+        <div class="hex">#D4534A</div>
+      </div>
+      <div class="ds-swatch">
+        <div class="color" style="background: #F2D4C4;"></div>
+        <div class="name">소프트 핑크</div>
+        <div class="hex">#F2D4C4</div>
+      </div>
+    </div>
+
+    <h3 style="font-size: 16px; font-weight: 600; margin: 32px 0 16px;">타이포그래피</h3>
+    <div style="display: flex; flex-direction: column; gap: 16px; max-width: 600px;">
+      <div style="display: flex; align-items: baseline; gap: 20px;">
+        <span style="font-size: 36px; font-weight: 700; color: #8B7355;">헤드라인 H1</span>
+        <span style="font-size: 13px; color: var(--light-gray);">36-64px / Bold / #8B7355</span>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 20px;">
+        <span style="font-size: 24px; font-weight: 700; color: #333333;">서브 헤드라인 H2</span>
+        <span style="font-size: 13px; color: var(--light-gray);">28px / Bold / #333333</span>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 20px;">
+        <span style="font-size: 16px; color: #666666;">본문 텍스트 Body</span>
+        <span style="font-size: 13px; color: var(--light-gray);">14-18px / Normal / #666666</span>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 20px;">
+        <span style="font-size: 12px; color: #999999;">캡션 텍스트 Caption</span>
+        <span style="font-size: 13px; color: var(--light-gray);">12px / Normal / #999999</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTPUT -->
+<section>
+  <div class="container">
+    <div class="section-label">OUTPUT</div>
+    <div class="section-title">산출물 구조</div>
+    <div class="section-desc">프로모션 워크플로우가 생성하는 파일들입니다.</div>
+
+    <div class="output-grid">
+      <div class="output-card">
+        <div class="output-icon pen">📁</div>
+        <div>
+          <h4>프로젝트 폴더</h4>
+          <p>프로모션별 독립 폴더. 기획서와 디자인이 한곳에 정리됩니다.</p>
+          <code>ai 디자인/output/{slug}/</code>
+        </div>
+      </div>
+      <div class="output-card">
+        <div class="output-icon pen">📄</div>
+        <div>
+          <h4>.pen 기획서 + .json 데이터</h4>
+          <p>시각적 기획서(1680×1188)와 구조화된 플랜 데이터가 함께 저장됩니다.</p>
+          <code>output/{slug}/plan.pen + plan.json</code>
+        </div>
+      </div>
+      <div class="output-card">
+        <div class="output-icon pen">🎨</div>
+        <div>
+          <h4>.pen 디자인</h4>
+          <p>채널별 최종 디자인 파일. 같은 프로젝트 폴더에 저장됩니다.</p>
+          <code>output/{slug}/{채널}-{포맷}.pen</code>
+        </div>
+      </div>
+      <div class="output-card">
+        <div class="output-icon team">🤖</div>
+        <div>
+          <h4>병렬 에이전트 팀</h4>
+          <p>산출물 수만큼 promotion-designer 에이전트가 동시에 작업합니다.</p>
+          <code>팀명: promo-{slug}</code>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section id="architecture" style="background: var(--white);">
+  <div class="container">
+    <div class="section-label">ARCHITECTURE</div>
+    <div class="section-title">시스템 구조</div>
+    <div class="section-desc">파일 구조와 스킬/에이전트 간 연동 관계입니다.</div>
+
+    <div class="arch-diagram"><span class="hl">skills/promotion/</span>
+├── <span class="hl">promotion-plan/</span>
+│   ├── SKILL.md                     <span class="dim">← 기획 스킬 본체</span>
+│   └── references/
+│       ├── channel-specs.md         <span class="dim">← 14개 채널/포맷 사양표</span>
+│       └── plan-template.md         <span class="dim">← .pen 레이아웃 + .json 스키마</span>
+│
+├── <span class="rd">promotion-design/</span>
+│   ├── SKILL.md                     <span class="dim">← 디자인 제작 스킬 본체</span>
+│   └── references/
+│       ├── channel-specs.md         <span class="dim">← 심링크 (공유)</span>
+│       ├── design-system.md         <span class="dim">← 브랜드 디자인 시스템</span>
+│       └── pen-templates.md         <span class="dim">← 8개 batch_design 패턴</span>
+
+<span class="gr">agents/</span>
+└── promotion-designer.md            <span class="dim">← 병렬 디자인 실행 에이전트</span>
+
+<span class="gr">~/.claude/commands/</span>
+├── promotion-plan.md                <span class="dim">← /promotion-plan 심링크</span>
+└── promotion-design.md              <span class="dim">← /promotion-design 심링크</span>
+
+<span class="gr">ai 디자인/</span>
+├── <span class="hl">output/</span>                           <span class="dim">← 프로젝트별 산출물 폴더</span>
+│   └── {slug}/                       <span class="dim">← plan.pen, plan.json, 디자인.pen</span>
+├── 인스타그램/                       <span class="dim">┐</span>
+├── 네이버 배너/                      <span class="dim">│</span>
+├── 자사몰 배너/                      <span class="dim">├ 67장 레퍼런스 이미지</span>
+├── 카카오톡 메세지/                   <span class="dim">│</span>
+└── 라이브 페이지/                    <span class="dim">┘</span></div>
+
+    <div class="tip-box" style="margin-top: 32px;">
+      <div class="icon">🔗</div>
+      <div>
+        <h4>기존 시스템 연동</h4>
+        <p>
+          <strong>copywriting</strong> 스킬로 카피 생성 →
+          <strong>brand-guide</strong>로 톤앤매너 참조 →
+          <strong>content-quality-reviewer</strong> 에이전트로 품질 검토 →
+          <strong>sundayhug-marketing-hub</strong>의 시즌 프로모션 워크플로우에 통합
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>SUNDAYHUG</strong> Promotion Workflow System<br>
+  <span style="opacity: .6;">Built with Claude Code — Skills &amp; Agents Architecture</span>
+</footer>
+
+</body>
+</html>

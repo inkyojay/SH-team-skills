@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>promo-html 스킬 사용 가이드</title>
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+  :root {
+    --sunday-beige: #F5E6D3;
+    --hug-brown: #8B7355;
+    --cream: #FAFAF7;
+    --soft-gray: #E8E4DE;
+    --text-dark: #333333;
+    --text-mid: #666666;
+    --text-light: #999999;
+    --sale-red: #D4534A;
+    --soft-pink: #F2D4C4;
+    --misty-green: #C5D5C5;
+    --code-bg: #2d2a26;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    line-height: 1.7;
+  }
+
+  /* Header */
+  .header {
+    background: var(--hug-brown);
+    padding: 60px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -10%;
+    width: 120%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, rgba(245,230,211,0.12) 0%, transparent 70%);
+  }
+  .header-label {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 20px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .header h1 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.5px;
+    position: relative;
+  }
+  .header p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.75);
+    margin-top: 12px;
+    position: relative;
+  }
+
+  /* Container */
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Section */
+  section {
+    margin: 48px 0;
+  }
+  section h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--hug-brown);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--sunday-beige);
+  }
+  section h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 28px 0 12px;
+  }
+  p { margin-bottom: 12px; color: var(--text-mid); }
+
+  /* Quick Start Box */
+  .quick-start {
+    background: var(--sunday-beige);
+    border-radius: 16px;
+    padding: 32px;
+    margin: 32px 0;
+  }
+  .quick-start h2 {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 16px;
+  }
+
+  /* Code Block */
+  .code-block {
+    background: var(--code-bg);
+    color: #e8e0d6;
+    border-radius: 12px;
+    padding: 20px 24px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 12px 0 20px;
+    overflow-x: auto;
+  }
+  .code-block .comment { color: #8a8070; }
+  .code-block .command { color: #e8c479; }
+  .code-block .prompt { color: #7dba6a; }
+  .code-block .flag { color: #d4918b; }
+
+  /* Inline code */
+  code {
+    background: rgba(139,115,85,0.1);
+    color: var(--hug-brown);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 13px;
+  }
+
+  /* Phase Flow */
+  .phase-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 24px 0;
+  }
+  .phase-item {
+    display: flex;
+    gap: 20px;
+    position: relative;
+  }
+  .phase-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 48px;
+  }
+  .phase-number {
+    width: 40px;
+    height: 40px;
+    background: var(--hug-brown);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .phase-line {
+    width: 2px;
+    flex: 1;
+    background: var(--soft-gray);
+    min-height: 20px;
+  }
+  .phase-item:last-child .phase-line { display: none; }
+  .phase-content {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    flex: 1;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .phase-content h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+  }
+  .phase-content p {
+    font-size: 14px;
+    color: var(--text-mid);
+    margin-bottom: 0;
+  }
+  .phase-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+  }
+  .tag-auto { background: var(--misty-green); color: #4a6b4a; }
+  .tag-interactive { background: var(--soft-pink); color: #8b5a3a; }
+  .tag-parallel { background: #d4dff7; color: #3a5a8b; }
+
+  /* Channel Table */
+  .channel-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .channel-table th {
+    background: var(--hug-brown);
+    color: #fff;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .channel-table th:first-child { border-radius: 8px 0 0 0; }
+  .channel-table th:last-child { border-radius: 0 8px 0 0; }
+  .channel-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--soft-gray);
+    color: var(--text-mid);
+  }
+  .channel-table tr:nth-child(even) td { background: rgba(245,230,211,0.2); }
+  .channel-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+  .channel-table tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+
+  /* File Tree */
+  .file-tree {
+    background: #fff;
+    border: 1px solid var(--soft-gray);
+    border-radius: 12px;
+    padding: 20px 24px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    line-height: 2;
+    color: var(--text-mid);
+    margin: 12px 0;
+  }
+  .file-tree .folder { color: var(--hug-brown); font-weight: 600; }
+  .file-tree .file { color: var(--text-mid); }
+  .file-tree .desc { color: var(--text-light); font-family: 'Pretendard', sans-serif; font-size: 12px; }
+
+  /* Tip Box */
+  .tip-box {
+    background: #fff;
+    border-left: 4px solid var(--hug-brown);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .tip-box.warning { border-left-color: var(--sale-red); }
+  .tip-box strong {
+    display: block;
+    font-size: 14px;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+  }
+  .tip-box p { font-size: 13px; margin-bottom: 0; }
+
+  /* Example Conversation */
+  .convo {
+    margin: 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .convo-msg {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: 16px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .convo-user {
+    align-self: flex-end;
+    background: var(--hug-brown);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+  .convo-ai {
+    align-self: flex-start;
+    background: #fff;
+    color: var(--text-dark);
+    border: 1px solid var(--soft-gray);
+    border-bottom-left-radius: 4px;
+  }
+  .convo-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 4px;
+  }
+  .convo-user .convo-label { color: rgba(255,255,255,0.6); }
+
+  /* Footer */
+  .footer {
+    background: var(--soft-gray);
+    padding: 32px 40px;
+    text-align: center;
+    margin-top: 60px;
+  }
+  .footer p {
+    font-size: 13px;
+    color: var(--text-light);
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-label">SUNDAYHUG SKILL</div>
+  <h1>/promo-html 사용 가이드</h1>
+  <p>기획부터 14개 채널 HTML 디자인 생성까지 원스톱 프로모션 제작</p>
+</div>
+
+<div class="container">
+
+  <!-- Quick Start -->
+  <div class="quick-start">
+    <h2>빠른 시작</h2>
+    <p style="color:var(--text-dark); font-weight:500;">Claude Code에서 아래 명령어를 입력하세요:</p>
+    <div class="code-block">
+      <span class="prompt">$</span> <span class="command">/promo-html</span>
+    </div>
+    <p style="color:var(--text-mid); font-size:14px;">기존 기획서(plan.json)가 있으면 자동으로 찾아 로드하고, 없으면 대화형으로 기획을 시작합니다.</p>
+  </div>
+
+  <!-- 워크플로우 -->
+  <section>
+    <h2>7단계 워크플로우</h2>
+    <p>스킬은 7개 Phase를 순서대로 진행하며, 각 단계마다 사용자 확인을 거칩니다.</p>
+
+    <div class="phase-flow">
+      <div class="phase-item">
+        <div class="phase-marker"><div class="phase-number">1</div><div class="phase-line"></div></div>
+        <div class="phase-content">
+          <span class="phase-tag tag-interactive">인터랙티브</span>
+          <h4>기획서 로딩 또는 신규 기획</h4>
+          <p>기존 plan.json 검색 → 있으면 로드, 없으면 대화형으로 프로모션 기획 (프로모션명, 컨셉, 채널, 혜택, 제품 등)</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-marker"><div class="phase-number">2</div><div class="phase-line"></div></div>
+        <div class="phase-content">
+          <span class="phase-tag tag-interactive">인터랙티브</span>
+          <h4>채널별 디자인 목록 확정</h4>
+          <p>선택한 채널에 해당하는 14개 포맷 중 생성할 디자인 목록을 테이블로 확인</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-marker"><div class="phase-number">3</div><div class="phase-line"></div></div>
+        <div class="phase-content">
+          <span class="phase-tag tag-interactive">인터랙티브</span>
+          <h4>채널별 카피 및 디자인 방향</h4>
+          <p>채널 특성에 맞는 헤드라인/서브카피/뱃지 생성 → 사용자 확인</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-marker"><div class="phase-number">4</div><div class="phase-line"></div></div>
+        <div class="phase-content">
+          <span class="phase-tag tag-parallel">병렬 처리</span>
+          <h4>HTML 병렬 생성</h4>
+          <p>채널별 에이전트가 병렬로 HTML 파일 생성 — 레퍼런스 이미지 참고, 브랜드 디자인 시스템 적용</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-marker"><div class="phase-number">5</div><div class="phase-line"></div></div>
+        <div class="phase-content">
+          <span class="phase-tag tag-interactive">인터랙티브</span>
+          <h4>검토 및 수정</h4>
+          <p>생성된 HTML 목록 확인 → 사용자 피드백 → 즉시 수정 반영</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-marker"><div class="phase-number">6</div><div class="phase-line"></div></div>
+        <div class="phase-content">
+          <span class="phase-tag tag-auto">자동</span>
+          <h4>PNG 변환 + .pen 생성</h4>
+          <p>Playwright로 HTML→PNG 배치 변환, Pencil MCP로 .pen 파일 생성</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-marker"><div class="phase-number">7</div><div class="phase-line"></div></div>
+        <div class="phase-content">
+          <span class="phase-tag tag-auto">자동</span>
+          <h4>완료 리포트</h4>
+          <p>전체 산출물 현황 테이블 + 파일 경로 안내</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 사용 예시 -->
+  <section>
+    <h2>사용 예시</h2>
+
+    <h3>예시 1: 기존 기획서로 바로 디자인</h3>
+    <div class="convo">
+      <div class="convo-msg convo-user"><div class="convo-label">나</div>/promo-html</div>
+      <div class="convo-msg convo-ai"><div class="convo-label">Claude</div>기획서를 찾았습니다.<br><br><strong>봄 슬리핑백 특가</strong><br>기간: 3/1 ~ 3/15 | 채널: 인스타그램, 네이버, 자사몰<br><br>이 기획서로 디자인을 진행할까요?</div>
+      <div class="convo-msg convo-user"><div class="convo-label">나</div>네, 진행해주세요</div>
+      <div class="convo-msg convo-ai"><div class="convo-label">Claude</div>10개 채널 디자인 목록을 확인해주세요... (Phase 2~7 자동 진행)</div>
+    </div>
+
+    <h3>예시 2: 새 프로모션 처음부터</h3>
+    <div class="convo">
+      <div class="convo-msg convo-user"><div class="convo-label">나</div>/promo-html</div>
+      <div class="convo-msg convo-ai"><div class="convo-label">Claude</div>기존 기획서가 없습니다. 새 프로모션을 기획할게요.<br><br>어떤 프로모션을 준비하고 계신가요?</div>
+      <div class="convo-msg convo-user"><div class="convo-label">나</div>여름 스와들 30% 할인 행사. 인스타랑 카카오톡으로 진행하려고.</div>
+      <div class="convo-msg convo-ai"><div class="convo-label">Claude</div>기간은 언제로 하실까요? 대상 제품은 어떤 건가요?</div>
+      <div class="convo-msg convo-user"><div class="convo-label">나</div>6월 1일부터 15일까지. 코튼 스와들이랑 뱀부 스와들.</div>
+      <div class="convo-msg convo-ai"><div class="convo-label">Claude</div>기획 요약입니다:<br>프로모션명: 여름 스와들 30% 특가<br>기간: 6/1~6/15 ...<br><br>확인해주시면 디자인을 시작합니다!</div>
+    </div>
+
+    <h3>예시 3: 특정 채널만 선택</h3>
+    <div class="convo">
+      <div class="convo-msg convo-user"><div class="convo-label">나</div>/promo-html</div>
+      <div class="convo-msg convo-ai"><div class="convo-label">Claude</div>(기획서 로드 후) 8개 디자인 목록입니다. 수정할 항목 있으면 알려주세요.</div>
+      <div class="convo-msg convo-user"><div class="convo-label">나</div>인스타 스토리랑 네이버 PC 배너만 먼저 만들어줘</div>
+      <div class="convo-msg convo-ai"><div class="convo-label">Claude</div>2개 채널만 생성합니다. 카피 확인해주세요...</div>
+    </div>
+  </section>
+
+  <!-- 14개 채널 -->
+  <section>
+    <h2>지원 채널 (14개)</h2>
+    <table class="channel-table">
+      <thead>
+        <tr><th>#</th><th>채널</th><th>포맷</th><th>사이즈</th><th>파일명</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>인스타그램</td><td>스토리</td><td>1080×1920</td><td>01-insta-story</td></tr>
+        <tr><td>2</td><td>인스타그램</td><td>피드(이벤트)</td><td>1080×1350</td><td>02-insta-event</td></tr>
+        <tr><td>3</td><td>인스타그램</td><td>재입고</td><td>1080×1350</td><td>03-insta-restock</td></tr>
+        <tr><td>4</td><td>인스타그램</td><td>체험단 모집</td><td>1080×1350</td><td>04-insta-review</td></tr>
+        <tr><td>5</td><td>네이버</td><td>브랜드홈 카드</td><td>240×240</td><td>05-naver-brandcard</td></tr>
+        <tr><td>6</td><td>네이버</td><td>모바일 배너</td><td>750×1308</td><td>06-naver-mobile</td></tr>
+        <tr><td>7</td><td>네이버</td><td>PC 배너</td><td>1920×860</td><td>07-naver-pc</td></tr>
+        <tr><td>8</td><td>네쇼라</td><td>프로모 스토리</td><td>755×698</td><td>08-nshopla-promo</td></tr>
+        <tr><td>9</td><td>자사몰</td><td>PC 배너</td><td>1920×860</td><td>09-mall-pc</td></tr>
+        <tr><td>10</td><td>자사몰</td><td>모바일 배너</td><td>720×950</td><td>10-mall-mobile</td></tr>
+        <tr><td>11</td><td>카카오톡</td><td>단일 이미지</td><td>800×400</td><td>11-kakao-single</td></tr>
+        <tr><td>12</td><td>카카오톡</td><td>리스트형</td><td>400×400</td><td>12-kakao-list</td></tr>
+        <tr><td>13</td><td>카카오톡</td><td>캐러셀</td><td>1080×1350</td><td>13-kakao-carousel</td></tr>
+        <tr><td>14</td><td>라이브</td><td>페이지</td><td>197×714</td><td>14-live-page</td></tr>
+      </tbody>
+    </table>
+
+    <div class="tip-box">
+      <strong>채널 자동 매핑</strong>
+      <p>plan.json에서 "인스타그램"을 선택하면 스토리/피드/재입고/체험단 4개 포맷이 자동으로 포함됩니다. 원하지 않는 포맷은 Phase 2에서 제외할 수 있습니다.</p>
+    </div>
+  </section>
+
+  <!-- 출력 구조 -->
+  <section>
+    <h2>출력 폴더 구조</h2>
+    <div class="file-tree">
+      <span class="folder">{{WORKSPACE_DIR}}/output/{slug}/</span><br>
+      ├── plan.json <span class="desc">← 기획 데이터</span><br>
+      ├── <span class="folder">html/</span> <span class="desc">← HTML 소스 파일</span><br>
+      │   ├── <span class="file">01-insta-story.html</span><br>
+      │   ├── <span class="file">02-insta-event.html</span><br>
+      │   ├── <span class="file">...</span><br>
+      │   └── <span class="file">14-live-page.html</span><br>
+      ├── <span class="folder">png/</span> <span class="desc">← PNG 렌더링 결과 (2x)</span><br>
+      │   ├── <span class="file">01-insta-story.png</span><br>
+      │   └── <span class="file">...</span><br>
+      └── <span class="folder">pen/</span> <span class="desc">← Pencil 에디터 파일</span><br>
+      &nbsp;   ├── <span class="file">01-insta-story.pen</span><br>
+      &nbsp;   └── <span class="file">...</span>
+    </div>
+  </section>
+
+  <!-- PNG 변환 -->
+  <section>
+    <h2>PNG 수동 변환 (필요 시)</h2>
+    <p>Phase 6에서 자동으로 실행되지만, HTML을 수정한 후 수동으로 다시 변환할 수도 있습니다.</p>
+
+    <h3>사전 설치</h3>
+    <div class="code-block">
+      <span class="prompt">$</span> <span class="command">pip install playwright</span><br>
+      <span class="prompt">$</span> <span class="command">playwright install chromium</span>
+    </div>
+
+    <h3>전체 배치 변환</h3>
+    <div class="code-block">
+      <span class="prompt">$</span> <span class="command">python3</span> {{REPO_DIR}}/skills/promotion/promo-html/scripts/render_all.py \<br>
+      &nbsp;&nbsp;<span class="flag">--input-dir</span> "{{WORKSPACE_DIR}}/output/{slug}/html/" \<br>
+      &nbsp;&nbsp;<span class="flag">--output-dir</span> "{{WORKSPACE_DIR}}/output/{slug}/png/" \<br>
+      &nbsp;&nbsp;<span class="flag">--scale</span> 2
+    </div>
+
+    <h3>옵션</h3>
+    <table class="channel-table">
+      <thead><tr><th>옵션</th><th>기본값</th><th>설명</th></tr></thead>
+      <tbody>
+        <tr><td><code>--input-dir</code></td><td>필수</td><td>HTML 파일 폴더</td></tr>
+        <tr><td><code>--output-dir</code></td><td>필수</td><td>PNG 저장 폴더</td></tr>
+        <tr><td><code>--scale</code></td><td>2.0</td><td>해상도 배율 (2x = 레티나)</td></tr>
+        <tr><td><code>--concurrency</code></td><td>3</td><td>동시 렌더링 수</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 스킬 파일 구조 -->
+  <section>
+    <h2>스킬 파일 구조</h2>
+    <div class="file-tree">
+      <span class="folder">promo-html/</span><br>
+      ├── SKILL.md <span class="desc">← 메인 스킬 (7 Phase 워크플로우)</span><br>
+      ├── <span class="folder">references/</span><br>
+      │   ├── <span class="file">design-system.md</span> <span class="desc">← 브랜드 컬러/타이포/컴포넌트</span><br>
+      │   ├── <span class="file">channel-specs.md</span> <span class="desc">← 14개 채널 사이즈/레이아웃</span><br>
+      │   ├── <span class="file">variable-guide.md</span> <span class="desc">← plan.json → HTML 변수 매핑</span><br>
+      │   └── <span class="file">html-generation-rules.md</span> <span class="desc">← HTML 작성 규칙/금지사항</span><br>
+      ├── <span class="folder">scripts/</span><br>
+      │   └── <span class="file">render_all.py</span> <span class="desc">← HTML→PNG 배치 변환</span><br>
+      └── <span class="file">guide.html</span> <span class="desc">← 이 가이드 문서</span>
+    </div>
+    <p style="margin-top:12px;">심볼릭 링크: <code>~/.claude/commands/promo-html.md</code> → <code>SKILL.md</code></p>
+  </section>
+
+  <!-- Tips -->
+  <section>
+    <h2>팁</h2>
+
+    <div class="tip-box">
+      <strong>기존 promotion-plan과 호환</strong>
+      <p><code>/promotion-plan</code>으로 만든 plan.json을 그대로 사용할 수 있습니다. JSON 스키마가 동일합니다.</p>
+    </div>
+
+    <div class="tip-box">
+      <strong>HTML 직접 수정</strong>
+      <p>Phase 5에서 피드백을 주면 Claude가 HTML을 직접 수정합니다. 또는 VS Code 등에서 직접 열어 수정한 뒤 PNG만 재변환할 수도 있습니다.</p>
+    </div>
+
+    <div class="tip-box">
+      <strong>부분 재생성</strong>
+      <p>"인스타 스토리만 다시 만들어줘"처럼 특정 채널만 재생성 요청할 수 있습니다.</p>
+    </div>
+
+    <div class="tip-box warning">
+      <strong>Playwright 필요</strong>
+      <p>PNG 변환에는 Playwright가 필요합니다. 미설치 시 <code>pip install playwright && playwright install chromium</code>을 실행하세요.</p>
+    </div>
+  </section>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>SUNDAYHUG &middot; promo-html skill v1.0 &middot; 2026</p>
+</div>
+
+</body>
+</html>
