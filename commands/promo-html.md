@@ -38,9 +38,22 @@ triggers:
 | 채널 | {channels 목록} |
 | 혜택 | {offer.description} |
 | 제품 | {products 목록} |
+| 룩앤필 | {look_and_feel} |
+| 레퍼런스 | {visual_references 수}장 등록됨 |
 
 이 기획서로 디자인을 진행할까요?
 ```
+
+#### 룩앤필 레퍼런스 확인
+
+plan.json에 `visual_references`가 있으면:
+1. 각 레퍼런스 이미지를 Read로 열어 시각적으로 확인
+2. `look_and_feel` 방향과 함께 디자인 톤 파악
+3. 이 정보를 Phase 4 에이전트 스폰 시 전달
+
+`visual_references`가 비어있거나 없으면:
+- 브랜드 기본 스타일로 진행
+- 사용자에게 "레퍼런스 이미지를 추가하시겠습니까?" 한 번 확인
 
 ### 1-B: 인터랙티브 기획 (기획서 없을 때)
 
@@ -72,6 +85,27 @@ triggers:
 | 대상 제품 | `products` | 코지 슬리핑백 89,000→71,200 |
 | 혜택 | `offer` | 20% 할인 + 무료배송 |
 
+### 룩앤필 레퍼런스 등록
+
+프로모션 내용 확정 후, 디자인 방향을 정합니다:
+
+```markdown
+## 디자인 룩앤필 설정
+
+원하는 분위기의 레퍼런스 이미지가 있으면 파일 경로를 알려주세요. (여러 장 가능)
+각 이미지에 대해 참고할 포인트도 메모해주시면 좋습니다.
+
+예: "~/Downloads/봄감성.png" — 이 색감이 좋아요
+
+없으면 "건너뛰기"로 브랜드 기본 스타일을 사용합니다.
+```
+
+이미지를 받으면:
+1. Read로 각 이미지를 열어 시각적 분석 (색감, 레이아웃, 무드)
+2. 분석 결과를 사용자에게 제시
+3. 종합 `look_and_feel` 방향 확정
+4. `visual_references` 배열에 경로+메모 저장
+
 모든 항목이 확정되면 요약 테이블 제시 → 사용자 확인 → plan.json 저장:
 ```bash
 mkdir -p "{{WORKSPACE_DIR}}/output/{slug}"
@@ -94,6 +128,11 @@ JSON 스키마는 기존 promotion-plan과 동일:
   "key_message": "...",
   "products": [{ "name": "...", "price": 0, "discount_price": 0, "image": "" }],
   "offer": { "type": "...", "value": "...", "description": "...", "additional": "..." },
+  "look_and_feel": "부드러운 봄 파스텔 + 미니멀 여백 + 자연광 느낌",
+  "visual_references": [
+    { "path": "/path/to/ref1.png", "note": "이 색감 참고" },
+    { "path": "/path/to/ref2.jpg", "note": "이 레이아웃 느낌" }
+  ],
   "channels": ["인스타그램", "네이버"],
   "deliverables": [],
   "project_dir": "{{WORKSPACE_DIR}}/output/{slug}/",
@@ -230,15 +269,22 @@ Agent 도구로 채널별 에이전트를 **병렬 스폰**합니다. 한 메시
 - BADGE_TEXT: {뱃지 텍스트}
 - CTA_TEXT: {CTA 문구}
 
+## 룩앤필 방향
+- 전체 방향: {look_and_feel}
+{visual_references가 있으면 각각:}
+- 레퍼런스 이미지: {ref.path} — {ref.note}
+
 ## 필수 작업
-1. 아래 레퍼런스 이미지를 Read로 확인하여 레이아웃 참고:
+1. 룩앤필 레퍼런스 이미지가 있으면 Read로 열어 색감/레이아웃/무드 파악
+2. 아래 채널 레퍼런스 이미지를 Read로 확인하여 레이아웃 참고:
    {{WORKSPACE_DIR}}/{레퍼런스 경로}
-2. 아래 디자인 시스템 파일을 Read로 읽어 브랜드 컬러/타이포 확인:
+3. 아래 디자인 시스템 파일을 Read로 읽어 브랜드 컬러/타이포 확인:
    {{REPO_DIR}}/skills/promotion/promo-html/references/design-system.md
-3. 아래 HTML 규칙 파일을 Read로 읽어 구조/규칙 확인:
+4. 아래 HTML 규칙 파일을 Read로 읽어 구조/규칙 확인:
    {{REPO_DIR}}/skills/promotion/promo-html/references/html-generation-rules.md
-4. Write 도구로 HTML 파일 생성
-5. 생성한 HTML이 품질 체크리스트를 만족하는지 자체 검증
+5. 룩앤필 방향 + 레퍼런스 이미지의 색감/무드를 디자인에 반영
+6. Write 도구로 HTML 파일 생성
+7. 생성한 HTML이 품질 체크리스트를 만족하는지 자체 검증
 
 ## 품질 체크
 - body width/height가 {width}×{height}과 정확히 일치
@@ -248,6 +294,7 @@ Agent 도구로 채널별 에이전트를 **병렬 스폰**합니다. 한 메시
 - 브랜드 팔레트 색상만 사용
 - 텍스트가 컨테이너 벗어나지 않음
 - 변수 플레이스홀더 남아있지 않음
+- 룩앤필 레퍼런스의 색감/무드가 반영되어 있음
 ```
 
 **중요**: 산출물이 여러 개이면 가능한 한 병렬로 스폰합니다 (한 메시지에 여러 Agent tool 호출).
