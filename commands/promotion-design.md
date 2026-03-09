@@ -35,6 +35,9 @@ JSON 파일을 Read로 읽어 핵심 정보를 추출합니다:
 - period (기간)
 - channels (채널 목록)
 - deliverables (예상 산출물)
+- look_and_feel (디자인 방향)
+- visual_references (룩앤필 레퍼런스 이미지)
+- materials (디자인 소재 사진)
 ```
 
 로드 후 사용자에게 요약 확인:
@@ -46,8 +49,26 @@ JSON 파일을 Read로 읽어 핵심 정보를 추출합니다:
 - 컨셉: {concept}
 - 기간: {period}
 - 채널: {channels}
+- 룩앤필: {look_and_feel}
+- 레퍼런스: {visual_references 수}장
+- 디자인 소재: {materials.photos 수}장
 - 예상 산출물: {deliverables 수}개
 ```
+
+### 룩앤필 + 소재 확인
+
+plan.json에 `visual_references`가 있으면:
+1. 각 레퍼런스 이미지를 Read로 열어 디자인 톤 파악
+2. `look_and_feel` 방향 확인
+
+plan.json에 `materials`가 있으면:
+1. `materials.base_dir` 하위 사진들을 Glob으로 탐색
+2. 각 사진을 Read로 열어 확인
+3. `use_in` 매핑에 따라 채널별 사진 배정 확인
+
+둘 다 없으면:
+- 사용자에게 "레퍼런스 이미지나 소재 사진을 추가하시겠습니까?" 확인
+- 없으면 브랜드 기본 스타일로 진행
 
 ## Phase 2: 디자인 논의
 
@@ -163,16 +184,27 @@ Task:
     - 기간: {period}
     - 톤앤매너: {tone_manner}
     - 대상 제품: {products}
-    {소재경로가 있으면: - 제품 이미지: {material_path}}
+
+    ## 룩앤필 방향
+    - 전체 방향: {look_and_feel}
+    {visual_references가 있으면 각각:}
+    - 레퍼런스: {ref.path} — {ref.note}
+
+    ## 디자인 소재 사진
+    {이 채널에 배정된 소재 사진:}
+    - {photo.category}: {materials.base_dir}/{photo.path} — {photo.description}
+    (use_in에 이 채널이 포함되거나 "all"인 사진만 전달)
 
     ## 디자인 가이드
-    1. 레퍼런스 이미지를 Read로 확인하여 스타일/레이아웃 파악
-    2. references/pen-templates.md에서 해당 채널 템플릿 참조
-    3. references/design-system.md의 브랜드 컬러/타이포 준수
-    4. open_document("new")로 새 .pen 생성
-    5. batch_design으로 디자인 구성
-    6. get_screenshot으로 결과 확인
-    7. 태스크 완료 보고
+    1. 룩앤필 레퍼런스 이미지가 있으면 Read로 열어 색감/무드 파악
+    2. 디자인 소재 사진이 있으면 Read로 열어 확인, .pen에 이미지 노드로 배치
+    3. 채널 레퍼런스 이미지를 Read로 확인하여 스타일/레이아웃 파악
+    4. references/pen-templates.md에서 해당 채널 템플릿 참조
+    5. references/design-system.md의 브랜드 컬러/타이포 준수
+    6. open_document("new")로 새 .pen 생성
+    7. batch_design으로 디자인 구성 (소재 사진 포함)
+    8. get_screenshot으로 결과 확인
+    9. 태스크 완료 보고
 
     디자인 레퍼런스 파일 경로:
     - design-system: {{REPO_DIR}}/skills/promotion/promotion-design/references/design-system.md
