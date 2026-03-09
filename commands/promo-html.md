@@ -55,6 +55,31 @@ plan.json에 `visual_references`가 있으면:
 - 브랜드 기본 스타일로 진행
 - 사용자에게 "레퍼런스 이미지를 추가하시겠습니까?" 한 번 확인
 
+#### 디자인 소재 사진 확인
+
+plan.json에 `materials`가 있으면:
+1. `materials.base_dir` 경로의 사진들을 Glob으로 탐색
+2. 각 사진을 Read로 열어 시각적으로 확인
+3. `use_in` 매핑에 따라 어떤 채널에 어떤 사진을 쓸지 파악
+
+```markdown
+## 디자인 소재 확인
+
+| # | 파일 | 카테고리 | 사용 채널 |
+|---|------|---------|----------|
+| 1 | 슬리핑백_정면.png | products | 네이버PC, 카카오톡 |
+| 2 | 착용샷1.jpg | lifestyle | 인스타 스토리 |
+| ... |
+```
+
+`materials`가 비어있으면:
+- 소재 폴더를 생성하고 사용자에게 등록 안내:
+```
+mkdir -p "{{WORKSPACE_DIR}}/output/{slug}/photos/{products,lifestyle,logo,etc}"
+```
+- 사용자가 사진을 넣고 "완료"하면 탐색 → 채널별 배정 제안
+- "건너뛰기"하면 사진 없이 진행 (텍스트 중심 디자인)
+
 ### 1-B: 인터랙티브 기획 (기획서 없을 때)
 
 브랜드 컨텍스트를 먼저 로드합니다:
@@ -106,6 +131,32 @@ plan.json에 `visual_references`가 있으면:
 3. 종합 `look_and_feel` 방향 확정
 4. `visual_references` 배열에 경로+메모 저장
 
+### 디자인 소재 사진 등록
+
+룩앤필 확정 후, 디자인에 사용할 실제 사진을 등록합니다:
+
+```markdown
+## 디자인 소재 사진 등록
+
+디자인에 사용할 사진을 아래 폴더에 넣어주세요!
+
+📁 소재 폴더: `{{WORKSPACE_DIR}}/output/{slug}/photos/`
+
+| 폴더 | 넣을 사진 |
+|------|----------|
+| `products/` | 제품 사진 (누끼, 착용샷) |
+| `lifestyle/` | 감성/분위기 사진 |
+| `logo/` | 브랜드 로고 |
+| `etc/` | 뱃지, 아이콘 등 |
+
+사진을 넣으셨으면 "완료"라고 말씀해주세요.
+```
+
+1. 소재 폴더 생성 → Finder로 열기
+2. 사용자가 "완료" → Glob으로 사진 탐색 → Read로 확인
+3. 채널별 사진 배정 제안 → 사용자 확인
+4. `materials` 필드에 저장
+
 모든 항목이 확정되면 요약 테이블 제시 → 사용자 확인 → plan.json 저장:
 ```bash
 mkdir -p "{{WORKSPACE_DIR}}/output/{slug}"
@@ -133,6 +184,12 @@ JSON 스키마는 기존 promotion-plan과 동일:
     { "path": "/path/to/ref1.png", "note": "이 색감 참고" },
     { "path": "/path/to/ref2.jpg", "note": "이 레이아웃 느낌" }
   ],
+  "materials": {
+    "base_dir": "{{WORKSPACE_DIR}}/output/{slug}/photos",
+    "photos": [
+      { "path": "products/제품사진.png", "category": "products", "description": "...", "use_in": ["naver-pc"] }
+    ]
+  },
   "channels": ["인스타그램", "네이버"],
   "deliverables": [],
   "project_dir": "{{WORKSPACE_DIR}}/output/{slug}/",
@@ -274,9 +331,17 @@ Agent 도구로 채널별 에이전트를 **병렬 스폰**합니다. 한 메시
 {visual_references가 있으면 각각:}
 - 레퍼런스 이미지: {ref.path} — {ref.note}
 
+## 디자인 소재 사진
+{이 채널에 배정된 소재 사진 목록:}
+- 제품 사진: {materials.base_dir}/{photo.path} — {photo.description}
+- 감성 사진: {materials.base_dir}/{photo.path} — {photo.description}
+- 로고: {materials.base_dir}/{photo.path}
+(use_in에 이 채널이 포함되거나 "all"인 사진만 전달)
+
 ## 필수 작업
-1. 룩앤필 레퍼런스 이미지가 있으면 Read로 열어 색감/레이아웃/무드 파악
-2. 아래 채널 레퍼런스 이미지를 Read로 확인하여 레이아웃 참고:
+1. 디자인 소재 사진이 있으면 Read로 열어 확인하고, HTML에 base64로 임베드하거나 레이아웃에 사진 영역을 배치
+2. 룩앤필 레퍼런스 이미지가 있으면 Read로 열어 색감/레이아웃/무드 파악
+3. 아래 채널 레퍼런스 이미지를 Read로 확인하여 레이아웃 참고:
    {{WORKSPACE_DIR}}/{레퍼런스 경로}
 3. 아래 디자인 시스템 파일을 Read로 읽어 브랜드 컬러/타이포 확인:
    {{REPO_DIR}}/skills/promotion/promo-html/references/design-system.md

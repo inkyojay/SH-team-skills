@@ -134,7 +134,118 @@ triggers:
 - `look_and_feel`: "썬데이허그 브랜드 기본 — 따뜻한 베이지톤, 미니멀 여백"
 - `visual_references`: []
 
-## Phase 4: 확정 요약
+## Phase 4: 디자인 소재 사진 등록
+
+디자인에 실제 사용할 사진(제품 사진, 감성 사진 등)을 폴더에 정리하도록 안내합니다.
+
+### 소재 폴더 생성
+
+먼저 프로젝트 소재 폴더를 생성합니다:
+```bash
+mkdir -p "{{WORKSPACE_DIR}}/output/{slug}/photos/products"
+mkdir -p "{{WORKSPACE_DIR}}/output/{slug}/photos/lifestyle"
+mkdir -p "{{WORKSPACE_DIR}}/output/{slug}/photos/logo"
+mkdir -p "{{WORKSPACE_DIR}}/output/{slug}/photos/etc"
+```
+
+### 사용자에게 사진 등록 안내
+
+```markdown
+## 디자인 소재 사진 등록
+
+디자인에 사용할 사진을 아래 폴더에 넣어주세요.
+폴더를 열어드릴게요!
+
+📁 **소재 폴더**: `{{WORKSPACE_DIR}}/output/{slug}/photos/`
+
+| 폴더 | 넣을 사진 | 예시 |
+|------|----------|------|
+| `products/` | 제품 사진 (누끼, 착용샷 등) | 슬리핑백_정면.png, 착용샷1.jpg |
+| `lifestyle/` | 감성/분위기 사진 | 아기잠자는모습.jpg, 봄인테리어.png |
+| `logo/` | 브랜드 로고 | sundayhug_logo.png |
+| `etc/` | 기타 (뱃지, 아이콘 등) | sale_badge.png |
+
+사진을 넣으셨으면 "완료" 또는 "준비됐어"라고 말씀해주세요.
+사진 없이 진행하려면 "건너뛰기"라고 해주세요.
+```
+
+### 소재 폴더 열기
+
+Bash로 Finder/탐색기에서 폴더를 열어줍니다:
+```bash
+open "{{WORKSPACE_DIR}}/output/{slug}/photos/"
+```
+(Windows: `explorer`, Linux: `xdg-open`)
+
+### 등록된 사진 확인
+
+사용자가 "완료"라고 하면:
+1. Glob으로 `photos/` 하위 모든 이미지 파일 탐색
+2. 각 사진을 Read로 열어 시각적으로 확인
+3. 등록된 소재 목록을 표로 정리:
+
+```markdown
+## 등록된 디자인 소재
+
+| # | 폴더 | 파일명 | 미리보기 |
+|---|------|--------|---------|
+| 1 | products | 슬리핑백_정면.png | ✅ 확인 |
+| 2 | products | 착용샷1.jpg | ✅ 확인 |
+| 3 | lifestyle | 봄감성.jpg | ✅ 확인 |
+| 4 | logo | sundayhug_logo.png | ✅ 확인 |
+
+총 {N}개 소재가 등록되었습니다.
+
+### 채널별 사진 배정 제안
+| 채널 | 추천 소재 |
+|------|----------|
+| 인스타 스토리 | 착용샷1.jpg + 봄감성.jpg |
+| 네이버 PC 배너 | 슬리핑백_정면.png + 로고 |
+| 카카오톡 | 슬리핑백_정면.png |
+| ... |
+
+이 배정으로 진행할까요? 수정하고 싶은 부분이 있으면 알려주세요.
+```
+
+### 소재 정보 저장
+
+확정된 소재 정보를 plan.json의 `materials` 필드에 저장합니다:
+
+```json
+"materials": {
+  "base_dir": "{{WORKSPACE_DIR}}/output/{slug}/photos",
+  "photos": [
+    {
+      "path": "products/슬리핑백_정면.png",
+      "category": "products",
+      "description": "실키밤부 슬리핑백 정면 누끼",
+      "use_in": ["naver-pc", "kakao-single", "insta-event"]
+    },
+    {
+      "path": "lifestyle/착용샷1.jpg",
+      "category": "lifestyle",
+      "description": "아기 착용 감성샷",
+      "use_in": ["insta-story", "jasamol-mobile"]
+    },
+    {
+      "path": "logo/sundayhug_logo.png",
+      "category": "logo",
+      "description": "썬데이허그 로고",
+      "use_in": ["all"]
+    }
+  ]
+}
+```
+
+건너뛰기를 선택하면:
+```json
+"materials": {
+  "base_dir": "",
+  "photos": []
+}
+```
+
+## Phase 5: 최종 확정
 
 모든 항목이 확정되면, 표 형태로 정리하여 사용자에게 확인받습니다.
 
@@ -157,14 +268,15 @@ triggers:
 | 혜택 | {offer} |
 | 룩앤필 | {look_and_feel} |
 | 레퍼런스 | {visual_references 수}장 등록 |
+| 디자인 소재 | {materials.photos 수}장 등록 |
 | 예상 산출물 | {deliverables_preview} |
 
 이 내용으로 기획서를 생성할까요?
 ```
 
-**사용자가 확인하면 Phase 5로 진행합니다.**
+**사용자가 확인하면 Phase 6으로 진행합니다.**
 
-## Phase 5: .pen 기획서 생성
+## Phase 6: .pen 기획서 생성
 
 Pencil MCP 도구를 사용하여 시각적 기획서를 생성합니다.
 
@@ -196,7 +308,7 @@ Pencil MCP 도구를 사용하여 시각적 기획서를 생성합니다.
 | 본문 | 14-16px `#666666` |
 | 태그 | `#F5E6D3` bg, pill shape |
 
-## Phase 6: .json 데이터 저장
+## Phase 7: .json 데이터 저장
 
 기획서와 동일한 경로에 .json 파일을 저장합니다.
 
@@ -239,7 +351,7 @@ Write 도구로 JSON 파일을 저장합니다:
 }
 ```
 
-## Phase 7: 핸드오프
+## Phase 8: 핸드오프
 
 기획서 생성 완료 후 안내:
 
