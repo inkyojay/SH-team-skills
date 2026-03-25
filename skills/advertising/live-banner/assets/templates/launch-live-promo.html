@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=750">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap');
+
+        :root {
+            /* === 테마 색상 (웜 프리미엄 감성) === */
+            --color-bg-warm: #F0EBE3;            /* 페이지 배경 (웜 베이지) */
+            --color-bg-cream: #FDFBF7;           /* 밝은 크림 섹션 */
+            --color-bg-taupe: #EDE6DC;           /* 따뜻한 토프 섹션 */
+            --color-bg-sand: #E8DFD3;            /* 모래색 배경 */
+
+            --color-title: #3A3028;              /* 메인 타이틀 (웜 차콜) */
+            --color-subtitle: #6B5E52;           /* 서브타이틀 */
+            --color-body: #7A6E63;               /* 본문 */
+            --color-muted: #A89F95;              /* 보조 텍스트 */
+            --color-light: #C4BAB0;              /* 연한 텍스트 */
+
+            --color-accent: #B8956A;             /* 골드 강조 */
+            --color-accent-light: #D4B98A;       /* 밝은 골드 */
+            --color-accent-dark: #96754A;        /* 진한 골드 */
+
+            --color-number-bg: #5C4A3A;          /* 번호 뱃지 (웜 다크 브라운) */
+            --color-number-text: #FFFFFF;
+
+            --color-divider: #DDD5CB;            /* 구분선 */
+            --color-divider-accent: #C4BAB0;     /* 강조 구분선 */
+
+            --color-live-badge-bg: #C0392B;      /* 라이브 뱃지 */
+            --color-live-badge-text: #FFFFFF;
+
+            --color-check: #96754A;              /* 체크마크 */
+
+            /* === 레이아웃 === */
+            --page-width: 750px;
+            --section-padding-y: 70px;
+            --section-padding-x: 55px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, sans-serif;
+            background: var(--color-bg-warm);
+            width: var(--page-width);
+            margin: 0 auto;
+            -webkit-font-smoothing: antialiased;
+            color: var(--color-body);
+        }
+
+        /* ===================================================================
+           히어로 섹션 — 라이프스타일 감성
+           =================================================================== */
+        .hero {
+            background: linear-gradient(180deg, var(--color-bg-sand) 0%, var(--color-bg-taupe) 100%);
+            padding: 36px var(--section-padding-x) 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* 상단 로고 바 */
+        .hero__logos {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .hero__logos img { height: 24px; object-fit: contain; }
+        .hero__logos-placeholder {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* 얇은 서브 라벨 → 굵은 제품명 패턴 */
+        .hero__sub-label {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--color-muted);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .hero__category {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .hero__year-badge {
+            display: inline-block;
+            border: 1.5px solid var(--color-accent);
+            color: var(--color-accent-dark);
+            font-size: 16px;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 4px;
+            letter-spacing: 1px;
+        }
+
+        .hero__category-label {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--color-subtitle);
+            letter-spacing: 2px;
+        }
+
+        .hero__product-name {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 58px;
+            font-weight: 900;
+            color: var(--color-title);
+            line-height: 1.15;
+            margin-bottom: 4px;
+            letter-spacing: -1px;
+        }
+
+        .hero__event-type {
+            font-size: 36px;
+            font-weight: 300;
+            color: var(--color-subtitle);
+            margin-bottom: 24px;
+            letter-spacing: 6px;
+        }
+
+        /* 라이브 일정 — 엘레강트 필 */
+        .hero__schedule {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(8px);
+            padding: 10px 28px;
+            border-radius: 40px;
+            margin-bottom: 40px;
+        }
+
+        .hero__live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--color-live-badge-bg);
+            color: var(--color-live-badge-text);
+            font-size: 13px;
+            font-weight: 800;
+            padding: 5px 14px;
+            border-radius: 4px;
+            letter-spacing: 1.5px;
+        }
+
+        .hero__live-dot {
+            width: 6px; height: 6px;
+            background: var(--color-live-badge-text);
+            border-radius: 50%;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero__schedule-text {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--color-subtitle);
+            letter-spacing: 0.5px;
+        }
+
+        /* 제품 이미지 */
+        .hero__product-image {
+            width: 480px;
+            max-width: 100%;
+            margin: 0 auto 36px;
+        }
+
+        .hero__product-image img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 40px rgba(58, 48, 40, 0.12));
+        }
+
+        /* 설명 텍스트 */
+        .hero__description {
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--color-subtitle);
+            line-height: 1.85;
+            letter-spacing: 0.2px;
+        }
+
+        .hero__description strong {
+            font-weight: 700;
+            color: var(--color-title);
+        }
+
+        /* ===================================================================
+           세로 구분 장식 (섹션 사이)
+           =================================================================== */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            height: 50px;
+            background: var(--color-bg-warm);
+        }
+
+        .section-divider__line {
+            width: 1px;
+            height: 100%;
+            background: var(--color-divider-accent);
+        }
+
+        /* ===================================================================
+           공통 섹션 — 교차 배경
+           =================================================================== */
+        .section {
+            padding: var(--section-padding-y) var(--section-padding-x);
+        }
+
+        .section--cream { background: var(--color-bg-cream); }
+        .section--taupe { background: var(--color-bg-taupe); }
+        .section--warm  { background: var(--color-bg-warm); }
+
+        /* 섹션 헤더 — 얇은 라인 + 텍스트 */
+        .section__header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section__header-sub {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--color-light);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .section__header-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--color-title);
+            letter-spacing: 1px;
+        }
+
+        .section__header-line {
+            width: 40px;
+            height: 2px;
+            background: var(--color-accent);
+            margin: 16px auto 0;
+            border-radius: 1px;
+        }
+
+        /* ===================================================================
+           혜택 리스트 — 체크마크 스타일
+           =================================================================== */
+        .benefit-list {
+            list-style: none;
+            max-width: 580px;
+            margin: 0 auto;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            padding: 28px 0;
+        }
+
+        .benefit-item + .benefit-item {
+            border-top: 1px solid var(--color-divider);
+        }
+
+        .benefit-item__number {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--color-accent);
+            color: var(--color-accent-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 700;
+            margin-right: 22px;
+        }
+
+        .benefit-item__content { flex: 1; min-width: 0; }
+
+        .benefit-item__title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-title);
+            margin-bottom: 3px;
+        }
+
+        .benefit-item__desc {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--color-muted);
+            line-height: 1.5;
+        }
+
+        .benefit-item__value {
+            flex-shrink: 0;
+            margin-left: 20px;
+            text-align: right;
+        }
+
+        .benefit-item__value-num {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--color-accent-dark);
+            line-height: 1;
+        }
+
+        .benefit-item__value-unit {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-muted);
+        }
+
+        .benefit-item__value-icon {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        /* ===================================================================
+           사은품 — 원형 이미지 + 라벨
+           =================================================================== */
+        .gift-list {
+            list-style: none;
+        }
+
+        .gift-item {
+            padding: 32px 0;
+        }
+
+        .gift-item + .gift-item {
+            border-top: 1px solid var(--color-divider);
+        }
+
+        .gift-item__header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .gift-item__number {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--color-number-bg);
+            color: var(--color-number-text);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 700;
+            margin-right: 16px;
+        }
+
+        .gift-item__title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-title);
+        }
+
+        .gift-item__subtitle {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--color-muted);
+            margin-left: auto;
+        }
+
+        .gift-item__images {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+        }
+
+        .gift-item__product { text-align: center; }
+
+        .gift-item__product-image {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: var(--color-bg-warm);
+            margin: 0 auto 10px;
+            box-shadow: 0 4px 20px rgba(58, 48, 40, 0.08);
+        }
+
+        .gift-item__product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gift-item__product-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-subtitle);
+        }
+
+        /* ===================================================================
+           이벤트 — 카드 스타일
+           =================================================================== */
+        .event-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .event-card {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(4px);
+            border-radius: 20px;
+            padding: 24px 28px;
+            transition: transform 0.2s;
+        }
+
+        .event-card__number {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            background: var(--color-number-bg);
+            color: var(--color-number-text);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            margin-right: 20px;
+        }
+
+        .event-card__content { flex: 1; min-width: 0; }
+
+        .event-card__label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-muted);
+            margin-bottom: 3px;
+            letter-spacing: 0.5px;
+        }
+
+        .event-card__title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-title);
+            line-height: 1.35;
+        }
+
+        .event-card__image {
+            flex-shrink: 0;
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-left: 16px;
+            box-shadow: 0 2px 12px rgba(58, 48, 40, 0.1);
+        }
+
+        .event-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ===================================================================
+           푸터 CTA — 미니멀
+           =================================================================== */
+        .footer-cta {
+            background: var(--color-number-bg);
+            padding: 30px var(--section-padding-x);
+            text-align: center;
+        }
+
+        .footer-cta__text {
+            font-size: 16px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.85);
+            letter-spacing: 0.5px;
+        }
+
+        .footer-cta__arrow {
+            display: inline-block;
+            margin-left: 8px;
+            font-size: 14px;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         SECTION 1: 히어로
+         ============================================================ -->
+    <div class="hero">
+        <div class="hero__logos">
+            <span class="hero__logos-placeholder">{{LOGO_LEFT}}</span>
+            <span class="hero__logos-placeholder">{{LOGO_CENTER}}</span>
+            <span class="hero__logos-placeholder">{{LOGO_RIGHT}}</span>
+        </div>
+
+        <div class="hero__sub-label">{{HERO_SUB_LABEL}}</div>
+
+        <div class="hero__category">
+            <span class="hero__year-badge">{{YEAR}}</span>
+            <span class="hero__category-label">{{CATEGORY_LABEL}}</span>
+        </div>
+
+        <h1 class="hero__product-name">{{PRODUCT_NAME}}</h1>
+        <div class="hero__event-type">{{EVENT_TYPE}}</div>
+
+        <div class="hero__schedule">
+            <span class="hero__live-badge">
+                <span class="hero__live-dot"></span>
+                LIVE
+            </span>
+            <span class="hero__schedule-text">{{LIVE_DATE}} {{LIVE_TIME}}</span>
+        </div>
+
+        <div class="hero__product-image">
+            <img src="{{PRODUCT_IMAGE}}" alt="{{PRODUCT_NAME}}">
+        </div>
+
+        <p class="hero__description">{{HERO_DESCRIPTION}}</p>
+    </div>
+
+    <!-- ============================================================
+         구분선
+         ============================================================ -->
+    <div class="section-divider">
+        <div class="section-divider__line"></div>
+    </div>
+
+    <!-- ============================================================
+         SECTION 2: 라이브 결제 혜택
+         ============================================================ -->
+    <div class="section section--cream">
+        <div class="section__header">
+            <div class="section__header-sub">{{BENEFIT_SECTION_SUB}}</div>
+            <h2 class="section__header-title">{{BENEFIT_SECTION_TITLE}}</h2>
+            <div class="section__header-line"></div>
+        </div>
+
+        <div class="benefit-list">
+            <div class="benefit-item">
+                <div class="benefit-item__number">01</div>
+                <div class="benefit-item__content">
+                    <div class="benefit-item__title">{{BENEFIT_1_TITLE}}</div>
+                    <div class="benefit-item__desc">{{BENEFIT_1_DESC}}</div>
+                </div>
+                <div class="benefit-item__value">
+                    <div class="benefit-item__value-num">{{BENEFIT_1_VALUE}}</div>
+                    <div class="benefit-item__value-unit">{{BENEFIT_1_UNIT}}</div>
+                </div>
+            </div>
+
+            <div class="benefit-item">
+                <div class="benefit-item__number">02</div>
+                <div class="benefit-item__content">
+                    <div class="benefit-item__title">{{BENEFIT_2_TITLE}}</div>
+                    <div class="benefit-item__desc">{{BENEFIT_2_DESC}}</div>
+                </div>
+                <div class="benefit-item__value">
+                    <div class="benefit-item__value-num">{{BENEFIT_2_VALUE}}</div>
+                    <div class="benefit-item__value-unit">{{BENEFIT_2_UNIT}}</div>
+                </div>
+            </div>
+
+            <div class="benefit-item">
+                <div class="benefit-item__number">03</div>
+                <div class="benefit-item__content">
+                    <div class="benefit-item__title">{{BENEFIT_3_TITLE}}</div>
+                    <div class="benefit-item__desc">{{BENEFIT_3_DESC}}</div>
+                </div>
+                <div class="benefit-item__value">
+                    <div class="benefit-item__value-num">{{BENEFIT_3_VALUE}}</div>
+                    <div class="benefit-item__value-unit">{{BENEFIT_3_UNIT}}</div>
+                </div>
+            </div>
+
+            <div class="benefit-item">
+                <div class="benefit-item__number">04</div>
+                <div class="benefit-item__content">
+                    <div class="benefit-item__title">{{BENEFIT_4_TITLE}}</div>
+                    <div class="benefit-item__desc">{{BENEFIT_4_DESC}}</div>
+                </div>
+                <div class="benefit-item__value">
+                    <img class="benefit-item__value-icon" src="{{BENEFIT_4_ICON}}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         구분선
+         ============================================================ -->
+    <div class="section-divider">
+        <div class="section-divider__line"></div>
+    </div>
+
+    <!-- ============================================================
+         SECTION 3: 라이브 사은품
+         ============================================================ -->
+    <div class="section section--taupe">
+        <div class="section__header">
+            <div class="section__header-sub">{{GIFT_SECTION_SUB}}</div>
+            <h2 class="section__header-title">{{GIFT_SECTION_TITLE}}</h2>
+            <div class="section__header-line"></div>
+        </div>
+
+        <div class="gift-list">
+            <div class="gift-item">
+                <div class="gift-item__header">
+                    <div class="gift-item__number">01</div>
+                    <div class="gift-item__title">{{GIFT_1_TITLE}}</div>
+                </div>
+                <div class="gift-item__images">
+                    <div class="gift-item__product">
+                        <div class="gift-item__product-image">
+                            <img src="{{GIFT_1_IMG_1}}" alt="{{GIFT_1_LABEL_1}}">
+                        </div>
+                        <div class="gift-item__product-label">{{GIFT_1_LABEL_1}}</div>
+                    </div>
+                    <div class="gift-item__product">
+                        <div class="gift-item__product-image">
+                            <img src="{{GIFT_1_IMG_2}}" alt="{{GIFT_1_LABEL_2}}">
+                        </div>
+                        <div class="gift-item__product-label">{{GIFT_1_LABEL_2}}</div>
+                    </div>
+                    <div class="gift-item__product">
+                        <div class="gift-item__product-image">
+                            <img src="{{GIFT_1_IMG_3}}" alt="{{GIFT_1_LABEL_3}}">
+                        </div>
+                        <div class="gift-item__product-label">{{GIFT_1_LABEL_3}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gift-item">
+                <div class="gift-item__header">
+                    <div class="gift-item__number">02</div>
+                    <div class="gift-item__title">{{GIFT_2_TITLE}}</div>
+                </div>
+                <div class="gift-item__images">
+                    <div class="gift-item__product">
+                        <div class="gift-item__product-image">
+                            <img src="{{GIFT_2_IMG_1}}" alt="{{GIFT_2_LABEL_1}}">
+                        </div>
+                        <div class="gift-item__product-label">{{GIFT_2_LABEL_1}}</div>
+                    </div>
+                    <div class="gift-item__product">
+                        <div class="gift-item__product-image">
+                            <img src="{{GIFT_2_IMG_2}}" alt="{{GIFT_2_LABEL_2}}">
+                        </div>
+                        <div class="gift-item__product-label">{{GIFT_2_LABEL_2}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gift-item">
+                <div class="gift-item__header">
+                    <div class="gift-item__number">03</div>
+                    <div class="gift-item__title">{{GIFT_3_TITLE}}</div>
+                </div>
+                <div class="gift-item__images">
+                    <div class="gift-item__product">
+                        <div class="gift-item__product-image">
+                            <img src="{{GIFT_3_IMG_1}}" alt="{{GIFT_3_LABEL_1}}">
+                        </div>
+                        <div class="gift-item__product-label">{{GIFT_3_LABEL_1}}</div>
+                    </div>
+                    <div class="gift-item__product">
+                        <div class="gift-item__product-image">
+                            <img src="{{GIFT_3_IMG_2}}" alt="{{GIFT_3_LABEL_2}}">
+                        </div>
+                        <div class="gift-item__product-label">{{GIFT_3_LABEL_2}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         구분선
+         ============================================================ -->
+    <div class="section-divider">
+        <div class="section-divider__line"></div>
+    </div>
+
+    <!-- ============================================================
+         SECTION 4: 라이브 이벤트
+         ============================================================ -->
+    <div class="section section--warm">
+        <div class="section__header">
+            <div class="section__header-sub">{{EVENT_SECTION_SUB}}</div>
+            <h2 class="section__header-title">{{EVENT_SECTION_TITLE}}</h2>
+            <div class="section__header-line"></div>
+        </div>
+
+        <div class="event-list">
+            <div class="event-card">
+                <div class="event-card__number">01</div>
+                <div class="event-card__content">
+                    <div class="event-card__label">{{EVENT_1_LABEL}}</div>
+                    <div class="event-card__title">{{EVENT_1_TITLE}}</div>
+                </div>
+                <div class="event-card__image">
+                    <img src="{{EVENT_1_IMAGE}}" alt="">
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-card__number">02</div>
+                <div class="event-card__content">
+                    <div class="event-card__label">{{EVENT_2_LABEL}}</div>
+                    <div class="event-card__title">{{EVENT_2_TITLE}}</div>
+                </div>
+                <div class="event-card__image">
+                    <img src="{{EVENT_2_IMAGE}}" alt="">
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-card__number">03</div>
+                <div class="event-card__content">
+                    <div class="event-card__label">{{EVENT_3_LABEL}}</div>
+                    <div class="event-card__title">{{EVENT_3_TITLE}}</div>
+                </div>
+                <div class="event-card__image">
+                    <img src="{{EVENT_3_IMAGE}}" alt="">
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-card__number">04</div>
+                <div class="event-card__content">
+                    <div class="event-card__label">{{EVENT_4_LABEL}}</div>
+                    <div class="event-card__title">{{EVENT_4_TITLE}}</div>
+                </div>
+                <div class="event-card__image">
+                    <img src="{{EVENT_4_IMAGE}}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         FOOTER CTA
+         ============================================================ -->
+    <div class="footer-cta">
+        <p class="footer-cta__text">
+            {{FOOTER_CTA_TEXT}}
+            <span class="footer-cta__arrow">&rsaquo;</span>
+        </p>
+    </div>
+
+</body>
+</html>

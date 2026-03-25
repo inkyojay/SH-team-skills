@@ -26,13 +26,30 @@ node_modules/
 __pycache__/
 *.pyc
 
+# 산출물 (5GB+, git에 올리지 않음)
+output/
+
 # Dashboard 세션 데이터
 dashboard/data/sessions/
 
-# 영상/오디오 바이너리 (Remotion public assets)
+# Kiro
+.kiro/
+
+# 폰트 바이너리
+*.otf
+*.ttf
+*.woff
+*.woff2
+
+# 영상/오디오 바이너리
 *.mp4
 *.mp3
 *.wav
+
+# 이미지 (가이드 프리뷰 등)
+docs/guide/assets/
+
+# 환경 변수
 .env
 .envrc
 .env.local
