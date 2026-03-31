@@ -116,6 +116,22 @@ SKILL_TRANSLATIONS = {
     "release-skills": "스킬 릴리스 워크플로우 - 버전 관리 및 배포",
     "firecrawl": "웹 크롤링 및 스크래핑 도구",
     "nano-banana-pro": "Google Gemini 기반 이미지 생성/편집 도구",
+    "apify-ultimate-scraper": "Apify 기반 웹 스크래핑 도구",
+    "webapp-testing": "웹앱 테스트 도구",
+    "feature-planner": "기능 계획 및 단계별 구현 전략 수립",
+
+    # Documents
+    "docx": "DOCX 문서 생성/편집/분석 도구",
+    "pdf": "PDF 추출, 생성, 병합, 분할, 폼 처리 도구",
+    "hwpx": "HWPX(아래아 한글) 문서 변환 도구",
+    "pptx": "프레젠테이션(PPT) 생성/편집/분석 도구",
+    "xlsx": "엑셀 스프레드시트 생성/편집/분석 도구",
+
+    # Marketing (additional)
+    "keyword-trend": "네이버 키워드 시즌 트렌드 분석",
+    "keyword-optimizer": "키워드 최적화 분석",
+    "new-product-planner": "신제품 기획 종합 도구 (시장조사~런칭 전략)",
+    "gov-apply": "정부/기관 지원사업 신청서 대화형 작성 도구",
 
     # Video
     "remotion-best-practices": "Remotion 영상 제작 가이드",
@@ -336,7 +352,9 @@ CATEGORY_EXAMPLES = {
     "documents": [
         "PDF 생성해줘",
         "엑셀 분석해줘",
-        "PPT 만들어줘"
+        "PPT 만들어줘",
+        "한글(HWP) 문서 변환",
+        "DOCX 편집해줘"
     ]
 }
 
@@ -497,12 +515,35 @@ def scan_skills() -> dict:
     """skills 폴더 스캔하여 모든 스킬 정보 수집"""
     skills = {}
 
+    # 루트 레벨 스킬 자동 카테고리 매핑
+    ROOT_SKILL_CATEGORIES = {
+        "docx": "documents",
+        "pdf": "documents",
+        "hwpx": "documents",
+        "pptx": "documents",
+        "xlsx": "documents",
+        "keyword-trend": "marketing",
+        "new-product-planner": "marketing",
+        "gov-apply": "tools",
+    }
+
     for category_dir in SKILLS_DIR.iterdir():
         if not category_dir.is_dir():
             continue
 
+        # 루트 레벨 스킬 (SKILL.md가 직접 있는 경우)
+        if (category_dir / "SKILL.md").exists():
+            skill_info = parse_skill_md(category_dir)
+            if skill_info:
+                cat = ROOT_SKILL_CATEGORIES.get(category_dir.name, "tools")
+                if cat not in skills:
+                    skills[cat] = []
+                skills[cat].append(skill_info)
+            continue
+
         category = category_dir.name
-        skills[category] = []
+        if category not in skills:
+            skills[category] = []
 
         for skill_dir in category_dir.iterdir():
             if not skill_dir.is_dir():
@@ -514,6 +555,10 @@ def scan_skills() -> dict:
 
         # 이름순 정렬
         skills[category].sort(key=lambda x: x["name"])
+
+    # 루트 레벨에서 추가된 카테고리도 정렬
+    for cat in skills:
+        skills[cat].sort(key=lambda x: x["name"])
 
     return skills
 
