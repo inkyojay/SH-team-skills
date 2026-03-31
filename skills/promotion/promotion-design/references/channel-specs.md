@@ -1,1 +1,0 @@
-/Users/inkyo/Projects/team-skills/skills/promotion/promotion-plan/references/channel-specs.md
