@@ -385,16 +385,17 @@ def parse_skill_md(skill_path: Path) -> dict:
         if name_match:
             info["name"] = name_match.group(1).strip().strip('"\'')
 
-        # description 추출 (한 줄짜리)
-        desc_match = re.search(r'^description:\s*["\']?([^|\n][^\n]*)["\']?$', frontmatter, re.MULTILINE)
-        if desc_match:
-            info["description"] = desc_match.group(1).strip().strip('"\'')
+        # 멀티라인 description 먼저 체크 (| 또는 > 로 시작하는 경우)
+        desc_multi = re.search(r'^description:\s*[|>]\s*\n(.*?)(?=\n[a-z_]+:|\Z)', frontmatter, re.DOTALL | re.MULTILINE)
+        if desc_multi:
+            desc_lines = desc_multi.group(1).strip().split('\n')
+            info["description"] = desc_lines[0].strip() if desc_lines else ""
         else:
-            # 멀티라인 description
-            desc_match = re.search(r'^description:\s*[|>]\s*\n(.*?)(?=\n[a-z_]+:|\Z)', frontmatter, re.DOTALL | re.MULTILINE)
-            if desc_match:
-                desc_lines = desc_match.group(1).strip().split('\n')
-                info["description"] = desc_lines[0].strip() if desc_lines else ""
+            # description 추출 (한 줄짜리)
+            desc_single = re.search(r'^description:\s*["\']?([^|\n][^\n]*)["\']?$', frontmatter, re.MULTILINE)
+            if desc_single:
+                info["description"] = desc_single.group(1).strip().strip('"\'')
+
 
         # triggers 추출
         triggers_match = re.search(r'triggers:\s*\n((?:\s*-\s*.+\n?)+)', frontmatter)
