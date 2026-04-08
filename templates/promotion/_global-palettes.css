@@ -1,0 +1,190 @@
+/* 썬데이허그 프로모션 공통 — 캠페인 컬러 팔레트 (12종)
+   모든 채널 템플릿이 @import로 참조
+   사용법: <body data-palette="warm-spring">
+   기본값: 팔레트 미지정 시 golden-hour 적용 (:root 기본값) */
+
+/* ============================================
+   DEFAULT (golden-hour와 동일)
+   ============================================ */
+/* :root에 정의된 기본값이 적용됨 */
+
+/* ============================================
+   시즌 팔레트 (4종)
+   ============================================ */
+
+/* 따뜻한 봄 — 봄 신상, 출산 선물 */
+[data-palette="warm-spring"] {
+  --accent: #E8C9A8;
+  --accent-light: #FBF3EA;
+  --accent-dark: #C4A584;
+  --bg-warm: #FBF9F6;
+  --bg-warm2: #F5EFE9;
+  --palette-gradient: linear-gradient(135deg, #FBF9F6 0%, #FBF3EA 50%, #F5EFE9 100%);
+  --palette-card-border: #F0E6DA;
+  --palette-badge-bg: #E8C9A8;
+  --palette-badge-text: #FFFFFF;
+  --palette-highlight: #FBF3EA;
+}
+
+/* 시원한 여름 — 여름 특가, 메쉬 라인 */
+[data-palette="cool-summer"] {
+  --accent: #B3C5D3;
+  --accent-light: #E8F0F5;
+  --accent-dark: #8FA5B5;
+  --bg-warm: #F5F7FA;
+  --bg-warm2: #ECF0F4;
+  --palette-gradient: linear-gradient(135deg, #F5F7FA 0%, #E8F0F5 50%, #ECF0F4 100%);
+  --palette-card-border: #D4DEE6;
+  --palette-badge-bg: #B3C5D3;
+  --palette-badge-text: #FFFFFF;
+  --palette-highlight: #E8F0F5;
+}
+
+/* 포근한 가을 — 추석 세트, 가을 신상 */
+[data-palette="cozy-autumn"] {
+  --accent: #D4A574;
+  --accent-light: #F5E8D8;
+  --accent-dark: #B08652;
+  --bg-warm: #FAF5EF;
+  --bg-warm2: #F2E8DC;
+  --palette-gradient: linear-gradient(135deg, #FAF5EF 0%, #F5E8D8 50%, #F2E8DC 100%);
+  --palette-card-border: #E5D5C2;
+  --palette-badge-bg: #D4A574;
+  --palette-badge-text: #FFFFFF;
+  --palette-highlight: #F5E8D8;
+}
+
+/* 고요한 겨울 — 크리스마스, 겨울 슬립백 */
+[data-palette="gentle-winter"] {
+  --accent: #C4B5CB;
+  --accent-light: #F0EBF2;
+  --accent-dark: #A296A8;
+  --bg-warm: #F8F5FA;
+  --bg-warm2: #EFE9F2;
+  --palette-gradient: linear-gradient(135deg, #F8F5FA 0%, #F0EBF2 50%, #EFE9F2 100%);
+  --palette-card-border: #DDD4E2;
+  --palette-badge-bg: #C4B5CB;
+  --palette-badge-text: #FFFFFF;
+  --palette-highlight: #F0EBF2;
+}
+
+/* ============================================
+   무드 팔레트 (4종)
+   ============================================ */
+
+/* 장밋빛 새벽 — 여아 제품, 블러시 컬렉션 */
+[data-palette="rose-dawn"] {
+  --accent: #C09B8D;
+  --accent-light: #F5EBE7;
+  --accent-dark: #9E7D70;
+  --bg-warm: #FBF5F3;
+  --bg-warm2: #F2E9E5;
+  --palette-gradient: linear-gradient(135deg, #FBF5F3 0%, #F5EBE7 50%, #F2E9E5 100%);
+  --palette-card-border: #E2D4CE;
+  --palette-badge-bg: #C09B8D;
+  --palette-badge-text: #FFFFFF;
+  --palette-highlight: #F5EBE7;
+}
+
+/* 싱그러운 정원 — 친환경, 밤부 라인 */
+[data-palette="fresh-garden"] {
+  --accent: #7A8F76;
+  --accent-light: #E8EDE6;
+  --accent-dark: #5E7258;
+  --bg-warm: #F5F8F4;
+  --bg-warm2: #E9EFE7;
+  --palette-gradient: linear-gradient(135deg, #F5F8F4 0%, #E8EDE6 50%, #E9EFE7 100%);
+  --palette-card-border: #CFDACC;
+  --palette-badge-bg: #7A8F76;
+  --palette-badge-text: #FFFFFF;
+  --palette-highlight: #E8EDE6;
+}
+
+/* 달빛 고요 — 수면 캠페인, 야간 라이브 */
+[data-palette="moonlit-calm"] {
+  --accent: #B0A899;
+  --accent-light: #F0ECE6;
+  --accent-dark: #908778;
+  --bg-warm: #F9F7F3;
+  --bg-warm2: #EBE6DE;
+  --palette-gradient: linear-gradient(135deg, #F9F7F3 0%, #F0ECE6 50%, #EBE6DE 100%);
+  --palette-card-border: #DDD6CA;
+  --palette-badge-bg: #B0A899;
+  --palette-badge-text: #FFFFFF;
+  --palette-highlight: #F0ECE6;
+}
+
+/* 볼터치 핑크 — 신생아, 출산 축하 */
+[data-palette="blush-touch"] {
+  --accent: #DEB5A8;
+  --accent-light: #FBF0EC;
+  --accent-dark: #BE9588;
+  --bg-warm: #FDF7F5;
+  --bg-warm2: #F5ECE8;
+  --palette-gradient: linear-gradient(135deg, #FDF7F5 0%, #FBF0EC 50%, #F5ECE8 100%);
+  --palette-card-border: #EAD8D0;
+  --palette-badge-bg: #DEB5A8;
+  --palette-badge-text: #FFFFFF;
+  --palette-highlight: #FBF0EC;
+}
+
+/* ============================================
+   스페셜 팔레트 (4종)
+   ============================================ */
+
+/* 슬레이트 블루 — 남아 제품, 프리미엄 라인 */
+[data-palette="slate-mood"] {
+  --accent: #8A9BB0;
+  --accent-light: #E8EDF2;
+  --accent-dark: #6B7E94;
+  --bg-warm: #F3F5F8;
+  --bg-warm2: #E8ECF0;
+  --palette-gradient: linear-gradient(135deg, #F3F5F8 0%, #E8EDF2 50%, #E8ECF0 100%);
+  --palette-card-border: #D0D8E2;
+  --palette-badge-bg: #8A9BB0;
+  --palette-badge-text: #FFFFFF;
+  --palette-highlight: #E8EDF2;
+}
+
+/* 골든 아워 — 브랜드 대표, 기본 라이브 */
+[data-palette="golden-hour"] {
+  --accent: #C8A07C;
+  --accent-light: #F0E6DA;
+  --accent-dark: #A8825E;
+  --bg-warm: #FAF7F4;
+  --bg-warm2: #F5F0EB;
+  --palette-gradient: linear-gradient(135deg, #FAF7F4 0%, #F0E6DA 50%, #F5F0EB 100%);
+  --palette-card-border: #E5DDD4;
+  --palette-badge-bg: #C8A07C;
+  --palette-badge-text: #FFFFFF;
+  --palette-highlight: #F0E6DA;
+}
+
+/* 코랄 선셋 — 한정판, 콜라보, 기념일 */
+[data-palette="coral-sunset"] {
+  --accent: #D4856C;
+  --accent-light: #F8EBE5;
+  --accent-dark: #B56A52;
+  --bg-warm: #FDF6F3;
+  --bg-warm2: #F4E8E2;
+  --palette-gradient: linear-gradient(135deg, #FDF6F3 0%, #F8EBE5 50%, #F4E8E2 100%);
+  --palette-card-border: #E6D2C8;
+  --palette-badge-bg: #D4856C;
+  --palette-badge-text: #FFFFFF;
+  --palette-highlight: #F8EBE5;
+}
+
+/* 미드나잇 럭스 — VIP 라이브, 프리미엄 세트
+   NOTE: 프레임 오버라이드는 각 템플릿의 _palettes.css에 정의 */
+[data-palette="midnight-luxe"] {
+  --accent: #C8A07C;
+  --accent-light: #F0E6DA;
+  --accent-dark: #A8825E;
+  --bg-warm: #FAF7F4;
+  --bg-warm2: #F5F0EB;
+  --palette-gradient: linear-gradient(135deg, #2C2C3A 0%, #3A3548 50%, #2C2C3A 100%);
+  --palette-card-border: #E5DDD4;
+  --palette-badge-bg: #C8A07C;
+  --palette-badge-text: #2C2C3A;
+  --palette-highlight: #F0E6DA;
+}

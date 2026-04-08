@@ -1,0 +1,94 @@
+<!--=============================================================
+  TYPE: 모바일 메인배너 (Mobile Main Banner)
+  VARIATION: D — Lifestyle (라이프스타일 풀 이미지)
+  DIMENSIONS: 720 × 960px (세로형)
+  PURPOSE: 모바일 스토어 홈 상단 — 라이프스타일 세로 이미지 + 하단 텍스트
+  IMAGE SPEC: 720 × 960px 이상 (전체 커버, 하단 25% 영역에 여백 확보)
+  REFERENCE: 아기 침대 배너 — 풀블리드 세로 이미지 + 하단 좌측 텍스트
+=============================================================-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>모바일 메인배너 - D Lifestyle</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../_base-styles.css">
+<link rel="stylesheet" href="../../_palettes.css">
+<style>
+  .ss-lifestyle-mo {
+    position: relative;
+    width: 720px;
+    height: 960px;
+    overflow: hidden;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  .ss-lifestyle-mo__bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .ss-lifestyle-mo__content {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    padding: 0 56px 72px 56px;
+    z-index: 1;
+  }
+  .ss-lifestyle-mo__tag {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 400;
+    color: #666666;
+    letter-spacing: 0.01em;
+    margin-bottom: 12px;
+  }
+  .ss-lifestyle-mo__subtitle {
+    font-family: var(--font-body);
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #3a3a3a;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .ss-lifestyle-mo__title {
+    font-family: var(--font-body);
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: #1a1a1a;
+    letter-spacing: -0.03em;
+  }
+</style>
+</head>
+<body style="margin:0;padding:0;background:#eee;">
+<div class="ss-lifestyle-mo">
+  <!-- 풀블리드 배경 이미지 -->
+  <img class="ss-lifestyle-mo__bg"
+       src="../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-04.jpg"
+       alt="실키밤부 슬리핑백">
+  <!-- 하단 좌측 텍스트 영역 -->
+  <div class="ss-lifestyle-mo__content">
+    <div class="ss-lifestyle-mo__tag">2차 프리오더</div>
+    <div class="ss-lifestyle-mo__subtitle">어디에 있어도, 같은 잠자리</div>
+    <div class="ss-lifestyle-mo__title">아기의 하루가 머무는 침대</div>
+  </div>
+</div>
+<!--
+  ▸ 사용 예시 (변수 치환):
+    ../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-04.jpg  → 세로형 라이프스타일 사진 경로
+    실키밤부 슬리핑백   → 이미지 대체 텍스트
+    2차 프리오더     → "2차 프리오더"
+    어디에 있어도, 같은 잠자리    → "어디에 있어도, 같은 잠자리"
+    아기의 하루가 머무는 침대       → "아기의 하루가 머무는 침대"
+
+  ▸ 이미지 가이드:
+    - 세로형 사진 (3:4 비율 권장)
+    - 피사체를 상단~중앙에 배치 (하단 25%에 텍스트 공간 확보)
+    - 하단 영역이 밝은 톤이면 텍스트 가독성 향상
+    - 모바일에서는 pill 버튼 제거, 간결한 3줄 구성
+-->
+</body>
+</html>

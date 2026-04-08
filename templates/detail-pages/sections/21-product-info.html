@@ -1,0 +1,20 @@
+<!--=============================================================
+  SECTION: Product Info (상품 정보 테이블)
+  ORDER: 21
+  REQUIRED: ✅ 필수
+  BACKGROUND: warm
+  PURPOSE: 법적 필수 상품 정보를 테이블 형태로 명시.
+
+  DATA REQUIRED:
+  - {{#product_info_rows}} : 정보 행 배열
+    각 행: { label: "제품명", value: "꿀잠 슬리핑백 실키 밤부" }
+=============================================================-->
+<div class="sec warm v">
+  <div class="sec-label">Product Info</div>
+  <div class="sec-title">상품 정보</div>
+  <table class="info-tbl">
+    {{#product_info_rows}}
+    <tr><th>{{label}}</th><td>{{value}}</td></tr>
+    {{/product_info_rows}}
+  </table>
+</div>

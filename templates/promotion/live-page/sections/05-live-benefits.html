@@ -1,0 +1,25 @@
+<!--=============================================================
+  SECTION: Live Benefits (라이브 혜택)
+  ORDER: 05
+  REQUIRED: ✅ 필수
+  BACKGROUND: white
+  PURPOSE: 2×2 카드 그리드로 라이브 혜택 안내.
+
+  DATA REQUIRED:
+  - {{#live_benefits}} : 4개 혜택 배열
+    각 항목: { icon, title, desc, tag }
+=============================================================-->
+<div class="sec">
+  <div class="sec-label tx-center">Live Benefits</div>
+  <div class="sec-title tx-center">함께하는 시간 동안<br>준비한 혜택</div>
+  <div class="live-benefit-grid">
+    {{#live_benefits}}
+    <div class="live-benefit-card">
+      <div class="live-benefit-icon">{{icon}}</div>
+      <h4>{{title}}</h4>
+      <p>{{desc}}</p>
+      <span class="live-benefit-tag">{{tag}}</span>
+    </div>
+    {{/live_benefits}}
+  </div>
+</div>

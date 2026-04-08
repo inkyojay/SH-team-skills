@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>썬데이허그 상세페이지 템플릿 시스템</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#FFFFFF;--bg-warm:#FAF7F4;--bg-warm2:#F5F0EB;
+  --dark:#1A1A1A;--dark2:#2C2C3A;--body:#444;--sub:#888;
+  --line:#EBEBEB;--line-warm:#E5DDD4;
+  --accent:#C8A07C;--accent-light:#F0E6DA;
+  --danger:#D4645C;--safe:#7C9A72;
+  --font-display:'Cormorant Garamond',Georgia,serif;
+  --font-body:'Noto Sans KR',-apple-system,sans-serif;
+  --font-en:'DM Sans','Noto Sans KR',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font-body);background:#F2EDE8;color:var(--dark);line-height:1.7;-webkit-font-smoothing:antialiased;}
+
+/* === HEADER === */
+.header{
+  background:var(--dark2);padding:60px 40px 48px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.header::before{
+  content:'';position:absolute;top:-60%;left:-20%;
+  width:140%;height:200%;
+  background:radial-gradient(ellipse at 30% 50%,rgba(200,160,124,.12) 0%,transparent 60%);
+}
+.header-tag{
+  font-family:var(--font-en);font-size:11px;font-weight:500;
+  letter-spacing:.35em;color:var(--accent);margin-bottom:12px;
+  position:relative;
+}
+.header h1{
+  font-family:var(--font-display);font-size:42px;font-weight:300;
+  font-style:italic;color:#fff;line-height:1.3;margin-bottom:12px;
+  position:relative;
+}
+.header-sub{font-size:14px;color:rgba(255,255,255,.5);position:relative;font-weight:300;}
+.header-stats{
+  display:flex;justify-content:center;gap:36px;margin-top:32px;
+  position:relative;
+}
+.header-stat{text-align:center;}
+.header-stat-val{
+  font-family:var(--font-en);font-size:28px;font-weight:700;color:#fff;
+}
+.header-stat-label{font-size:11px;color:rgba(255,255,255,.4);margin-top:2px;}
+
+/* === LAYOUT === */
+.container{max-width:1100px;margin:0 auto;padding:40px 24px 80px;}
+.grid-2{display:grid;grid-template-columns:320px 1fr;gap:32px;align-items:start;}
+
+/* === LEFT: FLOW DIAGRAM === */
+.flow-panel{
+  position:sticky;top:24px;
+  background:var(--bg);border-radius:12px;
+  border:1px solid var(--line);overflow:hidden;
+}
+.flow-header{
+  background:var(--dark2);padding:20px 24px;
+}
+.flow-header h2{
+  font-family:var(--font-en);font-size:11px;font-weight:600;
+  letter-spacing:.2em;color:var(--accent);
+}
+.flow-header p{font-size:12px;color:rgba(255,255,255,.4);margin-top:2px;}
+.flow-list{padding:8px 0;}
+.flow-item{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 20px;cursor:pointer;transition:all .2s;
+  border-left:3px solid transparent;
+}
+.flow-item:hover{background:var(--bg-warm);}
+.flow-item.active{background:var(--accent-light);border-left-color:var(--accent);}
+.flow-item.required .flow-dot{background:var(--accent);}
+.flow-item.optional .flow-dot{background:transparent;border:1.5px solid var(--sub);}
+.flow-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.flow-num{
+  font-family:var(--font-en);font-size:10px;font-weight:700;
+  color:var(--sub);width:20px;flex-shrink:0;
+}
+.flow-name{font-size:13px;font-weight:500;color:var(--dark);flex:1;}
+.flow-bg-tag{
+  font-size:9px;padding:2px 6px;border-radius:3px;
+  font-family:var(--font-en);font-weight:600;letter-spacing:.03em;
+}
+.flow-bg-tag.white{background:#fff;color:var(--sub);border:1px solid var(--line);}
+.flow-bg-tag.warm{background:var(--bg-warm);color:var(--accent);border:1px solid var(--line-warm);}
+.flow-bg-tag.dark{background:var(--dark2);color:rgba(255,255,255,.7);}
+.flow-bg-tag.grad{background:linear-gradient(135deg,var(--bg-warm),var(--accent-light));color:var(--accent);}
+
+.flow-divider{
+  display:flex;align-items:center;gap:8px;padding:4px 20px;
+}
+.flow-divider-line{flex:1;height:1px;background:var(--line);}
+.flow-divider-text{
+  font-family:var(--font-en);font-size:9px;font-weight:600;
+  color:var(--sub);letter-spacing:.1em;white-space:nowrap;
+}
+
+/* === RIGHT: SECTION CARDS === */
+.cards{display:flex;flex-direction:column;gap:20px;}
+
+.card{
+  background:var(--bg);border-radius:12px;
+  border:1px solid var(--line);overflow:hidden;
+  transition:all .25s;
+}
+.card:hover{border-color:var(--accent);box-shadow:0 4px 20px rgba(200,160,124,.12);}
+.card-top{
+  display:flex;align-items:stretch;
+}
+.card-preview{
+  width:200px;flex-shrink:0;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.card-preview.bg-white{background:var(--bg-warm);}
+.card-preview.bg-warm{background:var(--bg-warm2);}
+.card-preview.bg-dark{background:var(--dark2);}
+.card-preview.bg-grad{background:linear-gradient(135deg,var(--bg-warm),var(--accent-light));}
+.card-preview-inner{
+  width:120px;padding:16px 0;
+}
+.card-preview-label{
+  font-family:var(--font-en);font-size:7px;font-weight:500;
+  letter-spacing:.15em;color:var(--accent);margin-bottom:4px;
+}
+.card-preview-title{
+  font-size:9px;font-weight:700;line-height:1.4;
+  color:var(--dark);margin-bottom:3px;
+}
+.card-preview.bg-dark .card-preview-title{color:#fff;}
+.card-preview-desc{font-size:7px;color:var(--sub);line-height:1.5;}
+.card-preview.bg-dark .card-preview-desc{color:rgba(255,255,255,.4);}
+.card-preview-bar{
+  height:4px;border-radius:2px;margin-top:6px;
+}
+.card-preview-bar.accent{background:var(--accent);}
+.card-preview-bar.line{background:var(--line);}
+.card-preview-dots{display:flex;gap:4px;margin-top:6px;}
+.card-preview-dot{
+  width:24px;height:24px;border-radius:50%;
+  border:1px solid rgba(0,0,0,.06);
+}
+
+.card-body{flex:1;padding:24px 28px;}
+.card-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.card-order{
+  font-family:var(--font-en);font-size:20px;font-weight:700;
+  color:var(--accent);line-height:1;
+}
+.card-title-group{flex:1;}
+.card-title{font-size:17px;font-weight:700;color:var(--dark);line-height:1.3;}
+.card-en{
+  font-family:var(--font-en);font-size:11px;font-weight:400;
+  color:var(--sub);margin-top:1px;
+}
+.card-badge{
+  padding:4px 10px;border-radius:100px;font-size:10px;font-weight:600;
+}
+.card-badge.required{background:var(--accent-light);color:var(--accent);}
+.card-badge.optional{background:var(--bg-warm);color:var(--sub);}
+
+.card-purpose{
+  font-size:13px;color:var(--body);line-height:1.85;
+  margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--line);
+}
+
+.card-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.card-meta-item h4{
+  font-family:var(--font-en);font-size:9px;font-weight:600;
+  letter-spacing:.1em;color:var(--accent);margin-bottom:4px;
+}
+.card-meta-item p{font-size:11px;color:var(--body);line-height:1.6;}
+.card-meta-item code{
+  font-size:10px;background:var(--bg-warm);padding:1px 5px;
+  border-radius:3px;color:var(--accent);font-family:var(--font-en);
+}
+
+/* === DATA FIELDS === */
+.card-data{
+  margin-top:16px;padding-top:16px;border-top:1px solid var(--line);
+}
+.card-data h4{
+  font-family:var(--font-en);font-size:9px;font-weight:600;
+  letter-spacing:.1em;color:var(--accent);margin-bottom:8px;
+}
+.data-fields{display:flex;flex-wrap:wrap;gap:4px;}
+.data-field{
+  font-family:var(--font-en);font-size:10px;
+  padding:3px 8px;border-radius:3px;
+  background:var(--bg-warm);color:var(--body);
+}
+
+/* === CATEGORY DIVIDER === */
+.cat-divider{
+  display:flex;align-items:center;gap:16px;
+  padding:8px 0;
+}
+.cat-divider-icon{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--accent);display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.cat-divider-icon svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.cat-divider-text h3{
+  font-size:16px;font-weight:700;color:var(--dark);
+}
+.cat-divider-text p{font-size:12px;color:var(--sub);}
+
+/* === LEGEND === */
+.legend{
+  display:flex;gap:24px;justify-content:center;
+  margin-bottom:32px;padding:16px 24px;
+  background:var(--bg);border-radius:8px;border:1px solid var(--line);
+}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--body);}
+.legend-dot{width:8px;height:8px;border-radius:50%;}
+.legend-dot.filled{background:var(--accent);}
+.legend-dot.outline{border:1.5px solid var(--sub);}
+
+/* === PRINCIPLES === */
+.principles{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+  margin-bottom:32px;
+}
+.principle{
+  background:var(--bg);border-radius:10px;padding:24px 20px;
+  border:1px solid var(--line);text-align:center;
+}
+.principle-icon{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--accent-light);margin:0 auto 12px;
+  display:flex;align-items:center;justify-content:center;
+}
+.principle-icon svg{width:22px;height:22px;fill:none;stroke:var(--accent);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.principle h3{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:4px;}
+.principle p{font-size:11px;color:var(--body);line-height:1.6;}
+
+/* === RESPONSIVE === */
+@media(max-width:900px){
+  .grid-2{grid-template-columns:1fr;}
+  .flow-panel{position:static;}
+  .principles{grid-template-columns:1fr 1fr;}
+  .card-top{flex-direction:column;}
+  .card-preview{width:100%;height:120px;}
+}
+@media(max-width:600px){
+  .principles{grid-template-columns:1fr;}
+  .header h1{font-size:28px;}
+  .header-stats{gap:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-tag">SUNDAY HUG DESIGN SYSTEM</div>
+  <h1>상세페이지 템플릿 시스템</h1>
+  <div class="header-sub">모듈식 섹션 라이브러리로 일관된 브랜드 경험의 상세페이지를 만듭니다</div>
+  <div class="header-stats">
+    <div class="header-stat">
+      <div class="header-stat-val">27</div>
+      <div class="header-stat-label">섹션 템플릿</div>
+    </div>
+    <div class="header-stat">
+      <div class="header-stat-val">15</div>
+      <div class="header-stat-label">필수 섹션</div>
+    </div>
+    <div class="header-stat">
+      <div class="header-stat-val">12</div>
+      <div class="header-stat-label">선택 섹션</div>
+    </div>
+    <div class="header-stat">
+      <div class="header-stat-val">4+</div>
+      <div class="header-stat-label">CTA 배치</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- PRINCIPLES -->
+<div class="principles">
+  <div class="principle">
+    <div class="principle-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+    <h3>시선 포착</h3>
+    <p>Hero + Trust Bar로<br>3초 안에 핵심 가치 전달</p>
+  </div>
+  <div class="principle">
+    <div class="principle-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+    <h3>신뢰 확보</h3>
+    <p>인증·리뷰·통계로<br>구매 불안 요소 제거</p>
+  </div>
+  <div class="principle">
+    <div class="principle-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+    <h3>문제→해결</h3>
+    <p>Safety→Features 흐름으로<br>자연스러운 설득 구조</p>
+  </div>
+  <div class="principle">
+    <div class="principle-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg></div>
+    <h3>다중 CTA</h3>
+    <p>Mid·Event·Final·Sticky<br>4곳에 구매 버튼 배치</p>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot filled"></div> 필수 섹션 (15개)</div>
+  <div class="legend-item"><div class="legend-dot outline"></div> 선택 섹션 (12개)</div>
+  <div class="legend-item"><span style="font-size:10px;color:var(--sub);font-family:var(--font-en);">배경색:</span></div>
+  <div class="legend-item"><span class="flow-bg-tag white">white</span></div>
+  <div class="legend-item"><span class="flow-bg-tag warm">warm</span></div>
+  <div class="legend-item"><span class="flow-bg-tag dark">dark</span></div>
+  <div class="legend-item"><span class="flow-bg-tag grad">gradient</span></div>
+</div>
+
+
+<!-- MAIN GRID -->
+<div class="grid-2">
+
+<!-- LEFT: FLOW -->
+<div class="flow-panel">
+  <div class="flow-header">
+    <h2>SECTION FLOW</h2>
+    <p>상세페이지 섹션 순서</p>
+  </div>
+  <div class="flow-list">
+    <div class="flow-divider"><div class="flow-divider-line"></div><div class="flow-divider-text">시선 포착</div><div class="flow-divider-line"></div></div>
+    <div class="flow-item required" data-id="hero"><div class="flow-dot"></div><div class="flow-num">01</div><div class="flow-name">Hero</div><span class="flow-bg-tag warm">warm</span></div>
+    <div class="flow-item required" data-id="trust"><div class="flow-dot"></div><div class="flow-num">02</div><div class="flow-name">Trust Bar</div><span class="flow-bg-tag dark">dark</span></div>
+
+    <div class="flow-divider"><div class="flow-divider-line"></div><div class="flow-divider-text">문제 인식</div><div class="flow-divider-line"></div></div>
+    <div class="flow-item required" data-id="intro"><div class="flow-dot"></div><div class="flow-num">03</div><div class="flow-name">Intro</div><span class="flow-bg-tag white">white</span></div>
+    <div class="flow-item optional" data-id="safety"><div class="flow-dot"></div><div class="flow-num">04</div><div class="flow-name">Safety</div><span class="flow-bg-tag white">white</span></div>
+
+    <div class="flow-divider"><div class="flow-divider-line"></div><div class="flow-divider-text">해결책 제시</div><div class="flow-divider-line"></div></div>
+    <div class="flow-item required" data-id="features"><div class="flow-dot"></div><div class="flow-num">05</div><div class="flow-name">Key Features</div><span class="flow-bg-tag white">white</span></div>
+
+    <div class="flow-divider"><div class="flow-divider-line"></div><div class="flow-divider-text">구매 유도</div><div class="flow-divider-line"></div></div>
+    <div class="flow-item required" data-id="midcta"><div class="flow-dot"></div><div class="flow-num">06</div><div class="flow-name">Mid CTA</div><span class="flow-bg-tag grad">grad</span></div>
+
+    <div class="flow-divider"><div class="flow-divider-line"></div><div class="flow-divider-text">사회적 증거</div><div class="flow-divider-line"></div></div>
+    <div class="flow-item required" data-id="review"><div class="flow-dot"></div><div class="flow-num">07</div><div class="flow-name">Review</div><span class="flow-bg-tag warm">warm</span></div>
+
+    <div class="flow-divider"><div class="flow-divider-line"></div><div class="flow-divider-text">프로모션</div><div class="flow-divider-line"></div></div>
+    <div class="flow-item optional" data-id="event"><div class="flow-dot"></div><div class="flow-num">08</div><div class="flow-name">Event</div><span class="flow-bg-tag white">white</span></div>
+
+    <div class="flow-divider"><div class="flow-divider-line"></div><div class="flow-divider-text">상세 정보</div><div class="flow-divider-line"></div></div>
+    <div class="flow-item optional"><div class="flow-dot"></div><div class="flow-num">09</div><div class="flow-name">Lifestyle Image</div><span class="flow-bg-tag white">img</span></div>
+    <div class="flow-item optional"><div class="flow-dot"></div><div class="flow-num">10</div><div class="flow-name">Product Guide</div><span class="flow-bg-tag warm">warm</span></div>
+    <div class="flow-item optional"><div class="flow-dot"></div><div class="flow-num">10a</div><div class="flow-name">Expert Card</div><span class="flow-bg-tag warm">warm</span></div>
+    <div class="flow-item optional"><div class="flow-dot"></div><div class="flow-num">11</div><div class="flow-name">Material</div><span class="flow-bg-tag white">white</span></div>
+    <div class="flow-item required"><div class="flow-dot"></div><div class="flow-num">12</div><div class="flow-name">Feature Points</div><span class="flow-bg-tag white">교차</span></div>
+    <div class="flow-item optional"><div class="flow-dot"></div><div class="flow-num">12a</div><div class="flow-name">Feature Overlay</div><span class="flow-bg-tag dark">img</span></div>
+    <div class="flow-item required"><div class="flow-dot"></div><div class="flow-num">13</div><div class="flow-name">Product Detail</div><span class="flow-bg-tag warm">warm</span></div>
+    <div class="flow-item required"><div class="flow-dot"></div><div class="flow-num">14</div><div class="flow-name">Color Variation</div><span class="flow-bg-tag white">white</span></div>
+    <div class="flow-item optional"><div class="flow-dot"></div><div class="flow-num">15</div><div class="flow-name">Size Design</div><span class="flow-bg-tag warm">warm</span></div>
+    <div class="flow-item optional"><div class="flow-dot"></div><div class="flow-num">16</div><div class="flow-name">How to Wear</div><span class="flow-bg-tag white">white</span></div>
+    <div class="flow-item required"><div class="flow-dot"></div><div class="flow-num">17</div><div class="flow-name">Size Info</div><span class="flow-bg-tag warm">warm</span></div>
+    <div class="flow-item required"><div class="flow-dot"></div><div class="flow-num">18</div><div class="flow-name">Care</div><span class="flow-bg-tag white">white</span></div>
+    <div class="flow-item required"><div class="flow-dot"></div><div class="flow-num">19</div><div class="flow-name">Shipping</div><span class="flow-bg-tag warm">warm</span></div>
+    <div class="flow-item optional"><div class="flow-dot"></div><div class="flow-num">20</div><div class="flow-name">Other Products</div><span class="flow-bg-tag white">white</span></div>
+    <div class="flow-item required"><div class="flow-dot"></div><div class="flow-num">21</div><div class="flow-name">Product Info</div><span class="flow-bg-tag warm">warm</span></div>
+
+    <div class="flow-divider"><div class="flow-divider-line"></div><div class="flow-divider-text">감성 마무리</div><div class="flow-divider-line"></div></div>
+    <div class="flow-item required"><div class="flow-dot"></div><div class="flow-num">22</div><div class="flow-name">Brand Quote</div><span class="flow-bg-tag dark">dark</span></div>
+    <div class="flow-item required"><div class="flow-dot"></div><div class="flow-num">23</div><div class="flow-name">Brand Story</div><span class="flow-bg-tag warm">warm</span></div>
+
+    <div class="flow-divider"><div class="flow-divider-line"></div><div class="flow-divider-text">최종 전환</div><div class="flow-divider-line"></div></div>
+    <div class="flow-item required"><div class="flow-dot"></div><div class="flow-num">24</div><div class="flow-name">Final CTA</div><span class="flow-bg-tag dark">dark</span></div>
+    <div class="flow-item required"><div class="flow-dot"></div><div class="flow-num">25</div><div class="flow-name">Close</div><span class="flow-bg-tag warm">warm</span></div>
+    <div class="flow-item required"><div class="flow-dot"></div><div class="flow-num">26</div><div class="flow-name">Footer</div><span class="flow-bg-tag dark">dark</span></div>
+
+    <div class="flow-divider"><div class="flow-divider-line"></div><div class="flow-divider-text">상시 전환</div><div class="flow-divider-line"></div></div>
+    <div class="flow-item required"><div class="flow-dot"></div><div class="flow-num">27</div><div class="flow-name">Sticky Bar</div><span class="flow-bg-tag white">fixed</span></div>
+  </div>
+</div>
+
+<!-- RIGHT: CARDS -->
+<div class="cards">
+
+<!-- ===== 시선 포착 ===== -->
+<div class="cat-divider">
+  <div class="cat-divider-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/></svg></div>
+  <div class="cat-divider-text"><h3>시선 포착</h3><p>첫 화면에서 고객의 관심을 사로잡는 영역</p></div>
+</div>
+
+<div class="card" id="hero">
+  <div class="card-top">
+    <div class="card-preview bg-warm">
+      <div class="card-preview-inner">
+        <div style="background:var(--bg-warm2);height:50px;border-radius:4px;margin-bottom:8px;display:flex;align-items:flex-end;padding:6px;">
+          <div>
+            <div class="card-preview-label">SUNDAY HUG</div>
+            <div class="card-preview-title" style="color:#fff;font-size:8px;">꿀잠 수면루틴<br>실키밤부 슬리핑백</div>
+          </div>
+        </div>
+        <div style="background:var(--dark2);padding:4px 8px;border-radius:2px;display:flex;gap:8px;justify-content:center;">
+          <span style="font-size:6px;color:rgba(255,255,255,.7);">KC인증</span>
+          <span style="font-size:6px;color:rgba(255,255,255,.7);">국내생산</span>
+          <span style="font-size:6px;color:rgba(255,255,255,.7);">무형광</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-order">01</div>
+        <div class="card-title-group">
+          <div class="card-title">Hero</div>
+          <div class="card-en">01-hero.html</div>
+        </div>
+        <span class="card-badge required">필수</span>
+      </div>
+      <div class="card-purpose">첫 화면에서 제품의 핵심 가치를 한눈에 전달하고 시선을 사로잡습니다. 히어로 이미지 위에 그라데이션 오버레이로 텍스트 가독성을 확보하며, 제품의 첫인상을 결정하는 가장 중요한 섹션입니다.</div>
+      <div class="card-meta">
+        <div class="card-meta-item"><h4>BACKGROUND</h4><p>warm (이미지로 덮임)</p></div>
+        <div class="card-meta-item"><h4>IMAGE SPEC</h4><p>600 x 540px</p></div>
+      </div>
+      <div class="card-data">
+        <h4>DATA FIELDS</h4>
+        <div class="data-fields">
+          <span class="data-field">{{hero_image}}</span>
+          <span class="data-field">{{brand_tag}}</span>
+          <span class="data-field">{{hero_title_html}}</span>
+          <span class="data-field">{{hero_subtitle}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card" id="trust">
+  <div class="card-top">
+    <div class="card-preview bg-dark">
+      <div class="card-preview-inner">
+        <div style="display:flex;gap:6px;justify-content:center;">
+          <div style="text-align:center;flex:1;"><div style="font-size:7px;color:rgba(255,255,255,.8);">KC 인증</div><div style="font-size:5px;color:rgba(255,255,255,.3);margin-top:1px;">안전확인 완료</div></div>
+          <div style="width:1px;background:rgba(255,255,255,.1);"></div>
+          <div style="text-align:center;flex:1;"><div style="font-size:7px;color:rgba(255,255,255,.8);">국내생산</div><div style="font-size:5px;color:rgba(255,255,255,.3);margin-top:1px;">직영공장 제조</div></div>
+          <div style="width:1px;background:rgba(255,255,255,.1);"></div>
+          <div style="text-align:center;flex:1;"><div style="font-size:7px;color:rgba(255,255,255,.8);">무형광</div><div style="font-size:5px;color:rgba(255,255,255,.3);margin-top:1px;">피부 저자극</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-order">02</div>
+        <div class="card-title-group">
+          <div class="card-title">Trust Bar</div>
+          <div class="card-en">02-trust-bar.html</div>
+        </div>
+        <span class="card-badge required">필수</span>
+      </div>
+      <div class="card-purpose">히어로 직후 핵심 신뢰 포인트 3가지를 즉시 노출하여 스크롤 전에 "이 제품은 믿을 수 있다"는 인상을 심습니다. 인증, 제조, 소재 관련 포인트가 일반적입니다.</div>
+      <div class="card-meta">
+        <div class="card-meta-item"><h4>BACKGROUND</h4><p>dark2 (#2C2C3A)</p></div>
+        <div class="card-meta-item"><h4>LAYOUT</h4><p>3칸 가로 분할, 세로 구분선</p></div>
+      </div>
+      <div class="card-data">
+        <h4>DATA FIELDS</h4>
+        <div class="data-fields">
+          <span class="data-field">{{trust_1_main}}</span>
+          <span class="data-field">{{trust_1_sub}}</span>
+          <span class="data-field">{{trust_2_main}}</span>
+          <span class="data-field">{{trust_2_sub}}</span>
+          <span class="data-field">{{trust_3_main}}</span>
+          <span class="data-field">{{trust_3_sub}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 문제 인식 ===== -->
+<div class="cat-divider">
+  <div class="cat-divider-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div class="cat-divider-text"><h3>문제 인식</h3><p>고객의 고민을 환기하고 해결 필요성을 인식시키는 영역</p></div>
+</div>
+
+<div class="card">
+  <div class="card-top">
+    <div class="card-preview bg-white">
+      <div class="card-preview-inner">
+        <div class="card-preview-label">About This Product</div>
+        <div class="card-preview-title">아기의 건강한 수면 루틴,<br>슬리핑백에서 시작됩니다</div>
+        <div class="card-preview-desc">이불을 차고 일어나는 아기를 위해...</div>
+        <div style="background:var(--bg-warm2);height:30px;border-radius:3px;margin-top:6px;"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-order">03</div>
+        <div class="card-title-group"><div class="card-title">Intro</div><div class="card-en">03-intro.html</div></div>
+        <span class="card-badge required">필수</span>
+      </div>
+      <div class="card-purpose">제품이 왜 필요한지 공감을 이끌어내는 도입부. 고객의 고민/상황을 언급하고 제품이 해결책임을 암시합니다. 이 섹션 뒤에 thin-line 구분선을 배치합니다.</div>
+      <div class="card-meta">
+        <div class="card-meta-item"><h4>BACKGROUND</h4><p>white</p></div>
+        <div class="card-meta-item"><h4>LAYOUT</h4><p>라벨 + 제목 + 설명 + 풀블리드 이미지</p></div>
+      </div>
+      <div class="card-data">
+        <h4>DATA FIELDS</h4>
+        <div class="data-fields">
+          <span class="data-field">{{intro_label}}</span>
+          <span class="data-field">{{intro_title_html}}</span>
+          <span class="data-field">{{intro_desc_html}}</span>
+          <span class="data-field">{{intro_image}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-top">
+    <div class="card-preview bg-white">
+      <div class="card-preview-inner">
+        <div style="border:1px solid var(--line);border-radius:3px;overflow:hidden;">
+          <div style="background:var(--dark);padding:4px;text-align:center;font-size:6px;font-weight:700;color:#fff;">영아 수면 사고</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:3px;">
+            <div style="background:var(--bg-warm);padding:3px;font-size:5px;"><span style="color:var(--danger);font-weight:700;">SBS</span><br>이불 질식사고</div>
+            <div style="background:var(--bg-warm);padding:3px;font-size:5px;"><span style="color:var(--danger);font-weight:700;">MBC</span><br>영아 돌연사</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-order">04</div>
+        <div class="card-title-group"><div class="card-title">Safety</div><div class="card-en">04-safety.html</div></div>
+        <span class="card-badge optional">선택</span>
+      </div>
+      <div class="card-purpose">고객이 인식하지 못한 위험/문제를 뉴스·전문가 근거로 환기시켜 "이 문제를 해결해야 한다"는 인식을 만듭니다. 안전 이슈가 있는 제품(슬리핑백, 카시트 등)에만 사용합니다.</div>
+      <div class="card-meta">
+        <div class="card-meta-item"><h4>WHEN TO USE</h4><p>슬리핑백(질식 위험), 카시트, 아기띠/힙시트</p></div>
+        <div class="card-meta-item"><h4>COMPONENTS</h4><p>뉴스 그리드 + 비교 컬럼 + 콜아웃 박스</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 해결책 + 구매유도 ===== -->
+<div class="cat-divider">
+  <div class="cat-divider-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+  <div class="cat-divider-text"><h3>해결책 제시 + 구매 유도</h3><p>문제에 대한 해결책을 제시하고 첫 번째 구매 기회를 제공</p></div>
+</div>
+
+<div class="card">
+  <div class="card-top">
+    <div class="card-preview bg-white">
+      <div class="card-preview-inner">
+        <div class="card-preview-label">Key Features</div>
+        <div class="card-preview-title">그래서 만들었습니다,<br>꿀잠 슬리핑백</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:6px;">
+          <div style="background:var(--bg-warm);border-radius:3px;padding:4px;text-align:center;font-size:6px;font-weight:600;">입는 이불 구조</div>
+          <div style="background:var(--bg-warm);border-radius:3px;padding:4px;text-align:center;font-size:6px;font-weight:600;">밤새 적정 체온</div>
+          <div style="background:var(--bg-warm);border-radius:3px;padding:4px;text-align:center;font-size:6px;font-weight:600;">실키밤부 소재</div>
+          <div style="background:var(--bg-warm);border-radius:3px;padding:4px;text-align:center;font-size:6px;font-weight:600;">성장 맞춤 디자인</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-order">05</div>
+        <div class="card-title-group"><div class="card-title">Key Features</div><div class="card-en">05-key-features.html</div></div>
+        <span class="card-badge required">필수</span>
+      </div>
+      <div class="card-purpose">Safety(문제)에 대한 해결책으로 제품을 제시합니다. 핵심 USP를 4개 카드로 요약하고, "그래서 만들었습니다" 형태의 스토리텔링으로 설득합니다.</div>
+      <div class="card-meta">
+        <div class="card-meta-item"><h4>LAYOUT</h4><p>라이프스타일 이미지 + 2x2 카드 그리드</p></div>
+        <div class="card-meta-item"><h4>KEY RULE</h4><p>USP에 <code>.hl</code> 클래스로 accent 강조</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-top">
+    <div class="card-preview bg-grad">
+      <div class="card-preview-inner" style="text-align:center;">
+        <div style="font-size:8px;font-weight:700;color:var(--dark);margin-bottom:4px;">우리 아기 꿀잠,<br>지금 시작하세요</div>
+        <div style="font-size:5px;color:var(--body);margin-bottom:6px;">KC인증 / 국내생산 / 무형광</div>
+        <div style="background:var(--accent);color:#fff;padding:4px 12px;border-radius:2px;font-size:7px;font-weight:600;display:inline-block;">구매하기</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-order">06</div>
+        <div class="card-title-group"><div class="card-title">Mid CTA</div><div class="card-en">06-mid-cta.html</div></div>
+        <span class="card-badge required">필수</span>
+      </div>
+      <div class="card-purpose">Key Features를 읽고 관심이 생긴 고객이 바로 구매할 수 있도록 페이지 중간에 첫 번째 구매 버튼을 배치합니다. 이탈을 줄이는 핵심 전환 포인트입니다.</div>
+      <div class="card-meta">
+        <div class="card-meta-item"><h4>BACKGROUND</h4><p>gradient (warm → accent-light)</p></div>
+        <div class="card-meta-item"><h4>COMPONENTS</h4><p>제목 + Trust 한줄 + CTA 버튼</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 사회적 증거 + 프로모션 ===== -->
+<div class="cat-divider">
+  <div class="cat-divider-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+  <div class="cat-divider-text"><h3>사회적 증거 + 프로모션</h3><p>리뷰와 혜택으로 구매 확신을 강화하는 영역</p></div>
+</div>
+
+<div class="card">
+  <div class="card-top">
+    <div class="card-preview bg-warm">
+      <div class="card-preview-inner">
+        <div style="display:flex;gap:6px;justify-content:center;margin-bottom:6px;">
+          <div style="text-align:center;"><div style="font-family:var(--font-en);font-size:12px;font-weight:700;">4.9</div><div style="font-size:5px;color:var(--sub);">평점</div></div>
+          <div style="text-align:center;"><div style="font-family:var(--font-en);font-size:12px;font-weight:700;">2,847</div><div style="font-size:5px;color:var(--sub);">리뷰</div></div>
+          <div style="text-align:center;"><div style="font-family:var(--font-en);font-size:12px;font-weight:700;">89%</div><div style="font-size:5px;color:var(--sub);">재구매</div></div>
+        </div>
+        <div style="display:flex;gap:2px;">
+          <div style="flex:1;height:20px;background:var(--bg-warm2);border-radius:2px;"></div>
+          <div style="flex:1;height:20px;background:var(--bg-warm2);border-radius:2px;"></div>
+          <div style="flex:1;height:20px;background:var(--bg-warm2);border-radius:2px;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-order">07</div>
+        <div class="card-title-group"><div class="card-title">Review</div><div class="card-en">07-review.html</div></div>
+        <span class="card-badge required">필수</span>
+      </div>
+      <div class="card-purpose">실제 구매자 리뷰와 통계 수치로 사회적 증거를 제공합니다. "다른 엄마들도 만족했다"는 확신을 심어주는 핵심 섹션입니다.</div>
+      <div class="card-meta">
+        <div class="card-meta-item"><h4>COMPONENTS</h4><p>통계 바 + 사진 스트립 + 리뷰 3건 + 전체보기 링크</p></div>
+        <div class="card-meta-item"><h4>KEY DATA</h4><p>평점, 리뷰수, 재구매율</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-top">
+    <div class="card-preview bg-white">
+      <div class="card-preview-inner">
+        <div style="border:1px solid var(--accent);border-radius:4px;overflow:hidden;">
+          <div style="background:var(--danger);padding:3px;text-align:center;font-size:5px;color:#fff;font-weight:600;">선착순 200명 한정</div>
+          <div style="padding:6px;text-align:center;">
+            <div style="font-size:7px;font-weight:700;margin-bottom:4px;">구매 시 사은품 증정</div>
+            <div style="background:var(--accent);color:#fff;padding:3px;border-radius:2px;font-size:6px;">지금 구매하기</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-order">08</div>
+        <div class="card-title-group"><div class="card-title">Event</div><div class="card-en">08-event.html</div></div>
+        <span class="card-badge optional">선택</span>
+      </div>
+      <div class="card-purpose">한정 혜택/사은품으로 구매 긴급성과 부가가치를 전달합니다. "지금 안 사면 손해"라는 심리적 트리거를 활용합니다.</div>
+      <div class="card-meta">
+        <div class="card-meta-item"><h4>COMPONENTS</h4><p>긴급성 바 + 배너 + 사은품 그리드 + CTA</p></div>
+        <div class="card-meta-item"><h4>WHEN TO USE</h4><p>프로모션/이벤트 진행 중일 때만</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 상세 정보 ===== -->
+<div class="cat-divider">
+  <div class="cat-divider-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+  <div class="cat-divider-text"><h3>상세 정보</h3><p>제품의 기능, 소재, 사이즈, 관리법 등 구체적인 정보 영역</p></div>
+</div>
+
+<div class="card">
+  <div class="card-top">
+    <div class="card-preview bg-white">
+      <div class="card-preview-inner">
+        <div style="display:flex;gap:4px;margin-bottom:4px;">
+          <div style="flex:1;height:28px;background:var(--bg-warm);border-radius:2px;"></div>
+          <div style="flex:1;">
+            <div style="font-size:5px;color:var(--accent);font-weight:700;">POINT 01</div>
+            <div style="font-size:6px;font-weight:700;">안전하게 입는<br>이불 구조</div>
+          </div>
+        </div>
+        <div style="background:var(--bg-warm);border-radius:2px;padding:4px;text-align:center;margin-bottom:4px;">
+          <div style="font-size:5px;color:var(--accent);font-weight:700;">POINT 02</div>
+          <div style="font-size:6px;font-weight:700;">포근하고 따뜻한 수면</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-order">12</div>
+        <div class="card-title-group"><div class="card-title">Feature Points</div><div class="card-en">12-feature-points.html</div></div>
+        <span class="card-badge required">필수</span>
+      </div>
+      <div class="card-purpose">제품의 핵심 기능/장점을 4개 포인트로 깊이 있게 설명합니다. 좌우교차 → 센터 → 좌우교차(반전) → 센터 패턴으로 시각적 다양성을 확보합니다.</div>
+      <div class="card-meta">
+        <div class="card-meta-item"><h4>LAYOUT PATTERN</h4><p>P01: 좌교차+서브리스트 / P02: 센터+풀블리드<br>P03: 우교차+2col / P04: 센터+3col</p></div>
+        <div class="card-meta-item"><h4>BACKGROUND</h4><p>white ↔ warm 교차</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-top">
+    <div class="card-preview bg-warm">
+      <div class="card-preview-inner">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;">
+          <div style="background:var(--bg);border-radius:3px;overflow:hidden;border:1px solid var(--line);">
+            <div style="height:16px;background:var(--bg-warm2);"></div>
+            <div style="padding:3px;font-size:5px;"><span style="color:var(--accent);font-size:4px;font-weight:700;">DETAIL 01</span><br>넥라인 바인딩</div>
+          </div>
+          <div style="background:var(--bg);border-radius:3px;overflow:hidden;border:1px solid var(--line);">
+            <div style="height:16px;background:var(--bg-warm2);"></div>
+            <div style="padding:3px;font-size:5px;"><span style="color:var(--accent);font-size:4px;font-weight:700;">DETAIL 02</span><br>이중 지퍼 가드</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-order">13</div>
+        <div class="card-title-group"><div class="card-title">Product Detail</div><div class="card-en">13-product-detail.html</div></div>
+        <span class="card-badge required">필수</span>
+      </div>
+      <div class="card-purpose">제품의 세부 마감/디테일을 2열 그리드 카드로 보여줍니다. "이 제품은 세심하게 만들어졌다"는 품질 인상을 전달합니다.</div>
+      <div class="card-meta">
+        <div class="card-meta-item"><h4>LAYOUT</h4><p>2열 그리드, 4~6개 카드</p></div>
+        <div class="card-meta-item"><h4>CARD STRUCTURE</h4><p>이미지(4:3) + 라벨 + 제목 + 설명</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-top">
+    <div class="card-preview bg-white">
+      <div class="card-preview-inner">
+        <div class="card-preview-dots">
+          <div class="card-preview-dot" style="background:#F5F0E8;"></div>
+          <div class="card-preview-dot" style="background:#D9CFC0;"></div>
+          <div class="card-preview-dot" style="background:#F2D4D4;"></div>
+          <div class="card-preview-dot" style="background:#C5D9D0;"></div>
+          <div class="card-preview-dot" style="background:#C8D6E0;"></div>
+        </div>
+        <div style="margin-top:6px;display:grid;grid-template-columns:1fr 1fr;gap:3px;">
+          <div style="height:28px;background:#F5F0E8;border-radius:2px;"></div>
+          <div style="height:28px;background:#F5F0E8;border-radius:2px;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-order">14</div>
+        <div class="card-title-group"><div class="card-title">Color Variation</div><div class="card-en">14-color-variation.html</div></div>
+        <span class="card-badge required">필수</span>
+      </div>
+      <div class="card-purpose">사용 가능한 컬러 옵션을 실제 제품 사진과 함께 보여줍니다. 컬러 스와치 + 전면/후면 이미지 2열 그리드로 구성됩니다.</div>
+      <div class="card-meta">
+        <div class="card-meta-item"><h4>LAYOUT</h4><p>컬러별: 스와치 + 이름 + 2열 이미지</p></div>
+        <div class="card-meta-item"><h4>IMAGE SPEC</h4><p>270 x 340px (전면/후면 각각)</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 09~11, 15~21 간략 카드 그룹 -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+  <div class="card" style="border-radius:8px;">
+    <div class="card-body" style="padding:16px 20px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <div class="card-order" style="font-size:14px;">09</div>
+        <div><div class="card-title" style="font-size:13px;">Lifestyle Image</div></div>
+        <span class="card-badge optional" style="font-size:8px;padding:2px 6px;">선택</span>
+      </div>
+      <div style="font-size:11px;color:var(--body);line-height:1.6;">긴 텍스트 섹션 사이의 풀블리드 시각적 브레이크. 1~3회 사용.</div>
+    </div>
+  </div>
+  <div class="card" style="border-radius:8px;">
+    <div class="card-body" style="padding:16px 20px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <div class="card-order" style="font-size:14px;">10</div>
+        <div><div class="card-title" style="font-size:13px;">Product Guide</div></div>
+        <span class="card-badge optional" style="font-size:8px;padding:2px 6px;">선택</span>
+      </div>
+      <div style="font-size:11px;color:var(--body);line-height:1.6;">시리즈/연계 제품 가이드. 현재 제품이 .active로 강조.</div>
+    </div>
+  </div>
+  <div class="card" style="border-radius:8px;">
+    <div class="card-body" style="padding:16px 20px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <div class="card-order" style="font-size:14px;">11</div>
+        <div><div class="card-title" style="font-size:13px;">Material</div></div>
+        <span class="card-badge optional" style="font-size:8px;padding:2px 6px;">선택</span>
+      </div>
+      <div style="font-size:11px;color:var(--body);line-height:1.6;">소재 비교 테이블 + 현재 소재 특성 노트 카드.</div>
+    </div>
+  </div>
+  <div class="card" style="border-radius:8px;">
+    <div class="card-body" style="padding:16px 20px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <div class="card-order" style="font-size:14px;">15</div>
+        <div><div class="card-title" style="font-size:13px;">Size Design</div></div>
+        <span class="card-badge optional" style="font-size:8px;padding:2px 6px;">선택</span>
+      </div>
+      <div style="font-size:11px;color:var(--body);line-height:1.6;">사이즈별 기능 차이가 있을 때. 카드+태그 레이아웃.</div>
+    </div>
+  </div>
+  <div class="card" style="border-radius:8px;">
+    <div class="card-body" style="padding:16px 20px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <div class="card-order" style="font-size:14px;">16</div>
+        <div><div class="card-title" style="font-size:13px;">How to Wear</div></div>
+        <span class="card-badge optional" style="font-size:8px;padding:2px 6px;">선택</span>
+      </div>
+      <div style="font-size:11px;color:var(--body);line-height:1.6;">착용/사용법 스텝 가이드. 2~4 스텝 그리드.</div>
+    </div>
+  </div>
+  <div class="card" style="border-radius:8px;">
+    <div class="card-body" style="padding:16px 20px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <div class="card-order" style="font-size:14px;">17</div>
+        <div><div class="card-title" style="font-size:13px;">Size Info</div></div>
+        <span class="card-badge required" style="font-size:8px;padding:2px 6px;">필수</span>
+      </div>
+      <div style="font-size:11px;color:var(--body);line-height:1.6;">모델 착용 사진 + 사이즈 비교 테이블.</div>
+    </div>
+  </div>
+  <div class="card" style="border-radius:8px;">
+    <div class="card-body" style="padding:16px 20px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <div class="card-order" style="font-size:14px;">18</div>
+        <div><div class="card-title" style="font-size:13px;">Care Guide</div></div>
+        <span class="card-badge required" style="font-size:8px;padding:2px 6px;">필수</span>
+      </div>
+      <div style="font-size:11px;color:var(--body);line-height:1.6;">4열 SVG 아이콘 + 세탁/관리 방법.</div>
+    </div>
+  </div>
+  <div class="card" style="border-radius:8px;">
+    <div class="card-body" style="padding:16px 20px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <div class="card-order" style="font-size:14px;">19</div>
+        <div><div class="card-title" style="font-size:13px;">Shipping</div></div>
+        <span class="card-badge required" style="font-size:8px;padding:2px 6px;">필수</span>
+      </div>
+      <div style="font-size:11px;color:var(--body);line-height:1.6;">2x2 카드 + SVG 아이콘. 배송/교환/반품/CS.</div>
+    </div>
+  </div>
+  <div class="card" style="border-radius:8px;">
+    <div class="card-body" style="padding:16px 20px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <div class="card-order" style="font-size:14px;">20</div>
+        <div><div class="card-title" style="font-size:13px;">Other Products</div></div>
+        <span class="card-badge optional" style="font-size:8px;padding:2px 6px;">선택</span>
+      </div>
+      <div style="font-size:11px;color:var(--body);line-height:1.6;">3열 크로스셀 그리드. 같은 카테고리 제품.</div>
+    </div>
+  </div>
+  <div class="card" style="border-radius:8px;">
+    <div class="card-body" style="padding:16px 20px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <div class="card-order" style="font-size:14px;">21</div>
+        <div><div class="card-title" style="font-size:13px;">Product Info</div></div>
+        <span class="card-badge required" style="font-size:8px;padding:2px 6px;">필수</span>
+      </div>
+      <div style="font-size:11px;color:var(--body);line-height:1.6;">법적 필수 상품 정보 테이블.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 감성 마무리 + 최종 전환 ===== -->
+<div class="cat-divider">
+  <div class="cat-divider-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+  <div class="cat-divider-text"><h3>감성 마무리 + 최종 전환</h3><p>브랜드 감성으로 감정적 연결을 만들고 최종 구매를 유도</p></div>
+</div>
+
+<div class="card">
+  <div class="card-top">
+    <div class="card-preview bg-dark">
+      <div class="card-preview-inner" style="text-align:center;">
+        <div style="font-family:var(--font-display);font-size:12px;font-style:italic;color:var(--bg-warm);line-height:1.5;">"편안한 수면은<br>아이를 감싸주는<br>환경에서 시작됩니다"</div>
+        <div style="font-family:var(--font-en);font-size:6px;color:var(--accent);letter-spacing:.2em;margin-top:6px;">SUNDAY HUG</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-order">22</div>
+        <div class="card-title-group"><div class="card-title">Brand Quote</div><div class="card-en">22-brand-quote.html</div></div>
+        <span class="card-badge required">필수</span>
+      </div>
+      <div class="card-purpose">브랜드의 철학을 한 문장으로 감성적으로 전달합니다. 다크 배경에 Cormorant Garamond 이탤릭으로 시각적 전환점을 만듭니다.</div>
+      <div class="card-meta">
+        <div class="card-meta-item"><h4>FONT</h4><p>Cormorant Garamond 24px italic</p></div>
+        <div class="card-meta-item"><h4>BACKGROUND</h4><p>dark2 (#2C2C3A)</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-top">
+    <div class="card-preview bg-dark">
+      <div class="card-preview-inner" style="text-align:center;">
+        <div style="font-family:var(--font-en);font-size:6px;color:var(--accent);letter-spacing:.2em;margin-bottom:4px;">SUNDAY HUG</div>
+        <div style="font-size:9px;font-weight:700;color:#fff;margin-bottom:4px;">우리 아기의 꿀잠,<br>지금 시작해보세요</div>
+        <div style="font-size:5px;color:rgba(255,255,255,.5);margin-bottom:8px;">KC인증 / 국내생산 / 무형광</div>
+        <div style="background:var(--accent);color:#fff;padding:4px 16px;border-radius:2px;font-size:7px;font-weight:600;display:inline-block;">지금 구매하기</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-order">24</div>
+        <div class="card-title-group"><div class="card-title">Final CTA</div><div class="card-en">24-final-cta.html</div></div>
+        <span class="card-badge required">필수</span>
+      </div>
+      <div class="card-purpose">페이지 마지막 구매 전환 포인트. 신뢰 포인트 + 리뷰 수치를 다시 한 번 요약하고 큰 구매 버튼으로 최종 전환을 유도합니다. Brand Story 바로 다음에 배치합니다.</div>
+      <div class="card-meta">
+        <div class="card-meta-item"><h4>BACKGROUND</h4><p>dark2 (#2C2C3A)</p></div>
+        <div class="card-meta-item"><h4>COMPONENTS</h4><p>브랜드 태그 + 제목 + Trust 요약 + CTA + 통계</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+  <div class="card" style="border-radius:8px;">
+    <div class="card-body" style="padding:16px 20px;">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+        <div class="card-order" style="font-size:14px;">23</div>
+        <span class="card-badge required" style="font-size:8px;padding:2px 6px;">필수</span>
+      </div>
+      <div class="card-title" style="font-size:13px;">Brand Story</div>
+      <div style="font-size:10px;color:var(--body);line-height:1.5;margin-top:4px;">브랜드 탄생 배경과 철학. Final CTA 직전 배치.</div>
+    </div>
+  </div>
+  <div class="card" style="border-radius:8px;">
+    <div class="card-body" style="padding:16px 20px;">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+        <div class="card-order" style="font-size:14px;">25</div>
+        <span class="card-badge required" style="font-size:8px;padding:2px 6px;">필수</span>
+      </div>
+      <div class="card-title" style="font-size:13px;">Close + Footer</div>
+      <div style="font-size:10px;color:var(--body);line-height:1.5;margin-top:4px;">브랜드 로고 + 따뜻한 마무리 메시지 + 태그라인.</div>
+    </div>
+  </div>
+  <div class="card" style="border-radius:8px;">
+    <div class="card-body" style="padding:16px 20px;">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+        <div class="card-order" style="font-size:14px;">27</div>
+        <span class="card-badge required" style="font-size:8px;padding:2px 6px;">필수</span>
+      </div>
+      <div class="card-title" style="font-size:13px;">Sticky Bar</div>
+      <div style="font-size:10px;color:var(--body);line-height:1.5;margin-top:4px;">항상 보이는 고정 하단 바. 제품명 + 구매 버튼.</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /cards -->
+</div><!-- /grid-2 -->
+</div><!-- /container -->
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!--=============================================================
+  TYPE: 와이드 리스트형 (Wide List Message)
+  VARIATION: A — Product
+  DIMENSIONS: 헤더 800×400 + 리스트 800×800
+  PURPOSE: 제품 리스트형 메시지 (3~4개 상품)
+  IMAGE SPEC: 헤더 이미지: 480 × 400px 이상 (우측 절반) · 리스트 썸네일: 200 × 200px 각
+=============================================================-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>와이드 리스트형 A — Product</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../_base-styles.css">
+<link rel="stylesheet" href="../../_palettes.css">
+</head>
+<body style="margin:0;padding:0;background:#eee;">
+<!-- Header 800×400 -->
+<div class="kakao-frame" data-type="header">
+  <div class="km-split">
+    <div class="km-split-text" style="background:var(--palette-gradient);align-items:center;text-align:center;">
+      <div style="font-family:var(--font-en);font-size:14px;font-weight:500;letter-spacing:.2em;color:var(--accent);margin-bottom:12px;">COLLECTION</div>
+      <div style="font-size:32px;font-weight:700;color:var(--dark);line-height:1.35;">슬리핑백<br>컬렉션</div>
+      <div style="font-size:16px;color:var(--body);margin-top:8px;">우리 아이 꿀잠을 위한 라인업</div>
+    </div>
+    <div class="km-split-img">
+      <img src="../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="슬리핑백 컬렉션">
+    </div>
+  </div>
+</div>
+<!-- List 800×800 -->
+<div class="kakao-frame" data-type="list-item" style="display:flex;flex-direction:column;justify-content:center;">
+  <div class="km-list-item">
+    <div class="km-list-item-img"><img src="../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="실키밤부"></div>
+    <div class="km-list-item-body">
+      <div class="km-list-item-name">실키밤부 슬리핑백</div>
+      <div class="km-list-item-desc">실크처럼 부드러운 밤부 원단</div>
+      <div class="km-list-item-prices"><span class="km-list-item-discount">52%</span><span class="km-list-item-price">29,900원</span><span class="km-list-item-orig">62,000원</span></div>
+    </div>
+  </div>
+  <div class="km-list-item">
+    <div class="km-list-item-img"><img src="../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="트리플밤부"></div>
+    <div class="km-list-item-body">
+      <div class="km-list-item-name">트리플밤부 슬리핑백</div>
+      <div class="km-list-item-desc">3중 밤부 레이어 · 사계절용</div>
+      <div class="km-list-item-prices"><span class="km-list-item-discount">45%</span><span class="km-list-item-price">34,900원</span><span class="km-list-item-orig">63,000원</span></div>
+    </div>
+  </div>
+  <div class="km-list-item">
+    <div class="km-list-item-img"><img src="../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="메쉬"></div>
+    <div class="km-list-item-body">
+      <div class="km-list-item-name">메쉬 슬리핑백</div>
+      <div class="km-list-item-desc">통기성 메쉬 · 여름 전용</div>
+      <div class="km-list-item-prices"><span class="km-list-item-discount">40%</span><span class="km-list-item-price">23,900원</span><span class="km-list-item-orig">39,900원</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

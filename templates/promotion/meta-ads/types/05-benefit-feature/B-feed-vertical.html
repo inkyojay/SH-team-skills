@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Sunday Hug — 혜택/기능 Feed Vertical</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../_base-styles.css">
+<link rel="stylesheet" href="../../_palettes.css">
+</head>
+<!--=============================================================
+  TYPE: 혜택/기능 (Benefit-Feature)
+  VARIATION: B — Feed Vertical
+  DIMENSIONS: 1080 × 1350px (4:5)
+  PURPOSE: 메타 광고 — 제품 히어로 + 4개 기능 항목 세로 나열
+  IMAGE SPEC: 제품 라이프스타일 이미지 1080×540 (상단 40%)
+=============================================================-->
+<body style="margin:0;padding:0;background:#eee;">
+
+<div class="ma-frame" data-type="feed-vertical">
+  <div class="ma-split-h" style="width:100%;height:100%;">
+
+    <!-- TOP 40%: Hero Product Image -->
+    <div style="width:100%;height:40%;position:relative;overflow:hidden;">
+      <img src="../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg"
+           alt="실키밤부 슬리핑백"
+           style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;">
+      <!-- Bottom fade into palette -->
+      <div style="position:absolute;bottom:0;left:0;width:100%;height:120px;background:linear-gradient(to top, var(--bg) 0%, transparent 100%);z-index:1;"></div>
+    </div>
+
+    <!-- BOTTOM 60%: Features -->
+    <div style="width:100%;height:60%;background:var(--palette-gradient);display:flex;flex-direction:column;align-items:center;padding:40px 64px 48px;">
+
+      <!-- Title -->
+      <div style="text-align:center;margin-bottom:36px;">
+        <div class="ma-label" style="font-size:20px;letter-spacing:.15em;margin-bottom:12px;">WHY SILKY BAMBOO</div>
+        <div class="ma-title" style="font-size:44px;color:var(--dark);">왜 실키밤부일까요?</div>
+      </div>
+
+      <!-- 4 Feature Items -->
+      <div style="width:100%;display:flex;flex-direction:column;gap:20px;">
+
+        <!-- Item 1 -->
+        <div style="display:flex;align-items:center;gap:24px;background:var(--bg);border:1px solid var(--palette-card-border);border-radius:16px;padding:24px 32px;">
+          <div style="font-size:36px;flex-shrink:0;width:52px;text-align:center;">🌿</div>
+          <div>
+            <div style="font-size:26px;font-weight:700;color:var(--dark);margin-bottom:4px;">프리미엄 밤부 원단</div>
+            <div style="font-size:22px;color:var(--body);line-height:1.5;">실크보다 부드러운 촉감</div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div style="display:flex;align-items:center;gap:24px;background:var(--bg);border:1px solid var(--palette-card-border);border-radius:16px;padding:24px 32px;">
+          <div style="font-size:36px;flex-shrink:0;width:52px;text-align:center;">🌡️</div>
+          <div>
+            <div style="font-size:26px;font-weight:700;color:var(--dark);margin-bottom:4px;">사계절 온도 조절</div>
+            <div style="font-size:22px;color:var(--body);line-height:1.5;">여름엔 시원, 겨울엔 따뜻</div>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div style="display:flex;align-items:center;gap:24px;background:var(--bg);border:1px solid var(--palette-card-border);border-radius:16px;padding:24px 32px;">
+          <div style="font-size:36px;flex-shrink:0;width:52px;text-align:center;">🧬</div>
+          <div>
+            <div style="font-size:26px;font-weight:700;color:var(--dark);margin-bottom:4px;">자연 항균 기능</div>
+            <div style="font-size:22px;color:var(--body);line-height:1.5;">세균 번식 99.9% 억제</div>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div style="display:flex;align-items:center;gap:24px;background:var(--bg);border:1px solid var(--palette-card-border);border-radius:16px;padding:24px 32px;">
+          <div style="font-size:36px;flex-shrink:0;width:52px;text-align:center;">🔒</div>
+          <div>
+            <div style="font-size:26px;font-weight:700;color:var(--dark);margin-bottom:4px;">양방향 안전 지퍼</div>
+            <div style="font-size:22px;color:var(--body);line-height:1.5;">기저귀 교체도 간편</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CTA + Brand -->
+      <div style="margin-top:36px;display:flex;align-items:center;gap:32px;">
+        <span class="ma-cta-button" style="font-size:26px;padding:20px 56px;">자세히 보기</span>
+      </div>
+      <div style="position:absolute;bottom:32px;right:48px;">
+        <span class="ma-brand-logo" style="color:var(--accent-dark);font-size:24px;">Sunday Hug</span>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

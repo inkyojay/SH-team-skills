@@ -1,0 +1,27 @@
+<!--=============================================================
+  SECTION: Hero
+  ORDER: 01
+  REQUIRED: ✅ 필수
+  BACKGROUND: warm (이미지로 덮임)
+  PURPOSE: 첫 화면. 제품의 핵심 가치를 한눈에 전달하고 시선을 사로잡는다.
+
+  DESIGN NOTES:
+  - 히어로 이미지 위에 하단 그라데이션 오버레이로 텍스트 가독성 확보
+  - 태그는 영문 대문자, accent 컬러, 0.3em 자간
+  - 타이틀은 26px bold, 서브카피는 13px light
+
+  DATA REQUIRED:
+  - {{hero_image}}        : 메인 이미지 URL (600x540 권장)
+  - {{brand_tag}}         : 브랜드 태그 (기본: "SUNDAY HUG")
+  - {{hero_title_html}}   : 메인 타이틀 (HTML, <br> 가능)
+  - {{hero_subtitle}}     : 서브 카피 텍스트
+  - {{product_name_plain}}: alt 텍스트용 순수 제품명
+=============================================================-->
+<div class="hero">
+  <img class="hero-img" src="{{hero_image}}" alt="{{product_name_plain}}">
+  <div class="hero-text">
+    <div class="hero-tag">{{brand_tag}}</div>
+    <h1>{{hero_title_html}}</h1>
+    <p class="hero-sub">{{hero_subtitle}}</p>
+  </div>
+</div>

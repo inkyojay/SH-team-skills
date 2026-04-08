@@ -1,0 +1,78 @@
+<!--=============================================================
+  TYPE: 상품 카드 (Product Card)
+  VARIATION: C — Triple
+  DIMENSIONS: 720 × 720px (1:1)
+  PURPOSE: 3개 상품 리스트 카드 — 번호 매긴 리스트
+=============================================================-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>상품 카드 - C Triple</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../_base-styles.css">
+<link rel="stylesheet" href="../../_palettes.css">
+</head>
+<body style="margin:0;padding:0;background:#eee;">
+<div class="nlb-frame" data-type="product">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;background:var(--bg-warm);">
+    <!-- Header -->
+    <div style="padding:32px 40px 24px;display:flex;align-items:center;justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="nlb-live-badge" style="font-size:13px;padding:6px 14px;">LIVE</span>
+        <span class="nlb-label" style="font-size:14px;">BEST PICK 3</span>
+      </div>
+      <span class="nlb-brand-logo" style="color:var(--accent);font-size:18px;">Sunday Hug</span>
+    </div>
+    <!-- Product list -->
+    <div style="flex:1;display:flex;flex-direction:column;padding:0 40px 32px;gap:12px;justify-content:center;">
+      <!-- Item 1 -->
+      <div class="nlb-product-card" style="background:var(--bg);border-radius:12px;padding:16px 20px;">
+        <span style="font-family:var(--font-en);font-size:32px;font-weight:700;color:var(--accent);width:44px;text-align:center;flex-shrink:0;">01</span>
+        <div class="nlb-product-img" style="width:100px;height:100px;border-radius:8px;">
+          <img src="../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/overview-01.jpg" alt="실키밤부 슬리핑백">
+        </div>
+        <div class="nlb-product-body">
+          <div class="nlb-product-name" style="font-size:20px;">실키밤부 슬리핑백</div>
+          <div class="nlb-product-desc" style="font-size:14px;">프리미엄 밤부 원단</div>
+          <div class="nlb-product-prices" style="margin-top:4px;">
+            <span class="nlb-product-discount" style="font-size:22px;">52%</span>
+            <span class="nlb-product-price" style="font-size:22px;">29,900원</span>
+          </div>
+        </div>
+      </div>
+      <!-- Item 2 -->
+      <div class="nlb-product-card" style="background:var(--bg);border-radius:12px;padding:16px 20px;">
+        <span style="font-family:var(--font-en);font-size:32px;font-weight:700;color:var(--accent);width:44px;text-align:center;flex-shrink:0;">02</span>
+        <div class="nlb-product-img" style="width:100px;height:100px;border-radius:8px;">
+          <img src="../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-02-01.jpg" alt="밤부 스와들">
+        </div>
+        <div class="nlb-product-body">
+          <div class="nlb-product-name" style="font-size:20px;">밤부 스와들</div>
+          <div class="nlb-product-desc" style="font-size:14px;">통기성 좋은 밤부 소재</div>
+          <div class="nlb-product-prices" style="margin-top:4px;">
+            <span class="nlb-product-discount" style="font-size:22px;">40%</span>
+            <span class="nlb-product-price" style="font-size:22px;">24,900원</span>
+          </div>
+        </div>
+      </div>
+      <!-- Item 3 -->
+      <div class="nlb-product-card" style="background:var(--bg);border-radius:12px;padding:16px 20px;">
+        <span style="font-family:var(--font-en);font-size:32px;font-weight:700;color:var(--accent);width:44px;text-align:center;flex-shrink:0;">03</span>
+        <div class="nlb-product-img" style="width:100px;height:100px;border-radius:8px;">
+          <img src="../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-03-01.jpg" alt="트리플 밤부 이불">
+        </div>
+        <div class="nlb-product-body">
+          <div class="nlb-product-name" style="font-size:20px;">트리플 밤부 이불</div>
+          <div class="nlb-product-desc" style="font-size:14px;">3겹 구조 밤부 이불</div>
+          <div class="nlb-product-prices" style="margin-top:4px;">
+            <span class="nlb-product-discount" style="font-size:22px;">35%</span>
+            <span class="nlb-product-price" style="font-size:22px;">39,900원</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

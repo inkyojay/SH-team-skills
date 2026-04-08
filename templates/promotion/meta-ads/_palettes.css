@@ -1,0 +1,19 @@
+@import url('../_global-palettes.css');
+
+/* ============================================
+   메타 광고 전용: midnight-luxe 프레임 오버라이드
+   ============================================ */
+
+[data-palette="midnight-luxe"] .ma-frame{
+  background: #2C2C3A;
+  color:#fff;
+}
+[data-palette="midnight-luxe"] .ma-title { color: #fff; }
+[data-palette="midnight-luxe"] .ma-subtitle { color: rgba(255,255,255,.7); }
+[data-palette="midnight-luxe"] .ma-price { color: #fff; }
+[data-palette="midnight-luxe"] .ma-quote { color: #fff; }
+[data-palette="midnight-luxe"] .ma-cta-button { background: var(--accent); color: #2C2C3A; }
+[data-palette="midnight-luxe"] .ma-review-card { background: #3A3548; border-color: rgba(255,255,255,.1); }
+[data-palette="midnight-luxe"] .ma-feature-card { background: #3A3548; border-color: rgba(255,255,255,.1); }
+[data-palette="midnight-luxe"] .ma-comparison-row { border-color: rgba(255,255,255,.1); }
+[data-palette="midnight-luxe"] .ma-stat-label { color: rgba(255,255,255,.6); }

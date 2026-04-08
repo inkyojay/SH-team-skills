@@ -1,0 +1,23 @@
+<!-- ============================================
+     30. Collection Banner — 컬렉션 링크 배너
+     ============================================
+     선택 섹션 | 배경: 이미지
+     라이프스타일/제품 이미지 위에 하단 그라데이션으로
+     컬렉션 타이틀과 링크를 표시하는 풀블리드 배너.
+
+     DATA REQUIRED:
+     - {{collection_image}} : 배경 이미지 URL
+     - {{collection_title}} : 컬렉션 타이틀 (영문 이탤릭)
+     - {{collection_sub}} : 부제목/설명
+     - {{collection_link_text}} : 링크 텍스트 (예: "View Collection →")
+     - {{collection_url}} : 링크 URL
+     ============================================ -->
+
+<div class="coll-banner">
+  <img class="coll-banner-img" src="{{collection_image}}" alt="{{collection_title}}">
+  <div class="coll-banner-overlay">
+    <div class="coll-banner-title">{{collection_title}}</div>
+    <div class="coll-banner-sub">{{collection_sub}}</div>
+    <a class="coll-banner-link" href="{{collection_url}}">{{collection_link_text}} →</a>
+  </div>
+</div>

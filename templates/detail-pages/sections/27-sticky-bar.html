@@ -1,0 +1,25 @@
+<!--=============================================================
+  SECTION: Sticky Bottom Bar (고정 하단 바)
+  ORDER: 27 (body 닫기 직전)
+  REQUIRED: ✅ 필수
+  BACKGROUND: white (blur)
+  PURPOSE: 스크롤 위치와 무관하게 항상 보이는 구매 버튼.
+           제품명과 간단 정보 + CTA 버튼.
+
+  DESIGN NOTES:
+  - position: fixed, bottom: 0
+  - backdrop-filter: blur(10px)
+  - body에 padding-bottom: 64px 필요
+
+  DATA REQUIRED:
+  - {{product_name}}      : 제품명
+  - {{sticky_sub}}        : 부가 정보 (예: "S / M 사이즈 선택 가능")
+  - {{purchase_url}}      : 구매 링크
+=============================================================-->
+<div class="sticky-bar">
+  <div class="sticky-bar-info">
+    <div class="sticky-bar-name">{{product_name}}</div>
+    <div class="sticky-bar-price">{{sticky_sub}}</div>
+  </div>
+  <a href="{{purchase_url}}">구매하기</a>
+</div>

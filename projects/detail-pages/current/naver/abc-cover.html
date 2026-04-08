@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABC 아기침대 암막 커버 | 썬데이허그</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFFFFF;
+  --bg-warm: #FAF7F4;
+  --bg-warm2: #F5F0EB;
+  --bg-cool: #F8F8FA;
+  --dark: #1A1A1A;
+  --dark2: #2C2C3A;
+  --body: #444444;
+  --sub: #888888;
+  --line: #EBEBEB;
+  --line-warm: #E5DDD4;
+  --accent: #C8A07C;
+  --accent-light: #F0E6DA;
+  --danger: #D4645C;
+  --safe: #7C9A72;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Noto Sans KR', -apple-system, sans-serif;
+  --font-en: 'DM Sans', 'Noto Sans KR', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;-webkit-text-size-adjust:100%;}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--dark);
+  line-height:1.8;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  max-width:600px;
+  margin:0 auto;
+  overflow-x:hidden;
+  padding-bottom:64px;
+}
+img{width:100%;height:auto;display:block;}
+
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.v{opacity:1}.v.on{animation:rise .55s ease-out forwards}
+
+.hero{position:relative;background:var(--bg-warm);}
+.hero-img{width:100%;height:540px;object-fit:cover;}
+.hero-text{position:absolute;bottom:0;left:0;right:0;padding:64px 30px 36px;background:linear-gradient(to top,rgba(26,26,26,.72) 0%,rgba(26,26,26,.25) 70%,transparent 100%);}
+.hero-tag{font-family:var(--font-en);font-size:16px;font-weight:500;letter-spacing:.3em;color:var(--accent);margin-bottom:10px;}
+.hero h1{font-size:38px;font-weight:700;line-height:1.48;color:#fff;margin-bottom:8px;}
+.hero-sub{font-size:19px;color:rgba(255,255,255,.65);line-height:1.85;font-weight:400;}
+
+.trust-bar{display:flex;justify-content:center;gap:0;background:var(--dark2);padding:14px 20px;}
+.trust-bar-item{flex:1;text-align:center;position:relative;font-size:17px;font-weight:500;color:rgba(255,255,255,.85);letter-spacing:.02em;}
+.trust-bar-item+.trust-bar-item::before{content:'';position:absolute;left:0;top:15%;bottom:15%;width:1px;background:rgba(255,255,255,.1);}
+.trust-bar-item small{display:block;font-size:14px;font-weight:400;color:rgba(255,255,255,.4);margin-top:2px;letter-spacing:.01em;}
+
+.sec{padding:52px 30px;}
+.sec.warm{background:var(--bg-warm);}
+.sec.warm2{background:var(--bg-warm2);}
+.sec.cool{background:var(--bg-cool);}
+.sec.dark{background:var(--dark2);color:#fff;}
+.sec.dark .sec-label{color:var(--accent);}
+.sec.dark .sec-title{color:#fff;}
+.sec.dark .sec-desc{color:rgba(255,255,255,.6);}
+
+.sec-label{font-family:var(--font-en);font-size:16px;font-weight:500;letter-spacing:.2em;color:var(--accent);margin-bottom:12px;}
+.sec-title{font-size:32px;font-weight:700;line-height:1.52;color:var(--dark);margin-bottom:14px;letter-spacing:-.01em;}
+.sec-desc{font-size:20px;color:var(--body);line-height:2;font-weight:400;}
+.tx-center{text-align:center;}
+.hl{color:var(--accent);font-weight:500;}
+.thin-line{height:1px;background:var(--line);margin:0 30px;}
+
+.fb-img{margin:24px -30px 0;overflow:hidden;}
+.fb-img img{width:100%;display:block;}
+.sec-img{margin-top:24px;border-radius:6px;overflow:hidden;}
+
+.bq{padding:64px 36px;text-align:center;background:var(--dark2);position:relative;}
+.bq p{font-family:var(--font-display);font-size:35px;font-weight:400;font-style:italic;color:var(--bg-warm);line-height:1.7;}
+.bq small{display:block;margin-top:14px;font-family:var(--font-en);font-size:14px;color:var(--accent);letter-spacing:.25em;}
+
+.feat{padding:48px 30px;background:var(--bg);position:relative;}
+.feat+.feat{border-top:1px solid var(--line);}
+.feat.warm{background:var(--bg-warm);}
+.feat.center{text-align:center;}
+.feat-num{font-family:var(--font-en);font-size:16px;font-weight:500;letter-spacing:.15em;color:var(--accent);margin-bottom:8px;}
+.feat-title{font-size:29px;font-weight:700;line-height:1.5;color:var(--dark);margin-bottom:10px;}
+.feat-desc{font-size:20px;color:var(--body);line-height:2;margin-bottom:0;}
+
+.feat-hz{display:flex;gap:20px;align-items:center;margin-top:24px;}
+.feat-hz.rev{flex-direction:row-reverse;}
+.feat-hz-img{flex:0 0 48%;border-radius:6px;overflow:hidden;}
+.feat-hz-img img{width:100%;display:block;}
+.feat-hz-body{flex:1;}
+.feat-hz-body .feat-num{margin-bottom:6px;}
+.feat-hz-body .feat-title{font-size:26px;margin-bottom:8px;}
+.feat-hz-body .feat-desc{font-size:19px;line-height:1.85;}
+
+.sub-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;}
+.sub-2col-item{text-align:center;padding:20px 12px;background:var(--bg-warm);border-radius:6px;}
+.sub-2col-item h4{font-size:20px;font-weight:600;color:var(--dark);margin-bottom:4px;}
+.sub-2col-item p{font-size:17px;color:var(--body);line-height:1.7;}
+
+.trust-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;}
+.trust-3-item{text-align:center;padding:20px 8px;background:var(--bg-warm);border-radius:6px;}
+.trust-3-item .icon{width:36px;height:36px;margin:0 auto 8px;border-radius:50%;border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-size:12px;font-weight:700;color:var(--accent);}
+.trust-3-item h4{font-size:19px;font-weight:600;color:var(--dark);margin-bottom:3px;}
+.trust-3-item p{font-size:16px;color:var(--body);line-height:1.6;}
+
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;}
+.detail-item{border:1px solid var(--line);border-radius:6px;overflow:hidden;}
+.detail-item-img{overflow:hidden;}
+.detail-item-img img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover;}
+.detail-item-body{padding:16px;}
+.detail-item-label{font-family:var(--font-en);font-size:14px;font-weight:600;letter-spacing:.12em;color:var(--accent);margin-bottom:4px;}
+.detail-item-title{font-size:20px;font-weight:600;color:var(--dark);margin-bottom:5px;line-height:1.4;}
+.detail-item-desc{font-size:17px;color:var(--body);line-height:1.75;}
+
+.note-card{margin-top:28px;padding:28px 24px;border:1px solid var(--line-warm);border-radius:6px;background:var(--bg);position:relative;}
+.note-card::after{content:'';position:absolute;top:0;left:20px;right:20px;height:2px;background:var(--accent);}
+.note-hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line);}
+.note-hd h3{font-family:var(--font-display);font-size:29px;font-weight:500;font-style:italic;color:var(--dark);}
+.note-hd span{font-family:var(--font-en);font-size:14px;color:var(--sub);letter-spacing:.08em;}
+.note-item{padding:12px 0;border-bottom:1px dashed var(--line);}
+.note-item:last-child{border-bottom:none;}
+.note-item strong{font-family:var(--font-en);font-size:17px;font-weight:600;color:var(--accent);letter-spacing:.02em;}
+.note-item p{font-size:19px;color:var(--body);line-height:1.85;margin-top:4px;}
+
+.sz-tbl{width:100%;border-collapse:collapse;margin-top:20px;font-size:17px;}
+.sz-tbl th{background:var(--bg-warm);font-weight:600;padding:11px 6px;text-align:center;color:var(--dark);border-bottom:1px solid var(--line-warm);}
+.sz-tbl td{padding:11px 6px;text-align:center;border-bottom:1px solid var(--line);color:var(--body);}
+
+.info-tbl{width:100%;border-collapse:collapse;margin-top:20px;font-size:17px;}
+.info-tbl th{width:80px;font-weight:600;color:var(--dark);padding:11px 0;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);}
+.info-tbl td{color:var(--body);padding:11px 0;border-bottom:1px solid var(--line);line-height:1.65;}
+
+.care-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px;}
+.care-item{text-align:center;}
+.care-ico{width:48px;height:48px;border-radius:50%;background:var(--bg);border:1px solid var(--line);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;}
+.care-ico svg{width:22px;height:22px;fill:none;stroke:var(--accent);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.care-item p{font-size:14px;color:var(--body);line-height:1.5;}
+
+.step-list{margin-top:28px;}
+.step-item{padding:24px 0;border-bottom:1px solid var(--line);}
+.step-item:last-child{border-bottom:none;}
+.step-num{display:inline-block;padding:4px 14px;background:var(--dark2);color:#fff;border-radius:20px;font-family:var(--font-en);font-size:16px;font-weight:600;letter-spacing:.08em;margin-bottom:10px;}
+.step-title{font-size:25px;font-weight:700;color:var(--dark);margin-bottom:8px;line-height:1.5;}
+.step-desc{font-size:19px;color:var(--body);line-height:1.9;}
+.step-img{margin-top:16px;border-radius:6px;overflow:hidden;}
+.step-img img{width:100%;display:block;}
+
+.callout{margin-top:24px;padding:22px 24px;background:var(--bg);border-left:3px solid var(--accent);border-radius:0 4px 4px 0;}
+.callout-label{font-family:var(--font-en);font-size:14px;font-weight:600;letter-spacing:.12em;color:var(--accent);margin-bottom:6px;}
+.callout-text{font-size:19px;color:var(--body);line-height:1.9;}
+
+.callout.warning{border-left-color:var(--danger);}
+.callout.warning .callout-label{color:var(--danger);}
+
+
+.final-cta{padding:56px 30px;text-align:center;background:var(--dark2);}
+.final-cta-label{font-family:var(--font-en);font-size:16px;font-weight:500;letter-spacing:.25em;color:var(--accent);margin-bottom:12px;}
+.final-cta h2{font-size:32px;font-weight:700;color:#fff;line-height:1.55;margin-bottom:8px;}
+.final-cta p{font-size:19px;color:rgba(255,255,255,.55);line-height:1.85;margin-bottom:24px;}
+.final-cta-note{margin-top:16px;font-size:16px;color:rgba(255,255,255,.35);}
+
+.close{padding:72px 30px;text-align:center;background:var(--bg-warm);}
+.close-logo{font-family:var(--font-display);font-size:52px;font-weight:400;font-style:italic;color:var(--line-warm);margin-bottom:16px;}
+.close-title{font-size:29px;font-weight:700;line-height:1.6;margin-bottom:12px;}
+.close-desc{font-size:20px;color:var(--body);line-height:2;}
+.footer{background:var(--dark2);padding:24px 30px;text-align:center;}
+.footer span{font-family:var(--font-display);font-size:19px;font-weight:400;letter-spacing:.25em;color:rgba(255,255,255,.35);}
+
+
+/* FAQ */
+.faq-item{padding:20px 0;border-bottom:1px solid var(--line);}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{font-size:20px;font-weight:600;color:var(--dark);margin-bottom:10px;}
+.faq-a{font-size:19px;color:var(--body);line-height:1.9;}
+</style>
+</head>
+<body>
+
+
+<!-- HERO -->
+<div class="hero">
+  <img class="hero-img" src="../images/abc-cover/hero-01.jpg" alt="썬데이허그 ABC 아기침대 암막 커버">
+  <div class="hero-text">
+    <div class="hero-tag">SUNDAY HUG</div>
+    <h1>빛을 차단하면<br>아기의 잠이 달라져요</h1>
+    <p class="hero-sub">휴대용 아기침대를 위한 프리미엄 암막 커버<br>썬데이허그 ABC 아기침대 암막 커버</p>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-item">뛰어난 차광률<small>외부 빛 차단</small></div>
+  <div class="trust-bar-item">탁월한 통기성<small>쾌적한 수면</small></div>
+  <div class="trust-bar-item">뛰어난 신축성<small>간편한 탈부착</small></div>
+</div>
+
+
+<!-- INTRO -->
+<div class="sec v">
+  <div class="sec-label">Designed For Better Sleep</div>
+  <div class="sec-title">"낮잠 시간,<br>밝은 빛 때문에<br>아기가 자꾸<br>깨지 않나요?"</div>
+  <div class="sec-desc">
+    "외출 시 낮잠 재우기가<br>
+    너무 힘들어요."<br>
+    "밝은 곳에서는 금방 깨버려요."<br>
+    "어두운 환경을 만들어 주고 싶은데..."<br><br>
+    수면 전문가들은 아기의 숙면을 위해<br>
+    <span class="hl">어두운 환경이 필수</span>라고 말합니다.<br><br>
+    멜라토닌 분비를 촉진하고<br>
+    깊은 잠에 빠르게 들 수 있도록<br>
+    빛을 효과적으로 차단해 주세요.<br><br>
+    <span class="hl">썬데이허그 ABC<br>
+    아기침대 암막 커버</span>로<br>
+    언제 어디서나 편안한<br>
+    수면 환경을 만들어 주세요.
+  </div>
+  <div class="fb-img"><img src="../images/abc-cover/intro-01.jpg" alt="암막 커버 사용 모습"></div>
+</div>
+
+<div class="thin-line"></div>
+
+
+<!-- OVERVIEW -->
+<div class="sec warm v">
+  <div class="sec-label tx-center">Overview</div>
+  <div class="sec-title tx-center">수면의 질을 바꾸는<br>암막 커버의 힘</div>
+  <div class="sec-desc tx-center">
+    휴대용 아기침대에 씌우기만 하면<br>
+    언제 어디서나 아늑한<br>
+    수면 공간이 완성됩니다.
+  </div>
+  <div class="fb-img"><img src="../images/abc-cover/overview-01.jpg" alt="암막 커버 오버뷰"></div>
+</div>
+
+
+<!-- BRAND QUOTE -->
+<div class="bq">
+  <p>"암막 환경에서 잠든 아기는<br>수면의 질이 확연히 다릅니다"</p>
+  <small>SUNDAY HUG</small>
+</div>
+
+
+<!-- WHY BLACKOUT -->
+<div class="sec cool v">
+  <div class="sec-label">Why Blackout?</div>
+  <div class="sec-title">암막 커버가 필요한 이유</div>
+  <div class="sec-desc">
+    <span class="hl">빛 차단이 곧 숙면의 시작이에요.</span><br><br>
+    낮잠 시간에도 밤처럼 어둡게!<br>
+    아기의 멜라토닌 분비를 도와<br>
+    깊고 편안한 잠을 유도해요.<br><br>
+    외출 시에도, 거실에서도<br>
+    일관된 수면 환경을 만들어 주세요.
+  </div>
+</div>
+
+
+<!-- FEAT 01 -- 차광률 -->
+<div class="feat v">
+  <div class="feat-hz">
+    <div class="feat-hz-img"><img src="../images/abc-cover/feature-01-01-blackout.jpg" alt="뛰어난 차광률"></div>
+    <div class="feat-hz-body">
+      <div class="feat-num">KEY FEATURE 01</div>
+      <div class="feat-title">뛰어난 차광률</div>
+      <div class="feat-desc">
+        외부 빛의 대부분을<br>
+        차단하여 낮에도 밤처럼<br>
+        어두운 환경을 조성합니다.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- FEAT 02 -- 통기성 -->
+<div class="feat warm v">
+  <div class="feat-hz rev">
+    <div class="feat-hz-img"><img src="../images/abc-cover/feature-02-01-breathable.jpg" alt="탁월한 통기성"></div>
+    <div class="feat-hz-body">
+      <div class="feat-num">KEY FEATURE 02</div>
+      <div class="feat-title">탁월한 통기성</div>
+      <div class="feat-desc">
+        얇고 가벼운 원단으로<br>
+        공기 순환이 원활하여<br>
+        답답함 없이 쾌적한<br>
+        수면 환경을 유지합니다.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- FEAT 03 -- 신축성 -->
+<div class="feat v">
+  <div class="feat-hz">
+    <div class="feat-hz-img"><img src="../images/abc-cover/feature-03-01-stretchy.jpg" alt="뛰어난 신축성"></div>
+    <div class="feat-hz-body">
+      <div class="feat-num">KEY FEATURE 03</div>
+      <div class="feat-title">뛰어난 신축성</div>
+      <div class="feat-desc">
+        다양한 휴대용 아기침대에<br>
+        쏙 맞게 씌울 수 있는 신축성.<br>
+        간편하게 탈부착이 가능합니다.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 편리한 열림 기능 -->
+<div class="sec warm v">
+  <div class="sec-label tx-center">Smart Design</div>
+  <div class="sec-title tx-center">편리한 열림 기능</div>
+  <div class="sec-desc tx-center">
+    <span class="hl">위쪽 창</span>과 <span class="hl">옆쪽 창</span>이 열려<br>
+    아기 상태를 쉽게 확인할 수 있어요.<br><br>
+    암막 환경을 유지하면서도<br>
+    필요할 때 바로 확인 가능한<br>
+    세심한 디테일입니다.
+  </div>
+  <div class="sub-2col">
+    <div class="sub-2col-item v">
+      <img src="../images/abc-cover/feature-04-01-top-window.jpg" alt="위쪽 창" style="border-radius:6px;margin-bottom:12px;">
+      <h4>위쪽 창</h4>
+      <p>아기 얼굴 확인 및<br>상태 체크</p>
+    </div>
+    <div class="sub-2col-item v">
+      <img src="../images/abc-cover/feature-04-02-side-window.jpg" alt="옆쪽 창" style="border-radius:6px;margin-bottom:12px;">
+      <h4>옆쪽 창</h4>
+      <p>통풍 및<br>편리한 접근</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- USE CASE -->
+<div class="sec v">
+  <div class="sec-label">Use Case</div>
+  <div class="sec-title">이럴 때 사용하세요</div>
+  <div class="sec-desc">다양한 상황에서 암막 커버가<br>아기의 숙면을 도와줍니다.</div>
+
+  <div class="step-list">
+    <div class="step-item v">
+      <div class="step-num">CASE 01</div>
+      <div class="step-title">외출 시 낮잠 재우기</div>
+      <div class="step-desc">
+        카페, 레스토랑, 친척집 방문 시 밝은 환경에서도 아기가 편하게 잠들 수 있어요.
+        외출 중에도 <span class="hl">일관된 수면 환경을 만들어 주어</span> 낮잠 시간을 안정적으로 보낼 수 있습니다.
+      </div>
+    </div>
+
+    <div class="step-item v">
+      <div class="step-num">CASE 02</div>
+      <div class="step-title">집에서 낮잠 재우기</div>
+      <div class="step-desc">
+        거실이나 밝은 방에서도 암막 환경을 만들어 줄 수 있어요.
+        손님 방문 시나 <span class="hl">가족들이 활동하는 공간에서도</span> 아기가 편안하게 낮잠을 잘 수 있습니다.
+      </div>
+    </div>
+
+    <div class="step-item v">
+      <div class="step-num">CASE 03</div>
+      <div class="step-title">여행 시 수면 환경 유지</div>
+      <div class="step-desc">
+        낯선 환경에서도 <span class="hl">익숙한 수면 공간을 만들어</span> 아기의 불안을 줄여줘요.
+        호텔이나 여행지에서도 집과 같은 어두운 환경을 유지하여 아기가 안정적으로 잠들 수 있습니다.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- PRODUCT INFO -->
+<div class="sec warm v">
+  <div class="sec-label">Product Info</div>
+  <div class="sec-title">제품 상세 정보</div>
+  <div class="sec-desc">썬데이허그 ABC 아기침대<br>암막 커버의 상세 스펙을<br>확인해 주세요.</div>
+
+  <div class="sec-img"><img src="../images/abc-cover/product-01.jpg" alt="제품 이미지"></div>
+
+  <table class="info-tbl" style="margin-top:24px;">
+    <tr><th>모델명</th><td>썬데이허그 ABC 아기침대 암막 커버</td></tr>
+    <tr><th>색상</th><td>블랙</td></tr>
+    <tr><th>크기</th><td>105cm x 75cm x 74cm</td></tr>
+    <tr><th>소재</th><td>폴리에스터 95%, 스판덱스 5%</td></tr>
+    <tr><th>제조국</th><td>중국산 (썬데이허그 협력사)</td></tr>
+    <tr><th>KC 인증</th><td>[어린이제품] 안전확인_국가인증<br>인증번호: CB014R2450-5001</td></tr>
+  </table>
+</div>
+
+
+<!-- WASH & CARE -->
+<div class="sec v">
+  <div class="sec-label">How To Care</div>
+  <div class="sec-title">세탁 및 관리 방법</div>
+
+  <div class="note-card v">
+    <div class="note-hd">
+      <h3>Wash Guide</h3>
+      <span>CARE NOTE</span>
+    </div>
+    <div class="note-item">
+      <strong>Wash</strong>
+      <p>세탁망에 넣고 중성세제를 사용하여 <span class="hl">찬물로 단독 울 코스 세탁</span> 권장</p>
+    </div>
+    <div class="note-item">
+      <strong>Separate</strong>
+      <p>물 빠짐이 있을 수 있으니 반드시 <span class="hl">단독 세탁</span>해 주세요.</p>
+    </div>
+    <div class="note-item">
+      <strong>Dry</strong>
+      <p>건조기 사용 가능하나, 잦은 세탁 및 건조 시 수축 가능.</p>
+    </div>
+    <div class="note-item">
+      <strong>Caution</strong>
+      <p>장시간 물에 담가두거나 표백제 사용 시 탈색 및 이염 주의. 알칼리성 세제 사용을 금합니다.</p>
+    </div>
+  </div>
+
+  <div class="callout warning" style="margin-top:24px;">
+    <div class="callout-label">SAFETY NOTE</div>
+    <div class="callout-text">
+      암막 커버 사용 시 반드시 통풍구를 확보해 주세요. 완벽한 암막은 아니며 조명이 비칠 수 있으나, 통기성 확보를 위한 부분입니다. 아기를 장시간 방치하지 마시고, 수시로 상태를 확인해 주세요.
+    </div>
+  </div>
+</div>
+
+
+<!-- FAQ -->
+<div class="sec warm v">
+  <div class="sec-label">FAQ</div>
+  <div class="sec-title">자주 묻는 질문</div>
+
+  <div style="margin-top:24px;">
+    <div class="faq-item">
+      <div class="faq-q">Q1. 모든 휴대용 아기침대에 사용 가능한가요?</div>
+      <div class="faq-a">썬데이허그 ABC 아기침대 전용으로 제작되었습니다. 비슷한 사이즈의 침대에도 호환될 수 있으나, 최적의 핏을 위해 썬데이허그 ABC 아기침대와 함께 사용하시는 것을 권장합니다.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Q2. 완벽한 암막이 되나요?</div>
+      <div class="faq-a">통기성을 위해 원단이 얇게 제작되어 완벽한 암막은 아닙니다. 조명이 비치는 환경에서는 약간의 빛이 투과될 수 있으나, 외부 빛의 대부분을 차단하여 수면에 도움이 됩니다.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Q3. 세탁은 어떻게 하나요?</div>
+      <div class="faq-a">세탁망에 넣고 중성세제를 사용하여 찬물로 단독 울 코스 세탁을 권장합니다. 물 빠짐이 있을 수 있으니 반드시 단독 세탁해 주세요.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Q4. 여름에 사용해도 덥지 않나요?</div>
+      <div class="faq-a">통기성이 좋은 얇은 원단으로 제작되어 공기 순환이 원활합니다. 다만, 한여름 무더위에는 실내 온도 조절과 함께 사용하시고, 아기 상태를 수시로 확인해 주세요.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Q5. 위쪽 창과 옆쪽 창은 어떻게 사용하나요?</div>
+      <div class="faq-a">위쪽 창은 아기의 얼굴과 상태를 확인할 수 있도록 설계되었고, 옆쪽 창은 통풍과 편리한 접근을 위해 만들어졌습니다. 암막 환경을 유지하면서도 필요할 때 바로 확인할 수 있어요.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- BRAND QUOTE -->
+<div class="bq">
+  <p>"작은 배려가 모여<br>아기의 하루를<br>더 행복하게 만듭니다"</p>
+  <small>SUNDAY HUG</small>
+</div>
+
+
+<!-- BRAND STORY -->
+<div class="sec warm v">
+  <div class="sec-label tx-center">Our Story</div>
+  <div class="sec-title tx-center">가족의 행복한 일상,<br>썬데이허그</div>
+  <div class="sec-desc tx-center">
+    우리는 가족 구성원 각자가<br>
+    다양한 역할과 책임으로<br>
+    분주한 일상을 보내고 있음을<br>
+    잘 알고 있습니다.<br><br>
+    이러한 일상 속에서도,<br>
+    우리 브랜드를 통해<br>
+    가족 모두가 함께<br>
+    소중한 순간을 만들고<br>
+    일상의 행복을<br>
+    누릴 수 있기를 바랍니다.
+  </div>
+  <div class="fb-img"><img src="../images/abc-cover/brand-01-story.jpg" alt="브랜드 스토리"></div>
+</div>
+
+
+<!-- FINAL CTA -->
+<div class="final-cta v">
+  <div class="final-cta-label">SUNDAY HUG</div>
+  <h2>우리 아기에게<br>편안한 수면 환경을<br>선물하세요</h2>
+  <p>뛰어난 차광률 / 탁월한 통기성 / 간편한 탈부착<br>위쪽 창·옆쪽 창 열림 기능 / KC 인증</p>
+  <div class="final-cta-note">블랙 / ONE 사이즈 / 105 x 75 x 74cm</div>
+</div>
+
+
+<!-- CLOSE -->
+<div class="close">
+  <div class="close-logo v">Sunday Hug</div>
+  <div class="close-title v">가족의 행복한 일상을<br>언제나 응원합니다</div>
+  <div class="close-desc v">
+    썬데이허그는 여러분의 가족과 함께하는<br>
+    행복한 일상을 언제나 응원합니다.
+  </div>
+</div>
+<div class="footer"><span>Designed for Families.</span></div>
+
+
+
+<script>
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});
+},{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.v').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

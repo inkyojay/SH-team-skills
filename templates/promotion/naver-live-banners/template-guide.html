@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>썬데이허그 네이버 쇼핑라이브 배너 템플릿 가이드</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#FFFFFF;--bg-warm:#FAF7F4;--bg-warm2:#F5F0EB;--bg-cool:#F8F8FA;
+  --dark:#1A1A1A;--dark2:#2C2C3A;--body:#444;--sub:#888;
+  --line:#EBEBEB;--line-warm:#E5DDD4;
+  --accent:#C8A07C;--accent-light:#F0E6DA;--accent-dark:#A8825E;
+  --danger:#D4645C;--safe:#7C9A72;
+  --font-display:'Cormorant Garamond',Georgia,serif;
+  --font-body:'Noto Sans KR',-apple-system,sans-serif;
+  --font-en:'DM Sans','Noto Sans KR',sans-serif;
+  --palette-gradient:linear-gradient(135deg, var(--bg-warm) 0%, var(--accent-light) 100%);
+  --palette-card-border:var(--line);
+  --palette-badge-bg:var(--accent);
+  --palette-badge-text:#FFFFFF;
+  --palette-highlight:var(--accent-light);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font-body);background:#F2EDE8;color:var(--dark);line-height:1.7;-webkit-font-smoothing:antialiased;}
+img{max-width:none;display:block;}
+</style>
+<link rel="stylesheet" href="_guide-chrome.css">
+<link rel="stylesheet" href="_base-styles.css">
+<link rel="stylesheet" href="_palettes.css">
+</head>
+<body>
+
+<!-- ===== GUIDE HEADER ===== -->
+<div class="guide-header">
+  <div class="guide-header-tag">SUNDAY HUG &middot; NAVER LIVE BANNER TEMPLATES</div>
+  <h1>Naver Live Banner Templates</h1>
+  <p>5 Types &middot; 15 Variations &middot; 12 Palettes &middot; No JS/Animation</p>
+</div>
+
+<!-- ===== TYPE TABS ===== -->
+<div class="type-bar">
+  <button class="type-btn active" data-type="01">01 라이브메인</button>
+  <button class="type-btn" data-type="02">02 와이드배너</button>
+  <button class="type-btn" data-type="03">03 혜택배너</button>
+  <button class="type-btn" data-type="04">04 상품카드</button>
+  <button class="type-btn" data-type="05">05 알림배너</button>
+</div>
+
+<!-- ===== PALETTE SWITCHER ===== -->
+<div class="palette-bar">
+  <div class="palette-bar-title">CAMPAIGN PALETTE</div>
+  <div class="palette-grid">
+    <button class="palette-btn active" data-p="golden-hour"><span class="palette-swatch" style="background:#C8A07C"></span>골든 아워</button>
+    <button class="palette-btn" data-p="warm-spring"><span class="palette-swatch" style="background:#E8C9A8"></span>따뜻한 봄</button>
+    <button class="palette-btn" data-p="cool-summer"><span class="palette-swatch" style="background:#B3C5D3"></span>시원한 여름</button>
+    <button class="palette-btn" data-p="cozy-autumn"><span class="palette-swatch" style="background:#D4A574"></span>포근한 가을</button>
+    <button class="palette-btn" data-p="gentle-winter"><span class="palette-swatch" style="background:#C4B5CB"></span>고요한 겨울</button>
+    <button class="palette-btn" data-p="rose-dawn"><span class="palette-swatch" style="background:#C09B8D"></span>장밋빛 새벽</button>
+    <button class="palette-btn" data-p="fresh-garden"><span class="palette-swatch" style="background:#7A8F76"></span>싱그러운 정원</button>
+    <button class="palette-btn" data-p="moonlit-calm"><span class="palette-swatch" style="background:#B0A899"></span>달빛 고요</button>
+    <button class="palette-btn" data-p="blush-touch"><span class="palette-swatch" style="background:#DEB5A8"></span>볼터치 핑크</button>
+    <button class="palette-btn" data-p="slate-mood"><span class="palette-swatch" style="background:#8A9BB0"></span>슬레이트 블루</button>
+    <button class="palette-btn" data-p="coral-sunset"><span class="palette-swatch" style="background:#D4856C"></span>코랄 선셋</button>
+    <button class="palette-btn" data-p="midnight-luxe"><span class="palette-swatch" style="background:#2C2C3A"></span>미드나잇 럭스</button>
+  </div>
+</div>
+
+<!-- ===== PREVIEW AREA ===== -->
+<div id="preview-area" data-palette="golden-hour">
+
+<!-- ==========================================
+     TYPE 01: 라이브 메인 (1080×1080)
+     ========================================== -->
+<div class="type-content active" data-type="01">
+<div class="spec-bar">1080 &times; 1080px &middot; 쇼핑라이브 메인 썸네일 (1:1)</div>
+
+<!-- 01-A: Product -->
+<div class="var-section" data-var="A">
+  <label class="sec-toggle"><input type="checkbox" checked data-type="01" data-var="A"></label>
+  <div class="var-label">A &mdash; PRODUCT &middot; 제품 히어로 + 오버레이</div>
+  <div class="var-desc">전체 제품 이미지 + LIVE 뱃지 + 하단 그라데이션 오버레이에 제품명/가격.</div>
+  <div class="var-note">이미지: 1080 &times; 1080px 이상 (전체 커버)</div>
+  <div class="frame-wrap" data-size="1080x1080">
+    <div class="frame-inner">
+      <div class="nlb-frame" data-type="main">
+        <img class="nlb-hero-img" src="types/01-live-main/../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="실키밤부 슬리핑백">
+        <div style="position:absolute;top:48px;left:48px;z-index:2;">
+          <span class="nlb-live-badge">LIVE</span>
+        </div>
+        <div class="nlb-overlay bottom" style="padding:60px;gap:16px;">
+          <span class="nlb-badge" style="align-self:flex-start;">LIVE SPECIAL</span>
+          <div class="nlb-title" style="font-size:52px;">실키밤부 슬리핑백</div>
+          <div class="nlb-subtitle" style="font-size:28px;">실크처럼 부드러운 프리미엄 밤부 원단</div>
+          <div style="display:flex;align-items:baseline;gap:16px;margin-top:8px;">
+            <span class="nlb-discount" style="font-size:44px;">52%</span>
+            <span class="nlb-price" style="font-size:44px;">29,900원</span>
+            <span class="nlb-price-orig">62,000원</span>
+          </div>
+          <div class="nlb-brand-bar" style="margin-top:16px;">
+            <span class="nlb-brand-logo" style="color:rgba(255,255,255,.6);">Sunday Hug</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="var-divider"></div>
+
+<!-- 01-B: Host -->
+<div class="var-section" data-var="B">
+  <label class="sec-toggle"><input type="checkbox" checked data-type="01" data-var="B"></label>
+  <div class="var-label">B &mdash; HOST &middot; 진행자 + 카운트다운</div>
+  <div class="var-desc">제품 이미지 배경 + 진행자 원형 사진 + 카운트다운 표시.</div>
+  <div class="var-note">이미지: 1080 &times; 1080px 이상 (전체 커버) + 진행자 사진</div>
+  <div class="frame-wrap" data-size="1080x1080">
+    <div class="frame-inner">
+      <div class="nlb-frame" data-type="main">
+        <img class="nlb-hero-img" src="types/01-live-main/../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-03.jpg" alt="실키밤부 슬리핑백">
+        <div class="nlb-overlay top" style="padding:48px 60px;flex-direction:row;align-items:flex-start;justify-content:space-between;">
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <span class="nlb-live-badge">LIVE</span>
+            <span class="nlb-label" style="color:rgba(255,255,255,.6);font-size:16px;">LIVE HOST</span>
+          </div>
+          <div class="nlb-host-circle">
+            <img src="types/01-live-main/../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/overview-01.jpg" alt="진행자">
+          </div>
+        </div>
+        <div class="nlb-overlay bottom" style="padding:60px;gap:16px;">
+          <div class="nlb-title" style="font-size:48px;">라이브 진행자와 함께하는<br>실키밤부 슬리핑백</div>
+          <div class="nlb-subtitle" style="font-size:26px;">라이브 한정 특가 + 추가 혜택</div>
+          <div style="margin-top:12px;">
+            <div class="nlb-countdown">
+              <span>02</span><span class="nlb-countdown-sep">:</span>
+              <span>15</span><span class="nlb-countdown-sep">:</span>
+              <span>30</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="var-divider"></div>
+
+<!-- 01-C: Event -->
+<div class="var-section" data-var="C">
+  <label class="sec-toggle"><input type="checkbox" checked data-type="01" data-var="C"></label>
+  <div class="var-label">C &mdash; EVENT &middot; 그라데이션 배경 이벤트</div>
+  <div class="var-desc">팔레트 그라데이션 배경에 이벤트 제목/할인/기간 중앙 배치.</div>
+  <div class="var-note">이미지 불필요 (순수 텍스트+배경 디자인)</div>
+  <div class="frame-wrap" data-size="1080x1080">
+    <div class="frame-inner">
+      <div class="nlb-frame" data-type="main">
+        <div class="nlb-center" style="gap:24px;">
+          <span class="nlb-live-badge" style="font-size:20px;padding:12px 24px;">LIVE</span>
+          <span class="nlb-label" style="font-size:18px;margin-top:8px;">LIVE SPECIAL EVENT</span>
+          <div class="nlb-title" style="font-size:64px;">라이브 특가 이벤트</div>
+          <div class="nlb-subtitle" style="font-size:32px;">실키밤부 슬리핑백 외 전 제품</div>
+          <div style="display:flex;align-items:baseline;gap:20px;margin-top:8px;">
+            <span class="nlb-discount" style="font-size:72px;">52%</span>
+            <span style="font-family:var(--font-body);font-size:36px;font-weight:700;color:var(--dark);">할인</span>
+          </div>
+          <div style="margin-top:16px;font-family:var(--font-en);font-size:22px;font-weight:500;letter-spacing:.08em;color:var(--accent-dark);">2026.03.18 — 03.20</div>
+          <div style="margin-top:20px;font-family:var(--font-display);font-size:32px;font-weight:300;font-style:italic;color:var(--accent);">Sunday Hug</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==========================================
+     TYPE 02: 와이드 배너 (1200×628)
+     ========================================== -->
+<div class="type-content" data-type="02">
+<div class="spec-bar">1200 &times; 628px &middot; 쇼핑라이브 와이드 배너 (1.91:1)</div>
+
+<!-- 02-A: Product -->
+<div class="var-section" data-var="A">
+  <label class="sec-toggle"><input type="checkbox" checked data-type="02" data-var="A"></label>
+  <div class="var-label">A &mdash; PRODUCT &middot; 좌우 분할형</div>
+  <div class="var-desc">왼쪽 텍스트(50%) + 오른쪽 제품 이미지(50%). 제품명/가격/할인 강조.</div>
+  <div class="var-note">이미지: 600 &times; 628px 이상 (우측 50% 커버)</div>
+  <div class="frame-wrap" data-size="1200x628">
+    <div class="frame-inner">
+      <div class="nlb-frame" data-type="wide">
+        <div class="nlb-split">
+          <div class="nlb-split-text" style="padding:60px 64px;">
+            <span class="nlb-label" style="font-size:16px;margin-bottom:20px;">NAVER SHOPPING LIVE</span>
+            <div class="nlb-title" style="font-size:44px;margin-bottom:12px;">실키밤부 슬리핑백</div>
+            <div class="nlb-subtitle" style="font-size:24px;margin-bottom:28px;">실크처럼 부드러운 프리미엄 밤부 원단<br>아이의 편안한 잠을 위한 최고의 선택</div>
+            <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:8px;">
+              <span class="nlb-discount" style="font-size:40px;">52%</span>
+              <span class="nlb-price" style="font-size:40px;">29,900원</span>
+            </div>
+            <div class="nlb-price-orig">62,000원</div>
+            <div style="margin-top:28px;">
+              <span class="nlb-badge">LIVE SPECIAL</span>
+            </div>
+          </div>
+          <div class="nlb-split-img">
+            <img src="types/02-wide-banner/../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="실키밤부 슬리핑백">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="var-divider"></div>
+
+<!-- 02-B: Benefit -->
+<div class="var-section" data-var="B">
+  <label class="sec-toggle"><input type="checkbox" checked data-type="02" data-var="B"></label>
+  <div class="var-label">B &mdash; BENEFIT &middot; 혜택 안내</div>
+  <div class="var-desc">왼쪽 혜택 리스트 + 오른쪽 라이프스타일 이미지.</div>
+  <div class="var-note">이미지: 600 &times; 628px 이상 (우측 50% 커버)</div>
+  <div class="frame-wrap" data-size="1200x628">
+    <div class="frame-inner">
+      <div class="nlb-frame" data-type="wide">
+        <div class="nlb-split">
+          <div class="nlb-split-text" style="padding:56px 60px;">
+            <span class="nlb-label" style="font-size:16px;margin-bottom:16px;">LIVE BENEFITS</span>
+            <div class="nlb-title" style="font-size:40px;margin-bottom:12px;">라이브 한정 혜택</div>
+            <div class="nlb-subtitle" style="font-size:22px;margin-bottom:28px;">방송 중에만 받을 수 있는 특별 혜택</div>
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <div class="nlb-benefit-card" style="text-align:left;display:flex;align-items:center;gap:16px;padding:16px 24px;">
+                <span class="nlb-benefit-amount" style="font-size:28px;">15,000원</span>
+                <span class="nlb-benefit-label" style="margin-top:0;font-size:16px;">라이브 전용 쿠폰</span>
+              </div>
+              <div class="nlb-benefit-card" style="text-align:left;display:flex;align-items:center;gap:16px;padding:16px 24px;">
+                <span class="nlb-benefit-amount" style="font-size:28px;">무료배송</span>
+                <span class="nlb-benefit-label" style="margin-top:0;font-size:16px;">전 제품 무료배송</span>
+              </div>
+              <div class="nlb-benefit-card" style="text-align:left;display:flex;align-items:center;gap:16px;padding:16px 24px;">
+                <span class="nlb-benefit-amount" style="font-size:28px;">사은품</span>
+                <span class="nlb-benefit-label" style="margin-top:0;font-size:16px;">밤부 손수건 증정</span>
+              </div>
+            </div>
+          </div>
+          <div class="nlb-split-img">
+            <img src="types/02-wide-banner/../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-04.jpg" alt="실키밤부 슬리핑백">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="var-divider"></div>
+
+<!-- 02-C: Timesale -->
+<div class="var-section" data-var="C">
+  <label class="sec-toggle"><input type="checkbox" checked data-type="02" data-var="C"></label>
+  <div class="var-label">C &mdash; TIMESALE &middot; 타임세일 카운트다운</div>
+  <div class="var-desc">풀블리드 이미지 + 다크 오버레이에 타임세일 제목/할인/카운트다운.</div>
+  <div class="var-note">이미지: 1200 &times; 628px 이상 (전체 커버)</div>
+  <div class="frame-wrap" data-size="1200x628">
+    <div class="frame-inner">
+      <div class="nlb-frame" data-type="wide">
+        <img class="nlb-hero-img" src="types/02-wide-banner/../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-03.jpg" alt="실키밤부 슬리핑백">
+        <div class="nlb-overlay full">
+          <span class="nlb-live-badge" style="font-size:20px;padding:12px 24px;margin-bottom:20px;">LIVE</span>
+          <span class="nlb-label" style="color:rgba(255,255,255,.6);font-size:18px;margin-bottom:12px;">TIME SALE</span>
+          <div class="nlb-title" style="font-size:56px;margin-bottom:16px;">타임세일</div>
+          <div class="nlb-subtitle" style="font-size:28px;margin-bottom:24px;">실키밤부 슬리핑백 한정 특가</div>
+          <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:20px;">
+            <span class="nlb-discount" style="font-size:64px;">52%</span>
+          </div>
+          <div class="nlb-countdown" style="background:rgba(255,255,255,.15);color:#fff;">
+            <span>00</span><span class="nlb-countdown-sep" style="color:rgba(255,255,255,.5);">:</span>
+            <span>30</span><span class="nlb-countdown-sep" style="color:rgba(255,255,255,.5);">:</span>
+            <span>00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==========================================
+     TYPE 03: 혜택 배너 (720×360)
+     ========================================== -->
+<div class="type-content" data-type="03">
+<div class="spec-bar">720 &times; 360px &middot; 라이브 혜택 안내 배너 (2:1)</div>
+
+<!-- 03-A: Coupon -->
+<div class="var-section" data-var="A">
+  <label class="sec-toggle"><input type="checkbox" checked data-type="03" data-var="A"></label>
+  <div class="var-label">A &mdash; COUPON &middot; 쿠폰 안내</div>
+  <div class="var-desc">좌측 안내 텍스트 + 우측 쿠폰 카드 (점선 테두리, 금액, 조건).</div>
+  <div class="var-note">이미지 불필요 (순수 텍스트/카드 디자인)</div>
+  <div class="frame-wrap" data-size="720x360">
+    <div class="frame-inner">
+      <div class="nlb-frame" data-type="benefit">
+        <div style="display:flex;width:100%;height:100%;background:var(--palette-gradient);">
+          <div style="flex:1;padding:40px 48px;display:flex;flex-direction:column;justify-content:center;">
+            <span class="nlb-label" style="font-size:14px;margin-bottom:12px;">LIVE COUPON</span>
+            <div class="nlb-title" style="font-size:32px;margin-bottom:8px;">라이브 전용 쿠폰</div>
+            <div class="nlb-subtitle" style="font-size:20px;">방송 중 다운로드 가능</div>
+            <div class="nlb-brand-bar" style="margin-top:20px;">
+              <span class="nlb-brand-logo" style="color:var(--accent);font-size:20px;">Sunday Hug</span>
+            </div>
+          </div>
+          <div style="flex:0 0 300px;display:flex;align-items:center;justify-content:center;padding:40px;">
+            <div class="nlb-benefit-card" style="width:100%;padding:28px 24px;">
+              <div style="font-family:var(--font-en);font-size:13px;font-weight:600;letter-spacing:.1em;color:var(--accent);margin-bottom:8px;">LIVE ONLY</div>
+              <div class="nlb-benefit-amount" style="font-size:44px;">15,000원</div>
+              <div style="width:60%;height:1px;background:var(--line);margin:12px auto;"></div>
+              <div class="nlb-benefit-label" style="font-size:15px;">5만원 이상 구매 시</div>
+              <div style="font-size:13px;color:var(--sub);margin-top:6px;">라이브 방송 중 한정</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="var-divider"></div>
+
+<!-- 03-B: Gift -->
+<div class="var-section" data-var="B">
+  <label class="sec-toggle"><input type="checkbox" checked data-type="03" data-var="B"></label>
+  <div class="var-label">B &mdash; GIFT &middot; 사은품 증정</div>
+  <div class="var-desc">좌측 사은품 안내 + 우측 제품 이미지. 좌우 분할.</div>
+  <div class="var-note">이미지: 360 &times; 360px 이상 (우측 50% 커버)</div>
+  <div class="frame-wrap" data-size="720x360">
+    <div class="frame-inner">
+      <div class="nlb-frame" data-type="benefit">
+        <div class="nlb-split" style="height:100%;">
+          <div class="nlb-split-text" style="flex:0 0 50%;padding:40px 48px;">
+            <span class="nlb-badge" style="align-self:flex-start;font-size:14px;padding:8px 20px;margin-bottom:16px;">GIFT</span>
+            <div class="nlb-title" style="font-size:32px;margin-bottom:8px;">사은품 증정</div>
+            <div class="nlb-subtitle" style="font-size:20px;line-height:1.6;">라이브 구매 시<br>밤부 손수건 세트 증정</div>
+            <div style="margin-top:16px;font-family:var(--font-en);font-size:14px;font-weight:500;color:var(--accent-dark);">선착순 100명 한정</div>
+          </div>
+          <div class="nlb-split-img" style="flex:0 0 50%;">
+            <img src="types/03-benefit/../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-01-02.jpg" alt="사은품">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="var-divider"></div>
+
+<!-- 03-C: Limited -->
+<div class="var-section" data-var="C">
+  <label class="sec-toggle"><input type="checkbox" checked data-type="03" data-var="C"></label>
+  <div class="var-label">C &mdash; LIMITED &middot; 한정특가 스트립</div>
+  <div class="var-desc">수평 스트립에 한정특가 태그 + 제품명 + 가격 정보.</div>
+  <div class="var-note">이미지 불필요 (텍스트 기반)</div>
+  <div class="frame-wrap" data-size="720x360">
+    <div class="frame-inner">
+      <div class="nlb-frame" data-type="benefit">
+        <div style="display:flex;width:100%;height:100%;background:var(--bg-warm);">
+          <div style="width:8px;background:var(--accent);flex-shrink:0;"></div>
+          <div style="flex:0 0 auto;display:flex;align-items:center;padding:0 36px;">
+            <span class="nlb-badge" style="font-size:16px;padding:12px 24px;">한정특가</span>
+          </div>
+          <div style="flex:1;display:flex;align-items:center;padding:0 24px;">
+            <div>
+              <div class="nlb-product-name" style="font-size:28px;margin-bottom:4px;">실키밤부 슬리핑백</div>
+              <div class="nlb-product-desc" style="font-size:18px;">프리미엄 밤부 원단 슬리핑백</div>
+            </div>
+          </div>
+          <div style="flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;padding:0 48px 0 24px;">
+            <div class="nlb-product-prices">
+              <span class="nlb-product-discount" style="font-size:32px;">52%</span>
+              <span class="nlb-product-price" style="font-size:32px;">29,900원</span>
+            </div>
+            <span class="nlb-product-orig" style="margin-top:4px;">62,000원</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==========================================
+     TYPE 04: 상품 카드 (720×720)
+     ========================================== -->
+<div class="type-content" data-type="04">
+<div class="spec-bar">720 &times; 720px &middot; 라이브 상품 카드 (1:1)</div>
+
+<!-- 04-A: Single -->
+<div class="var-section" data-var="A">
+  <label class="sec-toggle"><input type="checkbox" checked data-type="04" data-var="A"></label>
+  <div class="var-label">A &mdash; SINGLE &middot; 단일 상품 카드</div>
+  <div class="var-desc">상단 이미지(60%) + 하단 제품 정보 카드(이름/설명/가격).</div>
+  <div class="var-note">이미지: 720 &times; 432px 이상 (상단 60% 커버)</div>
+  <div class="frame-wrap" data-size="720x720">
+    <div class="frame-inner">
+      <div class="nlb-frame" data-type="product">
+        <div style="position:absolute;top:0;left:0;width:100%;height:60%;overflow:hidden;">
+          <img src="types/04-product-card/../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="실키밤부 슬리핑백" style="width:100%;height:100%;object-fit:cover;">
+          <div style="position:absolute;top:24px;left:24px;">
+            <span class="nlb-live-badge" style="font-size:14px;padding:8px 16px;">LIVE</span>
+          </div>
+        </div>
+        <div class="nlb-card-body" style="position:absolute;bottom:0;left:0;width:100%;height:40%;padding:32px 40px;display:flex;flex-direction:column;justify-content:center;background:var(--bg-warm);">
+          <span class="nlb-label" style="font-size:13px;margin-bottom:8px;">SUNDAY HUG</span>
+          <div class="nlb-product-name" style="font-size:28px;margin-bottom:4px;">실키밤부 슬리핑백</div>
+          <div class="nlb-product-desc" style="font-size:18px;margin-bottom:12px;">실크처럼 부드러운 프리미엄 밤부 원단</div>
+          <div class="nlb-product-prices">
+            <span class="nlb-product-discount" style="font-size:32px;">52%</span>
+            <span class="nlb-product-price" style="font-size:32px;">29,900원</span>
+            <span class="nlb-product-orig">62,000원</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="var-divider"></div>
+
+<!-- 04-B: Dual -->
+<div class="var-section" data-var="B">
+  <label class="sec-toggle"><input type="checkbox" checked data-type="04" data-var="B"></label>
+  <div class="var-label">B &mdash; DUAL &middot; 2개 상품 비교</div>
+  <div class="var-desc">좌우 2개 제품 카드 — 이미지 + 이름 + 가격 비교.</div>
+  <div class="var-note">이미지: 360 &times; 640px 이상 2장 (좌우 분할)</div>
+  <div class="frame-wrap" data-size="720x720">
+    <div class="frame-inner">
+      <div class="nlb-frame" data-type="product">
+        <div style="position:absolute;top:0;left:0;width:100%;padding:28px 36px;background:var(--bg-warm);border-bottom:1px solid var(--palette-card-border);display:flex;align-items:center;justify-content:space-between;z-index:1;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span class="nlb-live-badge" style="font-size:13px;padding:6px 14px;">LIVE</span>
+            <span class="nlb-label" style="font-size:13px;">LIVE PICK</span>
+          </div>
+          <span class="nlb-brand-logo" style="color:var(--accent);font-size:18px;">Sunday Hug</span>
+        </div>
+        <div style="display:flex;width:100%;height:100%;padding-top:80px;">
+          <div style="flex:1;display:flex;flex-direction:column;border-right:1px solid var(--palette-card-border);">
+            <div style="flex:1;overflow:hidden;">
+              <img src="types/04-product-card/../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="실키밤부 슬리핑백" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            <div style="padding:20px 24px;background:var(--bg);">
+              <div class="nlb-product-name" style="font-size:20px;margin-bottom:4px;">실키밤부 슬리핑백</div>
+              <div class="nlb-product-desc" style="font-size:14px;margin-bottom:8px;">크림 아이보리</div>
+              <div class="nlb-product-prices">
+                <span class="nlb-product-discount" style="font-size:24px;">52%</span>
+                <span class="nlb-product-price" style="font-size:24px;">29,900원</span>
+              </div>
+            </div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;">
+            <div style="flex:1;overflow:hidden;">
+              <img src="types/04-product-card/../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-04.jpg" alt="실키밤부 슬리핑백" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            <div style="padding:20px 24px;background:var(--bg);">
+              <div class="nlb-product-name" style="font-size:20px;margin-bottom:4px;">실키밤부 슬리핑백</div>
+              <div class="nlb-product-desc" style="font-size:14px;margin-bottom:8px;">로즈 핑크</div>
+              <div class="nlb-product-prices">
+                <span class="nlb-product-discount" style="font-size:24px;">52%</span>
+                <span class="nlb-product-price" style="font-size:24px;">29,900원</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="var-divider"></div>
+
+<!-- 04-C: Triple -->
+<div class="var-section" data-var="C">
+  <label class="sec-toggle"><input type="checkbox" checked data-type="04" data-var="C"></label>
+  <div class="var-label">C &mdash; TRIPLE &middot; 3개 상품 리스트</div>
+  <div class="var-desc">번호 매긴 3개 상품 리스트. 이미지 + 이름 + 가격.</div>
+  <div class="var-note">이미지: 100 &times; 100px 이상 3장 (썸네일)</div>
+  <div class="frame-wrap" data-size="720x720">
+    <div class="frame-inner">
+      <div class="nlb-frame" data-type="product">
+        <div style="display:flex;flex-direction:column;width:100%;height:100%;background:var(--bg-warm);">
+          <div style="padding:32px 40px 24px;display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="nlb-live-badge" style="font-size:13px;padding:6px 14px;">LIVE</span>
+              <span class="nlb-label" style="font-size:14px;">BEST PICK 3</span>
+            </div>
+            <span class="nlb-brand-logo" style="color:var(--accent);font-size:18px;">Sunday Hug</span>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;padding:0 40px 32px;gap:12px;justify-content:center;">
+            <div class="nlb-product-card" style="background:var(--bg);border-radius:12px;padding:16px 20px;">
+              <span style="font-family:var(--font-en);font-size:32px;font-weight:700;color:var(--accent);width:44px;text-align:center;flex-shrink:0;">01</span>
+              <div class="nlb-product-img" style="width:100px;height:100px;border-radius:8px;">
+                <img src="types/04-product-card/../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/overview-01.jpg" alt="실키밤부 슬리핑백">
+              </div>
+              <div class="nlb-product-body">
+                <div class="nlb-product-name" style="font-size:20px;">실키밤부 슬리핑백</div>
+                <div class="nlb-product-desc" style="font-size:14px;">프리미엄 밤부 원단</div>
+                <div class="nlb-product-prices" style="margin-top:4px;">
+                  <span class="nlb-product-discount" style="font-size:22px;">52%</span>
+                  <span class="nlb-product-price" style="font-size:22px;">29,900원</span>
+                </div>
+              </div>
+            </div>
+            <div class="nlb-product-card" style="background:var(--bg);border-radius:12px;padding:16px 20px;">
+              <span style="font-family:var(--font-en);font-size:32px;font-weight:700;color:var(--accent);width:44px;text-align:center;flex-shrink:0;">02</span>
+              <div class="nlb-product-img" style="width:100px;height:100px;border-radius:8px;">
+                <img src="types/04-product-card/../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-02-01.jpg" alt="밤부 스와들">
+              </div>
+              <div class="nlb-product-body">
+                <div class="nlb-product-name" style="font-size:20px;">밤부 스와들</div>
+                <div class="nlb-product-desc" style="font-size:14px;">통기성 좋은 밤부 소재</div>
+                <div class="nlb-product-prices" style="margin-top:4px;">
+                  <span class="nlb-product-discount" style="font-size:22px;">40%</span>
+                  <span class="nlb-product-price" style="font-size:22px;">24,900원</span>
+                </div>
+              </div>
+            </div>
+            <div class="nlb-product-card" style="background:var(--bg);border-radius:12px;padding:16px 20px;">
+              <span style="font-family:var(--font-en);font-size:32px;font-weight:700;color:var(--accent);width:44px;text-align:center;flex-shrink:0;">03</span>
+              <div class="nlb-product-img" style="width:100px;height:100px;border-radius:8px;">
+                <img src="types/04-product-card/../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-03-01.jpg" alt="트리플 밤부 이불">
+              </div>
+              <div class="nlb-product-body">
+                <div class="nlb-product-name" style="font-size:20px;">트리플 밤부 이불</div>
+                <div class="nlb-product-desc" style="font-size:14px;">3겹 구조 밤부 이불</div>
+                <div class="nlb-product-prices" style="margin-top:4px;">
+                  <span class="nlb-product-discount" style="font-size:22px;">35%</span>
+                  <span class="nlb-product-price" style="font-size:22px;">39,900원</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==========================================
+     TYPE 05: 알림 배너 (720×240)
+     ========================================== -->
+<div class="type-content" data-type="05">
+<div class="spec-bar">720 &times; 240px &middot; 라이브 알림 스트립 배너 (3:1)</div>
+
+<!-- 05-A: Preview -->
+<div class="var-section" data-var="A">
+  <label class="sec-toggle"><input type="checkbox" checked data-type="05" data-var="A"></label>
+  <div class="var-label">A &mdash; PREVIEW &middot; 라이브 예고</div>
+  <div class="var-desc">라이브 예고 라벨 + 날짜/시간 + 우측 제품 썸네일.</div>
+  <div class="var-note">이미지: 200 &times; 240px 이상 (우측 썸네일)</div>
+  <div class="frame-wrap" data-size="720x240">
+    <div class="frame-inner">
+      <div class="nlb-frame" data-type="notify">
+        <div style="display:flex;width:100%;height:100%;background:var(--bg-warm);">
+          <div style="flex:1;padding:32px 40px;display:flex;flex-direction:column;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+              <span class="nlb-badge" style="font-size:12px;padding:6px 16px;">라이브 예고</span>
+              <span class="nlb-label" style="font-size:12px;">UPCOMING LIVE</span>
+            </div>
+            <div style="font-size:26px;font-weight:700;color:var(--dark);line-height:1.3;">실키밤부 슬리핑백 라이브 특가</div>
+            <div style="display:flex;align-items:center;gap:16px;margin-top:10px;">
+              <span style="font-family:var(--font-en);font-size:18px;font-weight:600;color:var(--accent-dark);">2026.03.20 (금)</span>
+              <span style="font-family:var(--font-en);font-size:18px;font-weight:700;color:var(--dark);">20:00</span>
+            </div>
+          </div>
+          <div style="flex:0 0 200px;overflow:hidden;">
+            <img src="types/05-notification/../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/overview-01.jpg" alt="실키밤부 슬리핑백" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="var-divider"></div>
+
+<!-- 05-B: Live Now -->
+<div class="var-section" data-var="B">
+  <label class="sec-toggle"><input type="checkbox" checked data-type="05" data-var="B"></label>
+  <div class="var-label">B &mdash; LIVE NOW &middot; 지금 방송 중</div>
+  <div class="var-desc">LIVE 뱃지 + "지금 방송 중!" 텍스트 + 제품명. 다크 배경.</div>
+  <div class="var-note">이미지: 200 &times; 240px 이상 (우측 썸네일)</div>
+  <div class="frame-wrap" data-size="720x240">
+    <div class="frame-inner">
+      <div class="nlb-frame" data-type="notify">
+        <div style="display:flex;width:100%;height:100%;background:var(--dark2);">
+          <div style="flex:1;padding:32px 40px;display:flex;align-items:center;gap:24px;">
+            <span class="nlb-live-badge" style="font-size:18px;padding:12px 24px;flex-shrink:0;">LIVE</span>
+            <div>
+              <div style="font-size:28px;font-weight:700;color:#fff;line-height:1.3;">지금 방송 중!</div>
+              <div style="font-size:20px;color:rgba(255,255,255,.7);margin-top:4px;">실키밤부 슬리핑백 라이브 특가 52% 할인</div>
+            </div>
+          </div>
+          <div style="flex:0 0 200px;overflow:hidden;">
+            <img src="types/05-notification/../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="실키밤부 슬리핑백" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="var-divider"></div>
+
+<!-- 05-C: Replay -->
+<div class="var-section" data-var="C">
+  <label class="sec-toggle"><input type="checkbox" checked data-type="05" data-var="C"></label>
+  <div class="var-label">C &mdash; REPLAY &middot; 다시보기</div>
+  <div class="var-desc">다시보기 라벨 + 방송일 + 우측 제품 썸네일.</div>
+  <div class="var-note">이미지: 200 &times; 240px 이상 (우측 썸네일)</div>
+  <div class="frame-wrap" data-size="720x240">
+    <div class="frame-inner">
+      <div class="nlb-frame" data-type="notify">
+        <div style="display:flex;width:100%;height:100%;background:var(--bg-warm);">
+          <div style="flex:1;padding:32px 40px;display:flex;flex-direction:column;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+              <span class="nlb-badge" style="font-size:12px;padding:6px 16px;background:var(--body);">다시보기</span>
+              <span class="nlb-label" style="font-size:12px;">REPLAY</span>
+            </div>
+            <div style="font-size:26px;font-weight:700;color:var(--dark);line-height:1.3;">실키밤부 슬리핑백 라이브 특가</div>
+            <div style="display:flex;align-items:center;gap:16px;margin-top:10px;">
+              <span style="font-family:var(--font-en);font-size:16px;font-weight:500;color:var(--sub);">2026.03.18 방송</span>
+              <span style="font-family:var(--font-en);font-size:16px;font-weight:600;color:var(--accent-dark);">특가 유지 중</span>
+            </div>
+          </div>
+          <div style="flex:0 0 200px;overflow:hidden;">
+            <img src="types/05-notification/../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/overview-01.jpg" alt="실키밤부 슬리핑백" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- /preview-area -->
+
+<!-- ===== FOOTER ===== -->
+<div class="guide-footer">
+  <span>Sunday Hug &middot; Naver Live Banner Templates</span>
+</div>
+
+<!-- ===== CONFIG FAB ===== -->
+<div class="config-fab">
+  <button class="btn-toggle-all" onclick="toggleAll(false)">ALL OFF</button>
+  <button class="btn-toggle-all on" onclick="toggleAll(true)">ALL ON</button>
+  <button class="btn-download" onclick="downloadConfig()">&#8595; DOWNLOAD JSON</button>
+  <button class="btn-save" onclick="showConfig()">COPY JSON</button>
+</div>
+<div class="config-modal-overlay" id="config-modal" onclick="if(event.target===this)closeConfig()">
+  <div class="config-modal">
+    <h3>SECTIONS CONFIG</h3>
+    <pre id="config-json"></pre>
+    <div class="config-modal-actions">
+      <button class="btn-save" onclick="copyFromModal()">Copy</button>
+      <button class="btn-download" onclick="downloadConfig()">Download</button>
+      <button onclick="closeConfig()" style="padding:8px 16px;border:1px solid var(--line);border-radius:100px;background:none;cursor:pointer;font-size:12px;">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  // 팔레트 스위처
+  document.querySelectorAll('.palette-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var p=btn.dataset.p;
+      var area=document.getElementById('preview-area');
+      if(area) area.setAttribute('data-palette',p);
+      document.querySelectorAll('.palette-btn').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active');
+    });
+  });
+  // 타입 탭 전환
+  document.querySelectorAll('.type-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var type=btn.dataset.type;
+      document.querySelectorAll('.type-btn').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active');
+      document.querySelectorAll('.type-content').forEach(function(c){c.classList.remove('active');});
+      var target=document.querySelector('.type-content[data-type="'+type+'"]');
+      if(target) target.classList.add('active');
+    });
+  });
+})();
+
+// === Toggle All ===
+function toggleAll(state){
+  document.querySelectorAll('.sec-toggle input[type="checkbox"]').forEach(function(cb){cb.checked=state;});
+}
+
+// === Section Config (JSON export) ===
+function collectConfig(){
+  var palette=(document.querySelector('.palette-btn.active')||{}).dataset;
+  var p=palette?palette.p:'golden-hour';
+  var types={};
+  document.querySelectorAll('.type-btn').forEach(function(btn){
+    var typeId=btn.dataset.type;
+    var tc=document.querySelector('.type-content[data-type="'+typeId+'"]');
+    if(!tc) return;
+    var enabled=[];
+    tc.querySelectorAll('input[type="checkbox"]').forEach(function(cb){
+      if(cb.checked) enabled.push(cb.dataset.var);
+    });
+    types['type-'+typeId]={enabled:enabled.length>0,variations:enabled};
+  });
+  return {
+    channel:'naver-live-banners',
+    palette:p,
+    types:types,
+    savedAt:new Date().toISOString()
+  };
+}
+function showConfig(){
+  var json=JSON.stringify(collectConfig(),null,2);
+  document.getElementById('config-json').textContent=json;
+  document.getElementById('config-modal').classList.add('active');
+}
+function closeConfig(){
+  document.getElementById('config-modal').classList.remove('active');
+}
+function copyFromModal(){
+  var text=document.getElementById('config-json').textContent;
+  try{navigator.clipboard.writeText(text);}catch(e){
+    var ta=document.createElement('textarea');ta.value=text;
+    document.body.appendChild(ta);ta.select();document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+  var btn=document.querySelector('.config-modal-actions .btn-save');
+  if(btn){btn.textContent='Copied!';setTimeout(function(){btn.textContent='Copy';},1500);}
+}
+function downloadConfig(){
+  var json=JSON.stringify(collectConfig(),null,2);
+  var blob=new Blob([json],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download='sections-config.json';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>

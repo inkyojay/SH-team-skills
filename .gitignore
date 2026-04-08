@@ -26,6 +26,9 @@ node_modules/
 __pycache__/
 *.pyc
 
+# 대용량 바이너리 (PSD 등)
+*.psd
+
 # 산출물 (5GB+, git에 올리지 않음)
 output/
 

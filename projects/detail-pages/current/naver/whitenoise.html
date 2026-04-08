@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>꿀잠 백색소음기 | 썬데이허그</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFFFFF;
+  --bg-warm: #FAF7F4;
+  --bg-warm2: #F5F0EB;
+  --bg-cool: #F8F8FA;
+  --dark: #1A1A1A;
+  --dark2: #2C2C3A;
+  --body: #444444;
+  --sub: #888888;
+  --line: #EBEBEB;
+  --line-warm: #E5DDD4;
+  --accent: #C8A07C;
+  --accent-light: #F0E6DA;
+  --danger: #D4645C;
+  --safe: #7C9A72;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Noto Sans KR', -apple-system, sans-serif;
+  --font-en: 'DM Sans', 'Noto Sans KR', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;-webkit-text-size-adjust:100%;}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--dark);
+  line-height:1.8;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  max-width:600px;
+  margin:0 auto;
+  overflow-x:hidden;
+  padding-bottom:64px;
+}
+img{width:100%;height:auto;display:block;}
+
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.v{opacity:1}.v.on{animation:rise .55s ease-out forwards}
+
+.hero{position:relative;background:var(--bg-warm);}
+.hero-img{width:100%;height:540px;object-fit:cover;}
+.hero-text{position:absolute;bottom:0;left:0;right:0;padding:64px 30px 36px;background:linear-gradient(to top,rgba(26,26,26,.72) 0%,rgba(26,26,26,.25) 70%,transparent 100%);}
+.hero-tag{font-family:var(--font-en);font-size:16px;font-weight:500;letter-spacing:.3em;color:var(--accent);margin-bottom:10px;}
+.hero h1{font-size:38px;font-weight:700;line-height:1.48;color:#fff;margin-bottom:8px;}
+.hero-sub{font-size:19px;color:rgba(255,255,255,.65);line-height:1.85;font-weight:400;}
+
+.trust-bar{display:flex;justify-content:center;gap:0;background:var(--dark2);padding:14px 20px;}
+.trust-bar-item{flex:1;text-align:center;position:relative;font-size:17px;font-weight:500;color:rgba(255,255,255,.85);letter-spacing:.02em;}
+.trust-bar-item+.trust-bar-item::before{content:'';position:absolute;left:0;top:15%;bottom:15%;width:1px;background:rgba(255,255,255,.1);}
+.trust-bar-item small{display:block;font-size:14px;font-weight:400;color:rgba(255,255,255,.4);margin-top:2px;letter-spacing:.01em;}
+
+.sec{padding:52px 30px;}
+.sec.warm{background:var(--bg-warm);}
+.sec.warm2{background:var(--bg-warm2);}
+.sec.cool{background:var(--bg-cool);}
+.sec.dark{background:var(--dark2);color:#fff;}
+.sec.dark .sec-label{color:var(--accent);}
+.sec.dark .sec-title{color:#fff;}
+.sec.dark .sec-desc{color:rgba(255,255,255,.6);}
+
+.sec-label{font-family:var(--font-en);font-size:16px;font-weight:500;letter-spacing:.2em;color:var(--accent);margin-bottom:12px;}
+.sec-title{font-size:32px;font-weight:700;line-height:1.52;color:var(--dark);margin-bottom:14px;letter-spacing:-.01em;}
+.sec-desc{font-size:20px;color:var(--body);line-height:2;font-weight:400;}
+.tx-center{text-align:center;}
+.hl{color:var(--accent);font-weight:500;}
+.thin-line{height:1px;background:var(--line);margin:0 30px;}
+
+.fb-img{margin:24px -30px 0;overflow:hidden;}
+.fb-img img{width:100%;display:block;}
+.sec-img{margin-top:24px;border-radius:6px;overflow:hidden;}
+
+.bq{padding:64px 36px;text-align:center;background:var(--dark2);position:relative;}
+.bq p{font-family:var(--font-display);font-size:35px;font-weight:400;font-style:italic;color:var(--bg-warm);line-height:1.7;}
+.bq small{display:block;margin-top:14px;font-family:var(--font-en);font-size:14px;color:var(--accent);letter-spacing:.25em;}
+
+.feat{padding:48px 30px;background:var(--bg);position:relative;}
+.feat+.feat{border-top:1px solid var(--line);}
+.feat.warm{background:var(--bg-warm);}
+.feat.cool{background:var(--bg-cool);}
+.feat.dark{background:var(--dark2);color:#fff;}
+.feat.dark .feat-num{color:var(--accent);}
+.feat.dark .feat-title{color:#fff;}
+.feat.dark .feat-desc{color:rgba(255,255,255,.6);}
+.feat.center{text-align:center;}
+.feat-num{font-family:var(--font-en);font-size:16px;font-weight:500;letter-spacing:.15em;color:var(--accent);margin-bottom:8px;}
+.feat-title{font-size:29px;font-weight:700;line-height:1.5;color:var(--dark);margin-bottom:10px;}
+.feat-desc{font-size:20px;color:var(--body);line-height:2;margin-bottom:0;}
+
+.feat-hz{display:flex;gap:20px;align-items:center;margin-top:24px;}
+.feat-hz.rev{flex-direction:row-reverse;}
+.feat-hz-img{flex:0 0 48%;border-radius:6px;overflow:hidden;}
+.feat-hz-img img{width:100%;display:block;}
+.feat-hz-body{flex:1;}
+.feat-hz-body .feat-num{margin-bottom:6px;}
+.feat-hz-body .feat-title{font-size:26px;margin-bottom:8px;}
+.feat-hz-body .feat-desc{font-size:19px;line-height:1.85;}
+
+.sub-pts{margin-top:28px;}
+.sub-pt{display:flex;gap:16px;align-items:flex-start;padding:20px 0;border-bottom:1px solid var(--line);}
+.sub-pt:last-child{border-bottom:none;}
+.sub-pt.rev{flex-direction:row-reverse;}
+.sub-pt-img{flex:0 0 44%;border-radius:4px;overflow:hidden;background:var(--bg-warm);}
+.sub-pt-img img{width:100%;display:block;}
+.sub-pt-body{flex:1;padding-top:2px;}
+.sub-pt-no{font-family:var(--font-display);font-size:32px;font-weight:400;color:var(--accent);line-height:1;margin-bottom:4px;font-style:italic;}
+.sub-pt-hd{font-size:15px;font-weight:600;color:var(--dark);margin-bottom:6px;}
+.sub-pt-tx{font-size:13px;color:var(--body);line-height:1.85;}
+
+.trust-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;}
+.trust-3-item{text-align:center;padding:20px 8px;background:var(--bg-warm);border-radius:6px;}
+.trust-3-item .icon{width:36px;height:36px;margin:0 auto 8px;border-radius:50%;border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-size:12px;font-weight:700;color:var(--accent);}
+.trust-3-item h4{font-size:19px;font-weight:600;color:var(--dark);margin-bottom:3px;}
+.trust-3-item p{font-size:16px;color:var(--body);line-height:1.6;}
+
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
+.compare-card{border-radius:6px;overflow:hidden;border:1px solid var(--line);}
+.compare-card.danger{border-color:var(--danger);}
+.compare-card.safe{border-color:var(--safe);}
+.compare-card-img{overflow:hidden;}
+.compare-card-img img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover;}
+.compare-card-body{padding:14px;}
+.compare-card-tag{font-family:var(--font-en);font-size:10px;font-weight:600;letter-spacing:.1em;margin-bottom:4px;}
+.compare-card.danger .compare-card-tag{color:var(--danger);}
+.compare-card.safe .compare-card-tag{color:var(--safe);}
+.compare-card-title{font-size:13px;font-weight:600;color:var(--dark);margin-bottom:4px;}
+.compare-card-desc{font-size:11px;color:var(--body);line-height:1.7;}
+
+.callout{margin-top:24px;padding:22px 24px;background:var(--bg);border-left:3px solid var(--accent);border-radius:0 4px 4px 0;}
+.callout-label{font-family:var(--font-en);font-size:14px;font-weight:600;letter-spacing:.12em;color:var(--accent);margin-bottom:6px;}
+.callout-text{font-size:19px;color:var(--body);line-height:1.9;}
+
+.note-card{margin-top:28px;padding:28px 24px;border:1px solid var(--line-warm);border-radius:6px;background:var(--bg);position:relative;}
+.note-card::after{content:'';position:absolute;top:0;left:20px;right:20px;height:2px;background:var(--accent);}
+.note-hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line);}
+.note-hd h3{font-family:var(--font-display);font-size:29px;font-weight:500;font-style:italic;color:var(--dark);}
+.note-hd span{font-family:var(--font-en);font-size:14px;color:var(--sub);letter-spacing:.08em;}
+.note-item{padding:12px 0;border-bottom:1px dashed var(--line);}
+.note-item:last-child{border-bottom:none;}
+.note-item strong{font-family:var(--font-en);font-size:17px;font-weight:600;color:var(--accent);letter-spacing:.02em;}
+.note-item p{font-size:19px;color:var(--body);line-height:1.85;margin-top:4px;}
+
+.info-tbl{width:100%;border-collapse:collapse;margin-top:20px;font-size:17px;}
+.info-tbl th{width:80px;font-weight:600;color:var(--dark);padding:11px 0;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);}
+.info-tbl td{color:var(--body);padding:11px 0;border-bottom:1px solid var(--line);line-height:1.65;}
+
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;}
+.detail-item{border:1px solid var(--line);border-radius:6px;overflow:hidden;}
+.detail-item-img{overflow:hidden;}
+.detail-item-img img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover;}
+.detail-item-body{padding:16px;}
+.detail-item-label{font-family:var(--font-en);font-size:14px;font-weight:600;letter-spacing:.12em;color:var(--accent);margin-bottom:4px;}
+.detail-item-title{font-size:20px;font-weight:600;color:var(--dark);margin-bottom:5px;line-height:1.4;}
+.detail-item-desc{font-size:17px;color:var(--body);line-height:1.75;}
+
+.close{padding:72px 30px;text-align:center;background:var(--bg-warm);}
+.close-logo{font-family:var(--font-display);font-size:52px;font-weight:400;font-style:italic;color:var(--line-warm);margin-bottom:16px;}
+.close-title{font-size:29px;font-weight:700;line-height:1.6;margin-bottom:12px;}
+.close-desc{font-size:20px;color:var(--body);line-height:2;}
+.footer{background:var(--dark2);padding:24px 30px;text-align:center;}
+.footer span{font-family:var(--font-display);font-size:19px;font-weight:400;letter-spacing:.25em;color:rgba(255,255,255,.35);}
+
+
+.final-cta{padding:56px 30px;text-align:center;background:var(--dark2);}
+.final-cta-label{font-family:var(--font-en);font-size:16px;font-weight:500;letter-spacing:.25em;color:var(--accent);margin-bottom:12px;}
+.final-cta h2{font-size:32px;font-weight:700;color:#fff;line-height:1.55;margin-bottom:8px;}
+.final-cta p{font-size:19px;color:rgba(255,255,255,.55);line-height:1.85;margin-bottom:24px;}
+.final-cta-note{margin-top:16px;font-size:16px;color:rgba(255,255,255,.35);}
+
+</style>
+</head>
+<body>
+
+
+<!-- HERO -->
+<div class="hero">
+  <img class="hero-img" src="../images/whitenoise/hero-01.jpg" alt="썬데이허그 꿀잠 백색소음기">
+  <div class="hero-text">
+    <div class="hero-tag">SUNDAY HUG</div>
+    <h1>아기의 편안한 꿀잠을 위한<br>꿀잠 백색소음기</h1>
+    <p class="hero-sub">엄마 뱃속에서 듣던 편안한 소리로 우리 아기에게 최고의 수면 환경을 선물하세요</p>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-item">21가지 사운드<small>프리미엄 음원</small></div>
+  <div class="trust-bar-item">30단계 볼륨<small>정밀 조절</small></div>
+  <div class="trust-bar-item">원터치 무드등<small>수유등 겸용</small></div>
+</div>
+
+
+<!-- INTRO -->
+<div class="sec v">
+  <div class="sec-label">Designed For Families</div>
+  <div class="sec-title">"매일 밤 울음 그치지 않는<br>우리 아기,<br>어떻게 해야 할까요?"</div>
+  <div class="sec-desc">
+    신생아 때부터 겪었던 아기의 밤울음,<br>
+    백색소음을 들려주니<br>
+    <span class="hl">신기하게도 울음을 그치고</span><br>
+    편안하게 잠들더라고요.<br><br>
+    썬데이허그 꿀잠 백색소음기는<br>
+    <span class="hl">360도 서라운드 스피커</span>로<br>
+    균일한 소리를 들려주고<br>
+    아기가 좋아하는 다양한 자연의 소리와<br>
+    엄마 뱃속 소리까지 담았어요.<br><br>
+    이제 백색소음기 하나로<br>
+    온 가족이 편안한 밤을 보내세요.
+  </div>
+  <div class="fb-img"><img src="../images/whitenoise/lifestyle-01.jpg" alt="백색소음기 스토리"></div>
+</div>
+
+<div class="thin-line"></div>
+
+<div class="fb-img" style="margin:0;"><img src="../images/whitenoise/lifestyle-02.png" alt="백색소음기 인트로"></div>
+
+
+<!-- OVERVIEW -->
+<div class="sec warm v">
+  <div class="sec-label tx-center">Overview</div>
+  <div class="sec-title tx-center">아기 수면에 최적화된<br>사운드 머신</div>
+  <div class="sec-desc tx-center">썬데이허그 백색소음기와 함께<br>편안하고 깊은 수면을 경험하세요</div>
+  <div class="fb-img"><img src="../images/whitenoise/feature-01-overview.jpg" alt="백색소음기 오버뷰"></div>
+  <div class="fb-img"><img src="../images/whitenoise/feature-02-overview.jpg" alt="백색소음기 오버뷰"></div>
+</div>
+
+
+<!-- KEY FEATURES -->
+<div class="sec v">
+  <div class="sec-label tx-center">Key Features</div>
+  <div class="sec-title tx-center">꿀잠을 부르는 4가지 특별함</div>
+
+  <div class="detail-grid">
+    <div class="detail-item v">
+      <div class="detail-item-body" style="text-align:center;padding:24px 16px;">
+        <div class="detail-item-label">FEATURE 01</div>
+        <div class="detail-item-title">21가지 사운드</div>
+        <div class="detail-item-desc">백색소음과 자연의 소리까지 다양한 사운드</div>
+      </div>
+    </div>
+    <div class="detail-item v">
+      <div class="detail-item-body" style="text-align:center;padding:24px 16px;">
+        <div class="detail-item-label">FEATURE 02</div>
+        <div class="detail-item-title">스마트 타이머</div>
+        <div class="detail-item-desc">30분, 60분, 90분 자동 종료</div>
+      </div>
+    </div>
+    <div class="detail-item v">
+      <div class="detail-item-body" style="text-align:center;padding:24px 16px;">
+        <div class="detail-item-label">FEATURE 03</div>
+        <div class="detail-item-title">30단계 볼륨</div>
+        <div class="detail-item-desc">아기 컨디션에 맞게 섬세한 볼륨 조절</div>
+      </div>
+    </div>
+    <div class="detail-item v">
+      <div class="detail-item-body" style="text-align:center;padding:24px 16px;">
+        <div class="detail-item-label">FEATURE 04</div>
+        <div class="detail-item-title">원터치 무드등</div>
+        <div class="detail-item-desc">부드러운 무드등으로 아늑한 환경 조성</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- POINT 01: 21가지 사운드 -->
+<div class="feat v">
+  <div class="feat-num">POINT 01</div>
+  <div class="feat-title">21가지 프리미엄 사운드</div>
+  <div class="feat-desc">
+    전문가가 선별한<br>
+    아기 수면에 최적화된 사운드<br>
+    매일 다른 소리로<br>
+    아기의 취향을 찾아보세요
+  </div>
+  <div class="fb-img"><img src="../images/whitenoise/feature-01-sounds.jpg" alt="21가지 사운드"></div>
+
+  <div class="note-card v">
+    <div class="note-hd">
+      <h3>21 Sounds</h3>
+      <span>SOUND LIST</span>
+    </div>
+    <div class="note-item">
+      <strong>White Noise (5종)</strong>
+      <p>TV 정적음, 청소기, 헤어드라이어, 선풍기, 에어컨</p>
+    </div>
+    <div class="note-item">
+      <strong>Fan Sound (5종)</strong>
+      <p>천장 선풍기, 탁상 선풍기, 환기팬, 공기청정기, 서큘레이터</p>
+    </div>
+    <div class="note-item">
+      <strong>Natural Sound (11종)</strong>
+      <p>숲 새소리, 모닥불, 폭포, 바닷가 파도, 개울가, 천둥, 장맛비, 피아노 자장가, 작은 별, 쉬소리, 태동 소리</p>
+    </div>
+  </div>
+
+  <div class="callout v">
+    <div class="callout-label">SMART TIP</div>
+    <div class="callout-text">전원이 꺼져도 걱정 없어요! 마지막으로 선택한 <span class="hl">소리와 볼륨</span>을 자동으로 기억해 다음에 켤 때도 그대로 재생됩니다.</div>
+  </div>
+</div>
+
+
+<!-- POINT 02: 타이머 -->
+<div class="feat warm v">
+  <div class="feat-num">POINT 02</div>
+  <div class="feat-title">수면 타이머 기능</div>
+  <div class="feat-desc">
+    아기가 잠드는 시간에 맞춰<br>
+    타이머를 맞춰 주세요.<br>
+    타이머에 맞게 사운드가 종료됩니다.<br>
+    30분, 60분, 90분<br>
+    3단계로 설정 가능합니다.
+  </div>
+  <div class="fb-img"><img src="../images/whitenoise/feature-02-timer.png" alt="수면 타이머"></div>
+</div>
+
+
+<!-- POINT 03: 볼륨 -->
+<div class="feat v">
+  <div class="feat-num">POINT 03</div>
+  <div class="feat-title">30단계 정밀 볼륨 조절</div>
+  <div class="feat-desc">
+    스크롤 방식으로 소리를<br>
+    섬세하게 조절해보세요.
+  </div>
+  <div class="fb-img"><img src="../images/whitenoise/feature-03-volume.jpg" alt="볼륨 조절"></div>
+
+  <div class="callout v">
+    <div class="callout-label">RECOMMEND</div>
+    <div class="callout-text">권장 볼륨: <span class="hl">50~60dB</span> (MAX 80dB)</div>
+  </div>
+
+  <div class="fb-img"><img src="../images/whitenoise/feature-03-volume-detail.jpg" alt="볼륨 조절 디테일"></div>
+</div>
+
+
+<!-- POINT 04: 무드등 -->
+<div class="feat dark v">
+  <div class="feat-num">POINT 04</div>
+  <div class="feat-title" style="color:#fff;">원터치 무드등</div>
+  <div class="feat-desc" style="color:rgba(255,255,255,.6);">
+    간편한 원터치로 켜지는 은은한 무드등<br>
+    수유등으로도 활용 가능해요!
+  </div>
+  <div class="fb-img"><img src="../images/whitenoise/feature-04-moodlight.jpg" alt="원터치 무드등"></div>
+  <div class="sec-desc" style="margin-top:24px;color:rgba(255,255,255,.6);text-align:center;">
+    부드러운 따뜻한 색온도로<br>
+    아기의 눈에 부담 없이<br>
+    밤중 수유나 기저귀 교체 시<br>
+    딱 필요한 만큼의 조명 제공<br><br>
+    2초간 누르면 조명이 켜지고 꺼지며,<br>
+    버튼을 누를 때마다<br>
+    5단계 밝기로 조절할 수 있습니다.
+  </div>
+</div>
+
+
+<!-- POINT 05: 포터블 -->
+<div class="feat warm v">
+  <div class="feat-num">POINT 05</div>
+  <div class="feat-title">언제 어디서나<br>함께하는 백색소음기</div>
+  <div class="feat-desc">
+    다양한 상황에서 아기에게 편안함을 선사합니다
+  </div>
+  <div class="fb-img"><img src="../images/whitenoise/feature-05-portable.jpg" alt="포터블 백색소음기"></div>
+
+  <div class="sub-pts">
+    <div class="sub-pt v">
+      <div class="sub-pt-img"><img src="../images/whitenoise/lifestyle-03-stroller.jpg" alt="유모차 외출"></div>
+      <div class="sub-pt-body">
+        <div class="sub-pt-no">01</div>
+        <div class="sub-pt-hd">유모차 외출</div>
+        <div class="sub-pt-tx">시끄러운 거리에서도 아기만의 편안한 공간을 만들어주세요.</div>
+      </div>
+    </div>
+    <div class="sub-pt rev v">
+      <div class="sub-pt-img"><img src="../images/whitenoise/lifestyle-04-feeding.jpg" alt="수유 시간"></div>
+      <div class="sub-pt-body">
+        <div class="sub-pt-no">02</div>
+        <div class="sub-pt-hd">수유 시간</div>
+        <div class="sub-pt-tx">수유 중에도 백색소음으로 아기를 안정시켜요.</div>
+      </div>
+    </div>
+    <div class="sub-pt v">
+      <div class="sub-pt-img"><img src="../images/whitenoise/lifestyle-05-carrier.jpg" alt="아기띠 착용"></div>
+      <div class="sub-pt-body">
+        <div class="sub-pt-no">03</div>
+        <div class="sub-pt-hd">아기띠 착용</div>
+        <div class="sub-pt-tx">엄마 품에서 익숙한 소리로 안정감을 제공합니다.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- POINT 06: 360도 서라운드 -->
+<div class="feat v">
+  <div class="feat-num">POINT 06</div>
+  <div class="feat-title">360도 서라운드 사운드</div>
+  <div class="feat-desc">
+    어디에 두어도 균일한 사운드,<br>
+    아기의 귀에 딱 맞는 사운드를 전달해요.
+  </div>
+  <div class="fb-img"><img src="../images/whitenoise/feature-06-surround.jpg" alt="360도 서라운드"></div>
+</div>
+
+
+<!-- COMPARISON -->
+<div class="sec v">
+  <div class="sec-label tx-center">Compare</div>
+  <div class="sec-title tx-center">왜 썬데이허그 백색소음기인가요?</div>
+
+  <div class="compare">
+    <div class="compare-card danger">
+      <div class="compare-card-body">
+        <div class="compare-card-tag">일반 백색소음기</div>
+        <div class="compare-card-desc" style="margin-top:8px;">
+          10가지 이하 사운드<br>
+          단순 볼륨 조절<br>
+          무드등 없음<br>
+          유선 전원만 가능
+        </div>
+      </div>
+    </div>
+    <div class="compare-card safe">
+      <div class="compare-card-body">
+        <div class="compare-card-tag">썬데이허그</div>
+        <div class="compare-card-desc" style="margin-top:8px;">
+          <strong>21가지 사운드</strong><br>
+          <strong>30단계 정밀 볼륨</strong><br>
+          <strong>원터치 무드등 내장</strong><br>
+          <strong>무선 사용 가능</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- BRAND QUOTE -->
+<div class="bq">
+  <p>"아기의 숙면이 곧<br>부모의 휴식입니다"</p>
+  <small>SUNDAY HUG</small>
+</div>
+
+
+<!-- SAFETY CERTIFICATION -->
+<div class="sec warm v">
+  <div class="sec-label tx-center">Safety Certified</div>
+  <div class="sec-title tx-center">믿고 사용하세요<br>안전인증 통과 제품입니다</div>
+  <div class="sec-desc tx-center">
+    썬데이허그 꿀잠 백색소음기는<br>
+    배터리 인증 및 전파 인증을<br>
+    통과한 제품으로<br>
+    <span class="hl">안심하고 사용하실 수 있습니다.</span>
+  </div>
+
+  <div class="fb-img"><img src="../images/whitenoise/feature-07-kc-cert.png" alt="KC 안전인증서"></div>
+  <div class="fb-img"><img src="../images/whitenoise/feature-08-radio-cert.png" alt="전파인증서"></div>
+
+  <div class="callout v">
+    <div class="callout-label">KC CERTIFICATION</div>
+    <div class="callout-text">
+      방송통신 기자재 적합등록: <strong>R-R-JCOP-SH25-03</strong><br>
+      배터리 안전확인 신고: <strong>XU101411-18002A</strong>
+    </div>
+  </div>
+</div>
+
+
+<!-- PRODUCT SPEC -->
+<div class="sec v">
+  <div class="sec-label">Specification</div>
+  <div class="sec-title">제품 상세 스펙</div>
+
+  <div class="sec-img"><img src="../images/whitenoise/feature-09-spec.jpg" alt="제품 스펙"></div>
+
+  <table class="info-tbl">
+    <tr><th>제품명</th><td>썬데이허그 꿀잠 백색소음기</td></tr>
+    <tr><th>크기</th><td>120 x 120 x 60mm</td></tr>
+    <tr><th>무게</th><td>280g</td></tr>
+    <tr><th>전원</th><td>USB-C 충전 (5V/1A)</td></tr>
+    <tr><th>사용시간</th><td>최대 20시간 연속 재생</td></tr>
+    <tr><th>사운드</th><td>21가지 내장 사운드</td></tr>
+    <tr><th>타이머</th><td>30분, 60분, 90분</td></tr>
+    <tr><th>볼륨</th><td>30단계 조절</td></tr>
+    <tr><th>무드등</th><td>원터치 무드등 (5단계 밝기)</td></tr>
+    <tr><th>인증</th><td>KC 안전인증</td></tr>
+  </table>
+</div>
+
+
+<!-- BRAND STORY -->
+<div class="sec warm v">
+  <div class="sec-label tx-center">Our Story</div>
+  <div class="sec-title tx-center">가족의 행복한 일상,<br>썬데이허그</div>
+  <div class="sec-desc tx-center">
+    우리는 아기의 편안한 수면이<br>
+    온 가족의 행복으로 이어진다고 믿습니다.<br><br>
+    세심한 디자인으로 만든 백색소음기로<br>
+    아기도, 부모님도 편안한 밤을 보내세요.<br><br>
+    썬데이허그는 여러분의 가족과 함께하는<br>
+    행복한 일상을 언제나 응원합니다.
+  </div>
+  <div class="fb-img"><img src="../images/whitenoise/brand-01-story.jpg" alt="브랜드 스토리"></div>
+</div>
+
+
+<!-- FINAL CTA -->
+<div class="final-cta v">
+  <div class="final-cta-label">SUNDAY HUG</div>
+  <h2>우리 아기에게<br>편안한 꿀잠을 선물하세요</h2>
+  <p>21가지 사운드 / 30단계 볼륨 / 원터치 무드등<br>스마트 타이머 / 360도 서라운드 / KC 인증</p>
+  <div class="final-cta-note">USB-C 충전 / 최대 20시간 연속 재생</div>
+</div>
+
+
+<!-- CLOSE -->
+<div class="close">
+  <div class="close-logo v">Sunday Hug</div>
+  <div class="close-title v">가족의 행복한 일상을<br>언제나 응원합니다</div>
+  <div class="close-desc v">
+    썬데이허그는 여러분의 가족과 함께하는<br>
+    행복한 일상을 언제나 응원합니다.
+  </div>
+</div>
+<div class="footer"><span>Designed for Families.</span></div>
+
+
+
+<script>
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});
+},{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.v').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

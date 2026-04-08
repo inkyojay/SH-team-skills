@@ -1,0 +1,35 @@
+<!--=============================================================
+  TYPE: 모바일 메인배너 (Mobile Main Banner)
+  VARIATION: A — Product (제품 중심)
+  DIMENSIONS: 720 × 480px
+  PURPOSE: 모바일 스토어 홈 상단 — 제품 이미지 + 정보
+  IMAGE SPEC: 720 × 288px 이상 (상단 60% 커버)
+=============================================================-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>모바일 메인배너 - A Product</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../_base-styles.css">
+<link rel="stylesheet" href="../../_palettes.css">
+</head>
+<body style="margin:0;padding:0;background:#eee;">
+<div class="ss-frame" data-type="mobile-main">
+  <!-- Top image area (60%) -->
+  <div style="position:absolute;top:0;left:0;width:100%;height:60%;overflow:hidden;">
+    <img src="../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="실키밤부 슬리핑백" style="width:100%;height:100%;object-fit:cover;">
+  </div>
+  <!-- Bottom info card (40%) -->
+  <div style="position:absolute;bottom:0;left:0;width:100%;height:40%;background:var(--bg-warm);padding:28px 36px;display:flex;flex-direction:column;justify-content:center;">
+    <span class="ss-label" style="font-size:14px;margin-bottom:8px;">SUNDAY HUG</span>
+    <div style="font-size:32px;font-weight:700;color:var(--dark);line-height:1.3;margin-bottom:10px;">실키밤부 슬리핑백</div>
+    <div class="ss-product-info">
+      <span class="ss-discount" style="font-size:36px;">52%</span>
+      <span class="ss-price" style="font-size:36px;">29,900원</span>
+      <span class="ss-price-orig" style="font-size:20px;">62,000원</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -125,10 +125,10 @@ def generate_image(
 
         # 이미지 생성 요청
         response = client.models.generate_content(
-            model="gemini-2.0-flash-exp",
+            model="gemini-2.5-flash-image",
             contents=full_prompt,
             config=types.GenerateContentConfig(
-                response_modalities=['TEXT', 'IMAGE']
+                response_modalities=['IMAGE']
             )
         )
 

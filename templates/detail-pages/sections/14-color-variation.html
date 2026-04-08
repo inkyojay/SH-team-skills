@@ -1,0 +1,42 @@
+<!--=============================================================
+  SECTION: Color Variation (컬러별 제품 이미지)
+  ORDER: 14
+  REQUIRED: ✅ 필수
+  BACKGROUND: white
+  PURPOSE: 사용 가능한 컬러 옵션을 실제 제품 사진과 함께 보여준다.
+           고객이 원하는 컬러를 미리 확인할 수 있다.
+
+  DESIGN NOTES:
+  - color-var-swatch: 원형 컬러 칩
+  - color-var-imgs: 2열 그리드 (전면/후면)
+  - 항목 사이 구분선
+
+  DATA REQUIRED:
+  - {{#colors}} : 컬러 배열
+    각 항목: {
+      hex: "#F5F0E8",
+      name_ko: "화이트 크림",
+      name_en: "White Cream",
+      front_image, back_image
+    }
+=============================================================-->
+<div class="sec v">
+  <div class="sec-label">Color Variation</div>
+  <div class="sec-title">컬러별 제품 이미지</div>
+  <div class="sec-desc">{{color_count}}가지 컬러 라인업, 다양한 실내복에 모두 매칭이 잘 돼요.</div>
+
+  <div class="color-var">
+    {{#colors}}
+    <div class="color-var-item v">
+      <div class="color-var-head">
+        <div class="color-var-swatch" style="background:{{hex}};"></div>
+        <div class="color-var-name">{{name_ko}}<span>{{name_en}}</span></div>
+      </div>
+      <div class="color-var-imgs">
+        <img src="{{front_image}}" alt="{{name_ko}} 전면">
+        <img src="{{back_image}}" alt="{{name_ko}} 후면">
+      </div>
+    </div>
+    {{/colors}}
+  </div>
+</div>

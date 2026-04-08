@@ -1,0 +1,45 @@
+<!--=============================================================
+  SECTION: Feature Overlay (이미지 오버레이 포인트)
+  ORDER: 12a (12-feature-points 대체/병행 가능)
+  REQUIRED: 선택 (기존 12-feature-points 대신 사용)
+  BACKGROUND: 이미지 자체가 배경
+  PURPOSE: 풀 이미지 위에 텍스트를 오버레이하여 시각적 임팩트를 극대화.
+           상단 중앙에 Point 번호와 서브 타이틀,
+           하단에 큰 제목과 설명이 그라데이션 위에 표시.
+
+  DESIGN NOTES:
+  - 각 포인트가 독립적인 풀 이미지 섹션
+  - 상단: Point 번호(골드) + 서브타이틀(흰색) 중앙 정렬
+  - 하단: 제목(24px 볼드 흰색) + 설명(14px 연흰색) 좌측 정렬
+  - 하단 그라데이션 오버레이로 텍스트 가독성 확보
+  - 포인트 간 12px 간격
+
+  CSS REQUIRED (in _base-styles.css):
+  .feat-overlay        — position:relative; overflow:hidden
+  .feat-overlay-img    — full-width background image
+  .feat-overlay-top    — absolute top, centered
+  .feat-overlay-bottom — absolute bottom, gradient background
+
+  DATA REQUIRED:
+  - {{#feature_overlays}} : 포인트 배열 (3~5개)
+    각 포인트: {
+      num: "Point 01",
+      sub: "팔 움직임을 방해하지 않는 구조",
+      title_html: "뒤집기 시작한 아이도<br>속싸개 없이 안전하게",
+      desc_html: "속싸개와 달리 팔을 자유롭게 움직일 수 있어<br>뒤집기를 시작하는 아이에게 이상적입니다.",
+      image: "이미지 URL"
+    }
+=============================================================-->
+{{#feature_overlays}}
+<div class="feat-overlay v">
+  <img class="feat-overlay-img" src="{{image}}" alt="{{num}}">
+  <div class="feat-overlay-top">
+    <div class="feat-num">{{num}}</div>
+    <div class="feat-overlay-sub">{{sub}}</div>
+  </div>
+  <div class="feat-overlay-bottom">
+    <div class="feat-title">{{title_html}}</div>
+    <div class="feat-desc">{{desc_html}}</div>
+  </div>
+</div>
+{{/feature_overlays}}

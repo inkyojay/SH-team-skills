@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABC 아기침대 오거나이저 | 썬데이허그</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFFFFF;
+  --bg-warm: #FAF7F4;
+  --bg-warm2: #F5F0EB;
+  --bg-cool: #F8F8FA;
+  --dark: #1A1A1A;
+  --dark2: #2C2C3A;
+  --body: #444444;
+  --sub: #888888;
+  --line: #EBEBEB;
+  --line-warm: #E5DDD4;
+  --accent: #C8A07C;
+  --accent-light: #F0E6DA;
+  --danger: #D4645C;
+  --safe: #7C9A72;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Noto Sans KR', -apple-system, sans-serif;
+  --font-en: 'DM Sans', 'Noto Sans KR', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;-webkit-text-size-adjust:100%;}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--dark);
+  line-height:1.8;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  max-width:600px;
+  margin:0 auto;
+  overflow-x:hidden;
+  padding-bottom:0;
+}
+img{width:100%;height:auto;display:block;}
+
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.v{opacity:1}.v.on{animation:rise .55s ease-out forwards}
+
+.hero{position:relative;background:var(--bg-warm);}
+.hero-img{width:100%;height:540px;object-fit:cover;}
+.hero-text{position:absolute;bottom:0;left:0;right:0;padding:64px 30px 36px;background:linear-gradient(to top,rgba(26,26,26,.72) 0%,rgba(26,26,26,.25) 70%,transparent 100%);}
+.hero-tag{font-family:var(--font-en);font-size:11px;font-weight:500;letter-spacing:.3em;color:var(--accent);margin-bottom:10px;}
+.hero h1{font-size:26px;font-weight:700;line-height:1.48;color:#fff;margin-bottom:8px;}
+.hero-sub{font-size:19px;color:rgba(255,255,255,.65);line-height:1.85;font-weight:400;}
+
+.trust-bar{display:flex;justify-content:center;gap:0;background:var(--dark2);padding:14px 20px;}
+.trust-bar-item{flex:1;text-align:center;position:relative;font-size:12px;font-weight:500;color:rgba(255,255,255,.85);letter-spacing:.02em;}
+.trust-bar-item+.trust-bar-item::before{content:'';position:absolute;left:0;top:15%;bottom:15%;width:1px;background:rgba(255,255,255,.1);}
+.trust-bar-item small{display:block;font-size:10px;font-weight:400;color:rgba(255,255,255,.4);margin-top:2px;letter-spacing:.01em;}
+
+.sec{padding:52px 30px;}
+.sec.warm{background:var(--bg-warm);}
+.sec.warm2{background:var(--bg-warm2);}
+.sec.cool{background:var(--bg-cool);}
+.sec.dark{background:var(--dark2);color:#fff;}
+.sec.dark .sec-label{color:var(--accent);}
+.sec.dark .sec-title{color:#fff;}
+.sec.dark .sec-desc{color:rgba(255,255,255,.6);}
+
+.sec-label{font-family:var(--font-en);font-size:11px;font-weight:500;letter-spacing:.2em;color:var(--accent);margin-bottom:12px;}
+.sec-title{font-size:22px;font-weight:700;line-height:1.52;color:var(--dark);margin-bottom:14px;letter-spacing:-.01em;}
+.sec-desc{font-size:14px;color:var(--body);line-height:2;font-weight:400;}
+.tx-center{text-align:center;}
+.hl{color:var(--accent);font-weight:500;}
+.thin-line{height:1px;background:var(--line);margin:0 30px;}
+
+.fb-img{margin:24px -30px 0;overflow:hidden;}
+.fb-img img{width:100%;display:block;}
+.sec-img{margin-top:24px;border-radius:6px;overflow:hidden;}
+
+.bq{padding:64px 36px;text-align:center;background:var(--dark2);position:relative;}
+.bq p{font-family:var(--font-display);font-size:24px;font-weight:400;font-style:italic;color:var(--bg-warm);line-height:1.7;}
+.bq small{display:block;margin-top:14px;font-family:var(--font-en);font-size:10px;color:var(--accent);letter-spacing:.25em;}
+
+.feat{padding:48px 30px;background:var(--bg);position:relative;}
+.feat+.feat{border-top:1px solid var(--line);}
+.feat.warm{background:var(--bg-warm);}
+.feat.center{text-align:center;}
+.feat-num{font-family:var(--font-en);font-size:11px;font-weight:500;letter-spacing:.15em;color:var(--accent);margin-bottom:8px;}
+.feat-title{font-size:29px;font-weight:700;line-height:1.5;color:var(--dark);margin-bottom:10px;}
+.feat-desc{font-size:20px;color:var(--body);line-height:2;margin-bottom:0;}
+
+.feat-hz{display:flex;gap:20px;align-items:center;margin-top:24px;}
+.feat-hz.rev{flex-direction:row-reverse;}
+.feat-hz-img{flex:0 0 48%;border-radius:6px;overflow:hidden;}
+.feat-hz-img img{width:100%;display:block;}
+.feat-hz-body{flex:1;}
+.feat-hz-body .feat-num{margin-bottom:6px;}
+.feat-hz-body .feat-title{font-size:26px;margin-bottom:8px;}
+.feat-hz-body .feat-desc{font-size:19px;line-height:1.85;}
+
+.sub-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;}
+.sub-2col-item{text-align:center;padding:20px 12px;background:var(--bg-warm);border-radius:6px;}
+.sub-2col-item h4{font-size:20px;font-weight:600;color:var(--dark);margin-bottom:4px;}
+.sub-2col-item p{font-size:17px;color:var(--body);line-height:1.7;}
+
+.trust-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;}
+.trust-3-item{text-align:center;padding:20px 8px;background:var(--bg-warm);border-radius:6px;}
+.trust-3-item .icon{width:36px;height:36px;margin:0 auto 8px;border-radius:50%;border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-size:12px;font-weight:700;color:var(--accent);}
+.trust-3-item h4{font-size:19px;font-weight:600;color:var(--dark);margin-bottom:3px;}
+.trust-3-item p{font-size:16px;color:var(--body);line-height:1.6;}
+
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;}
+.detail-item{border:1px solid var(--line);border-radius:6px;overflow:hidden;}
+.detail-item-img{overflow:hidden;}
+.detail-item-img img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover;}
+.detail-item-body{padding:16px;}
+.detail-item-label{font-family:var(--font-en);font-size:10px;font-weight:600;letter-spacing:.12em;color:var(--accent);margin-bottom:4px;}
+.detail-item-title{font-size:20px;font-weight:600;color:var(--dark);margin-bottom:5px;line-height:1.4;}
+.detail-item-desc{font-size:17px;color:var(--body);line-height:1.75;}
+
+.note-card{margin-top:28px;padding:28px 24px;border:1px solid var(--line-warm);border-radius:6px;background:var(--bg);position:relative;}
+.note-card::after{content:'';position:absolute;top:0;left:20px;right:20px;height:2px;background:var(--accent);}
+.note-hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line);}
+.note-hd h3{font-family:var(--font-display);font-size:29px;font-weight:500;font-style:italic;color:var(--dark);}
+.note-hd span{font-family:var(--font-en);font-size:14px;color:var(--sub);letter-spacing:.08em;}
+.note-item{padding:12px 0;border-bottom:1px dashed var(--line);}
+.note-item:last-child{border-bottom:none;}
+.note-item strong{font-family:var(--font-en);font-size:17px;font-weight:600;color:var(--accent);letter-spacing:.02em;}
+.note-item p{font-size:19px;color:var(--body);line-height:1.85;margin-top:4px;}
+
+.info-tbl{width:100%;border-collapse:collapse;margin-top:20px;font-size:17px;}
+.info-tbl th{width:80px;font-weight:600;color:var(--dark);padding:11px 0;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);}
+.info-tbl td{color:var(--body);padding:11px 0;border-bottom:1px solid var(--line);line-height:1.65;}
+
+.step-list{margin-top:28px;}
+.step-item{padding:24px 0;border-bottom:1px solid var(--line);}
+.step-item:last-child{border-bottom:none;}
+.step-num{display:inline-block;padding:4px 14px;background:var(--dark2);color:#fff;border-radius:20px;font-family:var(--font-en);font-size:11px;font-weight:600;letter-spacing:.08em;margin-bottom:10px;}
+.step-title{font-size:23px;font-weight:700;color:var(--dark);margin-bottom:8px;line-height:1.5;}
+.step-desc{font-size:19px;color:var(--body);line-height:1.9;}
+
+.callout{margin-top:24px;padding:22px 24px;background:var(--bg);border-left:3px solid var(--accent);border-radius:0 4px 4px 0;}
+.callout-label{font-family:var(--font-en);font-size:10px;font-weight:600;letter-spacing:.12em;color:var(--accent);margin-bottom:6px;}
+.callout-text{font-size:19px;color:var(--body);line-height:1.9;}
+.callout.warning{border-left-color:var(--danger);}
+.callout.warning .callout-label{color:var(--danger);}
+
+.final-cta{padding:56px 30px;text-align:center;background:var(--dark2);}
+.final-cta-label{font-family:var(--font-en);font-size:11px;font-weight:500;letter-spacing:.25em;color:var(--accent);margin-bottom:12px;}
+.final-cta h2{font-size:32px;font-weight:700;color:#fff;line-height:1.55;margin-bottom:8px;}
+.final-cta p{font-size:19px;color:rgba(255,255,255,.55);line-height:1.85;margin-bottom:24px;}
+.final-cta-note{margin-top:16px;font-size:16px;color:rgba(255,255,255,.35);}
+
+.close{padding:72px 30px;text-align:center;background:var(--bg-warm);}
+.close-logo{font-family:var(--font-display);font-size:52px;font-weight:400;font-style:italic;color:var(--line-warm);margin-bottom:16px;}
+.close-title{font-size:29px;font-weight:700;line-height:1.6;margin-bottom:12px;}
+.close-desc{font-size:20px;color:var(--body);line-height:2;}
+.footer{background:var(--dark2);padding:24px 30px;text-align:center;}
+.footer span{font-family:var(--font-display);font-size:17px;font-weight:400;letter-spacing:.25em;color:rgba(255,255,255,.35);}
+
+.faq-item{padding:20px 0;border-bottom:1px solid var(--line);}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{font-size:20px;font-weight:600;color:var(--dark);margin-bottom:10px;}
+.faq-a{font-size:19px;color:var(--body);line-height:1.9;}
+</style>
+</head>
+<body>
+
+
+<!-- HERO -->
+<div class="hero">
+  <img class="hero-img" src="../images/abc-organizer/hero-01.png" alt="썬데이허그 ABC 아기침대 오거나이저">
+  <div class="hero-text">
+    <div class="hero-tag">SUNDAY HUG</div>
+    <h1>필요한 순간,<br>손 닿는 곳에</h1>
+    <p class="hero-sub">ABC 아기침대 전용 수납 오거나이저<br>썬데이허그 ABC 아기침대 오거나이저</p>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-item">다용도 수납<small>포켓 구조</small></div>
+  <div class="trust-bar-item">간편 장착<small>탈부착 설계</small></div>
+  <div class="trust-bar-item">침대 전용<small>맞춤 설계</small></div>
+</div>
+
+
+<!-- INTRO -->
+<div class="sec v">
+  <div class="sec-label">Designed For Convenience</div>
+  <div class="sec-title">"기저귀, 물티슈, 로션...<br>매번 찾느라<br>바쁘지 않으세요?"</div>
+  <div class="sec-desc">
+    "밤중 수유 때 물건 찾느라 허둥대요."<br>
+    "기저귀 갈 때 한 손으로 꺼내기 힘들어요."<br>
+    "필요한 건 많은데 놓을 곳이 없어요."<br><br>
+    육아에서 가장 자주 쓰는 물건들을<br>
+    <span class="hl">손 닿는 곳에 정리</span>해 두면<br>
+    일상이 훨씬 편해집니다.<br><br>
+    <span class="hl">썬데이허그 ABC 아기침대 오거나이저</span>로<br>
+    필요한 순간, 바로 꺼내 쓸 수 있는<br>
+    스마트한 수납 공간을 만들어 보세요.
+  </div>
+  <div class="fb-img"><img src="../images/abc-organizer/intro-01.png" alt="오거나이저 사용 모습"></div>
+</div>
+
+<div class="thin-line"></div>
+
+
+<!-- OVERVIEW -->
+<div class="sec warm v">
+  <div class="sec-label tx-center">Overview</div>
+  <div class="sec-title tx-center">육아 필수템을<br>한 곳에 깔끔하게</div>
+  <div class="sec-desc tx-center">
+    아기침대 옆면에 걸기만 하면<br>
+    기저귀, 물티슈, 로션 등<br>
+    육아 필수품을 깔끔하게 정리할 수 있어요.
+  </div>
+  <div class="fb-img"><img src="../images/abc-organizer/overview-01.png" alt="오거나이저 오버뷰"></div>
+</div>
+
+
+<!-- BRAND QUOTE -->
+<div class="bq">
+  <p>"정리된 공간이<br>여유로운 육아의<br>시작입니다"</p>
+  <small>SUNDAY HUG</small>
+</div>
+
+
+<!-- WHY ORGANIZER -->
+<div class="sec cool v">
+  <div class="sec-label">Why Organizer?</div>
+  <div class="sec-title">오거나이저가 필요한 이유</div>
+  <div class="sec-desc">
+    <span class="hl">육아는 속도전, 정리가 핵심이에요.</span><br><br>
+    밤중에 기저귀를 갈아야 할 때,<br>
+    급하게 물티슈가 필요할 때,<br>
+    한 손으로 빠르게 꺼낼 수 있어야 합니다.<br><br>
+    아기 곁에 모든 것이 준비되어 있으면<br>
+    부모도 아기도 더 편안해져요.
+  </div>
+</div>
+
+
+<!-- FEAT 01 -- 다용도 포켓 -->
+<div class="feat v">
+  <div class="feat-hz">
+    <div class="feat-hz-img"><img src="../images/abc-organizer/hero-01.png" alt="다용도 포켓 구조"></div>
+    <div class="feat-hz-body">
+      <div class="feat-num">KEY FEATURE 01</div>
+      <div class="feat-title">다용도 포켓 구조</div>
+      <div class="feat-desc">
+        상단 바구니형 수납칸과<br>
+        하단 세로형 포켓이<br>
+        다양한 육아 용품을<br>
+        깔끔하게 정리해요.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- FEAT 02 -- 간편 탈부착 -->
+<div class="feat warm v">
+  <div class="feat-hz rev">
+    <div class="feat-hz-img"><img src="../images/abc-organizer/feature-02-detachable.png" alt="간편한 탈부착"></div>
+    <div class="feat-hz-body">
+      <div class="feat-num">KEY FEATURE 02</div>
+      <div class="feat-title">간편한 탈부착</div>
+      <div class="feat-desc">
+        침대 프레임에 걸어서<br>
+        고정하는 간편한 장착 방식.<br>
+        위치를 자유롭게<br>
+        조절할 수 있어요.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- FEAT 03 -- 침대 전용 설계 -->
+<div class="feat v">
+  <div class="feat-hz">
+    <div class="feat-hz-img"><img src="../images/abc-organizer/feature-03-design.png" alt="침대 전용 설계"></div>
+    <div class="feat-hz-body">
+      <div class="feat-num">KEY FEATURE 03</div>
+      <div class="feat-title">ABC 침대 전용 설계</div>
+      <div class="feat-desc">
+        ABC 아기침대에 최적화된<br>
+        사이즈와 형태.<br>
+        침대와 자연스럽게<br>
+        어우러지는 디자인입니다.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 수납 디테일 -->
+<div class="sec warm v">
+  <div class="sec-label tx-center">Smart Design</div>
+  <div class="sec-title tx-center">효율적인 수납 구조</div>
+  <div class="sec-desc tx-center">
+    용도에 맞는 다양한 수납 공간으로<br>
+    필요한 물건을 빠르게 찾을 수 있어요.
+  </div>
+  <div class="sub-2col">
+    <div class="sub-2col-item v">
+      <img src="../images/abc-organizer/hero-01.png" alt="상단 바구니" style="border-radius:6px;margin-bottom:12px;">
+      <h4>상단 바구니 수납</h4>
+      <p>기저귀, 물티슈, 로션 등<br>자주 쓰는 물건 수납</p>
+    </div>
+    <div class="sub-2col-item v">
+      <img src="../images/abc-organizer/feature-02-detachable.png" alt="하단 포켓" style="border-radius:6px;margin-bottom:12px;">
+      <h4>하단 세로 포켓</h4>
+      <p>여분의 기저귀와<br>소품 수납</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- USE CASE -->
+<div class="sec v">
+  <div class="sec-label">Use Case</div>
+  <div class="sec-title">이럴 때 사용하세요</div>
+  <div class="sec-desc">다양한 상황에서 오거나이저가<br>육아의 편의를 높여줍니다.</div>
+
+  <div class="step-list">
+    <div class="step-item v">
+      <div class="step-num">CASE 01</div>
+      <div class="step-title">기저귀 교체 시</div>
+      <div class="step-desc">
+        한 손으로 아기를 잡고, 한 손으로 기저귀를 꺼내세요.
+        <span class="hl">필요한 물건이 바로 손 닿는 곳에</span> 있어 빠르고 안전하게 교체할 수 있습니다.
+      </div>
+    </div>
+
+    <div class="step-item v">
+      <div class="step-num">CASE 02</div>
+      <div class="step-title">밤중 수유 준비</div>
+      <div class="step-desc">
+        어두운 밤에도 물건을 찾아 헤매지 않아요.
+        <span class="hl">정해진 위치에 정리해 두면</span> 손 감각만으로도 필요한 물건을 꺼낼 수 있습니다.
+      </div>
+    </div>
+
+    <div class="step-item v">
+      <div class="step-num">CASE 03</div>
+      <div class="step-title">외출 준비</div>
+      <div class="step-desc">
+        오거나이저에 정리된 물건을 그대로 외출 가방에 옮기면 끝!
+        <span class="hl">체계적인 수납 습관</span>이 외출 준비 시간도 줄여줍니다.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- TOGETHER -->
+<div class="sec warm v">
+  <div class="sec-label tx-center">Better Together</div>
+  <div class="sec-title tx-center">모기장과 함께 사용하면<br>더욱 완벽해요</div>
+  <div class="sec-desc tx-center">
+    오거나이저와 모기장을 함께 장착하면<br>
+    편리한 수납과 안전한 수면 환경을<br>
+    동시에 완성할 수 있어요.
+  </div>
+  <div class="fb-img"><img src="../images/abc-organizer/usecase-together.png" alt="오거나이저와 모기장 함께 사용"></div>
+</div>
+
+
+<!-- PRODUCT INFO -->
+<div class="sec v">
+  <div class="sec-label">Product Info</div>
+  <div class="sec-title">제품 상세 정보</div>
+  <div class="sec-desc">썬데이허그 ABC 아기침대 오거나이저의<br>상세 스펙을 확인해 주세요.</div>
+
+  <div class="sec-img"><img src="../images/abc-organizer/overview-01.png" alt="제품 이미지"></div>
+
+  <table class="info-tbl" style="margin-top:24px;">
+    <tr><th>모델명</th><td>썬데이허그 ABC 아기침대 오거나이저</td></tr>
+    <tr><th>색상</th><td>베이지</td></tr>
+    <tr><th>크기</th><td>OO x OO x OOcm</td></tr>
+    <tr><th>소재</th><td>폴리에스터, 메시</td></tr>
+    <tr><th>제조국</th><td>중국산 (썬데이허그 협력사)</td></tr>
+    <tr><th>KC 인증</th><td>[어린이제품] 안전확인_국가인증<br>인증번호: 확인 후 기재</td></tr>
+  </table>
+</div>
+
+
+<!-- WASH & CARE -->
+<div class="sec warm v">
+  <div class="sec-label">How To Care</div>
+  <div class="sec-title">세탁 및 관리 방법</div>
+
+  <div class="note-card v">
+    <div class="note-hd">
+      <h3>Wash Guide</h3>
+      <span>CARE NOTE</span>
+    </div>
+    <div class="note-item">
+      <strong>Wash</strong>
+      <p>세탁망에 넣고 중성세제를 사용하여 <span class="hl">찬물로 단독 울 코스 세탁</span> 권장</p>
+    </div>
+    <div class="note-item">
+      <strong>Separate</strong>
+      <p>물 빠짐이 있을 수 있으니 반드시 <span class="hl">단독 세탁</span>해 주세요.</p>
+    </div>
+    <div class="note-item">
+      <strong>Dry</strong>
+      <p>그늘에서 자연 건조를 권장합니다. 건조기 사용 시 수축이 발생할 수 있습니다.</p>
+    </div>
+    <div class="note-item">
+      <strong>Caution</strong>
+      <p>수납물의 무게가 과도하면 오거나이저가 처질 수 있습니다. 적정 무게 이내로 사용해 주세요.</p>
+    </div>
+  </div>
+
+  <div class="callout warning" style="margin-top:24px;">
+    <div class="callout-label">SAFETY NOTE</div>
+    <div class="callout-text">
+      오거나이저에 날카로운 물건이나 아기가 삼킬 수 있는 작은 물건을 수납하지 마세요. 아기가 오거나이저의 물건을 꺼내지 못하도록 아기 손이 닿지 않는 위치에 장착해 주세요.
+    </div>
+  </div>
+</div>
+
+
+<!-- FAQ -->
+<div class="sec v">
+  <div class="sec-label">FAQ</div>
+  <div class="sec-title">자주 묻는 질문</div>
+
+  <div style="margin-top:24px;">
+    <div class="faq-item">
+      <div class="faq-q">Q1. ABC 아기침대 전용인가요?</div>
+      <div class="faq-a">네, 썬데이허그 ABC 아기침대에 최적화되어 설계되었습니다. 침대 프레임의 크기와 높이에 맞게 제작되어 안정적으로 장착됩니다.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Q2. 최대 몇 kg까지 수납 가능한가요?</div>
+      <div class="faq-a">기저귀, 물티슈, 로션 등 일반적인 육아 용품을 수납하는 용도로 설계되었습니다. 무거운 물건을 넣으면 처질 수 있으니 적정 무게 이내로 사용해 주세요.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Q3. 장착 위치를 바꿀 수 있나요?</div>
+      <div class="faq-a">네, 침대 프레임에 걸어서 고정하는 방식이므로 원하는 위치로 자유롭게 이동하여 장착할 수 있습니다.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Q4. 모기장과 동시에 사용할 수 있나요?</div>
+      <div class="faq-a">네, 오거나이저와 모기장을 동시에 장착하여 사용할 수 있습니다. 서로 간섭 없이 각각의 기능을 수행합니다.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Q5. 세탁이 가능한가요?</div>
+      <div class="faq-a">네, 세탁망에 넣고 찬물로 단독 울 코스 세탁이 가능합니다. 그늘에서 자연 건조해 주세요.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- BRAND QUOTE -->
+<div class="bq">
+  <p>"작은 배려가 모여<br>아기의 하루를<br>더 행복하게 만듭니다"</p>
+  <small>SUNDAY HUG</small>
+</div>
+
+
+<!-- BRAND STORY -->
+<div class="sec warm v">
+  <div class="sec-label tx-center">Our Story</div>
+  <div class="sec-title tx-center">가족의 행복한 일상,<br>썬데이허그</div>
+  <div class="sec-desc tx-center">
+    우리는 가족 구성원 각자가 다양한 역할과 책임으로<br>
+    분주한 일상을 보내고 있음을 잘 알고 있습니다.<br><br>
+    이러한 일상 속에서도, 우리 브랜드를 통해<br>
+    가족 모두가 함께 소중한 순간을 만들고<br>
+    일상의 행복을 누릴 수 있기를 바랍니다.
+  </div>
+</div>
+
+
+<!-- FINAL CTA -->
+<div class="final-cta v">
+  <div class="final-cta-label">SUNDAY HUG</div>
+  <h2>체계적인 수납으로<br>여유로운 육아를<br>시작하세요</h2>
+  <p>다용도 포켓 구조 / 간편 탈부착 / ABC 침대 전용<br>상단 바구니 + 하단 포켓 / 메시 & 패브릭 혼합</p>
+  <div class="final-cta-note">베이지 / ONE 사이즈</div>
+</div>
+
+
+<!-- CLOSE -->
+<div class="close">
+  <div class="close-logo v">Sunday Hug</div>
+  <div class="close-title v">가족의 행복한 일상을<br>언제나 응원합니다</div>
+  <div class="close-desc v">
+    썬데이허그는 여러분의 가족과 함께하는<br>
+    행복한 일상을 언제나 응원합니다.
+  </div>
+</div>
+<div class="footer"><span>Designed for Families.</span></div>
+
+
+
+<script>
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});
+},{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.v').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
