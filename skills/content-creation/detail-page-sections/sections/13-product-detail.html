@@ -1,0 +1,36 @@
+<!--=============================================================
+  SECTION: Product Detail (디테일 그리드)
+  ORDER: 13
+  REQUIRED: ✅ 필수
+  BACKGROUND: warm
+  PURPOSE: 제품의 세부 마감/디테일을 2열 그리드 카드로 보여준다.
+           "이 제품은 세심하게 만들어졌다"는 품질 인상.
+
+  DESIGN NOTES:
+  - detail-grid: 2열 그리드
+  - 각 카드: 이미지(4:3) + 라벨 + 제목 + 설명
+  - 보통 6개 디테일 항목
+
+  DATA REQUIRED:
+  - {{#detail_items}} : 디테일 항목 배열 (4~6개)
+    각 항목: { image, label, title, desc }
+    label 예: "DETAIL 01", "DETAIL 02"...
+=============================================================-->
+<div class="sec warm v">
+  <div class="sec-label">Product Detail</div>
+  <div class="sec-title">디테일을 놓치지 않았습니다</div>
+  <div class="sec-desc">{{product_name_short}}의 세심한 디테일을 확인해보세요.</div>
+
+  <div class="detail-grid">
+    {{#detail_items}}
+    <div class="detail-item v">
+      <div class="detail-item-img"><img src="{{image}}" alt="{{title}}"></div>
+      <div class="detail-item-body">
+        <div class="detail-item-label">{{label}}</div>
+        <div class="detail-item-title">{{title}}</div>
+        <div class="detail-item-desc">{{desc}}</div>
+      </div>
+    </div>
+    {{/detail_items}}
+  </div>
+</div>

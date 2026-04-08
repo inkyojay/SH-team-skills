@@ -179,3 +179,14 @@ smartstore-banner/
         ├── coupon-banner-pc.html # PC 쿠폰배너 (1920×500)
         └── coupon-banner-mo.html # MO 쿠폰배너 (750×900)
 ```
+
+## V2 템플릿 (templates-v2/)
+
+Sunday Hug 브랜드에서 발전시킨 고급 템플릿 세트입니다. 유형별 디렉토리 구조, 팔레트 시스템, 가이드 문서를 포함합니다.
+
+- `templates-v2/` — 유형별 배너 템플릿
+- `templates-v2/GUIDE.md` — 사용 가이드
+- `templates-v2/_base-styles.css` — 공통 스타일
+- `templates-v2/_palettes.css` — 컬러 팔레트 시스템
+
+공유 디자인 시스템: `skills/advertising/_design-system/` 참조

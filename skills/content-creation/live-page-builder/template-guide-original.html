@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>썬데이허그 라이브 프로모션 페이지 템플릿 가이드 v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   ROOT VARIABLES
+   ============================================ */
+:root {
+  --bg:#FFFFFF;--bg-warm:#FAF7F4;--bg-warm2:#F5F0EB;--bg-cool:#F8F8FA;
+  --dark:#1A1A1A;--dark2:#2C2C3A;--body:#444;--sub:#888;
+  --line:#EBEBEB;--line-warm:#E5DDD4;
+  --accent:#C8A07C;--accent-light:#F0E6DA;--accent-dark:#A8825E;
+  --danger:#D4645C;--safe:#7C9A72;
+  --font-display:'Cormorant Garamond',Georgia,serif;
+  --font-body:'Noto Sans KR',-apple-system,sans-serif;
+  --font-en:'DM Sans','Noto Sans KR',sans-serif;
+  --palette-gradient:linear-gradient(135deg, var(--bg-warm) 0%, var(--accent-light) 100%);
+  --palette-card-border:var(--line);
+  --palette-badge-bg:var(--accent);
+  --palette-badge-text:#FFFFFF;
+  --palette-highlight:var(--accent-light);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font-body);background:#F2EDE8;color:var(--dark);line-height:1.7;-webkit-font-smoothing:antialiased;}
+img{width:100%;height:auto;display:block;}
+
+/* ============================================
+   GUIDE CHROME (header, tabs, labels)
+   ============================================ */
+.guide-header{
+  background:var(--dark2);padding:60px 40px 48px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.guide-header::before{
+  content:'';position:absolute;top:-60%;left:-20%;
+  width:140%;height:200%;
+  background:radial-gradient(ellipse at 30% 50%,rgba(200,160,124,.12) 0%,transparent 60%);
+}
+.guide-header-tag{
+  font-family:var(--font-en);font-size:11px;font-weight:500;
+  letter-spacing:.35em;color:var(--accent);margin-bottom:12px;position:relative;
+}
+.guide-header h1{
+  font-family:var(--font-display);font-size:38px;font-weight:300;
+  font-style:italic;color:#fff;line-height:1.3;margin-bottom:12px;position:relative;
+}
+.guide-header p{font-size:14px;color:rgba(255,255,255,.5);position:relative;}
+
+/* === MODE TABS (Full Page / Section Catalog) === */
+.mode-bar{
+  background:var(--dark2);border-bottom:1px solid rgba(255,255,255,.1);
+  padding:0 20px;display:flex;gap:0;
+}
+.mode-btn{
+  padding:14px 24px;border:none;background:none;
+  font-family:var(--font-en);font-size:12px;font-weight:500;
+  letter-spacing:.1em;color:rgba(255,255,255,.4);cursor:pointer;
+  border-bottom:2px solid transparent;
+}
+.mode-btn.active{color:#fff;border-bottom-color:var(--accent);}
+
+/* === PALETTE SWITCHER === */
+.palette-bar{
+  position:sticky;top:0;z-index:200;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+  padding:12px 20px;
+}
+.palette-bar-title{
+  font-family:var(--font-en);font-size:10px;font-weight:600;
+  letter-spacing:.12em;color:var(--sub);margin-bottom:8px;
+}
+.palette-grid{display:flex;flex-wrap:wrap;gap:6px;}
+.palette-btn{
+  display:flex;align-items:center;gap:6px;
+  padding:6px 12px;border:1px solid var(--line);border-radius:100px;
+  background:var(--bg);cursor:pointer;font-size:11px;color:var(--body);
+  font-family:var(--font-body);transition:all .15s;
+}
+.palette-btn:hover{border-color:var(--accent);}
+.palette-btn.active{border-color:var(--dark);background:var(--dark2);color:#fff;}
+.palette-swatch{
+  width:14px;height:14px;border-radius:50%;
+  border:1px solid rgba(0,0,0,.1);flex-shrink:0;
+}
+.palette-rec{
+  display:block;font-size:9px;color:var(--sub);margin-top:1px;
+}
+.palette-btn.active .palette-rec{color:rgba(255,255,255,.5);}
+
+/* === SECTION LABEL (guide annotations) === */
+.sec-guide-label{
+  background:var(--bg-warm);padding:20px;margin:0;
+  border-bottom:1px solid var(--line);
+}
+.sec-guide-label h3{
+  font-family:var(--font-en);font-size:11px;font-weight:600;
+  letter-spacing:.15em;color:var(--accent);margin-bottom:4px;
+}
+.sec-guide-label p{font-size:12px;color:var(--sub);}
+.sec-guide-label .tags{margin-top:4px;}
+.sec-guide-label .tag{
+  display:inline-block;font-size:10px;padding:2px 8px;
+  border-radius:100px;margin-right:4px;
+}
+.tag.req{background:#E8F5E9;color:#2E7D32;}
+.tag.opt{background:#FFF3E0;color:#E65100;}
+.tag.new{background:#E3F2FD;color:#1565C0;}
+
+/* === PHONE FRAME === */
+.phone-frame{
+  max-width:600px;margin:0 auto;background:var(--bg);
+  box-shadow:0 2px 24px rgba(0,0,0,.08);
+}
+
+/* === MODE CONTAINERS === */
+.mode-content{display:none;}
+.mode-content.active{display:block;}
+
+/* === CATALOG GRID === */
+.catalog-intro{
+  max-width:600px;margin:20px auto;padding:24px;
+  background:var(--bg);border-radius:8px;
+  box-shadow:0 2px 12px rgba(0,0,0,.05);
+}
+.catalog-intro h2{
+  font-size:18px;font-weight:700;color:var(--dark);margin-bottom:8px;
+}
+.catalog-intro p{font-size:13px;color:var(--body);line-height:1.8;}
+
+/* ============================================
+   ALL SECTION STYLES (inline from _base-styles.css)
+   ============================================ */
+
+/* Trust bar */
+.trust-bar{display:flex;justify-content:center;gap:0;background:var(--dark2);padding:14px 20px;}
+.trust-bar-item{flex:1;text-align:center;position:relative;font-size:12px;font-weight:500;color:rgba(255,255,255,.85);letter-spacing:.02em;}
+.trust-bar-item+.trust-bar-item::before{content:'';position:absolute;left:0;top:15%;bottom:15%;width:1px;background:rgba(255,255,255,.1);}
+.trust-bar-item small{display:block;font-size:10px;font-weight:300;color:rgba(255,255,255,.4);margin-top:2px;}
+
+/* Sections */
+.sec{padding:52px 30px;}
+.sec.warm{background:var(--bg-warm);}
+.sec.dark{background:var(--dark2);color:#fff;}
+.sec.dark .sec-label{color:var(--accent);}
+.sec.dark .sec-title{color:#fff;}
+.sec.dark .sec-desc{color:rgba(255,255,255,.6);}
+.sec-label{font-family:var(--font-en);font-size:11px;font-weight:500;letter-spacing:.2em;color:var(--accent);margin-bottom:12px;}
+.sec-title{font-size:22px;font-weight:700;line-height:1.52;color:var(--dark);margin-bottom:14px;letter-spacing:-.01em;}
+.sec-desc{font-size:14px;color:var(--body);line-height:2;font-weight:300;}
+.tx-center{text-align:center;}
+.hl{color:var(--accent);font-weight:500;}
+.fb-img{margin:24px -30px 0;overflow:hidden;}
+.fb-img img{width:100%;display:block;}
+
+/* Review */
+.rv{padding:20px 0;border-bottom:1px solid var(--line);}
+.rv:last-child{border-bottom:none;}
+.rv-stars{font-size:11px;color:var(--accent);letter-spacing:3px;margin-bottom:6px;}
+.rv-quote{font-size:15px;font-weight:500;color:var(--dark);line-height:1.65;margin-bottom:8px;}
+.rv-quote em{font-style:normal;background:var(--palette-highlight);padding:1px 4px;border-radius:2px;color:var(--accent);font-weight:600;}
+.rv-meta{font-size:11px;color:var(--sub);font-family:var(--font-en);margin-bottom:6px;}
+.rv-body{font-size:13px;color:var(--body);line-height:1.9;}
+.rv-stats{display:flex;justify-content:center;gap:24px;padding:20px;margin-bottom:24px;background:var(--bg);border-radius:8px;border:1px solid var(--line);}
+.rv-stat{text-align:center;}
+.rv-stat-val{font-family:var(--font-en);font-size:20px;font-weight:700;color:var(--dark);line-height:1.2;}
+.rv-stat-val .unit{font-size:12px;font-weight:400;color:var(--sub);}
+.rv-stat-label{font-size:11px;color:var(--sub);margin-top:3px;}
+
+/* Event / Gift */
+.event{margin-top:28px;border:1px solid var(--accent);border-radius:8px;overflow:hidden;position:relative;}
+.event-badge{position:absolute;top:0;left:0;background:var(--accent);color:#fff;font-family:var(--font-en);font-size:10px;font-weight:700;letter-spacing:.1em;padding:6px 14px;border-radius:0 0 8px 0;}
+.event-body{padding:24px;}
+.event-title{font-size:18px;font-weight:700;color:var(--dark);margin-bottom:10px;line-height:1.5;}
+.event-desc{font-size:13px;color:var(--body);line-height:1.85;margin-bottom:16px;}
+.event-gifts{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.event-gift{display:flex;align-items:center;gap:10px;padding:14px;background:var(--bg-warm);border-radius:6px;}
+.event-gift-img{width:48px;height:48px;border-radius:4px;overflow:hidden;flex-shrink:0;background:var(--bg-warm2);}
+.event-gift-info h5{font-size:12px;font-weight:600;color:var(--dark);margin-bottom:2px;}
+.event-gift-info p{font-size:11px;color:var(--sub);line-height:1.4;}
+.event-note{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);font-size:11px;color:var(--sub);line-height:1.65;}
+
+/* Close + Footer */
+.close{padding:72px 30px;text-align:center;background:var(--bg-warm);}
+.close-logo{font-family:var(--font-display);font-size:36px;font-weight:300;font-style:italic;color:var(--line-warm);margin-bottom:16px;}
+.close-title{font-size:20px;font-weight:700;line-height:1.6;margin-bottom:12px;}
+.close-desc{font-size:14px;color:var(--body);line-height:2;}
+.footer{background:var(--dark2);padding:24px 30px;text-align:center;}
+.footer span{font-family:var(--font-display);font-size:13px;font-weight:300;letter-spacing:.25em;color:rgba(255,255,255,.35);}
+
+/* Final CTA */
+.final-cta{padding:56px 30px;text-align:center;background:var(--dark2);}
+.final-cta-label{font-family:var(--font-en);font-size:11px;font-weight:500;letter-spacing:.25em;color:var(--accent);margin-bottom:12px;}
+.final-cta h2{font-size:22px;font-weight:700;color:#fff;line-height:1.55;margin-bottom:8px;}
+.final-cta p{font-size:13px;color:rgba(255,255,255,.55);line-height:1.85;margin-bottom:24px;}
+.final-cta a{display:inline-block;padding:16px 56px;background:var(--accent);color:#fff;border-radius:4px;font-size:15px;font-weight:600;text-decoration:none;}
+.final-cta-note{margin-top:16px;font-size:11px;color:rgba(255,255,255,.35);}
+
+/* Live Hero */
+.live-hero{position:relative;background:var(--palette-gradient);padding:48px 30px 40px;text-align:center;}
+.live-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:100px;background:var(--palette-badge-bg);color:var(--palette-badge-text);font-family:var(--font-en);font-size:11px;font-weight:700;letter-spacing:.08em;margin-bottom:16px;}
+.live-badge::before{content:'';width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.6;}
+.live-hero-host{width:80px;height:80px;border-radius:50%;border:3px solid var(--accent);object-fit:cover;margin:0 auto 16px;background:var(--bg-warm2);}
+.live-hero-title{font-size:24px;font-weight:700;line-height:1.5;color:var(--dark);margin-bottom:8px;}
+.live-hero-benefit{font-size:15px;font-weight:500;color:var(--accent);margin-bottom:6px;}
+.live-hero-sub{font-size:13px;color:var(--body);line-height:1.8;}
+
+/* Live Hero — Photo BG */
+.live-hero.photo-bg{background:none;padding:0;text-align:center;overflow:hidden;}
+.live-hero-bg{position:relative;}
+.live-hero-bg img{width:100%;display:block;}
+.live-hero-bg-overlay{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:48px 30px 40px;}
+.live-hero-bg-overlay.dark{background:linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,.25) 100%);}
+.live-hero-bg-overlay.dark .live-hero-title{color:#fff;}
+.live-hero-bg-overlay.dark .live-hero-benefit{color:#fff;opacity:.9;}
+.live-hero-bg-overlay.dark .live-hero-sub{color:rgba(255,255,255,.7);}
+.live-hero-bg-overlay.bottom-heavy{background:linear-gradient(180deg,transparent 0%,transparent 30%,rgba(0,0,0,.55) 100%);justify-content:flex-end;padding-bottom:48px;}
+.live-hero-bg-overlay.bottom-heavy .live-hero-title{color:#fff;}
+.live-hero-bg-overlay.bottom-heavy .live-hero-benefit{color:#fff;opacity:.9;}
+.live-hero-bg-overlay.bottom-heavy .live-hero-sub{color:rgba(255,255,255,.7);}
+.live-hero-bg-overlay.soft{background:linear-gradient(180deg,rgba(255,255,255,.65) 0%,rgba(255,255,255,.45) 100%);}
+.live-hero-bg-overlay.gradient-top{background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,transparent 60%);justify-content:flex-start;}
+.live-hero-bg-overlay.gradient-top .live-hero-title{color:#fff;}
+.live-hero-bg-overlay.gradient-top .live-hero-benefit{color:#fff;opacity:.9;}
+.live-hero-bg-overlay.gradient-top .live-hero-sub{color:rgba(255,255,255,.7);}
+.live-hero-price{font-size:28px;font-weight:700;color:#fff;margin:8px 0 4px;}
+.live-hero-price-original{font-size:14px;color:rgba(255,255,255,.5);text-decoration:line-through;}
+
+/* Countdown */
+.countdown{padding:36px 30px;text-align:center;background:var(--bg-warm);}
+.countdown-label{font-family:var(--font-en);font-size:11px;font-weight:500;letter-spacing:.2em;color:var(--accent);margin-bottom:12px;}
+.countdown-title{font-size:18px;font-weight:700;color:var(--dark);margin-bottom:20px;line-height:1.5;}
+.countdown-timer{display:flex;justify-content:center;gap:8px;}
+.countdown-unit{width:64px;padding:14px 0;background:var(--bg);border-radius:8px;text-align:center;}
+.countdown-num{font-family:var(--font-en);font-size:28px;font-weight:700;color:var(--dark);line-height:1;}
+.countdown-txt{font-size:10px;color:var(--sub);margin-top:4px;font-family:var(--font-en);letter-spacing:.05em;}
+.countdown-note{margin-top:14px;font-size:12px;color:var(--sub);}
+
+/* Live Benefits */
+.live-benefit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
+.live-benefit-card{padding:24px 16px;text-align:center;background:var(--bg);border:1px solid var(--palette-card-border);border-radius:8px;}
+.live-benefit-icon{width:40px;height:40px;margin:0 auto 10px;border-radius:50%;background:var(--palette-highlight);display:flex;align-items:center;justify-content:center;font-size:18px;}
+.live-benefit-card h4{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:4px;}
+.live-benefit-card p{font-size:12px;color:var(--body);line-height:1.65;}
+.live-benefit-tag{display:inline-block;margin-top:8px;font-family:var(--font-en);font-size:10px;font-weight:600;color:var(--accent);letter-spacing:.05em;padding:3px 8px;background:var(--palette-highlight);border-radius:100px;}
+
+/* Bundle Deals */
+.bundle{display:flex;flex-direction:column;gap:12px;margin-top:24px;}
+.bundle-card{padding:24px;border:1px solid var(--palette-card-border);border-radius:8px;background:var(--bg);display:flex;align-items:center;gap:16px;}
+.bundle-card.featured{border-color:var(--accent);background:var(--palette-highlight);}
+.bundle-card.featured .bundle-best{display:block;}
+.bundle-best{display:none;font-family:var(--font-en);font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--palette-badge-text);background:var(--palette-badge-bg);padding:3px 10px;border-radius:100px;margin-bottom:6px;}
+.bundle-img{width:72px;height:72px;border-radius:6px;overflow:hidden;flex-shrink:0;background:var(--bg-warm);}
+.bundle-body{flex:1;}
+.bundle-name{font-size:15px;font-weight:600;color:var(--dark);margin-bottom:4px;}
+.bundle-desc{font-size:12px;color:var(--body);line-height:1.6;margin-bottom:8px;}
+.bundle-prices{display:flex;align-items:baseline;gap:8px;}
+.bundle-price-original{font-size:12px;color:var(--sub);text-decoration:line-through;}
+.bundle-price-live{font-size:18px;font-weight:700;color:var(--accent);font-family:var(--font-en);}
+.bundle-discount{font-family:var(--font-en);font-size:11px;font-weight:700;color:var(--danger);}
+
+/* Host Recommendation */
+.host-rec{display:flex;gap:20px;align-items:flex-start;margin-top:24px;}
+.host-rec-photo{width:64px;height:64px;border-radius:50%;border:2px solid var(--accent);object-fit:cover;flex-shrink:0;background:var(--bg-warm2);}
+.host-rec-quote{flex:1;position:relative;padding:20px 24px;background:var(--bg);border-radius:12px;border:1px solid var(--palette-card-border);font-size:14px;color:var(--body);line-height:2;}
+.host-rec-quote::before{content:'';position:absolute;left:-8px;top:20px;width:16px;height:16px;background:var(--bg);border-left:1px solid var(--palette-card-border);border-bottom:1px solid var(--palette-card-border);transform:rotate(45deg);}
+.host-rec-name{margin-top:10px;font-size:12px;font-weight:600;color:var(--dark);}
+.host-rec-role{font-size:11px;color:var(--sub);}
+
+/* Quick Showcase */
+.quick-show{display:flex;gap:20px;align-items:center;padding:40px 30px;}
+.quick-show.rev{flex-direction:row-reverse;}
+.quick-show+.quick-show{border-top:1px solid var(--line);}
+.quick-show.warm{background:var(--bg-warm);}
+.quick-show-img{flex:0 0 46%;border-radius:6px;overflow:hidden;background:var(--bg-warm2);aspect-ratio:7/8;}
+.quick-show-body{flex:1;}
+.quick-show-num{font-family:var(--font-en);font-size:11px;font-weight:500;letter-spacing:.15em;color:var(--accent);margin-bottom:6px;}
+.quick-show-title{font-size:18px;font-weight:700;color:var(--dark);line-height:1.5;margin-bottom:8px;}
+.quick-show-desc{font-size:13px;color:var(--body);line-height:1.85;}
+
+/* FAQ (static — always open) */
+.faq{margin-top:24px;}
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:18px 0;font-size:14px;font-weight:500;color:var(--dark);line-height:1.6;}
+.faq-q::after{content:'+';font-family:var(--font-en);font-size:18px;color:var(--sub);flex-shrink:0;margin-left:12px;}
+.faq-a{max-height:none;overflow:visible;}
+.faq-a-inner{padding:0 0 18px;font-size:13px;color:var(--body);line-height:1.9;}
+
+/* Mid CTA */
+.mid-cta{padding:36px 30px;text-align:center;background:linear-gradient(135deg, var(--bg-warm) 0%, var(--accent-light) 100%);}
+.mid-cta-title{font-size:18px;font-weight:700;color:var(--dark);margin-bottom:6px;line-height:1.5;}
+.mid-cta-sub{font-size:13px;color:var(--body);margin-bottom:16px;}
+.mid-cta a{display:inline-block;padding:14px 48px;background:var(--accent);color:#fff;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;}
+
+/* Brand Quote */
+.bq{padding:64px 36px;text-align:center;background:var(--dark2);}
+.bq p{font-family:var(--font-display);font-size:24px;font-weight:400;font-style:italic;color:var(--bg-warm);line-height:1.7;}
+.bq small{display:block;margin-top:14px;font-family:var(--font-en);font-size:10px;color:var(--accent);letter-spacing:.25em;}
+
+/* Shipping */
+.ship-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
+.ship-card{padding:20px;background:var(--bg);border:1px solid var(--line);border-radius:6px;text-align:center;}
+.ship-card-ico{width:40px;height:40px;margin:0 auto 10px;border-radius:50%;background:var(--accent-light);display:flex;align-items:center;justify-content:center;color:var(--accent);}
+.ship-card h4{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:4px;}
+.ship-card p{font-size:12px;color:var(--body);line-height:1.65;}
+
+/* Size / Material tables */
+.sz-tbl{width:100%;border-collapse:collapse;margin-top:20px;font-size:12px;}
+.sz-tbl th{background:var(--bg-warm);font-weight:600;padding:11px 6px;text-align:center;color:var(--dark);border-bottom:1px solid var(--line-warm);}
+.sz-tbl td{padding:11px 6px;text-align:center;border-bottom:1px solid var(--line);color:var(--body);}
+.mat-tbl{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px;}
+.mat-tbl th{background:var(--bg-warm);font-weight:600;padding:12px 10px;text-align:center;border-bottom:1px solid var(--line-warm);color:var(--dark);font-size:12px;}
+.mat-tbl td{padding:12px 10px;text-align:center;border-bottom:1px solid var(--line);color:var(--body);line-height:1.6;}
+.mat-tbl td:first-child{font-weight:600;color:var(--dark);}
+
+/* Schedule */
+.schedule-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;}
+.schedule-card{text-align:center;padding:24px 12px;background:var(--bg);border:1px solid var(--palette-card-border);border-radius:8px;}
+.schedule-card-icon{width:40px;height:40px;margin:0 auto 10px;border-radius:50%;background:var(--palette-highlight);display:flex;align-items:center;justify-content:center;color:var(--accent);}
+.schedule-card h4{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:4px;}
+.schedule-card p{font-size:12px;color:var(--body);line-height:1.65;}
+
+/* Coupon */
+.coupon-card{margin-top:24px;padding:32px 24px;text-align:center;border:2px dashed var(--accent);border-radius:12px;background:var(--palette-highlight);}
+.coupon-amount{font-family:var(--font-en);font-size:36px;font-weight:700;color:var(--accent);line-height:1.2;margin-bottom:4px;}
+.coupon-label{font-size:16px;font-weight:700;color:var(--dark);margin-bottom:12px;}
+.coupon-condition{font-size:12px;color:var(--body);line-height:1.7;}
+.coupon-code{display:inline-block;margin-top:16px;padding:8px 24px;background:var(--bg);border:1px solid var(--palette-card-border);border-radius:4px;font-family:var(--font-en);font-size:14px;font-weight:600;color:var(--dark);letter-spacing:.1em;}
+
+/* Price Compare */
+.price-tbl{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;}
+.price-col{text-align:center;padding:24px 12px;background:var(--bg);border:1px solid var(--line);border-radius:8px;}
+.price-col.live{border-color:var(--accent);background:var(--palette-highlight);position:relative;}
+.price-col.live::before{content:'LIVE';position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-family:var(--font-en);font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--palette-badge-text);background:var(--palette-badge-bg);padding:3px 10px;border-radius:100px;}
+.price-col-label{font-size:12px;color:var(--sub);margin-bottom:8px;}
+.price-col-amount{font-family:var(--font-en);font-size:22px;font-weight:700;color:var(--dark);line-height:1.2;}
+.price-col.live .price-col-amount{color:var(--accent);}
+.price-save{margin-top:16px;text-align:center;font-size:14px;font-weight:600;color:var(--accent);}
+
+/* Set Contents */
+.set-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;}
+.set-item{text-align:center;}
+.set-item-img{aspect-ratio:1;border-radius:8px;overflow:hidden;background:var(--bg-warm);margin-bottom:8px;}
+.set-item h4{font-size:13px;font-weight:600;color:var(--dark);margin-bottom:2px;}
+.set-item p{font-size:11px;color:var(--sub);}
+.set-total{margin-top:20px;padding:16px;text-align:center;background:var(--palette-highlight);border-radius:8px;font-size:14px;font-weight:600;color:var(--dark);}
+
+/* Lifestyle */
+.lifestyle-caption{padding:16px 30px;text-align:center;font-size:13px;color:var(--sub);font-style:italic;font-family:var(--font-display);letter-spacing:.02em;}
+
+/* Social Proof */
+.social-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;}
+.social-card{border:1px solid var(--palette-card-border);border-radius:8px;overflow:hidden;background:var(--bg);}
+.social-card-img{aspect-ratio:1;overflow:hidden;background:var(--bg-warm2);}
+.social-card-body{padding:12px;}
+.social-card-user{font-size:11px;font-weight:600;color:var(--dark);margin-bottom:4px;}
+.social-quote{font-size:11px;color:var(--body);line-height:1.55;}
+
+/* Target Persona */
+.target-list{margin-top:24px;}
+.target-item{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);}
+.target-item:last-child{border-bottom:none;}
+.target-check{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--palette-highlight);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:14px;font-weight:700;margin-top:1px;}
+.target-item p{font-size:14px;color:var(--dark);line-height:1.7;}
+
+/* Cert Badges */
+.cert-badges{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px;}
+.cert-badge{text-align:center;padding:20px 8px;}
+.cert-badge-icon{width:48px;height:48px;margin:0 auto 8px;border-radius:50%;border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent);}
+.cert-badge h4{font-size:12px;font-weight:600;color:var(--dark);margin-bottom:2px;}
+.cert-badge p{font-size:10px;color:var(--sub);line-height:1.5;}
+
+/* Product Banner (Image BG + Text Overlay) */
+.prod-banner{position:relative;overflow:hidden;}
+.prod-banner-img{width:100%;display:block;}
+.prod-banner-overlay{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;justify-content:center;padding:40px 30px;}
+.prod-banner-overlay.bottom{justify-content:flex-end;padding-bottom:48px;}
+.prod-banner-overlay.top{justify-content:flex-start;padding-top:48px;}
+.prod-banner-overlay.center{justify-content:center;text-align:center;}
+.prod-banner-overlay.dark{background:linear-gradient(180deg,rgba(0,0,0,.4) 0%,rgba(0,0,0,.2) 100%);}
+.prod-banner-overlay.light{background:linear-gradient(180deg,rgba(255,255,255,.7) 0%,rgba(255,255,255,.4) 100%);}
+.prod-banner-overlay.bottom-fade{background:linear-gradient(180deg,transparent 0%,transparent 40%,rgba(0,0,0,.55) 100%);}
+.prod-banner-label{font-family:var(--font-en);font-size:11px;font-weight:500;letter-spacing:.2em;margin-bottom:8px;}
+.prod-banner-overlay.dark .prod-banner-label,.prod-banner-overlay.bottom-fade .prod-banner-label{color:var(--accent);}
+.prod-banner-overlay.light .prod-banner-label{color:var(--accent-dark);}
+.prod-banner-title{font-size:22px;font-weight:700;line-height:1.5;margin-bottom:8px;}
+.prod-banner-overlay.dark .prod-banner-title,.prod-banner-overlay.bottom-fade .prod-banner-title{color:#fff;}
+.prod-banner-overlay.light .prod-banner-title{color:var(--dark);}
+.prod-banner-desc{font-size:13px;line-height:1.8;margin-bottom:16px;}
+.prod-banner-overlay.dark .prod-banner-desc,.prod-banner-overlay.bottom-fade .prod-banner-desc{color:rgba(255,255,255,.7);}
+.prod-banner-overlay.light .prod-banner-desc{color:var(--body);}
+.prod-banner-btn{display:inline-block;padding:12px 32px;border-radius:4px;font-size:13px;font-weight:600;text-decoration:none;}
+.prod-banner-overlay.dark .prod-banner-btn,.prod-banner-overlay.bottom-fade .prod-banner-btn{background:var(--accent);color:#fff;}
+.prod-banner-overlay.light .prod-banner-btn{background:var(--dark);color:#fff;}
+.prod-banner-price{display:flex;align-items:baseline;gap:8px;margin-bottom:12px;}
+.prod-banner-overlay.center .prod-banner-price{justify-content:center;}
+.prod-banner-price-live{font-family:var(--font-en);font-size:24px;font-weight:700;color:var(--accent);}
+.prod-banner-price-original{font-size:13px;text-decoration:line-through;color:rgba(255,255,255,.5);}
+.prod-banner-overlay.light .prod-banner-price-original{color:var(--sub);}
+
+/* Product Grid */
+.prod-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
+.prod-card{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--bg);}
+.prod-card-img{aspect-ratio:1;overflow:hidden;background:var(--bg-warm);}
+.prod-card-img img{width:100%;height:100%;object-fit:cover;}
+.prod-card-body{padding:14px;}
+.prod-card-name{font-size:13px;font-weight:500;color:var(--dark);line-height:1.5;margin-bottom:6px;}
+.prod-card-prices{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;}
+.prod-card-discount{font-family:var(--font-en);font-size:14px;font-weight:700;color:var(--danger);}
+.prod-card-price{font-family:var(--font-en);font-size:14px;font-weight:700;color:var(--dark);}
+.prod-card-original{font-size:11px;color:var(--sub);text-decoration:line-through;}
+.prod-card-badge{display:inline-block;margin-top:6px;padding:3px 8px;font-family:var(--font-en);font-size:10px;font-weight:600;letter-spacing:.05em;background:var(--palette-highlight);color:var(--accent);border-radius:100px;}
+
+/* Collection Banner */
+.coll-banner{position:relative;overflow:hidden;}
+.coll-banner-img{width:100%;display:block;}
+.coll-banner-overlay{position:absolute;bottom:0;left:0;right:0;padding:32px 30px;background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.5) 100%);}
+.coll-banner-title{font-family:var(--font-display);font-size:24px;font-weight:300;font-style:italic;color:#fff;margin-bottom:8px;}
+.coll-banner-sub{font-size:13px;color:rgba(255,255,255,.7);margin-bottom:12px;}
+.coll-banner-link{font-family:var(--font-en);font-size:12px;font-weight:500;letter-spacing:.1em;color:var(--accent);text-decoration:none;}
+
+/* Channel Follow */
+.ch-follow{padding:40px 30px;text-align:center;background:var(--palette-highlight);}
+.ch-follow-icon{width:56px;height:56px;margin:0 auto 14px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;}
+.ch-follow-title{font-size:18px;font-weight:700;color:var(--dark);margin-bottom:6px;line-height:1.5;}
+.ch-follow-desc{font-size:13px;color:var(--body);margin-bottom:18px;line-height:1.7;}
+.ch-follow-btn{display:inline-block;padding:14px 36px;background:var(--dark);color:#fff;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;}
+
+/* midnight-luxe overrides */
+[data-palette="midnight-luxe"] .live-hero{color:#fff;}
+[data-palette="midnight-luxe"] .live-hero-title{color:#fff;}
+[data-palette="midnight-luxe"] .live-hero-sub{color:rgba(255,255,255,.6);}
+
+/* ============================================
+   PALETTES
+   ============================================ */
+[data-palette="warm-spring"]{--accent:#E8C9A8;--accent-light:#FBF3EA;--accent-dark:#C4A584;--bg-warm:#FBF9F6;--bg-warm2:#F5EFE9;--palette-gradient:linear-gradient(135deg,#FBF9F6 0%,#FBF3EA 50%,#F5EFE9 100%);--palette-card-border:#F0E6DA;--palette-badge-bg:#E8C9A8;--palette-badge-text:#fff;--palette-highlight:#FBF3EA;}
+[data-palette="cool-summer"]{--accent:#B3C5D3;--accent-light:#E8F0F5;--accent-dark:#8FA5B5;--bg-warm:#F5F7FA;--bg-warm2:#ECF0F4;--palette-gradient:linear-gradient(135deg,#F5F7FA 0%,#E8F0F5 50%,#ECF0F4 100%);--palette-card-border:#D4DEE6;--palette-badge-bg:#B3C5D3;--palette-badge-text:#fff;--palette-highlight:#E8F0F5;}
+[data-palette="cozy-autumn"]{--accent:#D4A574;--accent-light:#F5E8D8;--accent-dark:#B08652;--bg-warm:#FAF5EF;--bg-warm2:#F2E8DC;--palette-gradient:linear-gradient(135deg,#FAF5EF 0%,#F5E8D8 50%,#F2E8DC 100%);--palette-card-border:#E5D5C2;--palette-badge-bg:#D4A574;--palette-badge-text:#fff;--palette-highlight:#F5E8D8;}
+[data-palette="gentle-winter"]{--accent:#C4B5CB;--accent-light:#F0EBF2;--accent-dark:#A296A8;--bg-warm:#F8F5FA;--bg-warm2:#EFE9F2;--palette-gradient:linear-gradient(135deg,#F8F5FA 0%,#F0EBF2 50%,#EFE9F2 100%);--palette-card-border:#DDD4E2;--palette-badge-bg:#C4B5CB;--palette-badge-text:#fff;--palette-highlight:#F0EBF2;}
+[data-palette="rose-dawn"]{--accent:#C09B8D;--accent-light:#F5EBE7;--accent-dark:#9E7D70;--bg-warm:#FBF5F3;--bg-warm2:#F2E9E5;--palette-gradient:linear-gradient(135deg,#FBF5F3 0%,#F5EBE7 50%,#F2E9E5 100%);--palette-card-border:#E2D4CE;--palette-badge-bg:#C09B8D;--palette-badge-text:#fff;--palette-highlight:#F5EBE7;}
+[data-palette="fresh-garden"]{--accent:#7A8F76;--accent-light:#E8EDE6;--accent-dark:#5E7258;--bg-warm:#F5F8F4;--bg-warm2:#E9EFE7;--palette-gradient:linear-gradient(135deg,#F5F8F4 0%,#E8EDE6 50%,#E9EFE7 100%);--palette-card-border:#CFDACC;--palette-badge-bg:#7A8F76;--palette-badge-text:#fff;--palette-highlight:#E8EDE6;}
+[data-palette="moonlit-calm"]{--accent:#B0A899;--accent-light:#F0ECE6;--accent-dark:#908778;--bg-warm:#F9F7F3;--bg-warm2:#EBE6DE;--palette-gradient:linear-gradient(135deg,#F9F7F3 0%,#F0ECE6 50%,#EBE6DE 100%);--palette-card-border:#DDD6CA;--palette-badge-bg:#B0A899;--palette-badge-text:#fff;--palette-highlight:#F0ECE6;}
+[data-palette="blush-touch"]{--accent:#DEB5A8;--accent-light:#FBF0EC;--accent-dark:#BE9588;--bg-warm:#FDF7F5;--bg-warm2:#F5ECE8;--palette-gradient:linear-gradient(135deg,#FDF7F5 0%,#FBF0EC 50%,#F5ECE8 100%);--palette-card-border:#EAD8D0;--palette-badge-bg:#DEB5A8;--palette-badge-text:#fff;--palette-highlight:#FBF0EC;}
+[data-palette="slate-mood"]{--accent:#8A9BB0;--accent-light:#E8EDF2;--accent-dark:#6B7E94;--bg-warm:#F3F5F8;--bg-warm2:#E8ECF0;--palette-gradient:linear-gradient(135deg,#F3F5F8 0%,#E8EDF2 50%,#E8ECF0 100%);--palette-card-border:#D0D8E2;--palette-badge-bg:#8A9BB0;--palette-badge-text:#fff;--palette-highlight:#E8EDF2;}
+[data-palette="golden-hour"]{--accent:#C8A07C;--accent-light:#F0E6DA;--accent-dark:#A8825E;--bg-warm:#FAF7F4;--bg-warm2:#F5F0EB;--palette-gradient:linear-gradient(135deg,#FAF7F4 0%,#F0E6DA 50%,#F5F0EB 100%);--palette-card-border:#E5DDD4;--palette-badge-bg:#C8A07C;--palette-badge-text:#fff;--palette-highlight:#F0E6DA;}
+[data-palette="coral-sunset"]{--accent:#D4856C;--accent-light:#F8EBE5;--accent-dark:#B56A52;--bg-warm:#FDF6F3;--bg-warm2:#F4E8E2;--palette-gradient:linear-gradient(135deg,#FDF6F3 0%,#F8EBE5 50%,#F4E8E2 100%);--palette-card-border:#E6D2C8;--palette-badge-bg:#D4856C;--palette-badge-text:#fff;--palette-highlight:#F8EBE5;}
+[data-palette="midnight-luxe"]{--accent:#C8A07C;--accent-light:#F0E6DA;--accent-dark:#A8825E;--bg-warm:#FAF7F4;--bg-warm2:#F5F0EB;--palette-gradient:linear-gradient(135deg,#2C2C3A 0%,#3A3548 50%,#2C2C3A 100%);--palette-card-border:#E5DDD4;--palette-badge-bg:#C8A07C;--palette-badge-text:#2C2C3A;--palette-highlight:#F0E6DA;}
+
+/* Image fills for containers */
+.bundle-img img,.set-item-img img,.social-card-img img,.quick-show-img img,.event-gift-img img{width:100%;height:100%;object-fit:cover;}
+
+/* Variation divider */
+.var-divider{padding:12px 20px;background:rgba(200,160,124,.06);border-top:1px dashed var(--accent);border-bottom:1px dashed var(--accent);text-align:center;}
+.var-divider span{font-family:var(--font-en);font-size:10px;font-weight:600;letter-spacing:.15em;color:var(--accent);}
+</style>
+</head>
+<body>
+
+<!-- ===== GUIDE HEADER ===== -->
+<div class="guide-header">
+  <div class="guide-header-tag">SUNDAY HUG &middot; TEMPLATE SYSTEM v2</div>
+  <h1>Live Promotion Page</h1>
+  <p>27 Sections &middot; 12 Palettes &middot; Mobile-First &middot; No JS/Animation</p>
+</div>
+
+<!-- ===== MODE TABS ===== -->
+<div class="mode-bar">
+  <button class="mode-btn active" data-mode="fullpage">FULL PAGE PREVIEW</button>
+  <button class="mode-btn" data-mode="catalog">SECTION CATALOG</button>
+</div>
+
+<!-- ===== PALETTE SWITCHER ===== -->
+<div class="palette-bar">
+  <div class="palette-bar-title">CAMPAIGN PALETTE</div>
+  <div class="palette-grid">
+    <button class="palette-btn active" data-p="golden-hour"><span class="palette-swatch" style="background:#C8A07C"></span>골든 아워<span class="palette-rec">기본 라이브</span></button>
+    <button class="palette-btn" data-p="warm-spring"><span class="palette-swatch" style="background:#E8C9A8"></span>따뜻한 봄<span class="palette-rec">봄 신상</span></button>
+    <button class="palette-btn" data-p="cool-summer"><span class="palette-swatch" style="background:#B3C5D3"></span>시원한 여름<span class="palette-rec">여름 특가</span></button>
+    <button class="palette-btn" data-p="cozy-autumn"><span class="palette-swatch" style="background:#D4A574"></span>포근한 가을<span class="palette-rec">추석 세트</span></button>
+    <button class="palette-btn" data-p="gentle-winter"><span class="palette-swatch" style="background:#C4B5CB"></span>고요한 겨울<span class="palette-rec">크리스마스</span></button>
+    <button class="palette-btn" data-p="rose-dawn"><span class="palette-swatch" style="background:#C09B8D"></span>장밋빛 새벽<span class="palette-rec">여아 제품</span></button>
+    <button class="palette-btn" data-p="fresh-garden"><span class="palette-swatch" style="background:#7A8F76"></span>싱그러운 정원<span class="palette-rec">밤부 라인</span></button>
+    <button class="palette-btn" data-p="moonlit-calm"><span class="palette-swatch" style="background:#B0A899"></span>달빛 고요<span class="palette-rec">수면 캠페인</span></button>
+    <button class="palette-btn" data-p="blush-touch"><span class="palette-swatch" style="background:#DEB5A8"></span>볼터치 핑크<span class="palette-rec">출산 축하</span></button>
+    <button class="palette-btn" data-p="slate-mood"><span class="palette-swatch" style="background:#8A9BB0"></span>슬레이트 블루<span class="palette-rec">남아 제품</span></button>
+    <button class="palette-btn" data-p="coral-sunset"><span class="palette-swatch" style="background:#D4856C"></span>코랄 선셋<span class="palette-rec">한정판</span></button>
+    <button class="palette-btn" data-p="midnight-luxe"><span class="palette-swatch" style="background:#2C2C3A"></span>미드나잇 럭스<span class="palette-rec">VIP 라이브</span></button>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODE 1: FULL PAGE PREVIEW
+     ============================================================ -->
+<div class="mode-content active" id="mode-fullpage">
+<div class="phone-frame" id="preview" data-palette="golden-hour">
+
+<!-- 01. Live Hero -->
+<div class="live-hero">
+  <div class="live-badge">LIVE</div>
+  <img class="live-hero-host" src="../../../projects/detail-pages/current/images/profile/sbb_profile.png" alt="호스트">
+  <div class="live-hero-title">꿀잠 슬리핑백<br>라이브 단독 특가</div>
+  <div class="live-hero-benefit">최대 52% + 사은품 3종</div>
+  <div class="live-hero-sub">3월 15일 토요일 저녁 8시</div>
+</div>
+
+<!-- 02. Trust Bar -->
+<div class="trust-bar">
+  <div class="trust-bar-item">라이브 단독가<small>오늘 방송 한정</small></div>
+  <div class="trust-bar-item">실시간 상담<small>궁금한 점 바로 답변</small></div>
+  <div class="trust-bar-item">즉시 발송<small>주문 후 당일 출고</small></div>
+</div>
+
+<!-- 03. Schedule -->
+<div class="sec">
+  <div class="sec-label tx-center">Schedule</div>
+  <div class="sec-title tx-center">라이브 방송 일정</div>
+  <div class="schedule-grid">
+    <div class="schedule-card">
+      <div class="schedule-card-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+      <h4>3월 15일 (토)</h4>
+      <p>방송 날짜</p>
+    </div>
+    <div class="schedule-card">
+      <div class="schedule-card-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <h4>저녁 8:00</h4>
+      <p>시작 시간</p>
+    </div>
+    <div class="schedule-card">
+      <div class="schedule-card-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg></div>
+      <h4>네이버 쇼핑라이브</h4>
+      <p>방송 채널</p>
+    </div>
+  </div>
+</div>
+
+<!-- 04. Countdown -->
+<div class="countdown">
+  <div class="countdown-label">TIME DEAL</div>
+  <div class="countdown-title">이번 라이브에서만 만날 수 있는<br>특별한 가격이에요</div>
+  <div class="countdown-timer">
+    <div class="countdown-unit"><div class="countdown-num">02</div><div class="countdown-txt">HOURS</div></div>
+    <div class="countdown-unit"><div class="countdown-num">30</div><div class="countdown-txt">MIN</div></div>
+    <div class="countdown-unit"><div class="countdown-num">00</div><div class="countdown-txt">SEC</div></div>
+  </div>
+  <div class="countdown-note">방송 종료 후 정상가로 변경됩니다</div>
+</div>
+
+<!-- 05. Live Benefits -->
+<div class="sec">
+  <div class="sec-label tx-center">Live Benefits</div>
+  <div class="sec-title tx-center">함께하는 시간 동안<br>준비한 혜택</div>
+  <div class="live-benefit-grid">
+    <div class="live-benefit-card"><div class="live-benefit-icon">%</div><h4>라이브 특별 할인</h4><p>이번 방송에서만 만나는<br>최대 할인 혜택</p><span class="live-benefit-tag">UP TO 52%</span></div>
+    <div class="live-benefit-card"><div class="live-benefit-icon">F</div><h4>무료 배송</h4><p>전 제품 무료 배송<br>제주/도서산간 포함</p><span class="live-benefit-tag">FREE</span></div>
+    <div class="live-benefit-card"><div class="live-benefit-icon">G</div><h4>사은품 증정</h4><p>구매 시 선택 가능한<br>사은품 3종</p><span class="live-benefit-tag">3 GIFTS</span></div>
+    <div class="live-benefit-card"><div class="live-benefit-icon">P</div><h4>포인트 적립</h4><p>구매 금액의 5%<br>포인트 즉시 적립</p><span class="live-benefit-tag">5% POINT</span></div>
+  </div>
+</div>
+
+<!-- 06. Coupon -->
+<div class="sec warm">
+  <div class="sec-label tx-center">Coupon</div>
+  <div class="sec-title tx-center">라이브 시청자 전용 쿠폰</div>
+  <div class="coupon-card">
+    <div class="coupon-amount">5,000원</div>
+    <div class="coupon-label">라이브 전용 할인 쿠폰</div>
+    <div class="coupon-condition">3만원 이상 구매 시 사용 가능<br>다른 쿠폰과 중복 사용 불가</div>
+    <div class="coupon-code">LIVE2026</div>
+  </div>
+</div>
+
+<!-- 07. Bundle Deals -->
+<div class="sec">
+  <div class="sec-label tx-center">Bundle Deals</div>
+  <div class="sec-title tx-center">라이브 시청자님을 위한<br>구매 옵션</div>
+  <div class="bundle">
+    <div class="bundle-card"><div class="bundle-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/overview-01.jpg" alt="단품"></div><div class="bundle-body"><div class="bundle-best">BEST</div><div class="bundle-name">단품 구매</div><div class="bundle-desc">꿀잠 슬리핑백 실키밤부 1개</div><div class="bundle-prices"><span class="bundle-price-original">89,000원</span><span class="bundle-price-live">42,800원</span><span class="bundle-discount">-52%</span></div></div></div>
+    <div class="bundle-card featured"><div class="bundle-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="2+1 세트"></div><div class="bundle-body"><div class="bundle-best">BEST</div><div class="bundle-name">2+1 세트</div><div class="bundle-desc">슬리핑백 2개 + 속싸개 1개</div><div class="bundle-prices"><span class="bundle-price-original">267,000원</span><span class="bundle-price-live">119,000원</span><span class="bundle-discount">-55%</span></div></div></div>
+    <div class="bundle-card"><div class="bundle-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-03.jpg" alt="프리미엄 세트"></div><div class="bundle-body"><div class="bundle-best">BEST</div><div class="bundle-name">프리미엄 세트</div><div class="bundle-desc">슬리핑백 + 이불 + 속싸개 + 턱받이</div><div class="bundle-prices"><span class="bundle-price-original">356,000원</span><span class="bundle-price-live">169,000원</span><span class="bundle-discount">-53%</span></div></div></div>
+  </div>
+</div>
+
+<!-- 08. Price Compare -->
+<div class="sec warm">
+  <div class="sec-label tx-center">Price Compare</div>
+  <div class="sec-title tx-center">라이브에서 가장<br>합리적인 가격</div>
+  <div class="price-tbl">
+    <div class="price-col"><div class="price-col-label">정가</div><div class="price-col-amount">89,000원</div></div>
+    <div class="price-col"><div class="price-col-label">온라인 최저가</div><div class="price-col-amount">65,000원</div></div>
+    <div class="price-col live"><div class="price-col-label">라이브가</div><div class="price-col-amount">42,800원</div></div>
+  </div>
+  <div class="price-save">총 46,200원 절약!</div>
+</div>
+
+<!-- 09. Set Contents -->
+<div class="sec">
+  <div class="sec-label tx-center">What's Included</div>
+  <div class="sec-title tx-center">세트 구성품 안내</div>
+  <div class="set-grid">
+    <div class="set-item"><div class="set-item-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/overview-01.jpg" alt="슬리핑백"></div><h4>슬리핑백</h4><p>1개</p></div>
+    <div class="set-item"><div class="set-item-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-03.jpg" alt="속싸개"></div><h4>속싸개</h4><p>1개</p></div>
+    <div class="set-item"><div class="set-item-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-04.jpg" alt="턱받이"></div><h4>턱받이</h4><p>2개</p></div>
+  </div>
+  <div class="set-total">총 3종, 정가 대비 53% 할인</div>
+</div>
+
+<!-- 10. Mid CTA -->
+<div class="mid-cta">
+  <div class="mid-cta-title">우리 아기 꿀잠, 지금 시작하세요</div>
+  <div class="mid-cta-sub">KC인증 완료 / 100% 국내생산 / 무형광</div>
+  <a href="#">지금 구매하기</a>
+</div>
+
+<!-- 11. Host Recommendation -->
+<div class="sec warm">
+  <div class="sec-label">Host's Pick</div>
+  <div class="sec-title">호스트가 직접 써보고<br>추천하는 이유</div>
+  <div class="host-rec">
+    <img class="host-rec-photo" src="../../../projects/detail-pages/current/images/profile/sbb_profile.png" alt="호스트">
+    <div class="host-rec-quote">
+      저도 두 아이 엄마로서 잠투정 때문에 정말 힘들었는데, 이 슬리핑백을 쓰고 나서 아이가 새벽에 깨는 횟수가 확 줄었어요.<br><br>밤부 소재라 여름에도 쾌적하고, 지퍼가 아래에서 위로 열려서 기저귀 갈 때도 편하거든요.
+      <div class="host-rec-name">김수진</div>
+      <div class="host-rec-role">쇼호스트 · 두 아이 엄마</div>
+    </div>
+  </div>
+</div>
+
+<!-- 12. Quick Showcase -->
+<div class="quick-show">
+  <div class="quick-show-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-01-02.jpg" alt="밤부 소재"></div>
+  <div class="quick-show-body"><div class="quick-show-num">01</div><div class="quick-show-title">100% 밤부 레이온<br>시원한 촉감</div><div class="quick-show-desc">여름에도 쾌적한 밤부 소재로 아기 피부에 부드럽고 시원합니다.</div></div>
+</div>
+<div class="quick-show warm rev">
+  <div class="quick-show-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-03-01.jpg" alt="안전 구조"></div>
+  <div class="quick-show-body"><div class="quick-show-num">02</div><div class="quick-show-title">안전한 이불 구조<br>KC 인증 완료</div><div class="quick-show-desc">입는 이불 구조로 답답하지 않으면서도 질식 위험 없이 안전합니다.</div></div>
+</div>
+<div class="quick-show">
+  <div class="quick-show-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/overview-01.jpg" alt="역방향 지퍼"></div>
+  <div class="quick-show-body"><div class="quick-show-num">03</div><div class="quick-show-title">역방향 지퍼<br>기저귀 갈 때 편리</div><div class="quick-show-desc">아래에서 위로 열리는 지퍼로 기저귀 교체 시 아이를 깨우지 않습니다.</div></div>
+</div>
+
+<!-- 13. Lifestyle -->
+<div class="fb-img" style="margin:0;"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-02-01.jpg" alt="라이프스타일"></div>
+<div class="lifestyle-caption">Our little dreamers, sleeping peacefully</div>
+
+<!-- 14. Size & Spec -->
+<div class="sec warm">
+  <div class="sec-label">Size & Spec</div>
+  <div class="sec-title">사이즈 및 소재 정보</div>
+  <table class="sz-tbl">
+    <thead><tr><th>사이즈</th><th>월령</th><th>키</th><th>체중</th></tr></thead>
+    <tbody>
+      <tr><td>S</td><td>0~6개월</td><td>~67cm</td><td>~8kg</td></tr>
+      <tr><td>M</td><td>6~18개월</td><td>67~80cm</td><td>8~11kg</td></tr>
+      <tr><td>L</td><td>18~36개월</td><td>80~95cm</td><td>11~15kg</td></tr>
+    </tbody>
+  </table>
+  <table class="mat-tbl" style="margin-top:28px;">
+    <thead><tr><th>소재</th><th>특징</th><th>구성</th></tr></thead>
+    <tbody>
+      <tr><td>실키밤부</td><td>시원하고 부드러움</td><td>밤부 레이온 97%</td></tr>
+      <tr><td>오가닉코튼</td><td>보온성 우수</td><td>유기농 면 100%</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 15. Review -->
+<div class="sec">
+  <div class="sec-label tx-center">Real Review</div>
+  <div class="sec-title tx-center">실제 구매하신 분들의<br>솔직한 이야기</div>
+  <div class="rv-stats">
+    <div class="rv-stat"><div class="rv-stat-val">4.9 <span class="unit">/ 5.0</span></div><div class="rv-stat-label">평균 평점</div></div>
+    <div class="rv-stat"><div class="rv-stat-val">2,847</div><div class="rv-stat-label">누적 리뷰</div></div>
+    <div class="rv-stat"><div class="rv-stat-val">89<span class="unit">%</span></div><div class="rv-stat-label">재구매율</div></div>
+  </div>
+  <div class="rv">
+    <div class="rv-stars">★ ★ ★ ★ ★</div>
+    <div class="rv-quote">"<em>아이가 새벽에 안 깨요</em> — 정말 꿀잠이라는 말이 맞아요"</div>
+    <div class="rv-meta">ddo***  ·  2026.02.14</div>
+    <div class="rv-body">6개월 아기 쓰는데 전에는 새벽 3~4번 깼는데 슬리핑백 입히고 나서 1번으로 줄었어요.</div>
+  </div>
+</div>
+
+<!-- 16. Social Proof -->
+<div class="sec warm">
+  <div class="sec-label tx-center">Social Proof</div>
+  <div class="sec-title tx-center">실제 사용하시는 분들의<br>SNS 후기</div>
+  <div class="social-grid">
+    <div class="social-card"><div class="social-card-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-01-02.jpg" alt="후기"></div><div class="social-card-body"><div class="social-card-user">@happy_mom</div><div class="social-quote">밤새 푹 자는 아기 보고 감동...</div></div></div>
+    <div class="social-card"><div class="social-card-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-02-01.jpg" alt="후기"></div><div class="social-card-body"><div class="social-card-user">@baby_diary</div><div class="social-quote">밤부 소재 촉감이 진짜 좋아요</div></div></div>
+    <div class="social-card"><div class="social-card-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-03-01.jpg" alt="후기"></div><div class="social-card-body"><div class="social-card-user">@mom_life_</div><div class="social-quote">재구매 3번째! 선물로도 최고</div></div></div>
+  </div>
+</div>
+
+<!-- 17. Gift Event -->
+<div class="sec">
+  <div class="sec-label tx-center">Gift for You</div>
+  <div class="sec-title tx-center">라이브 시청자님을 위한<br>특별 선물</div>
+  <div class="event">
+    <div class="event-badge">GIFT</div>
+    <div class="event-body">
+      <div class="event-title">구매해주시는 분들께<br>감사 선물을 드려요</div>
+      <div class="event-desc">이번 라이브에서 구매해주시는 모든 분들께 아래 선물을 함께 보내드립니다.</div>
+      <div class="event-gifts">
+        <div class="event-gift"><div class="event-gift-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-04.jpg" alt="손수건"></div><div class="event-gift-info"><h5>밤부 손수건 세트</h5><p>전 구매자</p></div></div>
+        <div class="event-gift"><div class="event-gift-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-05-01.jpg" alt="세제"></div><div class="event-gift-info"><h5>미니 세제 세트</h5><p>2개 이상 구매 시</p></div></div>
+      </div>
+      <div class="event-note">※ 사은품은 소진 시 변경될 수 있습니다.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 18. Target Persona -->
+<div class="sec warm">
+  <div class="sec-label tx-center">Who Is This For?</div>
+  <div class="sec-title tx-center">이런 분께 추천해요</div>
+  <div class="target-list">
+    <div class="target-item"><div class="target-check">✓</div><p>아이가 밤에 자주 깨서 힘드신 분</p></div>
+    <div class="target-item"><div class="target-check">✓</div><p>여름에도 시원하게 재울 수 있는 이불을 찾으시는 분</p></div>
+    <div class="target-item"><div class="target-check">✓</div><p>안전한 수면 환경이 중요하신 분</p></div>
+    <div class="target-item"><div class="target-check">✓</div><p>출산 선물을 고민 중이신 분</p></div>
+  </div>
+</div>
+
+<!-- 19. FAQ -->
+<div class="sec">
+  <div class="sec-label tx-center">FAQ</div>
+  <div class="sec-title tx-center">자주 묻는 질문</div>
+  <div class="faq">
+    <div class="faq-item"><div class="faq-q">라이브 가격은 언제까지 적용되나요?</div><div class="faq-a"><div class="faq-a-inner">라이브 방송 중에만 적용되는 특별 가격입니다. 방송 종료 후 자동으로 정상가로 변경됩니다.</div></div></div>
+    <div class="faq-item"><div class="faq-q">교환/반품이 가능한가요?</div><div class="faq-a"><div class="faq-a-inner">네, 수령 후 7일 이내 미사용 제품에 한해 교환/반품이 가능합니다.</div></div></div>
+    <div class="faq-item"><div class="faq-q">사이즈 선택은 어떻게 하나요?</div><div class="faq-a"><div class="faq-a-inner">S(0~6개월), M(6~18개월), L(18~36개월) 기준으로 아이의 월령에 맞게 선택해주세요.</div></div></div>
+  </div>
+</div>
+
+<!-- 20. Shipping -->
+<div class="sec warm">
+  <div class="sec-label tx-center">Shipping & Exchange</div>
+  <div class="sec-title tx-center">배송 및 교환/반품 안내</div>
+  <div class="ship-grid">
+    <div class="ship-card"><div class="ship-card-ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><h4>무료 배송</h4><p>전 제품 무료 배송<br>제주/도서산간 포함</p></div>
+    <div class="ship-card"><div class="ship-card-ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h4>당일 출고</h4><p>오후 2시 이전 주문<br>당일 출고</p></div>
+    <div class="ship-card"><div class="ship-card-ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></div><h4>7일 이내 교환</h4><p>미사용 제품<br>무료 교환/반품</p></div>
+    <div class="ship-card"><div class="ship-card-ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h4>고객센터</h4><p>평일 10:00~17:00<br>카카오톡 상담</p></div>
+  </div>
+</div>
+
+<!-- 21. Guarantee -->
+<div class="sec">
+  <div class="sec-label tx-center">Guarantee</div>
+  <div class="sec-title tx-center">안심하고 구매하세요</div>
+  <div class="ship-grid">
+    <div class="ship-card"><div class="ship-card-ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>무료 반품 보장</h4><p>마음에 들지 않으시면<br>무료로 반품 가능</p></div>
+    <div class="ship-card"><div class="ship-card-ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><h4>100% 환불 보장</h4><p>불만족 시<br>전액 환불해드립니다</p></div>
+  </div>
+</div>
+
+<!-- 22. Cert Badges -->
+<div class="sec warm">
+  <div class="sec-label tx-center">Certifications</div>
+  <div class="sec-title tx-center">안전과 품질을 인증합니다</div>
+  <div class="cert-badges">
+    <div class="cert-badge"><div class="cert-badge-icon"><span style="font-family:var(--font-en);font-size:12px;font-weight:700;">KC</span></div><h4>KC 인증</h4><p>어린이 제품<br>안전 인증</p></div>
+    <div class="cert-badge"><div class="cert-badge-icon"><span style="font-family:var(--font-en);font-size:12px;font-weight:700;">0%</span></div><h4>무형광</h4><p>형광증백제<br>불검출</p></div>
+    <div class="cert-badge"><div class="cert-badge-icon"><span style="font-family:var(--font-en);font-size:12px;font-weight:700;">KR</span></div><h4>국내 생산</h4><p>100%<br>국내 제조</p></div>
+    <div class="cert-badge"><div class="cert-badge-icon"><span style="font-family:var(--font-en);font-size:10px;font-weight:700;">OEK</span></div><h4>OEKO-TEX</h4><p>유해물질<br>안전 인증</p></div>
+  </div>
+</div>
+
+<!-- 23. Brand Quote -->
+<div class="bq">
+  <p>Every child deserves<br>a peaceful night's sleep.</p>
+  <small>SUNDAY HUG</small>
+</div>
+
+<!-- 24. Brand Story -->
+<div class="sec warm">
+  <div class="sec-label tx-center">Our Story</div>
+  <div class="sec-title tx-center">아이의 잠이 편안하면<br>온 가족이 행복해져요</div>
+  <div class="sec-desc tx-center">썬데이허그는 잠투정으로 힘들어하는 부모의 마음에서 시작되었습니다.<br>매일 밤 아이와 부모 모두 편안한 잠을 잘 수 있도록,<br>안전하고 쾌적한 수면 환경을 만들어갑니다.</div>
+</div>
+
+<!-- 28. Product Banner — Dark Overlay -->
+<div class="prod-banner">
+  <img class="prod-banner-img" src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-02-01.jpg" alt="슬리핑백">
+  <div class="prod-banner-overlay dark center">
+    <div class="prod-banner-label">BEST SELLER</div>
+    <div class="prod-banner-title">실키밤부 꿀잠 슬리핑백</div>
+    <div class="prod-banner-desc">아기의 편안한 밤을 위한<br>프리미엄 슬리핑백</div>
+    <div class="prod-banner-price">
+      <span class="prod-banner-price-live">42,800원</span>
+      <span class="prod-banner-price-original">89,000원</span>
+    </div>
+    <div><a class="prod-banner-btn" href="#">라이브에서 구매하기</a></div>
+  </div>
+</div>
+
+<!-- 28b. Product Banner — Bottom Fade -->
+<div class="prod-banner">
+  <img class="prod-banner-img" src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-03-01.jpg" alt="슬리핑백">
+  <div class="prod-banner-overlay bottom-fade bottom">
+    <div class="prod-banner-label">LIMITED EDITION</div>
+    <div class="prod-banner-title">오가닉 코튼 라인<br>새로운 컬러 출시</div>
+    <div class="prod-banner-price">
+      <span class="prod-banner-price-live">39,800원</span>
+      <span class="prod-banner-price-original">79,000원</span>
+    </div>
+  </div>
+</div>
+
+<!-- 29. Product Grid -->
+<div class="sec">
+  <div class="sec-label tx-center">Recommendations</div>
+  <div class="sec-title tx-center">함께 구매하면 좋은 제품</div>
+  <div class="prod-grid">
+    <div class="prod-card">
+      <div class="prod-card-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/overview-01.jpg" alt="슬리핑백 크림"></div>
+      <div class="prod-card-body">
+        <div class="prod-card-name">실키밤부 슬리핑백<br>크림</div>
+        <div class="prod-card-prices"><span class="prod-card-discount">52%</span><span class="prod-card-price">42,800원</span></div>
+        <div class="prod-card-original">89,000원</div>
+        <span class="prod-card-badge">LIVE ONLY</span>
+      </div>
+    </div>
+    <div class="prod-card">
+      <div class="prod-card-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-03.jpg" alt="슬리핑백 핑크"></div>
+      <div class="prod-card-body">
+        <div class="prod-card-name">실키밤부 슬리핑백<br>블러시 핑크</div>
+        <div class="prod-card-prices"><span class="prod-card-discount">52%</span><span class="prod-card-price">42,800원</span></div>
+        <div class="prod-card-original">89,000원</div>
+        <span class="prod-card-badge">LIVE ONLY</span>
+      </div>
+    </div>
+    <div class="prod-card">
+      <div class="prod-card-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-04.jpg" alt="슬리핑백 민트"></div>
+      <div class="prod-card-body">
+        <div class="prod-card-name">실키밤부 슬리핑백<br>세이지 그린</div>
+        <div class="prod-card-prices"><span class="prod-card-discount">48%</span><span class="prod-card-price">45,900원</span></div>
+        <div class="prod-card-original">89,000원</div>
+      </div>
+    </div>
+    <div class="prod-card">
+      <div class="prod-card-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="슬리핑백 베이지"></div>
+      <div class="prod-card-body">
+        <div class="prod-card-name">오가닉코튼 슬리핑백<br>내추럴 베이지</div>
+        <div class="prod-card-prices"><span class="prod-card-discount">45%</span><span class="prod-card-price">48,900원</span></div>
+        <div class="prod-card-original">89,000원</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 30. Collection Banner -->
+<div class="coll-banner">
+  <img class="coll-banner-img" src="../../../projects/detail-pages/current/images/abc/hero-01.jpg" alt="컬렉션">
+  <div class="coll-banner-overlay">
+    <div class="coll-banner-title">Silky Bamboo<br>Collection</div>
+    <div class="coll-banner-sub">사계절 쾌적한 밤부 라인 전체 보기</div>
+    <a class="coll-banner-link" href="#">View Collection →</a>
+  </div>
+</div>
+
+<!-- 31. Channel Follow -->
+<div class="ch-follow">
+  <div class="ch-follow-icon">
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  </div>
+  <div class="ch-follow-title">카카오톡 채널 추가하고<br>다음 라이브 알림 받기</div>
+  <div class="ch-follow-desc">새로운 라이브 일정과 특별 할인 소식을<br>가장 먼저 받아보세요.</div>
+  <a class="ch-follow-btn" href="#">채널 추가하기</a>
+</div>
+
+<!-- 28c. Product Banner — Light Overlay -->
+<div class="prod-banner">
+  <img class="prod-banner-img" src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-01-02.jpg" alt="슬리핑백">
+  <div class="prod-banner-overlay light top">
+    <div class="prod-banner-label">NEW ARRIVAL</div>
+    <div class="prod-banner-title">2026 여름 신상<br>메쉬 슬리핑백</div>
+    <div class="prod-banner-desc">통기성 극대화 메쉬 소재로<br>한여름에도 쾌적하게</div>
+    <div><a class="prod-banner-btn" href="#">자세히 보기</a></div>
+  </div>
+</div>
+
+<!-- 25. Final CTA -->
+<div class="final-cta">
+  <div class="final-cta-label">LIVE ONLY</div>
+  <h2>지금 이 라이브에서만<br>만날 수 있는 가격</h2>
+  <p>라이브 단독 최대 52% 할인 + 사은품 3종 + 무료배송</p>
+  <a href="#">라이브 방송 중 구매하기</a>
+  <div class="final-cta-note">방송 종료 후 정상가로 변경됩니다</div>
+</div>
+
+<!-- 26. Close -->
+<div class="close">
+  <div class="close-logo">Sunday Hug</div>
+  <div class="close-title">오늘도 우리 아이의<br>편안한 잠을 응원합니다</div>
+  <div class="close-desc">썬데이허그가 함께하는 밤은<br>온 가족이 편안합니다.</div>
+</div>
+
+<!-- 27. Footer -->
+<div class="footer"><span>Designed for Families.</span></div>
+
+</div><!-- /phone-frame -->
+</div><!-- /mode-fullpage -->
+
+<!-- ============================================================
+     MODE 2: SECTION CATALOG
+     ============================================================ -->
+<div class="mode-content" id="mode-catalog">
+
+<div class="catalog-intro">
+  <h2>Section Catalog</h2>
+  <p>27개 섹션을 개별적으로 미리보기합니다. 각 섹션의 구조와 데이터 요구사항을 확인하세요.</p>
+</div>
+
+<div class="phone-frame" id="catalog-preview" data-palette="golden-hour">
+
+<!-- 01 -->
+<div class="sec-guide-label"><h3>01 — LIVE HERO</h3><p>라이브 첫인상: 호스트 + 방송 제목 + 메인 혜택</p><div class="tags"><span class="tag req">필수</span></div></div>
+<div class="live-hero">
+  <div class="live-badge">LIVE</div><img class="live-hero-host" src="../../../projects/detail-pages/current/images/profile/sbb_profile.png" alt="호스트">
+  <div class="live-hero-title">꿀잠 슬리핑백<br>라이브 단독 특가</div>
+  <div class="live-hero-benefit">최대 52% + 사은품 3종</div>
+  <div class="live-hero-sub">3월 15일 토요일 저녁 8시</div>
+</div>
+
+<!-- Variation B: Product Hero -->
+<div class="var-divider"><span>VARIATION B — PRODUCT HERO (호스트 없이 제품 이미지 중심)</span></div>
+<div class="live-hero" style="padding-bottom:0;">
+  <div class="live-badge">LIVE</div>
+  <div class="live-hero-title" style="font-size:26px;">실키밤부 꿀잠 슬리핑백<br>단 하루, 역대 최저가</div>
+  <div class="live-hero-benefit">42,800원 <span style="font-size:12px;color:var(--body);text-decoration:line-through;">89,000원</span></div>
+  <div class="live-hero-sub">오늘 저녁 8시 · 네이버 쇼핑라이브</div>
+  <div class="fb-img" style="margin:24px -30px 0;"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-02-01.jpg" alt="제품"></div>
+</div>
+<!-- Variation C: Minimal Hero -->
+<div class="var-divider"><span>VARIATION C — MINIMAL HERO (미니멀 텍스트 중심)</span></div>
+<div class="live-hero" style="padding:64px 30px;">
+  <div class="live-badge">LIVE</div>
+  <div style="font-family:var(--font-display);font-size:32px;font-weight:300;font-style:italic;color:var(--dark);line-height:1.4;margin-bottom:16px;">Sweet Dreams<br>Start Here</div>
+  <div class="live-hero-title" style="font-size:20px;">꿀잠 슬리핑백 라이브 단독 특가</div>
+  <div class="live-hero-benefit">최대 52% + 사은품 3종</div>
+  <div class="live-hero-sub">3월 15일 토요일 저녁 8시</div>
+</div>
+
+<!-- Variation D: Photo BG — Dark Overlay (사진 배경 + 어두운 오버레이) -->
+<div class="var-divider"><span>VARIATION D — PHOTO BG DARK (사진 배경 + 어두운 오버레이)</span></div>
+<div class="live-hero photo-bg">
+  <div class="live-hero-bg">
+    <img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-01-02.jpg" alt="배경">
+    <div class="live-hero-bg-overlay dark">
+      <div class="live-badge">LIVE</div>
+      <div class="live-hero-title" style="color:#fff;">꿀잠 슬리핑백<br>라이브 단독 특가</div>
+      <div class="live-hero-benefit" style="color:#fff;opacity:.9;">최대 52% + 사은품 3종</div>
+      <div class="live-hero-sub" style="color:rgba(255,255,255,.7);">3월 15일 토요일 저녁 8시</div>
+    </div>
+  </div>
+</div>
+
+<!-- Variation E: Photo BG — Bottom Fade (사진 배경 + 하단 그라데이션) -->
+<div class="var-divider"><span>VARIATION E — PHOTO BG BOTTOM FADE (사진 노출 최대 + 하단 텍스트)</span></div>
+<div class="live-hero photo-bg">
+  <div class="live-hero-bg">
+    <img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-03-01.jpg" alt="배경">
+    <div class="live-hero-bg-overlay bottom-heavy">
+      <div class="live-badge" style="position:absolute;top:20px;left:50%;transform:translateX(-50%);">LIVE</div>
+      <div class="live-hero-title" style="color:#fff;font-size:22px;">실키밤부 꿀잠 슬리핑백<br>단 하루, 역대 최저가</div>
+      <div class="live-hero-price">42,800원</div>
+      <div class="live-hero-price-original">89,000원</div>
+    </div>
+  </div>
+</div>
+
+<!-- Variation F: Photo BG — Soft Light (사진 배경 + 밝은 오버레이) -->
+<div class="var-divider"><span>VARIATION F — PHOTO BG SOFT (사진 배경 + 밝은 오버레이)</span></div>
+<div class="live-hero photo-bg">
+  <div class="live-hero-bg">
+    <img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-02-01.jpg" alt="배경">
+    <div class="live-hero-bg-overlay soft">
+      <div class="live-badge">LIVE</div>
+      <img class="live-hero-host" src="../../../projects/detail-pages/current/images/profile/sbb_profile.png" alt="호스트" style="border-color:var(--accent);">
+      <div class="live-hero-title">꿀잠 슬리핑백<br>라이브 단독 특가</div>
+      <div class="live-hero-benefit">최대 52% + 사은품 3종</div>
+      <div class="live-hero-sub">3월 15일 토요일 저녁 8시</div>
+    </div>
+  </div>
+</div>
+
+<!-- Variation G: Photo BG — Top Gradient (상단 텍스트 + 사진 하단 노출) -->
+<div class="var-divider"><span>VARIATION G — PHOTO BG TOP (상단 그라데이션 + 제품 사진 하단 노출)</span></div>
+<div class="live-hero photo-bg">
+  <div class="live-hero-bg">
+    <img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/overview-01.jpg" alt="배경">
+    <div class="live-hero-bg-overlay gradient-top">
+      <div class="live-badge">LIVE</div>
+      <div class="live-hero-title" style="color:#fff;font-size:22px;">꿀잠 슬리핑백<br>라이브 단독 특가</div>
+      <div class="live-hero-benefit" style="color:#fff;opacity:.9;">최대 52% + 사은품 3종</div>
+      <div class="live-hero-sub" style="color:rgba(255,255,255,.7);">3월 15일 토요일 저녁 8시</div>
+    </div>
+  </div>
+</div>
+
+<!-- 02 -->
+<div class="sec-guide-label"><h3>02 — TRUST BAR</h3><p>라이브 특화 신뢰 포인트 3가지</p><div class="tags"><span class="tag req">필수</span></div></div>
+<div class="trust-bar">
+  <div class="trust-bar-item">라이브 단독가<small>오늘 방송 한정</small></div>
+  <div class="trust-bar-item">실시간 상담<small>궁금한 점 바로 답변</small></div>
+  <div class="trust-bar-item">즉시 발송<small>주문 후 당일 출고</small></div>
+</div>
+
+<!-- 03 -->
+<div class="sec-guide-label"><h3>03 — SCHEDULE</h3><p>방송 날짜/시간/채널 3칸 카드</p><div class="tags"><span class="tag req">필수</span> <span class="tag new">신규</span></div></div>
+<div class="sec">
+  <div class="sec-label tx-center">Schedule</div>
+  <div class="sec-title tx-center">라이브 방송 일정</div>
+  <div class="schedule-grid">
+    <div class="schedule-card"><div class="schedule-card-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><h4>3월 15일 (토)</h4><p>방송 날짜</p></div>
+    <div class="schedule-card"><div class="schedule-card-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h4>저녁 8:00</h4><p>시작 시간</p></div>
+    <div class="schedule-card"><div class="schedule-card-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg></div><h4>네이버 쇼핑라이브</h4><p>방송 채널</p></div>
+  </div>
+</div>
+
+<!-- 04 -->
+<div class="sec-guide-label"><h3>04 — COUNTDOWN</h3><p>정적 카운트다운 (애니메이션 없음)</p><div class="tags"><span class="tag req">필수</span></div></div>
+<div class="countdown">
+  <div class="countdown-label">TIME DEAL</div>
+  <div class="countdown-title">이번 라이브에서만 만날 수 있는<br>특별한 가격이에요</div>
+  <div class="countdown-timer">
+    <div class="countdown-unit"><div class="countdown-num">02</div><div class="countdown-txt">HOURS</div></div>
+    <div class="countdown-unit"><div class="countdown-num">30</div><div class="countdown-txt">MIN</div></div>
+    <div class="countdown-unit"><div class="countdown-num">00</div><div class="countdown-txt">SEC</div></div>
+  </div>
+  <div class="countdown-note">방송 종료 후 정상가로 변경됩니다</div>
+</div>
+
+<!-- 05 -->
+<div class="sec-guide-label"><h3>05 — LIVE BENEFITS</h3><p>2x2 혜택 카드 그리드</p><div class="tags"><span class="tag req">필수</span></div></div>
+<div class="sec">
+  <div class="sec-label tx-center">Live Benefits</div>
+  <div class="sec-title tx-center">함께하는 시간 동안<br>준비한 혜택</div>
+  <div class="live-benefit-grid">
+    <div class="live-benefit-card"><div class="live-benefit-icon">%</div><h4>라이브 특별 할인</h4><p>최대 할인 혜택</p><span class="live-benefit-tag">UP TO 52%</span></div>
+    <div class="live-benefit-card"><div class="live-benefit-icon">F</div><h4>무료 배송</h4><p>전 제품 무료 배송</p><span class="live-benefit-tag">FREE</span></div>
+    <div class="live-benefit-card"><div class="live-benefit-icon">G</div><h4>사은품 증정</h4><p>사은품 3종</p><span class="live-benefit-tag">3 GIFTS</span></div>
+    <div class="live-benefit-card"><div class="live-benefit-icon">P</div><h4>포인트 적립</h4><p>5% 즉시 적립</p><span class="live-benefit-tag">5% POINT</span></div>
+  </div>
+</div>
+
+<!-- 06 -->
+<div class="sec-guide-label"><h3>06 — COUPON</h3><p>전용 할인 쿠폰 카드</p><div class="tags"><span class="tag opt">선택</span> <span class="tag new">신규</span></div></div>
+<div class="sec warm">
+  <div class="sec-label tx-center">Coupon</div>
+  <div class="sec-title tx-center">라이브 시청자 전용 쿠폰</div>
+  <div class="coupon-card"><div class="coupon-amount">5,000원</div><div class="coupon-label">라이브 전용 할인 쿠폰</div><div class="coupon-condition">3만원 이상 구매 시 사용 가능</div><div class="coupon-code">LIVE2026</div></div>
+</div>
+
+<!-- 07 -->
+<div class="sec-guide-label"><h3>07 — BUNDLE DEALS</h3><p>단품/2+1/세트 구매 옵션</p><div class="tags"><span class="tag req">필수</span></div></div>
+<div class="sec">
+  <div class="sec-label tx-center">Bundle Deals</div>
+  <div class="sec-title tx-center">구매 옵션</div>
+  <div class="bundle">
+    <div class="bundle-card"><div class="bundle-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/overview-01.jpg" alt="단품"></div><div class="bundle-body"><div class="bundle-best">BEST</div><div class="bundle-name">단품</div><div class="bundle-desc">슬리핑백 1개</div><div class="bundle-prices"><span class="bundle-price-original">89,000원</span><span class="bundle-price-live">42,800원</span><span class="bundle-discount">-52%</span></div></div></div>
+    <div class="bundle-card featured"><div class="bundle-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="2+1 세트"></div><div class="bundle-body"><div class="bundle-best">BEST</div><div class="bundle-name">2+1 세트</div><div class="bundle-desc">슬리핑백 2 + 속싸개 1</div><div class="bundle-prices"><span class="bundle-price-original">267,000원</span><span class="bundle-price-live">119,000원</span><span class="bundle-discount">-55%</span></div></div></div>
+  </div>
+</div>
+
+<!-- Variation B: 3 Options with Images -->
+<div class="var-divider"><span>VARIATION B — 3 OPTIONS (제품 이미지 강조 + 3단 구성)</span></div>
+<div class="sec">
+  <div class="sec-label tx-center">Bundle Deals</div>
+  <div class="sec-title tx-center">구매 옵션</div>
+  <div class="bundle">
+    <div class="bundle-card"><div class="bundle-img" style="width:96px;height:96px;"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/overview-01.jpg" alt="단품"></div><div class="bundle-body"><div class="bundle-name">단품</div><div class="bundle-desc">실키밤부 슬리핑백 1개</div><div class="bundle-prices"><span class="bundle-price-original">89,000원</span><span class="bundle-price-live">42,800원</span><span class="bundle-discount">-52%</span></div></div></div>
+    <div class="bundle-card featured"><div class="bundle-img" style="width:96px;height:96px;"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="2+1"></div><div class="bundle-body"><div class="bundle-best">BEST</div><div class="bundle-name">2+1 세트</div><div class="bundle-desc">슬리핑백 2 + 속싸개 1</div><div class="bundle-prices"><span class="bundle-price-original">267,000원</span><span class="bundle-price-live">119,000원</span><span class="bundle-discount">-55%</span></div></div></div>
+    <div class="bundle-card"><div class="bundle-img" style="width:96px;height:96px;"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-03.jpg" alt="프리미엄"></div><div class="bundle-body"><div class="bundle-name">프리미엄 세트</div><div class="bundle-desc">슬리핑백 + 이불 + 속싸개 + 턱받이</div><div class="bundle-prices"><span class="bundle-price-original">356,000원</span><span class="bundle-price-live">169,000원</span><span class="bundle-discount">-53%</span></div></div></div>
+  </div>
+</div>
+
+<!-- 08 -->
+<div class="sec-guide-label"><h3>08 — PRICE COMPARE</h3><p>정가 vs 라이브가 비교표</p><div class="tags"><span class="tag opt">선택</span> <span class="tag new">신규</span></div></div>
+<div class="sec warm">
+  <div class="sec-label tx-center">Price Compare</div>
+  <div class="sec-title tx-center">가격 비교</div>
+  <div class="price-tbl">
+    <div class="price-col"><div class="price-col-label">정가</div><div class="price-col-amount">89,000원</div></div>
+    <div class="price-col"><div class="price-col-label">최저가</div><div class="price-col-amount">65,000원</div></div>
+    <div class="price-col live"><div class="price-col-label">라이브가</div><div class="price-col-amount">42,800원</div></div>
+  </div>
+  <div class="price-save">총 46,200원 절약!</div>
+</div>
+
+<!-- 09 -->
+<div class="sec-guide-label"><h3>09 — SET CONTENTS</h3><p>세트 구성품 비주얼 나열</p><div class="tags"><span class="tag opt">선택</span> <span class="tag new">신규</span></div></div>
+<div class="sec">
+  <div class="sec-label tx-center">What's Included</div>
+  <div class="sec-title tx-center">세트 구성품</div>
+  <div class="set-grid">
+    <div class="set-item"><div class="set-item-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/overview-01.jpg" alt="슬리핑백"></div><h4>슬리핑백</h4><p>1개</p></div>
+    <div class="set-item"><div class="set-item-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-03.jpg" alt="속싸개"></div><h4>속싸개</h4><p>1개</p></div>
+    <div class="set-item"><div class="set-item-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-04.jpg" alt="턱받이"></div><h4>턱받이</h4><p>2개</p></div>
+  </div>
+  <div class="set-total">총 3종, 정가 대비 53% 할인</div>
+</div>
+
+<!-- 10 -->
+<div class="sec-guide-label"><h3>10 — MID CTA</h3><p>중간 구매 유도 (그라데이션 배경)</p><div class="tags"><span class="tag req">필수</span> <span class="tag new">신규</span></div></div>
+<div class="mid-cta">
+  <div class="mid-cta-title">우리 아기 꿀잠, 지금 시작하세요</div>
+  <div class="mid-cta-sub">KC인증 완료 / 100% 국내생산 / 무형광</div>
+  <a href="#">지금 구매하기</a>
+</div>
+
+<!-- 11 -->
+<div class="sec-guide-label"><h3>11 — HOST RECOMMENDATION</h3><p>호스트 감성 추천</p><div class="tags"><span class="tag opt">선택</span></div></div>
+<div class="sec warm">
+  <div class="sec-label">Host's Pick</div>
+  <div class="sec-title">호스트가 직접 써보고<br>추천하는 이유</div>
+  <div class="host-rec"><img class="host-rec-photo" src="../../../projects/detail-pages/current/images/profile/sbb_profile.png" alt="호스트"><div class="host-rec-quote">저도 두 아이 엄마로서 잠투정 때문에 정말 힘들었는데...<div class="host-rec-name">김수진</div><div class="host-rec-role">쇼호스트 · 두 아이 엄마</div></div></div>
+</div>
+
+<!-- 12 -->
+<div class="sec-guide-label"><h3>12 — QUICK SHOWCASE</h3><p>핵심 셀링 포인트 좌우 교차</p><div class="tags"><span class="tag req">필수</span></div></div>
+<div class="quick-show"><div class="quick-show-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-01-02.jpg" alt="밤부"></div><div class="quick-show-body"><div class="quick-show-num">01</div><div class="quick-show-title">100% 밤부 레이온</div><div class="quick-show-desc">여름에도 쾌적한 촉감</div></div></div>
+<div class="quick-show warm rev"><div class="quick-show-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-03-01.jpg" alt="KC인증"></div><div class="quick-show-body"><div class="quick-show-num">02</div><div class="quick-show-title">KC 인증 완료</div><div class="quick-show-desc">안전한 이불 구조</div></div></div>
+
+<!-- Variation B: Single Full-Width Showcase -->
+<div class="var-divider"><span>VARIATION B — SINGLE SHOWCASE (단일 아이템 풀폭 강조형)</span></div>
+<div class="quick-show" style="flex-direction:column;text-align:center;">
+  <div class="quick-show-img" style="flex:none;width:100%;aspect-ratio:4/3;"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-02-01.jpg" alt="제품"></div>
+  <div class="quick-show-body" style="padding:24px 0 0;">
+    <div class="quick-show-num">POINT 01</div>
+    <div class="quick-show-title">100% 밤부 레이온으로<br>사계절 쾌적하게</div>
+    <div class="quick-show-desc">여름에도 시원하고 겨울에도 따뜻한 밤부 소재로 아기 피부에 부드럽고 쾌적합니다.</div>
+  </div>
+</div>
+<!-- Variation C: 4-Point Grid -->
+<div class="var-divider"><span>VARIATION C — 4-POINT GRID (2x2 그리드 요약형)</span></div>
+<div class="sec">
+  <div class="sec-label tx-center">Key Features</div>
+  <div class="sec-title tx-center">핵심 포인트</div>
+  <div class="live-benefit-grid">
+    <div class="live-benefit-card" style="padding:16px;"><div class="quick-show-img" style="aspect-ratio:1;border-radius:6px;margin-bottom:10px;"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-01-02.jpg" alt="밤부"></div><h4 style="font-size:13px;">100% 밤부 레이온</h4><p style="font-size:11px;">시원하고 부드러운 촉감</p></div>
+    <div class="live-benefit-card" style="padding:16px;"><div class="quick-show-img" style="aspect-ratio:1;border-radius:6px;margin-bottom:10px;"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-03-01.jpg" alt="KC"></div><h4 style="font-size:13px;">KC 인증 완료</h4><p style="font-size:11px;">안전한 이불 구조</p></div>
+    <div class="live-benefit-card" style="padding:16px;"><div class="quick-show-img" style="aspect-ratio:1;border-radius:6px;margin-bottom:10px;"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/overview-01.jpg" alt="지퍼"></div><h4 style="font-size:13px;">역방향 지퍼</h4><p style="font-size:11px;">기저귀 갈 때 편리</p></div>
+    <div class="live-benefit-card" style="padding:16px;"><div class="quick-show-img" style="aspect-ratio:1;border-radius:6px;margin-bottom:10px;"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-03.jpg" alt="컬러"></div><h4 style="font-size:13px;">5가지 컬러</h4><p style="font-size:11px;">취향에 맞는 선택</p></div>
+  </div>
+</div>
+
+<!-- 13 -->
+<div class="sec-guide-label"><h3>13 — LIFESTYLE</h3><p>풀블리드 감성 이미지 + 캡션</p><div class="tags"><span class="tag opt">선택</span> <span class="tag new">신규</span></div></div>
+<div class="fb-img" style="margin:0;"><img src="../../../projects/detail-pages/current/images/abc/hero-01.jpg" alt="라이프스타일"></div>
+<div class="lifestyle-caption">Our little dreamers, sleeping peacefully</div>
+
+<!-- Variation B: Alt Lifestyle Image -->
+<div class="var-divider"><span>VARIATION B — ALT IMAGE (대체 이미지 예시)</span></div>
+<div class="fb-img" style="margin:0;"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-01-02.jpg" alt="라이프스타일 B"></div>
+<div class="lifestyle-caption">Wrapped in comfort, dreaming in peace</div>
+<!-- Variation C: Lifestyle with Product -->
+<div class="var-divider"><span>VARIATION C — PRODUCT LIFESTYLE (제품 착용 이미지)</span></div>
+<div class="fb-img" style="margin:0;"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-03-01.jpg" alt="라이프스타일 C"></div>
+<div class="lifestyle-caption">Every night, a little more peaceful</div>
+
+<!-- 14 -->
+<div class="sec-guide-label"><h3>14 — SIZE & SPEC</h3><p>사이즈표 + 소재 비교 테이블</p><div class="tags"><span class="tag opt">선택</span> <span class="tag new">신규</span></div></div>
+<div class="sec warm">
+  <div class="sec-label">Size & Spec</div>
+  <div class="sec-title">사이즈 및 소재 정보</div>
+  <table class="sz-tbl"><thead><tr><th>사이즈</th><th>월령</th><th>키</th></tr></thead><tbody><tr><td>S</td><td>0~6개월</td><td>~67cm</td></tr><tr><td>M</td><td>6~18개월</td><td>67~80cm</td></tr></tbody></table>
+</div>
+
+<!-- 15 -->
+<div class="sec-guide-label"><h3>15 — REVIEW</h3><p>별점 통계 + 대표 리뷰</p><div class="tags"><span class="tag req">필수</span></div></div>
+<div class="sec">
+  <div class="sec-label tx-center">Real Review</div>
+  <div class="sec-title tx-center">솔직한 이야기</div>
+  <div class="rv-stats"><div class="rv-stat"><div class="rv-stat-val">4.9 <span class="unit">/ 5.0</span></div><div class="rv-stat-label">평균 평점</div></div><div class="rv-stat"><div class="rv-stat-val">2,847</div><div class="rv-stat-label">누적 리뷰</div></div></div>
+  <div class="rv"><div class="rv-stars">★ ★ ★ ★ ★</div><div class="rv-quote">"<em>아이가 새벽에 안 깨요</em>"</div><div class="rv-meta">ddo*** · 2026.02.14</div><div class="rv-body">슬리핑백 입히고 나서 1번으로 줄었어요.</div></div>
+</div>
+
+<!-- 16 -->
+<div class="sec-guide-label"><h3>16 — SOCIAL PROOF</h3><p>SNS 후기 카드 그리드</p><div class="tags"><span class="tag opt">선택</span> <span class="tag new">신규</span></div></div>
+<div class="sec warm">
+  <div class="sec-label tx-center">Social Proof</div>
+  <div class="sec-title tx-center">SNS 후기</div>
+  <div class="social-grid">
+    <div class="social-card"><div class="social-card-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-01-02.jpg" alt="후기"></div><div class="social-card-body"><div class="social-card-user">@happy_mom</div><div class="social-quote">밤새 푹 자는 아기...</div></div></div>
+    <div class="social-card"><div class="social-card-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-02-01.jpg" alt="후기"></div><div class="social-card-body"><div class="social-card-user">@baby_diary</div><div class="social-quote">촉감이 진짜 좋아요</div></div></div>
+    <div class="social-card"><div class="social-card-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-03-01.jpg" alt="후기"></div><div class="social-card-body"><div class="social-card-user">@mom_life_</div><div class="social-quote">재구매 3번째!</div></div></div>
+  </div>
+</div>
+
+<!-- Variation B: 2-Column Social -->
+<div class="var-divider"><span>VARIATION B — 2-COLUMN (2열 레이아웃, 긴 후기)</span></div>
+<div class="sec warm">
+  <div class="sec-label tx-center">Social Proof</div>
+  <div class="sec-title tx-center">SNS 후기</div>
+  <div class="social-grid" style="grid-template-columns:1fr 1fr;">
+    <div class="social-card"><div class="social-card-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-02-01.jpg" alt="후기"></div><div class="social-card-body"><div class="social-card-user">@sleeping_baby</div><div class="social-quote">밤새 한번도 안깨고 꿀잠! 엄마도 드디어 숙면</div></div></div>
+    <div class="social-card"><div class="social-card-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-03-01.jpg" alt="후기"></div><div class="social-card-body"><div class="social-card-user">@newborn_diary</div><div class="social-quote">출산선물로 받았는데 대박.. 재구매 예정!</div></div></div>
+  </div>
+</div>
+
+<!-- 17 -->
+<div class="sec-guide-label"><h3>17 — GIFT EVENT</h3><p>사은품 안내</p><div class="tags"><span class="tag opt">선택</span></div></div>
+<div class="sec">
+  <div class="sec-label tx-center">Gift for You</div>
+  <div class="sec-title tx-center">특별 선물</div>
+  <div class="event"><div class="event-badge">GIFT</div><div class="event-body"><div class="event-title">감사 선물을 드려요</div><div class="event-gifts"><div class="event-gift"><div class="event-gift-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-04.jpg" alt="손수건"></div><div class="event-gift-info"><h5>밤부 손수건</h5><p>전 구매자</p></div></div><div class="event-gift"><div class="event-gift-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-05-01.jpg" alt="세제"></div><div class="event-gift-info"><h5>미니 세제</h5><p>2개 이상</p></div></div></div></div></div>
+</div>
+
+<!-- 18 -->
+<div class="sec-guide-label"><h3>18 — TARGET PERSONA</h3><p>"이런 분께 추천" 체크리스트</p><div class="tags"><span class="tag opt">선택</span> <span class="tag new">신규</span></div></div>
+<div class="sec warm">
+  <div class="sec-label tx-center">Who Is This For?</div>
+  <div class="sec-title tx-center">이런 분께 추천해요</div>
+  <div class="target-list">
+    <div class="target-item"><div class="target-check">✓</div><p>아이가 밤에 자주 깨서 힘드신 분</p></div>
+    <div class="target-item"><div class="target-check">✓</div><p>안전한 수면 환경이 중요하신 분</p></div>
+    <div class="target-item"><div class="target-check">✓</div><p>출산 선물을 고민 중이신 분</p></div>
+  </div>
+</div>
+
+<!-- 19 -->
+<div class="sec-guide-label"><h3>19 — FAQ</h3><p>정적 Q&A (항상 열림, 아코디언 아님)</p><div class="tags"><span class="tag opt">선택</span></div></div>
+<div class="sec">
+  <div class="sec-label tx-center">FAQ</div>
+  <div class="sec-title tx-center">자주 묻는 질문</div>
+  <div class="faq">
+    <div class="faq-item"><div class="faq-q">라이브 가격은 언제까지?</div><div class="faq-a"><div class="faq-a-inner">방송 중에만 적용됩니다.</div></div></div>
+    <div class="faq-item"><div class="faq-q">교환/반품 가능한가요?</div><div class="faq-a"><div class="faq-a-inner">7일 이내 미사용 제품 가능합니다.</div></div></div>
+  </div>
+</div>
+
+<!-- 20 -->
+<div class="sec-guide-label"><h3>20 — SHIPPING</h3><p>배송/교환/반품 2x2 카드</p><div class="tags"><span class="tag req">필수</span> <span class="tag new">신규</span></div></div>
+<div class="sec warm">
+  <div class="sec-label tx-center">Shipping & Exchange</div>
+  <div class="sec-title tx-center">배송 안내</div>
+  <div class="ship-grid">
+    <div class="ship-card"><div class="ship-card-ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><h4>무료 배송</h4><p>제주/도서산간 포함</p></div>
+    <div class="ship-card"><div class="ship-card-ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h4>당일 출고</h4><p>오후 2시 이전 주문</p></div>
+    <div class="ship-card"><div class="ship-card-ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></div><h4>7일 교환</h4><p>미사용 제품</p></div>
+    <div class="ship-card"><div class="ship-card-ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h4>고객센터</h4><p>평일 10~17시</p></div>
+  </div>
+</div>
+
+<!-- 21 -->
+<div class="sec-guide-label"><h3>21 — GUARANTEE</h3><p>구매 안심 보장 (무료반품/환불)</p><div class="tags"><span class="tag opt">선택</span> <span class="tag new">신규</span></div></div>
+<div class="sec">
+  <div class="sec-label tx-center">Guarantee</div>
+  <div class="sec-title tx-center">안심하고 구매하세요</div>
+  <div class="ship-grid">
+    <div class="ship-card"><div class="ship-card-ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>무료 반품</h4><p>무료 반품 가능</p></div>
+    <div class="ship-card"><div class="ship-card-ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div><h4>100% 환불</h4><p>전액 환불 보장</p></div>
+  </div>
+</div>
+
+<!-- 22 -->
+<div class="sec-guide-label"><h3>22 — CERT BADGES</h3><p>KC인증/무형광/국내생산 배지 그리드</p><div class="tags"><span class="tag opt">선택</span> <span class="tag new">신규</span></div></div>
+<div class="sec warm">
+  <div class="sec-label tx-center">Certifications</div>
+  <div class="sec-title tx-center">인증 배지</div>
+  <div class="cert-badges">
+    <div class="cert-badge"><div class="cert-badge-icon"><span style="font-family:var(--font-en);font-size:12px;font-weight:700;">KC</span></div><h4>KC 인증</h4><p>안전 인증</p></div>
+    <div class="cert-badge"><div class="cert-badge-icon"><span style="font-family:var(--font-en);font-size:12px;font-weight:700;">0%</span></div><h4>무형광</h4><p>불검출</p></div>
+    <div class="cert-badge"><div class="cert-badge-icon"><span style="font-family:var(--font-en);font-size:12px;font-weight:700;">KR</span></div><h4>국내 생산</h4><p>국내 제조</p></div>
+    <div class="cert-badge"><div class="cert-badge-icon"><span style="font-family:var(--font-en);font-size:10px;font-weight:700;">OEK</span></div><h4>OEKO-TEX</h4><p>유해물질 안전</p></div>
+  </div>
+</div>
+
+<!-- 23 -->
+<div class="sec-guide-label"><h3>23 — BRAND QUOTE</h3><p>감성 브랜드 인용문 (다크 배경)</p><div class="tags"><span class="tag opt">선택</span> <span class="tag new">신규</span></div></div>
+<div class="bq"><p>Every child deserves<br>a peaceful night's sleep.</p><small>SUNDAY HUG</small></div>
+
+<!-- 24 -->
+<div class="sec-guide-label"><h3>24 — BRAND STORY</h3><p>브랜드 철학</p><div class="tags"><span class="tag opt">선택</span></div></div>
+<div class="sec warm">
+  <div class="sec-label tx-center">Our Story</div>
+  <div class="sec-title tx-center">아이의 잠이 편안하면<br>온 가족이 행복해져요</div>
+  <div class="sec-desc tx-center">썬데이허그는 잠투정으로 힘들어하는 부모의 마음에서 시작되었습니다.</div>
+</div>
+
+<!-- 28 -->
+<div class="sec-guide-label"><h3>28 — PRODUCT BANNER</h3><p>제품 이미지 배경 + 텍스트 오버레이 배너 (3가지 스타일)</p><div class="tags"><span class="tag opt">선택</span> <span class="tag new">신규</span></div></div>
+<!-- Style A: Dark Overlay + Center -->
+<div class="prod-banner">
+  <img class="prod-banner-img" src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-02-01.jpg" alt="슬리핑백">
+  <div class="prod-banner-overlay dark center">
+    <div class="prod-banner-label">BEST SELLER</div>
+    <div class="prod-banner-title">실키밤부 꿀잠 슬리핑백</div>
+    <div class="prod-banner-desc">아기의 편안한 밤을 위한 프리미엄 슬리핑백</div>
+    <div class="prod-banner-price"><span class="prod-banner-price-live">42,800원</span><span class="prod-banner-price-original">89,000원</span></div>
+    <div><a class="prod-banner-btn" href="#">라이브에서 구매하기</a></div>
+  </div>
+</div>
+<!-- Variation B: Bottom Fade -->
+<div class="var-divider"><span>VARIATION B — BOTTOM FADE (하단 그라데이션 + 가격 강조)</span></div>
+<div class="prod-banner">
+  <img class="prod-banner-img" src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-03-01.jpg" alt="슬리핑백">
+  <div class="prod-banner-overlay bottom-fade bottom">
+    <div class="prod-banner-label">LIMITED EDITION</div>
+    <div class="prod-banner-title">오가닉 코튼 라인<br>새로운 컬러 출시</div>
+    <div class="prod-banner-price"><span class="prod-banner-price-live">39,800원</span><span class="prod-banner-price-original">79,000원</span></div>
+  </div>
+</div>
+<!-- Variation C: Light Overlay + Top -->
+<div class="var-divider"><span>VARIATION C — LIGHT OVERLAY (밝은 오버레이 + 상단 텍스트)</span></div>
+<div class="prod-banner">
+  <img class="prod-banner-img" src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-01-02.jpg" alt="슬리핑백">
+  <div class="prod-banner-overlay light top">
+    <div class="prod-banner-label">NEW ARRIVAL</div>
+    <div class="prod-banner-title">2026 여름 신상<br>메쉬 슬리핑백</div>
+    <div class="prod-banner-desc">통기성 극대화 메쉬 소재로<br>한여름에도 쾌적하게</div>
+    <div><a class="prod-banner-btn" href="#">자세히 보기</a></div>
+  </div>
+</div>
+<!-- Variation D: Dark + Left Aligned -->
+<div class="var-divider"><span>VARIATION D — LEFT ALIGNED (좌측 정렬 + CTA 버튼)</span></div>
+<div class="prod-banner">
+  <img class="prod-banner-img" src="../../../projects/detail-pages/current/images/abc/hero-01.jpg" alt="가족">
+  <div class="prod-banner-overlay dark" style="text-align:left;">
+    <div class="prod-banner-label">FAMILY SET</div>
+    <div class="prod-banner-title">온 가족이 함께하는<br>편안한 밤</div>
+    <div class="prod-banner-desc">슬리핑백 + 이불 + 속싸개<br>프리미엄 패밀리 세트</div>
+    <div><a class="prod-banner-btn" href="#">세트 구매하기</a></div>
+  </div>
+</div>
+<!-- Variation E: Minimal Price Focus -->
+<div class="var-divider"><span>VARIATION E — PRICE FOCUS (가격 중심 심플형)</span></div>
+<div class="prod-banner">
+  <img class="prod-banner-img" src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/overview-01.jpg" alt="슬리핑백">
+  <div class="prod-banner-overlay dark center">
+    <div class="prod-banner-label">LIVE SPECIAL</div>
+    <div class="prod-banner-price" style="margin-bottom:4px;"><span class="prod-banner-price-live" style="font-size:32px;">42,800원</span></div>
+    <div class="prod-banner-title" style="font-size:16px;font-weight:400;">실키밤부 꿀잠 슬리핑백</div>
+    <div class="prod-banner-desc">정가 89,000원 → 라이브 단독 52% 할인</div>
+  </div>
+</div>
+
+<!-- 29 -->
+<div class="sec-guide-label"><h3>29 — PRODUCT GRID</h3><p>추천 상품 2열 카드 그리드 (이미지 + 가격 + 할인율)</p><div class="tags"><span class="tag opt">선택</span> <span class="tag new">신규</span></div></div>
+<div class="sec">
+  <div class="sec-label tx-center">Recommendations</div>
+  <div class="sec-title tx-center">함께 구매하면 좋은 제품</div>
+  <div class="prod-grid">
+    <div class="prod-card"><div class="prod-card-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/overview-01.jpg" alt="크림"></div><div class="prod-card-body"><div class="prod-card-name">실키밤부 슬리핑백 크림</div><div class="prod-card-prices"><span class="prod-card-discount">52%</span><span class="prod-card-price">42,800원</span></div><div class="prod-card-original">89,000원</div><span class="prod-card-badge">LIVE ONLY</span></div></div>
+    <div class="prod-card"><div class="prod-card-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-03.jpg" alt="핑크"></div><div class="prod-card-body"><div class="prod-card-name">실키밤부 슬리핑백 핑크</div><div class="prod-card-prices"><span class="prod-card-discount">52%</span><span class="prod-card-price">42,800원</span></div><div class="prod-card-original">89,000원</div><span class="prod-card-badge">LIVE ONLY</span></div></div>
+    <div class="prod-card"><div class="prod-card-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-04.jpg" alt="그린"></div><div class="prod-card-body"><div class="prod-card-name">실키밤부 슬리핑백 세이지</div><div class="prod-card-prices"><span class="prod-card-discount">48%</span><span class="prod-card-price">45,900원</span></div><div class="prod-card-original">89,000원</div></div></div>
+    <div class="prod-card"><div class="prod-card-img"><img src="../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="베이지"></div><div class="prod-card-body"><div class="prod-card-name">오가닉코튼 슬리핑백 베이지</div><div class="prod-card-prices"><span class="prod-card-discount">45%</span><span class="prod-card-price">48,900원</span></div><div class="prod-card-original">89,000원</div></div></div>
+  </div>
+</div>
+
+<!-- 30 -->
+<div class="sec-guide-label"><h3>30 — COLLECTION BANNER</h3><p>풀 이미지 컬렉션 링크 배너 (하단 그라데이션)</p><div class="tags"><span class="tag opt">선택</span> <span class="tag new">신규</span></div></div>
+<div class="coll-banner">
+  <img class="coll-banner-img" src="../../../projects/detail-pages/current/images/abc/hero-01.jpg" alt="컬렉션">
+  <div class="coll-banner-overlay">
+    <div class="coll-banner-title">Silky Bamboo<br>Collection</div>
+    <div class="coll-banner-sub">사계절 쾌적한 밤부 라인 전체 보기</div>
+    <a class="coll-banner-link" href="#">View Collection →</a>
+  </div>
+</div>
+
+<!-- 31 -->
+<div class="sec-guide-label"><h3>31 — CHANNEL FOLLOW</h3><p>카카오/SNS 채널 팔로우 유도 CTA</p><div class="tags"><span class="tag opt">선택</span> <span class="tag new">신규</span></div></div>
+<div class="ch-follow">
+  <div class="ch-follow-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+  <div class="ch-follow-title">카카오톡 채널 추가하고<br>다음 라이브 알림 받기</div>
+  <div class="ch-follow-desc">새로운 라이브 일정과 특별 할인 소식을<br>가장 먼저 받아보세요.</div>
+  <a class="ch-follow-btn" href="#">채널 추가하기</a>
+</div>
+
+<!-- 25 -->
+<div class="sec-guide-label"><h3>25 — FINAL CTA</h3><p>최종 구매 유도 (다크 배경)</p><div class="tags"><span class="tag req">필수</span></div></div>
+<div class="final-cta"><div class="final-cta-label">LIVE ONLY</div><h2>지금 이 라이브에서만<br>만날 수 있는 가격</h2><p>최대 52% 할인 + 사은품 3종</p><a href="#">라이브 방송 중 구매하기</a><div class="final-cta-note">방송 종료 후 정상가로 변경됩니다</div></div>
+
+<!-- 26 -->
+<div class="sec-guide-label"><h3>26 — CLOSE</h3><p>브랜드 클로징 메시지</p><div class="tags"><span class="tag req">필수</span> <span class="tag new">신규</span></div></div>
+<div class="close"><div class="close-logo">Sunday Hug</div><div class="close-title">오늘도 우리 아이의<br>편안한 잠을 응원합니다</div><div class="close-desc">썬데이허그가 함께하는 밤은<br>온 가족이 편안합니다.</div></div>
+
+<!-- 27 -->
+<div class="sec-guide-label"><h3>27 — FOOTER</h3><p>브랜드 태그라인</p><div class="tags"><span class="tag req">필수</span></div></div>
+<div class="footer"><span>Designed for Families.</span></div>
+
+</div><!-- /catalog-preview -->
+</div><!-- /mode-catalog -->
+
+<script>
+// Palette Switcher — applies to both preview frames
+document.querySelectorAll('.palette-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const p = btn.dataset.p;
+    document.getElementById('preview').setAttribute('data-palette', p);
+    document.getElementById('catalog-preview').setAttribute('data-palette', p);
+    document.querySelectorAll('.palette-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// Mode Tabs
+document.querySelectorAll('.mode-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const mode = btn.dataset.mode;
+    document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.mode-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('mode-' + mode).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

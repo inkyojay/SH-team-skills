@@ -111,11 +111,29 @@ python3 scripts/generate-catalog.py
 
 | 카테고리 | 폴더 | 용도 |
 |----------|------|------|
-| 콘텐츠 제작 | `content-creation/` | 상세페이지, 카드뉴스 |
+| 콘텐츠 제작 | `content-creation/` | 상세페이지, 카드뉴스, 라이브 페이지 |
 | 영상 제작 | `video/` | 릴스 편집, Remotion |
-| 브랜드 | `brand/` | 브랜드 분석, 제품 분석 |
+| 광고 | `advertising/` | 배너, 메타 광고, 인스타, 카카오 |
+| 브랜드 | `brand/` | 브랜드 분석, 제품 분석, 브랜드 가이드 |
 | 마케팅 | `marketing/` | CRO, 카피, 전략 |
 | 도구 | `tools/` | 유틸리티, 스킬 생성 |
+
+## 브랜드별 작업 콘텐츠
+
+상세페이지, 브랜드 스토리 등 브랜드별 작업 콘텐츠는 `output/` 하위에 브랜드 폴더로 관리합니다.
+
+```
+output/
+├── 상세페이지/sundayhug/          # 상세페이지 HTML + images/
+├── 브랜드가이드/sundayhug/pages/  # 브랜드 스토리 페이지
+└── cafe24-skins/sundayhug/        # 카페24 스킨
+```
+
+상세페이지 작업 시:
+- **편집**: `output/상세페이지/sundayhug/` 에서 직접 HTML 편집
+- **프리뷰**: `cd output/상세페이지/sundayhug && python3 -m http.server 8080`
+- **CSS 빌드**: `detail-page-sections` 스킬의 scripts/ 활용
+- **이미지**: `output/상세페이지/sundayhug/images/` (상대경로로 참조)
 
 ## 미디어 대시보드 (MCP 연동)
 

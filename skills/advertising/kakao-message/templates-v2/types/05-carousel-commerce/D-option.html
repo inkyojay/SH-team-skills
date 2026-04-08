@@ -1,0 +1,56 @@
+<!--=============================================================
+  TYPE: 캐러셀 커머스형 (Carousel Commerce)
+  VARIATION: D — Option · 옵션 비교 + 쿠폰 카드
+  DIMENSIONS: 800 × 800px (1:1)
+  PURPOSE: 옵션 A/B 탭 + 제품 비교 + 가격표 + 쿠폰
+  IMAGE SPEC: 제품 사진 300×200px 이상 각 2장 (cover 적용)
+=============================================================-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>캐러셀 커머스 - D Option</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../_base-styles.css">
+<link rel="stylesheet" href="../../_palettes.css">
+</head>
+<body style="margin:0;padding:0;background:#eee;">
+
+<div class="km-card" data-type="commerce">
+  <div style="padding:32px 40px 16px;text-align:center;">
+    <div style="font-size:18px;color:var(--sub);margin-bottom:4px;">봄 슬리핑백 한정 기획세트</div>
+    <div style="font-size:26px;font-weight:700;color:var(--dark);margin-bottom:16px;">3.20(목) 23:59 까지</div>
+    <div class="km-option-header">
+      <div class="km-option-tab active">옵션 A</div>
+      <div class="km-option-tab">옵션 B</div>
+    </div>
+  </div>
+  <div class="km-option-products" style="margin-bottom:16px;">
+    <div class="km-option-item">
+      <img class="km-option-img" src="../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="옵션 A">
+      <div class="km-option-name">실키밤부 슬리핑백</div>
+    </div>
+    <div class="km-option-item">
+      <img class="km-option-img" src="../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="옵션 B">
+      <div class="km-option-name">트리플밤부 슬리핑백</div>
+    </div>
+  </div>
+  <div class="km-price-table">
+    <div class="km-price-row"><span class="km-price-label">정상가</span><span class="km-price-value" style="text-decoration:line-through;color:var(--sub);">119,700원</span></div>
+    <div class="km-price-row"><span class="km-price-label">상시가</span><span class="km-price-value" style="text-decoration:line-through;color:var(--sub);">89,700원</span></div>
+    <div class="km-price-row" style="font-weight:700;color:var(--dark);"><span>라이브 특가</span><span style="display:flex;align-items:center;gap:8px;"><span style="background:var(--danger);color:#fff;padding:2px 8px;border-radius:3px;font-size:13px;font-weight:700;">33%</span><span class="km-price-value" style="font-size:22px;">79,900원</span></span></div>
+  </div>
+  <div class="km-coupon-section">
+    <div class="km-coupon">
+      <div class="km-coupon-amount">20,000원</div>
+      <div class="km-coupon-label">장바구니 할인</div>
+    </div>
+    <div class="km-coupon">
+      <div class="km-coupon-amount">10,000원</div>
+      <div class="km-coupon-label">첫 구매 할인</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

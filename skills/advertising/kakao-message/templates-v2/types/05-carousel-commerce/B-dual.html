@@ -1,0 +1,60 @@
+<!--=============================================================
+  TYPE: 캐러셀 커머스형 (Carousel Commerce)
+  VARIATION: B — Dual · 커버 + 2개 제품 비교 카드
+  DIMENSIONS: 800 × 800px per card (1:1)
+  PURPOSE: 그라데이션 커버 → 2개 제품 나란히 비교
+  IMAGE SPEC: 커버 이미지 불필요 · 제품 사진 300×300px 이상 각 2장
+=============================================================-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>캐러셀 커머스 - B Dual</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../_base-styles.css">
+<link rel="stylesheet" href="../../_palettes.css">
+</head>
+<body style="margin:0;padding:0;background:#eee;">
+
+<!-- Card 1: Gradient Cover -->
+<div class="km-card" data-type="commerce">
+  <div class="km-cover-gradient">
+    <span class="km-badge" style="margin-bottom:24px;">SEASON OFF</span>
+    <div style="font-size:44px;font-weight:700;color:var(--dark);line-height:1.3;">슬리핑백 세트<br>최대 52% OFF</div>
+    <div style="font-size:20px;color:var(--body);margin-top:16px;">실키밤부 · 트리플밤부 · 메쉬</div>
+    <div style="font-family:var(--font-en);font-size:15px;color:var(--sub);letter-spacing:.08em;margin-top:16px;">2026.03.13 — 03.27</div>
+  </div>
+</div>
+
+<!-- Card 2: Dual Product -->
+<div class="km-card" data-type="commerce" style="margin-top:20px;">
+  <div style="padding:36px 40px 12px;text-align:center;">
+    <div style="font-family:var(--font-en);font-size:13px;font-weight:500;letter-spacing:.2em;color:var(--accent);margin-bottom:6px;">SLEEPING BAG</div>
+    <div style="font-size:26px;font-weight:700;color:var(--dark);">활동감 좋은 슬리핑백 2종</div>
+  </div>
+  <div class="km-dual" style="padding-top:20px;padding-bottom:20px;">
+    <div class="km-dual-item">
+      <img class="km-dual-img" src="../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="실키밤부">
+      <div class="km-dual-name">실키밤부 슬리핑백</div>
+      <div class="km-dual-size">SIZE S / M / L</div>
+      <div class="km-dual-price-row">
+        <span class="km-dual-discount">52%</span>
+        <span class="km-dual-price">29,900원</span>
+      </div>
+      <div class="km-dual-orig">62,000원</div>
+    </div>
+    <div class="km-dual-item">
+      <img class="km-dual-img" src="../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="트리플밤부">
+      <div class="km-dual-name">트리플밤부 슬리핑백</div>
+      <div class="km-dual-size">SIZE S / M / L</div>
+      <div class="km-dual-price-row">
+        <span class="km-dual-discount">45%</span>
+        <span class="km-dual-price">34,900원</span>
+      </div>
+      <div class="km-dual-orig">63,000원</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

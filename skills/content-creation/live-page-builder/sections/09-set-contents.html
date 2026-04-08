@@ -1,0 +1,26 @@
+<!--=============================================================
+  SECTION: Set Contents (세트 구성품)
+  ORDER: 09
+  REQUIRED: 🔶 선택
+  BACKGROUND: white
+  PURPOSE: 세트 구성품을 가로로 비주얼 나열.
+
+  DATA REQUIRED:
+  - {{#set_items}} : 구성품 배열
+    각 항목: { image, name, qty }
+  - {{set_total}}  : 총 구성 요약 (예: "총 4종, 정가 대비 53% 할인")
+=============================================================-->
+<div class="sec">
+  <div class="sec-label tx-center">What's Included</div>
+  <div class="sec-title tx-center">세트 구성품 안내</div>
+  <div class="set-grid">
+    {{#set_items}}
+    <div class="set-item">
+      <div class="set-item-img"><img src="{{image}}" alt=""></div>
+      <h4>{{name}}</h4>
+      <p>{{qty}}</p>
+    </div>
+    {{/set_items}}
+  </div>
+  <div class="set-total">{{set_total}}</div>
+</div>

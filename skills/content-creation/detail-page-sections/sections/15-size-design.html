@@ -1,0 +1,26 @@
+<!--=============================================================
+  SECTION: Size Design (사이즈별 디자인)
+  ORDER: 15
+  REQUIRED: 🔶 선택 — 사이즈별 기능 차이가 있을 때
+  BACKGROUND: warm
+  PURPOSE: 사이즈별로 기능이 다른 경우 차이점을 시각적으로 보여준다.
+
+  DATA REQUIRED:
+  - {{#size_cards}} : 사이즈 카드 배열
+    각 항목: { step, size_label, image, tags[] }
+=============================================================-->
+<div class="sec warm v">
+  <div class="sec-label">Size Design</div>
+  <div class="sec-title">아이 성장 단계에 맞춘<br>사이즈별 맞춤 디자인</div>
+  <div class="sz-cards v">
+    {{#size_cards}}
+    <div class="sz-card">
+      <div class="sz-card-hd"><h4>{{step}}</h4><p>{{size_label}}</p></div>
+      <div class="sz-card-img"><img src="{{image}}" alt="{{size_label}}"></div>
+      <div class="sz-card-tags">
+        {{#tags}}<span class="sz-tag">{{.}}</span>{{/tags}}
+      </div>
+    </div>
+    {{/size_cards}}
+  </div>
+</div>

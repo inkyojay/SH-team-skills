@@ -1,0 +1,50 @@
+<!--=============================================================
+  SECTION: Product Guide (제품 가이드)
+  ORDER: 10 (Event / Lifestyle Image 뒤)
+  REQUIRED: 🔶 선택 — 시리즈/연계 제품이 있을 때
+  BACKGROUND: warm
+  PURPOSE: 현재 제품이 브랜드 전체 라인업에서 어디에 위치하는지 보여주고,
+           고객이 자신에게 맞는 제품을 쉽게 찾을 수 있게 한다.
+           해당 제품 행은 .active로 강조.
+
+  WHEN TO USE:
+  - 수면 시리즈 (스와들→슬리핑백→수면조끼)
+  - 이동 시리즈 (아기띠→힙시트→유모차)
+  - 단독 제품인 경우 이 섹션 생략
+
+  DATA REQUIRED:
+  - {{guide_title}}       : 섹션 제목
+  - {{guide_subtitle}}    : 설명
+  - {{guide_header}}      : 가이드 박스 타이틀
+  - {{guide_header_sub}}  : 가이드 박스 부제
+  - {{#guide_steps}}      : 스텝 배열
+    각 스텝: { step, name, desc, tags, url, is_current }
+=============================================================-->
+<div class="sec warm v">
+  <div class="sec-label">{{guide_label}}</div>
+  <div class="sec-title">{{guide_title}}</div>
+  <div class="sec-desc">{{guide_subtitle}}</div>
+
+  <div class="guide v">
+    <div class="guide-hd">
+      <h3>{{guide_header}}</h3>
+      <p>{{guide_header_sub}}</p>
+    </div>
+    {{#guide_steps}}
+    {{?is_current}}
+    <div class="guide-row active">
+    {{/is_current}}
+    {{?is_not_current}}
+    <a href="{{url}}" class="guide-row">
+    {{/is_not_current}}
+      <div>
+        <div class="guide-step">{{step}}</div>
+        <div class="guide-name">{{name}}</div>
+        <div class="guide-desc">{{desc}}</div>
+        <div class="guide-tags">{{tags}}</div>
+      </div>
+    {{?is_current}}</div>{{/is_current}}
+    {{?is_not_current}}</a>{{/is_not_current}}
+    {{/guide_steps}}
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<!--=============================================================
+  SECTION: Shipping & Exchange (배송/교환/반품)
+  ORDER: 19
+  REQUIRED: ✅ 필수
+  BACKGROUND: warm
+  PURPOSE: 배송, 출고, 교환/반품, 고객센터 정보를 명확히 제공.
+           구매 전 불안 요소를 제거하는 신뢰 섹션.
+
+  DESIGN NOTES:
+  - 2x2 그리드 카드, 각 카드에 SVG 인라인 아이콘
+  - 이모티콘/HTML 엔티티 사용 금지 → 반드시 SVG 아이콘 사용
+
+  DATA REQUIRED:
+  - {{#shipping_cards}} : 4개 카드 배열
+    각 항목: { svg_icon, title, desc_html }
+    svg_icon: 인라인 SVG (20x20, stroke currentColor)
+=============================================================-->
+<div class="sec warm v">
+  <div class="sec-label tx-center">Shipping & Exchange</div>
+  <div class="sec-title tx-center">배송 및 교환/반품 안내</div>
+
+  <div class="ship-grid v">
+    <div class="ship-card">
+      <div class="ship-card-ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+      <h4>{{ship_title_1}}</h4>
+      <p>{{ship_desc_1}}</p>
+    </div>
+    <div class="ship-card">
+      <div class="ship-card-ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <h4>{{ship_title_2}}</h4>
+      <p>{{ship_desc_2}}</p>
+    </div>
+    <div class="ship-card">
+      <div class="ship-card-ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></div>
+      <h4>{{ship_title_3}}</h4>
+      <p>{{ship_desc_3}}</p>
+    </div>
+    <div class="ship-card">
+      <div class="ship-card-ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+      <h4>{{ship_title_4}}</h4>
+      <p>{{ship_desc_4}}</p>
+    </div>
+  </div>
+</div>
