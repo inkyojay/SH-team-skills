@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compare Guide — SundayHug Brand Pages</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   SundayHug Pages — Shared Design System
+   브랜드 가이드 기반 공유 CSS
+   ============================================================ */
+
+/* ─── CSS VARIABLES ─── */
+:root {
+  /* Primary Palette */
+  --sh-midnight: #2C2C3A;
+  --sh-cloud: #F7F5F2;
+  --sh-warm-ivory: #FBF9F6;
+  --sh-moon: #E8DFD4;
+  --sh-linen: #D9CFC3;
+
+  /* Signature Colors */
+  --sh-dusty-lavender: #C4B5CB;
+  --sh-sage: #B5C4B1;
+  --sh-soft-apricot: #E8C9A8;
+  --sh-misty-blue: #B3C5D3;
+  --sh-blush: #DEB5A8;
+
+  /* Seasonal Accent */
+  --sh-golden-hour: #D4A574;
+  --sh-deep-sage: #7A8F76;
+  --sh-dusty-rose: #C09B8D;
+  --sh-slate-blue: #8A9BB0;
+
+  /* Semantic Tokens */
+  --sh-text-primary: #2C2C3A;
+  --sh-text-secondary: #6B6B7B;
+  --sh-text-tertiary: #9B9BAB;
+  --sh-border: #E8E4DF;
+  --sh-bg-elevated: #FFFFFF;
+
+  /* Font Stacks */
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body-kr: 'Noto Sans KR', sans-serif;
+  --font-body-en: 'DM Sans', sans-serif;
+}
+
+/* ─── RESET ─── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body-kr);
+  background: var(--sh-warm-ivory);
+  color: var(--sh-text-primary);
+  line-height: 1.7;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+
+/* ─── SIDEBAR NAVIGATION ─── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: var(--sh-midnight);
+  padding: 48px 32px;
+  z-index: 100;
+  overflow-y: auto;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav::-webkit-scrollbar { width: 0; }
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--sh-cloud);
+  margin-bottom: 8px;
+}
+
+.nav-subtitle {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sh-text-tertiary);
+  margin-bottom: 48px;
+}
+
+.nav-section { margin-bottom: 28px; }
+
+.nav-section-title {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sh-linen);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.nav a {
+  display: block;
+  text-decoration: none;
+  color: rgba(247, 245, 242, 0.6);
+  font-size: 0.85rem;
+  padding: 6px 0;
+  transition: all 0.3s ease;
+  font-weight: 300;
+}
+
+.nav a:hover {
+  color: var(--sh-cloud);
+  padding-left: 8px;
+}
+
+.nav a.active {
+  color: var(--sh-cloud);
+  font-weight: 500;
+}
+
+/* ─── MOBILE MENU TOGGLE ─── */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 200;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: var(--sh-bg-elevated);
+  border-radius: 12px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  flex-direction: column;
+  gap: 5px;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--sh-midnight);
+  transition: all 0.3s;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(44, 44, 58, 0.5);
+  z-index: 150;
+}
+
+.overlay.active { display: block; }
+
+/* ─── MAIN CONTENT ─── */
+.main {
+  margin-left: 0;
+  min-height: 100vh;
+}
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 120px 100px;
+  background: linear-gradient(135deg, var(--sh-warm-ivory) 0%, var(--sh-moon) 100%);
+  border-bottom: 1px solid var(--sh-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,165,116,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-label {
+  font-family: var(--font-body-en);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sh-text-tertiary);
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--sh-text-primary);
+  margin-bottom: 20px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--sh-golden-hour);
+}
+
+.hero-sub {
+  font-family: var(--font-body-kr);
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--sh-text-secondary);
+  max-width: 480px;
+  line-height: 1.9;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  margin-top: 48px;
+}
+
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--sh-text-primary);
+}
+
+.hero-stat-label {
+  font-size: 0.75rem;
+  color: var(--sh-text-tertiary);
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+
+/* ─── SECTIONS ─── */
+.section {
+  padding: 100px 100px;
+  border-bottom: 1px solid var(--sh-border);
+}
+
+.section:last-of-type { border-bottom: none; }
+
+.section--warm { background: var(--sh-warm-ivory); }
+.section--cloud { background: var(--sh-cloud); }
+.section--elevated { background: var(--sh-bg-elevated); }
+.section--dark {
+  background: var(--sh-midnight);
+  color: var(--sh-cloud);
+}
+
+.section-label {
+  font-family: var(--font-body-en);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sh-text-tertiary);
+  margin-bottom: 16px;
+}
+
+.section--dark .section-label { color: var(--sh-linen); }
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--sh-text-primary);
+  margin-bottom: 20px;
+}
+
+.section-title em { font-style: italic; color: var(--sh-golden-hour); }
+.section--dark .section-title { color: var(--sh-cloud); }
+.section--dark .section-title em { color: var(--sh-golden-hour); }
+
+.lead-text {
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--sh-text-secondary);
+  max-width: 640px;
+  line-height: 2;
+  margin-bottom: 60px;
+}
+
+.section--dark .lead-text { color: var(--sh-linen); }
+
+/* ─── PRODUCT CARD ─── */
+.product-card {
+  background: var(--sh-bg-elevated);
+  border: 1px solid var(--sh-border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(44,44,58,0.08);
+}
+
+.product-card-image {
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body-en);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: rgba(44,44,58,0.4);
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.product-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-card-body {
+  padding: 24px;
+}
+
+.product-card-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+  color: var(--sh-text-primary);
+}
+
+.product-card-desc {
+  font-size: 0.85rem;
+  color: var(--sh-text-secondary);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.product-card-price {
+  font-family: var(--font-body-en);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--sh-text-primary);
+  margin-bottom: 16px;
+}
+
+.product-card-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+/* ─── CTA BUTTONS ─── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  background: var(--sh-midnight);
+  color: var(--sh-cloud);
+  font-family: var(--font-body-kr);
+  font-size: 0.85rem;
+  font-weight: 400;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: #3D3D4E;
+  box-shadow: 0 4px 16px rgba(44,44,58,0.2);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  background: transparent;
+  color: var(--sh-text-primary);
+  font-family: var(--font-body-kr);
+  font-size: 0.85rem;
+  font-weight: 400;
+  border: 1px solid var(--sh-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-outline:hover {
+  border-color: var(--sh-midnight);
+  box-shadow: 0 2px 8px rgba(44,44,58,0.1);
+}
+
+.section--dark .btn-outline {
+  color: var(--sh-cloud);
+  border-color: rgba(247,245,242,0.3);
+}
+
+.section--dark .btn-outline:hover {
+  border-color: var(--sh-cloud);
+}
+
+/* ─── AGE BADGE ─── */
+.age-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-family: var(--font-body-en);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.age-badge--newborn {
+  background: rgba(232,201,168,0.2);
+  color: #8B7355;
+}
+
+.age-badge--infant {
+  background: rgba(181,196,177,0.2);
+  color: var(--sh-deep-sage);
+}
+
+.age-badge--baby {
+  background: rgba(196,181,203,0.2);
+  color: #6B5A7A;
+}
+
+.age-badge--toddler {
+  background: rgba(179,197,211,0.2);
+  color: var(--sh-slate-blue);
+}
+
+/* ─── MATERIAL CHIP ─── */
+.material-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  border: 1px solid var(--sh-border);
+  background: var(--sh-bg-elevated);
+}
+
+.material-chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.material-chip--silky .material-chip-dot { background: var(--sh-dusty-lavender); }
+.material-chip--triple .material-chip-dot { background: var(--sh-sage); }
+.material-chip--mesh .material-chip-dot { background: var(--sh-misty-blue); }
+
+/* ─── TOG CARD ─── */
+.tog-card {
+  padding: 32px;
+  border-radius: 16px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.tog-card:hover { transform: translateY(-4px); }
+
+.tog-number {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
+.tog-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.tog-temp {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.tog-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* ─── IMAGE PLACEHOLDER ─── */
+.img-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body-en);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(44,44,58,0.35);
+  text-align: center;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+/* ─── TWO COLUMN LAYOUT ─── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.four-col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* ─── INFO CARD ─── */
+.info-card {
+  padding: 40px;
+  background: var(--sh-bg-elevated);
+  border: 1px solid var(--sh-border);
+  border-radius: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(44,44,58,0.06);
+}
+
+.info-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 24px;
+}
+
+.info-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.info-card p {
+  font-size: 0.9rem;
+  color: var(--sh-text-secondary);
+  line-height: 1.8;
+}
+
+/* ─── FILTER CHIPS ─── */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.filter-chip {
+  padding: 8px 20px;
+  border: 1px solid var(--sh-border);
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 400;
+  background: var(--sh-bg-elevated);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-chip:hover {
+  border-color: var(--sh-midnight);
+}
+
+.filter-chip.active {
+  background: var(--sh-midnight);
+  color: var(--sh-cloud);
+  border-color: var(--sh-midnight);
+}
+
+/* ─── FOOTER ─── */
+.footer {
+  padding: 60px 100px;
+  text-align: center;
+  background: var(--sh-midnight);
+  color: var(--sh-linen);
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 300;
+  margin-bottom: 16px;
+  color: var(--sh-cloud);
+}
+
+.footer p {
+  font-size: 0.8rem;
+  color: var(--sh-text-tertiary);
+  line-height: 1.6;
+}
+
+/* ─── SCROLL ANIMATION ─── */
+.v {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.v.on {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1023px) {
+  .nav {
+    transform: translateX(-100%);
+  }
+
+  .nav.open {
+    transform: translateX(0);
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+
+  .hero {
+    padding: 100px 48px 80px;
+    min-height: 60vh;
+  }
+
+  .section {
+    padding: 60px 48px;
+  }
+
+  .footer {
+    padding: 48px;
+  }
+
+  .two-col {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .three-col {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .four-col {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .tog-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .product-card-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-stats {
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    padding: 64px 20px 40px;
+    min-height: auto;
+  }
+
+  .hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .hero::after {
+    width: 200px;
+    height: 200px;
+    opacity: 0.5;
+  }
+
+  .hero-sub {
+    font-size: 0.88rem;
+  }
+
+  .hero-label {
+    margin-bottom: 16px;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .hero-stat-num {
+    font-size: 1.8rem;
+  }
+
+  .section {
+    padding: 40px 20px;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+    margin-bottom: 14px;
+  }
+
+  .section-label {
+    font-size: 0.6rem;
+    margin-bottom: 10px;
+  }
+
+  .lead-text {
+    font-size: 0.85rem;
+    margin-bottom: 32px;
+    line-height: 1.8;
+  }
+
+  .footer {
+    padding: 32px 16px;
+  }
+
+  .footer-logo {
+    font-size: 1.1rem;
+  }
+
+  .info-card {
+    padding: 24px 18px;
+  }
+
+  .info-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .product-card-body {
+    padding: 16px;
+  }
+
+  .tog-card {
+    padding: 20px;
+  }
+
+  .tog-number {
+    font-size: 2rem;
+  }
+
+  .three-col,
+  .four-col {
+    grid-template-columns: 1fr;
+  }
+
+  .tog-row {
+    grid-template-columns: 1fr;
+  }
+
+  .product-card-row {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-bar {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+  }
+
+  .filter-chip {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 56px 16px 32px;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+
+  .section {
+    padding: 32px 14px;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+
+  .lead-text {
+    margin-bottom: 24px;
+  }
+
+  .footer {
+    padding: 28px 14px;
+  }
+}
+
+</style>
+<style>
+/* ─── Page-specific: Compare Guide ─── */
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 120px 100px;
+  background: linear-gradient(135deg, var(--sh-warm-ivory) 0%, var(--sh-moon) 50%, var(--sh-soft-apricot) 100%);
+  border-bottom: 1px solid var(--sh-border);
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,201,168,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-label {
+  font-family: var(--font-body-en);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sh-text-tertiary);
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--sh-text-primary);
+  margin-bottom: 20px;
+}
+.hero h1 em { font-style: italic; color: var(--sh-golden-hour); }
+.hero-sub {
+  font-family: var(--font-body-kr);
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--sh-text-secondary);
+  max-width: 480px;
+  line-height: 1.9;
+}
+
+/* ─── SECTIONS ─── */
+.section {
+  padding: 100px 100px;
+  border-bottom: 1px solid var(--sh-border);
+}
+.section-bg-alt { background: var(--sh-cloud); }
+.section-label {
+  font-family: var(--font-body-en);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sh-text-tertiary);
+  margin-bottom: 16px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--sh-text-primary);
+  margin-bottom: 20px;
+}
+.section-title em { font-style: italic; color: var(--sh-golden-hour); }
+.lead-text {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--sh-text-secondary);
+  max-width: 600px;
+  line-height: 2;
+  margin-bottom: 56px;
+}
+
+/* ─── COMPARE TABLE ─── */
+.compare-table-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--sh-border);
+}
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.compare-table thead tr {
+  background: var(--sh-midnight);
+}
+.compare-table thead th {
+  padding: 20px 24px;
+  text-align: left;
+  font-family: var(--font-body-en);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+}
+.compare-table thead th:first-child {
+  width: 180px;
+  color: rgba(255,255,255,0.5);
+}
+.compare-table thead .col-hl {
+  background: rgba(212,165,116,0.25);
+  color: var(--sh-soft-apricot);
+}
+.compare-table tbody tr {
+  border-bottom: 1px solid var(--sh-border);
+  background: var(--sh-bg-elevated);
+}
+.compare-table tbody tr:hover { background: var(--sh-warm-ivory); }
+.compare-table tbody tr:last-child { border-bottom: none; }
+.compare-table tbody td {
+  padding: 16px 24px;
+  vertical-align: top;
+  color: var(--sh-text-secondary);
+  font-weight: 300;
+  line-height: 1.7;
+}
+.compare-table tbody td:first-child {
+  color: var(--sh-text-tertiary);
+  font-family: var(--font-body-en);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.compare-table tbody .col-hl {
+  background: rgba(212,165,116,0.05);
+  color: var(--sh-text-primary);
+  font-weight: 400;
+}
+
+/* 3-col compare */
+.compare-3col thead th { text-align: center; }
+.compare-3col thead th:first-child { text-align: left; }
+.compare-3col tbody td { text-align: center; }
+.compare-3col tbody td:first-child { text-align: left; }
+.compare-3col .col-hl { background: rgba(181,196,177,0.12); }
+
+/* ─── FLOW CHART ─── */
+.flow-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin-top: 48px;
+}
+.flow-question {
+  background: var(--sh-midnight);
+  color: #fff;
+  border-radius: 40px;
+  padding: 14px 32px;
+  font-size: 0.9rem;
+  font-weight: 400;
+  text-align: center;
+  width: fit-content;
+  max-width: 380px;
+  min-width: 200px;
+}
+.flow-arrow {
+  width: 2px;
+  height: 28px;
+  background: var(--sh-border);
+  margin: 0 auto;
+  position: relative;
+}
+.flow-arrow::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid var(--sh-linen);
+}
+.flow-branch {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0;
+  width: 100%;
+  max-width: 700px;
+  align-items: flex-start;
+}
+.flow-branch-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.flow-branch-label {
+  font-family: var(--font-body-en);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sh-text-tertiary);
+  margin-bottom: 8px;
+  padding: 0 8px;
+  text-align: center;
+}
+.flow-answer {
+  background: var(--sh-bg-elevated);
+  border: 1px solid var(--sh-border);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+}
+.flow-answer-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--sh-text-primary);
+  margin-bottom: 6px;
+}
+.flow-answer-desc {
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--sh-text-secondary);
+  line-height: 1.6;
+}
+.flow-answer.rec-swaddle { background: var(--sh-misty-blue); border-color: var(--sh-misty-blue); }
+.flow-answer.rec-bag { background: var(--sh-sage); border-color: var(--sh-sage); }
+.flow-answer.rec-relaxer { background: var(--sh-soft-apricot); border-color: var(--sh-soft-apricot); }
+.flow-answer.rec-both { background: var(--sh-dusty-lavender); border-color: var(--sh-dusty-lavender); }
+.flow-center-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--sh-linen);
+  margin: 14px auto 0;
+}
+.flow-h-line {
+  height: 2px;
+  background: var(--sh-border);
+  flex: 1;
+  margin-top: 16px;
+}
+.flow-connector {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 700px;
+}
+
+/* ─── HONEST TABLE ─── */
+.honest-table-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--sh-border);
+}
+.honest-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  background: var(--sh-bg-elevated);
+}
+.honest-table thead {
+  background: var(--sh-midnight);
+}
+.honest-table thead th {
+  padding: 16px 20px;
+  text-align: left;
+  font-family: var(--font-body-en);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+}
+.honest-table tbody tr { border-bottom: 1px solid var(--sh-border); }
+.honest-table tbody tr:last-child { border-bottom: none; }
+.honest-table tbody tr:hover { background: var(--sh-warm-ivory); }
+.honest-table tbody td { padding: 14px 20px; color: var(--sh-text-secondary); font-weight: 300; vertical-align: top; line-height: 1.7; }
+.honest-table tbody td:first-child { font-weight: 500; color: var(--sh-text-primary); }
+.pro-tag {
+  display: inline-block;
+  background: #e8f5e9;
+  color: #2e7d32;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+.con-tag {
+  display: inline-block;
+  background: #fff3e0;
+  color: #e65100;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* ─── FOOTER ─── */
+.footer {
+  background: var(--sh-midnight);
+  color: var(--sh-cloud);
+  text-align: center;
+  padding: 60px 24px;
+}
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+.footer-text {
+  font-size: 0.8rem;
+  color: var(--sh-linen);
+  font-weight: 300;
+  margin-bottom: 16px;
+}
+.footer-copy {
+  font-size: 0.7rem;
+  color: var(--sh-text-tertiary);
+}
+
+/* ─── RESPONSIVE (page-specific) ─── */
+@media (max-width: 1023px) {
+  .hero { padding: 100px 60px 80px; }
+  .section { padding: 72px 60px; }
+}
+
+@media (max-width: 767px) {
+  .hero { padding: 80px 24px 60px; min-height: 60vh; }
+  .hero h1 { font-size: 2.4rem; }
+  .flow-branch { grid-template-columns: 1fr; gap: 16px; }
+  .flow-h-line { display: none; }
+  .flow-connector { flex-direction: column; align-items: center; }
+}
+
+
+/* ══ Mobile Optimization Fix ══ */
+@media (max-width: 767px) {
+  /* 테이블 기본 스크롤 처리 */
+  table { max-width: 100%; }
+  .compare-table-wrap, .table-wrap, .tbl-wrap,
+  .size-table-wrap, .honest-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* 인라인 고정폭 오버플로우 방지 */
+  [style*="width"][style*="px"]:not(img):not(svg) {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 1.5rem !important; }
+  .section-title { font-size: 1.2rem !important; }
+  .lead-text { font-size: 0.82rem; line-height: 1.75; margin-bottom: 20px; }
+  .footer { padding: 28px 14px; }
+  .footer-logo { font-size: 1rem; }
+}
+
+/* 비교 테이블 모바일: 카드형으로 전환 */
+@media (max-width: 767px) {
+  /* 플로우 다이어그램 고정폭 제거 */
+  .flow-branch, .flow-connector {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* 비교 테이블 — 가로 스크롤 + 첫 열 고정 */
+  .compare-table-wrap, .honest-table-wrap {
+    position: relative;
+    margin: 0 -20px;
+    padding: 0;
+  }
+  .compare-table, .honest-table {
+    min-width: 0;
+    font-size: 0.78rem;
+  }
+  .compare-table th, .compare-table td,
+  .honest-table th, .honest-table td {
+    padding: 10px 10px;
+    font-size: 0.78rem;
+    white-space: normal;
+    word-break: keep-all;
+    vertical-align: top;
+    min-width: 90px;
+  }
+  .compare-table th:first-child,
+  .compare-table td:first-child,
+  .honest-table th:first-child,
+  .honest-table td:first-child {
+    position: sticky;
+    left: 0;
+    background: var(--sh-bg-elevated, #fff);
+    z-index: 2;
+    min-width: 80px;
+    box-shadow: 2px 0 4px rgba(0,0,0,0.06);
+  }
+  .compare-table th:first-child,
+  .honest-table th:first-child {
+    background: var(--sh-midnight, #2C2C3A);
+    z-index: 3;
+  }
+  .col-hl { min-width: 100px; }
+}
+@media (max-width: 480px) {
+  .compare-table th, .compare-table td,
+  .honest-table th, .honest-table td {
+    padding: 8px 6px;
+    font-size: 0.72rem;
+    min-width: 76px;
+  }
+}
+
+
+/* ══ Table Scroll UX ══ */
+
+/* Min-widths: 컬럼 압축 방지 */
+.compare-table { min-width: 480px; }
+.compare-3col, .compare-table.compare-3col { min-width: 560px; }
+.honest-table { min-width: 560px; }
+.test-table { min-width: 500px; }
+.size-table { min-width: 460px; display: table; }
+
+/* 스크롤 컨테이너 공통 */
+.compare-table-wrap,
+.honest-table-wrap,
+.table-wrap,
+.size-table-wrap,
+.tbl-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 767px) {
+  .compare-table-wrap,
+  .honest-table-wrap,
+  .table-wrap,
+  .size-table-wrap,
+  .tbl-wrap {
+    /* CSS-only 스크롤 그림자 — 스크롤 위치에 따라 자동 표시/숨김 */
+    background:
+      linear-gradient(to right, var(--sh-warm-ivory, #FBF9F6) 30%, transparent) left center,
+      linear-gradient(to left, var(--sh-warm-ivory, #FBF9F6) 30%, transparent) right center,
+      radial-gradient(farthest-side at 0 50%, rgba(44,44,58,0.12), transparent) left center,
+      radial-gradient(farthest-side at 100% 50%, rgba(44,44,58,0.12), transparent) right center;
+    background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
+    background-repeat: no-repeat;
+    background-attachment: local, local, scroll, scroll;
+    /* 얇은 스크롤바 */
+    scrollbar-width: thin;
+    scrollbar-color: var(--sh-linen, #D9CFC3) transparent;
+    padding-bottom: 6px;
+    border-radius: 8px;
+  }
+  .compare-table-wrap::-webkit-scrollbar,
+  .honest-table-wrap::-webkit-scrollbar,
+  .table-wrap::-webkit-scrollbar,
+  .size-table-wrap::-webkit-scrollbar,
+  .tbl-wrap::-webkit-scrollbar { height: 4px; }
+
+  .compare-table-wrap::-webkit-scrollbar-thumb,
+  .honest-table-wrap::-webkit-scrollbar-thumb,
+  .table-wrap::-webkit-scrollbar-thumb,
+  .size-table-wrap::-webkit-scrollbar-thumb,
+  .tbl-wrap::-webkit-scrollbar-thumb {
+    background: var(--sh-linen, #D9CFC3);
+    border-radius: 2px;
+  }
+
+  .compare-table-wrap::-webkit-scrollbar-track,
+  .honest-table-wrap::-webkit-scrollbar-track,
+  .table-wrap::-webkit-scrollbar-track,
+  .size-table-wrap::-webkit-scrollbar-track,
+  .tbl-wrap::-webkit-scrollbar-track { background: transparent; }
+
+  /* 스크롤 힌트 텍스트 */
+  .scroll-hint {
+    text-align: center;
+    font-size: 0.68rem;
+    color: var(--sh-text-tertiary, #9B9BAB);
+    letter-spacing: 0.1em;
+    padding: 6px 0;
+    margin: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  /* 테이블 셀 모바일 기본 */
+  .compare-table th, .compare-table td,
+  .honest-table th, .honest-table td,
+  .test-table th, .test-table td,
+  .size-table th, .size-table td {
+    font-size: 0.8rem;
+    padding: 10px 10px;
+    white-space: normal;
+    word-break: keep-all;
+    vertical-align: top;
+  }
+
+  /* 첫 열 고정 (비교표) */
+  .compare-table th:first-child,
+  .compare-table td:first-child,
+  .honest-table th:first-child,
+  .honest-table td:first-child {
+    position: sticky;
+    left: 0;
+    background: var(--sh-bg-elevated, #fff);
+    z-index: 2;
+    box-shadow: 2px 0 4px rgba(44,44,58,0.06);
+  }
+  .compare-table thead th:first-child,
+  .honest-table thead th:first-child {
+    background: var(--sh-midnight, #2C2C3A);
+    z-index: 3;
+  }
+}
+
+@media (max-width: 480px) {
+  .compare-table th, .compare-table td,
+  .honest-table th, .honest-table td,
+  .test-table th, .test-table td,
+  .size-table th, .size-table td {
+    font-size: 0.74rem;
+    padding: 8px 8px;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<main class="main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-label">Trust — Compare Guide</div>
+    <h1>Compare &amp; Choose<br><em>Honest Guide</em></h1>
+    <p class="hero-sub">솔직하게 비교하고, 현명하게 선택하세요. 어떤 제품이 우리 아기에게 맞는지, 헷갈리지 않도록 도와드릴게요.</p>
+  </section>
+
+  <!-- SECTION 1: 스와들 vs 슬리핑백 -->
+  <section class="section">
+    <div class="section-label">Comparison 01</div>
+    <h2 class="section-title">스와들 vs 슬리핑백<br><em>우리 아기에겐 뭐가 맞을까요?</em></h2>
+    <p class="lead-text">스와들(포대기형)과 슬리핑백(수면낭형)은 목적이 달라요. 월령과 아기의 발달 단계에 따라 선택 기준도 달라지죠. 두 제품을 솔직하게 비교했어요.</p>
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>비교 항목</th>
+            <th class="col-hl">스와들 (포대기형)</th>
+            <th>슬리핑백 (수면낭형)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>적정 월령</td>
+            <td class="col-hl">신생아 ~ 생후 3~4개월</td>
+            <td>생후 2개월 ~ 36개월+</td>
+          </tr>
+          <tr>
+            <td>사용 목적</td>
+            <td class="col-hl">모로반사 억제, 포근한 포대기 느낌</td>
+            <td>체온 유지, 자유로운 움직임 지원</td>
+          </tr>
+          <tr>
+            <td>주요 장점</td>
+            <td class="col-hl">자궁 안 같은 안정감, 수면 유도에 탁월</td>
+            <td>킥킥거리는 아기 발 발달 방해 없음</td>
+          </tr>
+          <tr>
+            <td>주의사항</td>
+            <td class="col-hl">뒤집기 시작 전에 중단 필요</td>
+            <td>너무 타이트하면 힙 발달에 영향</td>
+          </tr>
+          <tr>
+            <td>세탁 편의성</td>
+            <td class="col-hl">일반적으로 더 쉬움</td>
+            <td>지퍼 방향 확인 필요</td>
+          </tr>
+          <tr>
+            <td>여름철 사용</td>
+            <td class="col-hl">메쉬·대나무 소재 선택 가능</td>
+            <td>낮은 TOG(0.5~1.0) 선택 필요</td>
+          </tr>
+          <tr>
+            <td>외출 사용</td>
+            <td class="col-hl">유모차·카시트 호환 어려움</td>
+            <td>일부 제품 카시트 호환 가능</td>
+          </tr>
+          <tr>
+            <td>졸업 시기</td>
+            <td class="col-hl">뒤집기 시작 즉시 중단 권장</td>
+            <td>걷기 시작할 때까지 사용 가능</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION 2: 릴랙서 vs 바운서 vs 범보 -->
+  <section class="section section-bg-alt">
+    <div class="section-label">Comparison 02</div>
+    <h2 class="section-title">릴랙서 vs 바운서 vs 범보<br><em>포지셔너 완전 비교</em></h2>
+    <p class="lead-text">아기를 앉히거나 눕혀두는 제품이 많아서 어떤 걸 사야 할지 헷갈리죠. 각 제품의 설계 목적이 다르기 때문에, 월령과 상황에 맞게 선택하는 게 중요해요.</p>
+    <div class="compare-table-wrap">
+      <table class="compare-table compare-3col">
+        <thead>
+          <tr>
+            <th>비교 항목</th>
+            <th class="col-hl">썬데이허그 릴랙서</th>
+            <th>바운서</th>
+            <th>범보 시트</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>적정 월령</td>
+            <td class="col-hl">신생아 ~ 6개월</td>
+            <td>0 ~ 9개월</td>
+            <td>4 ~ 14개월</td>
+          </tr>
+          <tr>
+            <td>주요 기능</td>
+            <td class="col-hl">수면·휴식 포지셔닝</td>
+            <td>진동·달래기</td>
+            <td>앉기 연습 보조</td>
+          </tr>
+          <tr>
+            <td>척추 지지</td>
+            <td class="col-hl">최적화된 신생아 각도</td>
+            <td>반경사 지지</td>
+            <td>직립 지지</td>
+          </tr>
+          <tr>
+            <td>공간 차지</td>
+            <td class="col-hl">접이식, 소형</td>
+            <td>중간 ~ 대형</td>
+            <td>소형, 고정형</td>
+          </tr>
+          <tr>
+            <td>사용 장소</td>
+            <td class="col-hl">침실·거실·이동 가능</td>
+            <td>거실·주로 한 곳</td>
+            <td>식탁·거실</td>
+          </tr>
+          <tr>
+            <td>수면 사용</td>
+            <td class="col-hl">가능 (감독 하)</td>
+            <td>감독 하에만 가능</td>
+            <td>불가</td>
+          </tr>
+          <tr>
+            <td>가격대</td>
+            <td class="col-hl">중간</td>
+            <td>중간 ~ 고가</td>
+            <td>낮음 ~ 중간</td>
+          </tr>
+          <tr>
+            <td>세탁 방법</td>
+            <td class="col-hl">커버 탈착 세탁</td>
+            <td>커버 탈착 세탁</td>
+            <td>통세척 가능</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION 3: 플로우차트 -->
+  <section class="section">
+    <div class="section-label">Recommendation Flowchart</div>
+    <h2 class="section-title">우리 아기에게 <em>맞는 제품</em> 찾기</h2>
+    <p class="lead-text">월령, 계절, 수면 고민에 따라 최적의 제품이 달라요. 아래 흐름을 따라가면 우리 아기에게 맞는 제품을 찾을 수 있어요.</p>
+
+    <div class="flow-container">
+      <div class="flow-question">현재 아기의 월령은?</div>
+      <div class="flow-arrow"></div>
+      <div class="flow-branch" style="max-width:640px; display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+        <div>
+          <div class="flow-branch-label">신생아 ~ 3개월</div>
+          <div class="flow-arrow" style="height:16px;"></div>
+          <div class="flow-question" style="font-size:0.82rem;">모로반사로 자주 깨나요?</div>
+          <div class="flow-arrow"></div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div>
+              <div class="flow-branch-label">YES</div>
+              <div class="flow-answer rec-swaddle">
+                <div class="flow-answer-title">스와들</div>
+                <div class="flow-answer-desc">모로반사 억제에 최적화된 포대기형 제품을 추천해요</div>
+              </div>
+            </div>
+            <div>
+              <div class="flow-branch-label">NO</div>
+              <div class="flow-answer rec-relaxer">
+                <div class="flow-answer-title">릴랙서</div>
+                <div class="flow-answer-desc">수유 후 자세 유지가 고민이라면 릴랙서가 도움돼요</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="flow-branch-label">4개월 이상</div>
+          <div class="flow-arrow" style="height:16px;"></div>
+          <div class="flow-question" style="font-size:0.82rem;">뒤집기 시작했나요?</div>
+          <div class="flow-arrow"></div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div>
+              <div class="flow-branch-label">YES</div>
+              <div class="flow-answer rec-bag">
+                <div class="flow-answer-title">슬리핑백</div>
+                <div class="flow-answer-desc">자유로운 움직임을 허용하면서 체온을 유지해요</div>
+              </div>
+            </div>
+            <div>
+              <div class="flow-branch-label">NO</div>
+              <div class="flow-answer rec-both">
+                <div class="flow-answer-title">스와들 또는 슬리핑백</div>
+                <div class="flow-answer-desc">아기 선호도에 따라 선택해도 괜찮아요</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: 자사 제품 간 솔직한 비교 -->
+  <section class="section section-bg-alt">
+    <div class="section-label">Honest Product Comparison</div>
+    <h2 class="section-title">썬데이허그 제품 간 <em>솔직한 비교</em></h2>
+    <p class="lead-text">자사 제품끼리도 모든 것이 완벽하진 않아요. 장점과 단점을 솔직하게 공개해요. 어떤 제품이든 우리 아기에게 맞는 것을 고르는 것이 가장 중요해요.</p>
+    <div class="honest-table-wrap">
+      <table class="honest-table">
+        <thead>
+          <tr>
+            <th>제품명</th>
+            <th>적합한 상황</th>
+            <th>장점</th>
+            <th>솔직한 단점</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>스와들 올시즌</td>
+            <td>신생아부터 사용. 계절 무관 실내 수면</td>
+            <td><span class="pro-tag">PRO</span> 사계절 내내 사용 가능. 소재가 부드러워 예민한 피부에도 적합</td>
+            <td><span class="con-tag">CON</span> 여름 폭염 시 조금 더운 편. 이 경우 메쉬 스와들 추천</td>
+          </tr>
+          <tr>
+            <td>스와들 메쉬</td>
+            <td>여름철 또는 더위를 타는 아기</td>
+            <td><span class="pro-tag">PRO</span> 통기성이 탁월하여 땀 걱정 없음. 빠른 건조</td>
+            <td><span class="con-tag">CON</span> 신축성이 올시즌보다 낮아 감싸는 느낌이 약간 다름</td>
+          </tr>
+          <tr>
+            <td>슬리핑백 대나무</td>
+            <td>4개월 이후 수면. 체온 조절이 중요한 아기</td>
+            <td><span class="pro-tag">PRO</span> 대나무 섬유 특유의 체온 조절 기능. 부드러운 촉감</td>
+            <td><span class="con-tag">CON</span> 가격이 기본 라인보다 높음. 세탁 후 살짝 수축 가능성</td>
+          </tr>
+          <tr>
+            <td>슬리핑백 트리플 대나무</td>
+            <td>겨울철, 또는 차가운 환경</td>
+            <td><span class="pro-tag">PRO</span> TOG 3.5 최고 단열. 한겨울에도 충분한 따뜻함</td>
+            <td><span class="con-tag">CON</span> 무게감이 있어 움직임이 활발한 아기는 답답해할 수 있음</td>
+          </tr>
+          <tr>
+            <td>릴랙서</td>
+            <td>수유 후 자세 유지, 낮잠 포지셔닝</td>
+            <td><span class="pro-tag">PRO</span> 신생아 척추 각도에 최적화. 접이식으로 이동 간편</td>
+            <td><span class="con-tag">CON</span> 수면 중 지속 감독 필요. 자립 수면 훈련 시 의존성 주의</td>
+          </tr>
+          <tr>
+            <td>ABC 솜이불 세트</td>
+            <td>돌 이후 유아 이불로 전환</td>
+            <td><span class="pro-tag">PRO</span> 유아 사이즈로 오래 사용 가능. 커버 교체로 활용도 높음</td>
+            <td><span class="con-tag">CON</span> 신생아기에는 SIDS 위험으로 이불 사용 권장하지 않음</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">SundayHug</div>
+      <div class="footer-text">Designed for Families</div>
+      <div class="footer-copy">&copy; 2025 SundayHug. All rights reserved.</div>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+(function() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('on');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.v').forEach(function(el) {
+    observer.observe(el);
+  });
+})();
+</script>
+
+<script>
+/* Table Scroll Hint — 모바일에서만 동작 */
+(function(){
+  if(window.innerWidth>767)return;
+  var s='.compare-table-wrap,.honest-table-wrap,.table-wrap,.size-table-wrap,.tbl-wrap';
+  setTimeout(function(){
+    document.querySelectorAll(s).forEach(function(w){
+      if(w.scrollWidth<=w.clientWidth+5)return;
+      var h=document.createElement('p');
+      h.className='scroll-hint';
+      h.textContent='\u2190 \uc88c\uc6b0\ub85c \uc2a4\ud06c\ub864 \u2192';
+      w.parentNode.insertBefore(h,w);
+      var d=false;
+      w.addEventListener('scroll',function(){
+        if(!d){h.style.opacity='0';d=true;}
+      });
+    });
+  },200);
+})();
+</script>
+</body>
+</html>

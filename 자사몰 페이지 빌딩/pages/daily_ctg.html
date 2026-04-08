@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>데일리룩 컬렉션 — SundayHug</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   SundayHug Pages — Shared Design System
+   브랜드 가이드 기반 공유 CSS
+   ============================================================ */
+
+/* ─── CSS VARIABLES ─── */
+:root {
+  /* Primary Palette */
+  --sh-midnight: #2C2C3A;
+  --sh-cloud: #F7F5F2;
+  --sh-warm-ivory: #FBF9F6;
+  --sh-moon: #E8DFD4;
+  --sh-linen: #D9CFC3;
+
+  /* Signature Colors */
+  --sh-dusty-lavender: #C4B5CB;
+  --sh-sage: #B5C4B1;
+  --sh-soft-apricot: #E8C9A8;
+  --sh-misty-blue: #B3C5D3;
+  --sh-blush: #DEB5A8;
+
+  /* Seasonal Accent */
+  --sh-golden-hour: #D4A574;
+  --sh-deep-sage: #7A8F76;
+  --sh-dusty-rose: #C09B8D;
+  --sh-slate-blue: #8A9BB0;
+
+  /* Semantic Tokens */
+  --sh-text-primary: #2C2C3A;
+  --sh-text-secondary: #6B6B7B;
+  --sh-text-tertiary: #9B9BAB;
+  --sh-border: #E8E4DF;
+  --sh-bg-elevated: #FFFFFF;
+
+  /* Font Stacks */
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body-kr: 'Noto Sans KR', sans-serif;
+  --font-body-en: 'DM Sans', sans-serif;
+}
+
+/* ─── RESET ─── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body-kr);
+  background: var(--sh-warm-ivory);
+  color: var(--sh-text-primary);
+  line-height: 1.7;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+
+/* ─── SIDEBAR NAVIGATION ─── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: var(--sh-midnight);
+  padding: 48px 32px;
+  z-index: 100;
+  overflow-y: auto;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav::-webkit-scrollbar { width: 0; }
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--sh-cloud);
+  margin-bottom: 8px;
+}
+
+.nav-subtitle {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sh-text-tertiary);
+  margin-bottom: 48px;
+}
+
+.nav-section { margin-bottom: 28px; }
+
+.nav-section-title {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sh-linen);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.nav a {
+  display: block;
+  text-decoration: none;
+  color: rgba(247, 245, 242, 0.6);
+  font-size: 0.85rem;
+  padding: 6px 0;
+  transition: all 0.3s ease;
+  font-weight: 300;
+}
+
+.nav a:hover {
+  color: var(--sh-cloud);
+  padding-left: 8px;
+}
+
+.nav a.active {
+  color: var(--sh-cloud);
+  font-weight: 500;
+}
+
+/* ─── MOBILE MENU TOGGLE ─── */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 200;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: var(--sh-bg-elevated);
+  border-radius: 12px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  flex-direction: column;
+  gap: 5px;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--sh-midnight);
+  transition: all 0.3s;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(44, 44, 58, 0.5);
+  z-index: 150;
+}
+
+.overlay.active { display: block; }
+
+/* ─── MAIN CONTENT ─── */
+.main {
+  margin-left: 0;
+  min-height: 100vh;
+}
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 120px 100px;
+  background: linear-gradient(135deg, var(--sh-warm-ivory) 0%, var(--sh-moon) 100%);
+  border-bottom: 1px solid var(--sh-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,165,116,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-label {
+  font-family: var(--font-body-en);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sh-text-tertiary);
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--sh-text-primary);
+  margin-bottom: 20px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--sh-golden-hour);
+}
+
+.hero-sub {
+  font-family: var(--font-body-kr);
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--sh-text-secondary);
+  max-width: 480px;
+  line-height: 1.9;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  margin-top: 48px;
+}
+
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--sh-text-primary);
+}
+
+.hero-stat-label {
+  font-size: 0.75rem;
+  color: var(--sh-text-tertiary);
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+
+/* ─── SECTIONS ─── */
+.section {
+  padding: 100px 100px;
+  border-bottom: 1px solid var(--sh-border);
+}
+
+.section:last-of-type { border-bottom: none; }
+
+.section--warm { background: var(--sh-warm-ivory); }
+.section--cloud { background: var(--sh-cloud); }
+.section--elevated { background: var(--sh-bg-elevated); }
+.section--dark {
+  background: var(--sh-midnight);
+  color: var(--sh-cloud);
+}
+
+.section-label {
+  font-family: var(--font-body-en);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sh-text-tertiary);
+  margin-bottom: 16px;
+}
+
+.section--dark .section-label { color: var(--sh-linen); }
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--sh-text-primary);
+  margin-bottom: 20px;
+}
+
+.section-title em { font-style: italic; color: var(--sh-golden-hour); }
+.section--dark .section-title { color: var(--sh-cloud); }
+.section--dark .section-title em { color: var(--sh-golden-hour); }
+
+.lead-text {
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--sh-text-secondary);
+  max-width: 640px;
+  line-height: 2;
+  margin-bottom: 60px;
+}
+
+.section--dark .lead-text { color: var(--sh-linen); }
+
+/* ─── PRODUCT CARD ─── */
+.product-card {
+  background: var(--sh-bg-elevated);
+  border: 1px solid var(--sh-border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(44,44,58,0.08);
+}
+
+.product-card-image {
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body-en);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: rgba(44,44,58,0.4);
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.product-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-card-body {
+  padding: 24px;
+}
+
+.product-card-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+  color: var(--sh-text-primary);
+}
+
+.product-card-desc {
+  font-size: 0.85rem;
+  color: var(--sh-text-secondary);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.product-card-price {
+  font-family: var(--font-body-en);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--sh-text-primary);
+  margin-bottom: 16px;
+}
+
+.product-card-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+/* ─── CTA BUTTONS ─── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  background: var(--sh-midnight);
+  color: var(--sh-cloud);
+  font-family: var(--font-body-kr);
+  font-size: 0.85rem;
+  font-weight: 400;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: #3D3D4E;
+  box-shadow: 0 4px 16px rgba(44,44,58,0.2);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  background: transparent;
+  color: var(--sh-text-primary);
+  font-family: var(--font-body-kr);
+  font-size: 0.85rem;
+  font-weight: 400;
+  border: 1px solid var(--sh-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-outline:hover {
+  border-color: var(--sh-midnight);
+  box-shadow: 0 2px 8px rgba(44,44,58,0.1);
+}
+
+.section--dark .btn-outline {
+  color: var(--sh-cloud);
+  border-color: rgba(247,245,242,0.3);
+}
+
+.section--dark .btn-outline:hover {
+  border-color: var(--sh-cloud);
+}
+
+/* ─── AGE BADGE ─── */
+.age-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-family: var(--font-body-en);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.age-badge--newborn {
+  background: rgba(232,201,168,0.2);
+  color: #8B7355;
+}
+
+.age-badge--infant {
+  background: rgba(181,196,177,0.2);
+  color: var(--sh-deep-sage);
+}
+
+.age-badge--baby {
+  background: rgba(196,181,203,0.2);
+  color: #6B5A7A;
+}
+
+.age-badge--toddler {
+  background: rgba(179,197,211,0.2);
+  color: var(--sh-slate-blue);
+}
+
+/* ─── MATERIAL CHIP ─── */
+.material-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  border: 1px solid var(--sh-border);
+  background: var(--sh-bg-elevated);
+}
+
+.material-chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.material-chip--silky .material-chip-dot { background: var(--sh-dusty-lavender); }
+.material-chip--triple .material-chip-dot { background: var(--sh-sage); }
+.material-chip--mesh .material-chip-dot { background: var(--sh-misty-blue); }
+
+/* ─── TOG CARD ─── */
+.tog-card {
+  padding: 32px;
+  border-radius: 16px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.tog-card:hover { transform: translateY(-4px); }
+
+.tog-number {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
+.tog-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.tog-temp {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.tog-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* ─── IMAGE PLACEHOLDER ─── */
+.img-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body-en);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(44,44,58,0.35);
+  text-align: center;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+/* ─── TWO COLUMN LAYOUT ─── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.four-col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* ─── INFO CARD ─── */
+.info-card {
+  padding: 40px;
+  background: var(--sh-bg-elevated);
+  border: 1px solid var(--sh-border);
+  border-radius: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(44,44,58,0.06);
+}
+
+.info-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 24px;
+}
+
+.info-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.info-card p {
+  font-size: 0.9rem;
+  color: var(--sh-text-secondary);
+  line-height: 1.8;
+}
+
+/* ─── FILTER CHIPS ─── */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.filter-chip {
+  padding: 8px 20px;
+  border: 1px solid var(--sh-border);
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 400;
+  background: var(--sh-bg-elevated);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-chip:hover {
+  border-color: var(--sh-midnight);
+}
+
+.filter-chip.active {
+  background: var(--sh-midnight);
+  color: var(--sh-cloud);
+  border-color: var(--sh-midnight);
+}
+
+/* ─── FOOTER ─── */
+.footer {
+  padding: 60px 100px;
+  text-align: center;
+  background: var(--sh-midnight);
+  color: var(--sh-linen);
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 300;
+  margin-bottom: 16px;
+  color: var(--sh-cloud);
+}
+
+.footer p {
+  font-size: 0.8rem;
+  color: var(--sh-text-tertiary);
+  line-height: 1.6;
+}
+
+/* ─── SCROLL ANIMATION ─── */
+.v {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.v.on {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1023px) {
+  .nav {
+    transform: translateX(-100%);
+  }
+
+  .nav.open {
+    transform: translateX(0);
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+
+  .hero {
+    padding: 100px 48px 80px;
+    min-height: 60vh;
+  }
+
+  .section {
+    padding: 60px 48px;
+  }
+
+  .footer {
+    padding: 48px;
+  }
+
+  .two-col {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .three-col {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .four-col {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .tog-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .product-card-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-stats {
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    padding: 64px 20px 40px;
+    min-height: auto;
+  }
+
+  .hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .hero::after {
+    width: 200px;
+    height: 200px;
+    opacity: 0.5;
+  }
+
+  .hero-sub {
+    font-size: 0.88rem;
+  }
+
+  .hero-label {
+    margin-bottom: 16px;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .hero-stat-num {
+    font-size: 1.8rem;
+  }
+
+  .section {
+    padding: 40px 20px;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+    margin-bottom: 14px;
+  }
+
+  .section-label {
+    font-size: 0.6rem;
+    margin-bottom: 10px;
+  }
+
+  .lead-text {
+    font-size: 0.85rem;
+    margin-bottom: 32px;
+    line-height: 1.8;
+  }
+
+  .footer {
+    padding: 32px 16px;
+  }
+
+  .footer-logo {
+    font-size: 1.1rem;
+  }
+
+  .info-card {
+    padding: 24px 18px;
+  }
+
+  .info-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .product-card-body {
+    padding: 16px;
+  }
+
+  .tog-card {
+    padding: 20px;
+  }
+
+  .tog-number {
+    font-size: 2rem;
+  }
+
+  .three-col,
+  .four-col {
+    grid-template-columns: 1fr;
+  }
+
+  .tog-row {
+    grid-template-columns: 1fr;
+  }
+
+  .product-card-row {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-bar {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+  }
+
+  .filter-chip {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 56px 16px 32px;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+
+  .section {
+    padding: 32px 14px;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+
+  .lead-text {
+    margin-bottom: 24px;
+  }
+
+  .footer {
+    padding: 28px 14px;
+  }
+}
+
+</style>
+<style>
+/* ─── BAMBOO STORY ─── */
+.bamboo-text p {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--sh-text-secondary);
+  line-height: 2;
+  margin-bottom: 20px;
+}
+
+.bamboo-text p:last-child { margin-bottom: 0; }
+
+.bamboo-text h3 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--sh-text-primary);
+  margin-bottom: 24px;
+  line-height: 1.3;
+}
+
+.bamboo-img {
+  aspect-ratio: 3/4;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bamboo-img span {
+  font-family: var(--font-body-en);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(44,44,58,0.35);
+  text-align: center;
+  padding: 20px;
+}
+
+/* ─── DUAL FILTER ─── */
+.filter-group-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sh-text-tertiary);
+  margin-bottom: 8px;
+}
+
+.filter-group {
+  margin-bottom: 16px;
+}
+
+.filter-group:last-child {
+  margin-bottom: 40px;
+}
+
+/* ─── PRODUCT GRID ─── */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.product-card[data-season] {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+.product-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.product-card-sizes {
+  font-size: 0.7rem;
+  color: var(--sh-text-tertiary);
+}
+
+/* ─── SIZE TABLE ─── */
+.size-table-wrap {
+  max-width: 640px;
+  margin-top: 40px;
+}
+
+.size-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.size-table thead th {
+  font-family: var(--font-body-en);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sh-text-tertiary);
+  font-weight: 500;
+  padding: 12px 20px;
+  text-align: left;
+  border-bottom: 2px solid var(--sh-border);
+}
+
+.size-table tbody td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--sh-border);
+  color: var(--sh-text-primary);
+  font-weight: 300;
+}
+
+.size-table tbody td:first-child {
+  font-family: var(--font-body-en);
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.size-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.size-table tbody tr:hover {
+  background: rgba(247,245,242,0.5);
+}
+
+.size-cta {
+  margin-top: 32px;
+}
+
+/* ─── BUNDLE SECTION ─── */
+.bundle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.bundle-card {
+  border-radius: 20px;
+  padding: 48px 40px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bundle-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 64px rgba(44,44,58,0.1);
+}
+
+.bundle-card--daily {
+  background: linear-gradient(135deg, #F0F8F6 0%, #EDE5F0 50%, #F5EFE6 100%);
+  border: 1px solid rgba(181,196,177,0.3);
+}
+
+.bundle-card--summer {
+  background: linear-gradient(135deg, #E8F0F5 0%, #F5EFE6 50%, #FBF9F6 100%);
+  border: 1px solid rgba(179,197,211,0.3);
+}
+
+.bundle-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-family: var(--font-body-en);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  background: rgba(44,44,58,0.08);
+  color: var(--sh-text-primary);
+  margin-bottom: 20px;
+}
+
+.bundle-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--sh-text-primary);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.bundle-desc {
+  font-size: 0.85rem;
+  color: var(--sh-text-secondary);
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+.bundle-pricing {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.bundle-original {
+  font-size: 0.85rem;
+  color: var(--sh-text-tertiary);
+  text-decoration: line-through;
+}
+
+.bundle-sale {
+  font-family: var(--font-body-en);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--sh-text-primary);
+}
+
+.bundle-discount {
+  font-family: var(--font-body-en);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--sh-dusty-rose);
+  background: rgba(192,155,141,0.12);
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1023px) {
+  .product-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .bundle-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bundle-card {
+    padding: 36px 28px;
+  }
+
+  .bundle-title {
+    font-size: 1.3rem;
+  }
+
+  .size-table thead th,
+  .size-table tbody td {
+    padding: 12px 12px;
+    font-size: 0.85rem;
+  }
+
+  .bamboo-img {
+    aspect-ratio: 16/9;
+  }
+}
+
+
+/* ══ Mobile Optimization Fix ══ */
+@media (max-width: 767px) {
+  /* 테이블 기본 스크롤 처리 */
+  table { max-width: 100%; }
+  .compare-table-wrap, .table-wrap, .tbl-wrap,
+  .size-table-wrap, .honest-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* 인라인 고정폭 오버플로우 방지 */
+  [style*="width"][style*="px"]:not(img):not(svg) {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 1.5rem !important; }
+  .section-title { font-size: 1.2rem !important; }
+  .lead-text { font-size: 0.82rem; line-height: 1.75; margin-bottom: 20px; }
+  .footer { padding: 28px 14px; }
+  .footer-logo { font-size: 1rem; }
+}
+
+@media (max-width: 767px) {
+  .size-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .size-table th, .size-table td {
+    white-space: nowrap;
+    font-size: 0.8rem;
+    padding: 10px 12px;
+  }
+}
+
+
+/* ══ Table Scroll UX ══ */
+
+/* Min-widths: 컬럼 압축 방지 */
+.compare-table { min-width: 480px; }
+.compare-3col, .compare-table.compare-3col { min-width: 560px; }
+.honest-table { min-width: 560px; }
+.test-table { min-width: 500px; }
+.size-table { min-width: 460px; display: table; }
+
+/* 스크롤 컨테이너 공통 */
+.compare-table-wrap,
+.honest-table-wrap,
+.table-wrap,
+.size-table-wrap,
+.tbl-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 767px) {
+  .compare-table-wrap,
+  .honest-table-wrap,
+  .table-wrap,
+  .size-table-wrap,
+  .tbl-wrap {
+    /* CSS-only 스크롤 그림자 — 스크롤 위치에 따라 자동 표시/숨김 */
+    background:
+      linear-gradient(to right, var(--sh-warm-ivory, #FBF9F6) 30%, transparent) left center,
+      linear-gradient(to left, var(--sh-warm-ivory, #FBF9F6) 30%, transparent) right center,
+      radial-gradient(farthest-side at 0 50%, rgba(44,44,58,0.12), transparent) left center,
+      radial-gradient(farthest-side at 100% 50%, rgba(44,44,58,0.12), transparent) right center;
+    background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
+    background-repeat: no-repeat;
+    background-attachment: local, local, scroll, scroll;
+    /* 얇은 스크롤바 */
+    scrollbar-width: thin;
+    scrollbar-color: var(--sh-linen, #D9CFC3) transparent;
+    padding-bottom: 6px;
+    border-radius: 8px;
+  }
+  .compare-table-wrap::-webkit-scrollbar,
+  .honest-table-wrap::-webkit-scrollbar,
+  .table-wrap::-webkit-scrollbar,
+  .size-table-wrap::-webkit-scrollbar,
+  .tbl-wrap::-webkit-scrollbar { height: 4px; }
+
+  .compare-table-wrap::-webkit-scrollbar-thumb,
+  .honest-table-wrap::-webkit-scrollbar-thumb,
+  .table-wrap::-webkit-scrollbar-thumb,
+  .size-table-wrap::-webkit-scrollbar-thumb,
+  .tbl-wrap::-webkit-scrollbar-thumb {
+    background: var(--sh-linen, #D9CFC3);
+    border-radius: 2px;
+  }
+
+  .compare-table-wrap::-webkit-scrollbar-track,
+  .honest-table-wrap::-webkit-scrollbar-track,
+  .table-wrap::-webkit-scrollbar-track,
+  .size-table-wrap::-webkit-scrollbar-track,
+  .tbl-wrap::-webkit-scrollbar-track { background: transparent; }
+
+  /* 스크롤 힌트 텍스트 */
+  .scroll-hint {
+    text-align: center;
+    font-size: 0.68rem;
+    color: var(--sh-text-tertiary, #9B9BAB);
+    letter-spacing: 0.1em;
+    padding: 6px 0;
+    margin: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  /* 테이블 셀 모바일 기본 */
+  .compare-table th, .compare-table td,
+  .honest-table th, .honest-table td,
+  .test-table th, .test-table td,
+  .size-table th, .size-table td {
+    font-size: 0.8rem;
+    padding: 10px 10px;
+    white-space: normal;
+    word-break: keep-all;
+    vertical-align: top;
+  }
+
+  /* 첫 열 고정 (비교표) */
+  .compare-table th:first-child,
+  .compare-table td:first-child,
+  .honest-table th:first-child,
+  .honest-table td:first-child {
+    position: sticky;
+    left: 0;
+    background: var(--sh-bg-elevated, #fff);
+    z-index: 2;
+    box-shadow: 2px 0 4px rgba(44,44,58,0.06);
+  }
+  .compare-table thead th:first-child,
+  .honest-table thead th:first-child {
+    background: var(--sh-midnight, #2C2C3A);
+    z-index: 3;
+  }
+}
+
+@media (max-width: 480px) {
+  .compare-table th, .compare-table td,
+  .honest-table th, .honest-table td,
+  .test-table th, .test-table td,
+  .size-table th, .size-table td {
+    font-size: 0.74rem;
+    padding: 8px 8px;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Mobile Menu Toggle -->
+<!-- Sidebar Navigation -->
+<!-- Main Content -->
+<div class="main">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero-label">Daily Wear Collection</div>
+    <h1>데일리룩<br><em>컬렉션</em></h1>
+    <p class="hero-sub">밤부 소재의 부드러움을 입는 아기의 하루.</p>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">4</div>
+        <div class="hero-stat-label">가지 아이템</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">Bamboo</div>
+        <div class="hero-stat-label">밤부 소재</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">50~80</div>
+        <div class="hero-stat-label">사이즈</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 2: 밤부 소재 스토리 ═══ -->
+  <section class="section section--elevated">
+    <div class="section-label">Why Bamboo</div>
+    <h2 class="section-title v">왜 밤부 소재일까요?</h2>
+
+    <div class="two-col" style="margin-top: 48px;">
+      <div class="bamboo-text v">
+        <h3>아기 피부를 위한<br>자연의 선택</h3>
+        <p>밤부 섬유는 대나무에서 추출한 천연 소재예요. 일반 면보다 3배 이상 부드럽고, 아기의 예민한 피부에도 자극 없이 닿아요. 처음 만져보면 실크처럼 매끄러운 촉감에 놀라실 거예요.</p>
+        <p>밤부 소재는 천연 항균 성분을 지니고 있어서, 세탁을 반복해도 항균력이 유지돼요. 세균 번식을 억제하기 때문에 침을 많이 흘리거나 땀이 많은 아기에게 특히 좋아요.</p>
+        <p>통기성이 뛰어나 여름에는 시원하고, 체온을 조절해주는 성질 덕분에 겨울에도 따뜻해요. 그래서 사계절 내내 쾌적하게 입힐 수 있어요. 반복 세탁에도 형태가 잘 유지되어 오래 입힐 수 있답니다.</p>
+      </div>
+      <div class="bamboo-img v">
+        <img src="images/illustrations/fabric-bamboo-closeup.png" alt="밤부 원단 클로즈업" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:16px;">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 3: 시즌 + 아이템 필터 ═══ -->
+  <section class="section section--cloud">
+    <div class="section-label">Shop by Category</div>
+    <h2 class="section-title v">아이템 <em>찾기</em></h2>
+    <p class="lead-text v">시즌과 아이템 유형으로 원하는 제품을 찾아보세요.</p>
+
+    <div class="filter-group filter-season v">
+      <div class="filter-group-label">Season</div>
+      <div class="filter-bar">
+        <button class="filter-chip active" data-filter="전체">전체</button>
+        <button class="filter-chip" data-filter="여름">여름</button>
+        <button class="filter-chip" data-filter="간절기">간절기</button>
+        <button class="filter-chip" data-filter="겨울">겨울</button>
+      </div>
+    </div>
+
+    <div class="filter-group filter-item v">
+      <div class="filter-group-label">Item</div>
+      <div class="filter-bar">
+        <button class="filter-chip active" data-filter="전체">전체</button>
+        <button class="filter-chip" data-filter="바디수트">바디수트</button>
+        <button class="filter-chip" data-filter="조거팬츠">조거팬츠</button>
+        <button class="filter-chip" data-filter="상하세트">상하세트</button>
+        <button class="filter-chip" data-filter="모자">모자</button>
+      </div>
+    </div>
+
+    <div class="product-grid">
+      <!-- 1. 밤부 반팔 바디수트 -->
+      <div class="product-card v" data-season="여름" data-item="바디수트">
+        <div class="product-card-image">
+          <img src="images/products/bodysuit-short.png" alt="밤부 반팔 바디수트" loading="lazy">
+        </div>
+        <div class="product-card-body">
+          <div class="product-card-meta">
+            <span class="material-chip material-chip--silky"><span class="material-chip-dot"></span>밤부</span>
+            <span class="product-card-sizes">50 / 60 / 70 / 80</span>
+          </div>
+          <div class="product-card-name">밤부 반팔 바디수트</div>
+          <div class="product-card-desc">여름 필수템. 부드러운 밤부 소재로 땀을 빠르게 흡수해요.</div>
+          <div class="product-card-price">24,000원</div>
+          <a href="#" class="btn-primary">자세히 보기</a>
+        </div>
+      </div>
+
+      <!-- 2. 밤부 긴팔 바디수트 -->
+      <div class="product-card v" data-season="간절기,겨울" data-item="바디수트">
+        <div class="product-card-image">
+          <img src="images/products/bodysuit-long.png" alt="밤부 긴팔 바디수트" loading="lazy">
+        </div>
+        <div class="product-card-body">
+          <div class="product-card-meta">
+            <span class="material-chip material-chip--silky"><span class="material-chip-dot"></span>밤부</span>
+            <span class="product-card-sizes">50 / 60 / 70 / 80</span>
+          </div>
+          <div class="product-card-name">밤부 긴팔 바디수트</div>
+          <div class="product-card-desc">간절기부터 겨울까지. 체온을 유지하면서도 답답하지 않아요.</div>
+          <div class="product-card-price">28,000원</div>
+          <a href="#" class="btn-primary">자세히 보기</a>
+        </div>
+      </div>
+
+      <!-- 3. 메쉬 반팔 바디수트 -->
+      <div class="product-card v" data-season="여름" data-item="바디수트">
+        <div class="product-card-image">
+          <img src="images/products/bodysuit-mesh.png" alt="메쉬 반팔 바디수트" loading="lazy">
+        </div>
+        <div class="product-card-body">
+          <div class="product-card-meta">
+            <span class="material-chip material-chip--mesh"><span class="material-chip-dot"></span>코튼메쉬</span>
+            <span class="product-card-sizes">50 / 60 / 70 / 80</span>
+          </div>
+          <div class="product-card-name">메쉬 반팔 바디수트</div>
+          <div class="product-card-desc">메쉬 구조로 통기성 극대화. 한여름에도 쾌적하게 입혀요.</div>
+          <div class="product-card-price">22,000원</div>
+          <a href="#" class="btn-primary">자세히 보기</a>
+        </div>
+      </div>
+
+      <!-- 4. 밤부 조거팬츠 -->
+      <div class="product-card v" data-season="간절기" data-item="조거팬츠">
+        <div class="product-card-image">
+          <img src="images/products/jogger-pants.png" alt="밤부 조거팬츠" loading="lazy">
+        </div>
+        <div class="product-card-body">
+          <div class="product-card-meta">
+            <span class="material-chip material-chip--triple"><span class="material-chip-dot"></span>밤부</span>
+            <span class="product-card-sizes">50 / 60 / 70 / 80</span>
+          </div>
+          <div class="product-card-name">밤부 조거팬츠</div>
+          <div class="product-card-desc">신축성 좋은 밤부 조거. 기저귀 위에 편하게 입힐 수 있어요.</div>
+          <div class="product-card-price">26,000원</div>
+          <a href="#" class="btn-primary">자세히 보기</a>
+        </div>
+      </div>
+
+      <!-- 5. 밤부 상하세트 -->
+      <div class="product-card v" data-season="간절기" data-item="상하세트">
+        <div class="product-card-image">
+          <img src="images/products/twopiece-bamboo.png" alt="밤부 상하세트" loading="lazy">
+        </div>
+        <div class="product-card-body">
+          <div class="product-card-meta">
+            <span class="material-chip material-chip--silky"><span class="material-chip-dot"></span>밤부</span>
+            <span class="product-card-sizes">60 / 70 / 80</span>
+          </div>
+          <div class="product-card-name">밤부 상하세트</div>
+          <div class="product-card-desc">상의 + 하의 세트. 코디 걱정 없이 입히기 좋아요.</div>
+          <div class="product-card-price">45,000원</div>
+          <a href="#" class="btn-primary">자세히 보기</a>
+        </div>
+      </div>
+
+      <!-- 6. 메쉬 상하세트 -->
+      <div class="product-card v" data-season="여름" data-item="상하세트">
+        <div class="product-card-image">
+          <img src="images/products/twopiece-mesh.png" alt="메쉬 상하세트" loading="lazy">
+        </div>
+        <div class="product-card-body">
+          <div class="product-card-meta">
+            <span class="material-chip material-chip--mesh"><span class="material-chip-dot"></span>코튼메쉬</span>
+            <span class="product-card-sizes">60 / 70 / 80</span>
+          </div>
+          <div class="product-card-name">메쉬 상하 세트</div>
+          <div class="product-card-desc">시원한 메쉬 소재 상하세트. 여름 외출복으로 딱이에요.</div>
+          <div class="product-card-price">39,000원</div>
+          <a href="#" class="btn-primary">자세히 보기</a>
+        </div>
+      </div>
+
+      <!-- 7. 밤부 모자 -->
+      <div class="product-card v" data-season="사계절" data-item="모자">
+        <div class="product-card-image">
+          <img src="images/products/hat-bamboo.png" alt="밤부 모자" loading="lazy">
+        </div>
+        <div class="product-card-body">
+          <div class="product-card-meta">
+            <span class="material-chip material-chip--silky"><span class="material-chip-dot"></span>밤부</span>
+            <span class="product-card-sizes">Free</span>
+          </div>
+          <div class="product-card-name">밤부 모자</div>
+          <div class="product-card-desc">사계절 쓸 수 있는 밤부 모자. 부드럽게 머리를 감싸줘요.</div>
+          <div class="product-card-price">15,000원</div>
+          <a href="#" class="btn-primary">자세히 보기</a>
+        </div>
+      </div>
+
+      <!-- 8. 밤부 턱받이 -->
+      <div class="product-card v" data-season="사계절" data-item="모자">
+        <div class="product-card-image">
+          <img src="images/products/bib-bamboo.png" alt="밤부 턱받이" loading="lazy">
+        </div>
+        <div class="product-card-body">
+          <div class="product-card-meta">
+            <span class="material-chip material-chip--silky"><span class="material-chip-dot"></span>밤부</span>
+            <span class="product-card-sizes">Free</span>
+          </div>
+          <div class="product-card-name">밤부 턱받이</div>
+          <div class="product-card-desc">항균 밤부 소재로 침 흘림에도 걱정 없어요. 빨래가 쉬워요.</div>
+          <div class="product-card-price">12,000원</div>
+          <a href="#" class="btn-primary">자세히 보기</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 4: 사이즈 가이드 요약 ═══ -->
+  <section class="section section--elevated">
+    <div class="section-label">Size Guide</div>
+    <h2 class="section-title v">사이즈 선택 <em>가이드</em></h2>
+    <p class="lead-text v">월령과 체형에 맞는 사이즈를 확인해보세요.</p>
+
+    <div class="size-table-wrap v">
+      <table class="size-table">
+        <thead>
+          <tr>
+            <th>사이즈</th>
+            <th>월령</th>
+            <th>키</th>
+            <th>몸무게</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>50</td>
+            <td>0~2개월</td>
+            <td>~55cm</td>
+            <td>~4kg</td>
+          </tr>
+          <tr>
+            <td>60</td>
+            <td>2~6개월</td>
+            <td>55~65cm</td>
+            <td>4~7kg</td>
+          </tr>
+          <tr>
+            <td>70</td>
+            <td>6~12개월</td>
+            <td>65~75cm</td>
+            <td>7~10kg</td>
+          </tr>
+          <tr>
+            <td>80</td>
+            <td>12~24개월</td>
+            <td>75~85cm</td>
+            <td>10~13kg</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="size-cta v">
+      <a href="size_guide.html" class="btn-outline">상세 사이즈 가이드 &rarr;</a>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 5: 번들 딜 ═══ -->
+  <section class="section section--warm">
+    <div class="section-label">Bundle Deals</div>
+    <h2 class="section-title v">세트로 <em>합리적으로</em></h2>
+    <p class="lead-text v">자주 쓰는 아이템을 세트로 준비하면 더 합리적이에요.</p>
+
+    <div class="bundle-grid">
+      <div class="bundle-card bundle-card--daily v">
+        <div class="bundle-badge">DAILY SET</div>
+        <div class="bundle-title">데일리 3종 세트</div>
+        <div class="bundle-desc">바디수트 + 조거팬츠 + 모자 — 하루 종일 편안한 밤부 코디를 완성해보세요.</div>
+        <div class="bundle-pricing">
+          <span class="bundle-original">65,000원</span>
+          <span class="bundle-sale">52,000원</span>
+          <span class="bundle-discount">20% OFF</span>
+        </div>
+        <a href="#" class="btn-primary">세트 구매하기</a>
+      </div>
+
+      <div class="bundle-card bundle-card--summer v">
+        <div class="bundle-badge">SUMMER</div>
+        <div class="bundle-title">여름 쿨링 세트</div>
+        <div class="bundle-desc">메쉬 바디수트 + 메쉬 상하세트 — 한여름에도 쾌적하게 입힐 수 있는 조합이에요.</div>
+        <div class="bundle-pricing">
+          <span class="bundle-original">61,000원</span>
+          <span class="bundle-sale">49,000원</span>
+          <span class="bundle-discount">20% OFF</span>
+        </div>
+        <a href="#" class="btn-primary">세트 구매하기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer-logo">SundayHug</div>
+    <p>&copy; 2025 SundayHug. All rights reserved.<br>Designed for Families.</p>
+  </footer>
+
+</div>
+
+<!-- Shared Navigation JS -->
+<script>
+(function() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('on');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.v').forEach(function(el) {
+    observer.observe(el);
+  });
+})();
+</script>
+
+<!-- Dual Filter & Scroll Animation -->
+<script>
+// Dual filter
+document.querySelectorAll('.filter-chip').forEach(chip => {
+  chip.addEventListener('click', function() {
+    const group = this.closest('.filter-bar');
+    group.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+    applyFilters();
+  });
+});
+
+function applyFilters() {
+  const season = document.querySelector('.filter-season .filter-chip.active')?.dataset.filter || '전체';
+  const item = document.querySelector('.filter-item .filter-chip.active')?.dataset.filter || '전체';
+  document.querySelectorAll('.product-card[data-season]').forEach(card => {
+    const matchSeason = season === '전체' || card.dataset.season.includes(season);
+    const matchItem = item === '전체' || card.dataset.item === item;
+    card.style.display = (matchSeason && matchItem) ? '' : 'none';
+  });
+}
+
+// Scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('on');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.v').forEach(el => io.observe(el));
+</script>
+
+
+<script>
+/* Table Scroll Hint — 모바일에서만 동작 */
+(function(){
+  if(window.innerWidth>767)return;
+  var s='.compare-table-wrap,.honest-table-wrap,.table-wrap,.size-table-wrap,.tbl-wrap';
+  setTimeout(function(){
+    document.querySelectorAll(s).forEach(function(w){
+      if(w.scrollWidth<=w.clientWidth+5)return;
+      var h=document.createElement('p');
+      h.className='scroll-hint';
+      h.textContent='\u2190 \uc88c\uc6b0\ub85c \uc2a4\ud06c\ub864 \u2192';
+      w.parentNode.insertBefore(h,w);
+      var d=false;
+      w.addEventListener('scroll',function(){
+        if(!d){h.style.opacity='0';d=true;}
+      });
+    });
+  },200);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sustainability — SundayHug Brand Pages</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   SundayHug Pages — Shared Design System
+   브랜드 가이드 기반 공유 CSS
+   ============================================================ */
+
+/* ─── CSS VARIABLES ─── */
+:root {
+  /* Primary Palette */
+  --sh-midnight: #2C2C3A;
+  --sh-cloud: #F7F5F2;
+  --sh-warm-ivory: #FBF9F6;
+  --sh-moon: #E8DFD4;
+  --sh-linen: #D9CFC3;
+
+  /* Signature Colors */
+  --sh-dusty-lavender: #C4B5CB;
+  --sh-sage: #B5C4B1;
+  --sh-soft-apricot: #E8C9A8;
+  --sh-misty-blue: #B3C5D3;
+  --sh-blush: #DEB5A8;
+
+  /* Seasonal Accent */
+  --sh-golden-hour: #D4A574;
+  --sh-deep-sage: #7A8F76;
+  --sh-dusty-rose: #C09B8D;
+  --sh-slate-blue: #8A9BB0;
+
+  /* Semantic Tokens */
+  --sh-text-primary: #2C2C3A;
+  --sh-text-secondary: #6B6B7B;
+  --sh-text-tertiary: #9B9BAB;
+  --sh-border: #E8E4DF;
+  --sh-bg-elevated: #FFFFFF;
+
+  /* Font Stacks */
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body-kr: 'Noto Sans KR', sans-serif;
+  --font-body-en: 'DM Sans', sans-serif;
+}
+
+/* ─── RESET ─── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body-kr);
+  background: var(--sh-warm-ivory);
+  color: var(--sh-text-primary);
+  line-height: 1.7;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+
+/* ─── SIDEBAR NAVIGATION ─── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: var(--sh-midnight);
+  padding: 48px 32px;
+  z-index: 100;
+  overflow-y: auto;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav::-webkit-scrollbar { width: 0; }
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--sh-cloud);
+  margin-bottom: 8px;
+}
+
+.nav-subtitle {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sh-text-tertiary);
+  margin-bottom: 48px;
+}
+
+.nav-section { margin-bottom: 28px; }
+
+.nav-section-title {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sh-linen);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.nav a {
+  display: block;
+  text-decoration: none;
+  color: rgba(247, 245, 242, 0.6);
+  font-size: 0.85rem;
+  padding: 6px 0;
+  transition: all 0.3s ease;
+  font-weight: 300;
+}
+
+.nav a:hover {
+  color: var(--sh-cloud);
+  padding-left: 8px;
+}
+
+.nav a.active {
+  color: var(--sh-cloud);
+  font-weight: 500;
+}
+
+/* ─── MOBILE MENU TOGGLE ─── */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 200;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: var(--sh-bg-elevated);
+  border-radius: 12px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  flex-direction: column;
+  gap: 5px;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--sh-midnight);
+  transition: all 0.3s;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(44, 44, 58, 0.5);
+  z-index: 150;
+}
+
+.overlay.active { display: block; }
+
+/* ─── MAIN CONTENT ─── */
+.main {
+  margin-left: 0;
+  min-height: 100vh;
+}
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 120px 100px;
+  background: linear-gradient(135deg, var(--sh-warm-ivory) 0%, var(--sh-moon) 100%);
+  border-bottom: 1px solid var(--sh-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,165,116,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-label {
+  font-family: var(--font-body-en);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sh-text-tertiary);
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--sh-text-primary);
+  margin-bottom: 20px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--sh-golden-hour);
+}
+
+.hero-sub {
+  font-family: var(--font-body-kr);
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--sh-text-secondary);
+  max-width: 480px;
+  line-height: 1.9;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  margin-top: 48px;
+}
+
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--sh-text-primary);
+}
+
+.hero-stat-label {
+  font-size: 0.75rem;
+  color: var(--sh-text-tertiary);
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+
+/* ─── SECTIONS ─── */
+.section {
+  padding: 100px 100px;
+  border-bottom: 1px solid var(--sh-border);
+}
+
+.section:last-of-type { border-bottom: none; }
+
+.section--warm { background: var(--sh-warm-ivory); }
+.section--cloud { background: var(--sh-cloud); }
+.section--elevated { background: var(--sh-bg-elevated); }
+.section--dark {
+  background: var(--sh-midnight);
+  color: var(--sh-cloud);
+}
+
+.section-label {
+  font-family: var(--font-body-en);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sh-text-tertiary);
+  margin-bottom: 16px;
+}
+
+.section--dark .section-label { color: var(--sh-linen); }
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--sh-text-primary);
+  margin-bottom: 20px;
+}
+
+.section-title em { font-style: italic; color: var(--sh-golden-hour); }
+.section--dark .section-title { color: var(--sh-cloud); }
+.section--dark .section-title em { color: var(--sh-golden-hour); }
+
+.lead-text {
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--sh-text-secondary);
+  max-width: 640px;
+  line-height: 2;
+  margin-bottom: 60px;
+}
+
+.section--dark .lead-text { color: var(--sh-linen); }
+
+/* ─── PRODUCT CARD ─── */
+.product-card {
+  background: var(--sh-bg-elevated);
+  border: 1px solid var(--sh-border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(44,44,58,0.08);
+}
+
+.product-card-image {
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body-en);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: rgba(44,44,58,0.4);
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.product-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-card-body {
+  padding: 24px;
+}
+
+.product-card-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+  color: var(--sh-text-primary);
+}
+
+.product-card-desc {
+  font-size: 0.85rem;
+  color: var(--sh-text-secondary);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.product-card-price {
+  font-family: var(--font-body-en);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--sh-text-primary);
+  margin-bottom: 16px;
+}
+
+.product-card-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+/* ─── CTA BUTTONS ─── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  background: var(--sh-midnight);
+  color: var(--sh-cloud);
+  font-family: var(--font-body-kr);
+  font-size: 0.85rem;
+  font-weight: 400;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: #3D3D4E;
+  box-shadow: 0 4px 16px rgba(44,44,58,0.2);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  background: transparent;
+  color: var(--sh-text-primary);
+  font-family: var(--font-body-kr);
+  font-size: 0.85rem;
+  font-weight: 400;
+  border: 1px solid var(--sh-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-outline:hover {
+  border-color: var(--sh-midnight);
+  box-shadow: 0 2px 8px rgba(44,44,58,0.1);
+}
+
+.section--dark .btn-outline {
+  color: var(--sh-cloud);
+  border-color: rgba(247,245,242,0.3);
+}
+
+.section--dark .btn-outline:hover {
+  border-color: var(--sh-cloud);
+}
+
+/* ─── AGE BADGE ─── */
+.age-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-family: var(--font-body-en);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.age-badge--newborn {
+  background: rgba(232,201,168,0.2);
+  color: #8B7355;
+}
+
+.age-badge--infant {
+  background: rgba(181,196,177,0.2);
+  color: var(--sh-deep-sage);
+}
+
+.age-badge--baby {
+  background: rgba(196,181,203,0.2);
+  color: #6B5A7A;
+}
+
+.age-badge--toddler {
+  background: rgba(179,197,211,0.2);
+  color: var(--sh-slate-blue);
+}
+
+/* ─── MATERIAL CHIP ─── */
+.material-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  border: 1px solid var(--sh-border);
+  background: var(--sh-bg-elevated);
+}
+
+.material-chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.material-chip--silky .material-chip-dot { background: var(--sh-dusty-lavender); }
+.material-chip--triple .material-chip-dot { background: var(--sh-sage); }
+.material-chip--mesh .material-chip-dot { background: var(--sh-misty-blue); }
+
+/* ─── TOG CARD ─── */
+.tog-card {
+  padding: 32px;
+  border-radius: 16px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.tog-card:hover { transform: translateY(-4px); }
+
+.tog-number {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
+.tog-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.tog-temp {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.tog-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* ─── IMAGE PLACEHOLDER ─── */
+.img-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body-en);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(44,44,58,0.35);
+  text-align: center;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+/* ─── TWO COLUMN LAYOUT ─── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.four-col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* ─── INFO CARD ─── */
+.info-card {
+  padding: 40px;
+  background: var(--sh-bg-elevated);
+  border: 1px solid var(--sh-border);
+  border-radius: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(44,44,58,0.06);
+}
+
+.info-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 24px;
+}
+
+.info-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.info-card p {
+  font-size: 0.9rem;
+  color: var(--sh-text-secondary);
+  line-height: 1.8;
+}
+
+/* ─── FILTER CHIPS ─── */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.filter-chip {
+  padding: 8px 20px;
+  border: 1px solid var(--sh-border);
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 400;
+  background: var(--sh-bg-elevated);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-chip:hover {
+  border-color: var(--sh-midnight);
+}
+
+.filter-chip.active {
+  background: var(--sh-midnight);
+  color: var(--sh-cloud);
+  border-color: var(--sh-midnight);
+}
+
+/* ─── FOOTER ─── */
+.footer {
+  padding: 60px 100px;
+  text-align: center;
+  background: var(--sh-midnight);
+  color: var(--sh-linen);
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 300;
+  margin-bottom: 16px;
+  color: var(--sh-cloud);
+}
+
+.footer p {
+  font-size: 0.8rem;
+  color: var(--sh-text-tertiary);
+  line-height: 1.6;
+}
+
+/* ─── SCROLL ANIMATION ─── */
+.v {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.v.on {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1023px) {
+  .nav {
+    transform: translateX(-100%);
+  }
+
+  .nav.open {
+    transform: translateX(0);
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+
+  .hero {
+    padding: 100px 48px 80px;
+    min-height: 60vh;
+  }
+
+  .section {
+    padding: 60px 48px;
+  }
+
+  .footer {
+    padding: 48px;
+  }
+
+  .two-col {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .three-col {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .four-col {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .tog-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .product-card-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-stats {
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    padding: 64px 20px 40px;
+    min-height: auto;
+  }
+
+  .hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .hero::after {
+    width: 200px;
+    height: 200px;
+    opacity: 0.5;
+  }
+
+  .hero-sub {
+    font-size: 0.88rem;
+  }
+
+  .hero-label {
+    margin-bottom: 16px;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .hero-stat-num {
+    font-size: 1.8rem;
+  }
+
+  .section {
+    padding: 40px 20px;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+    margin-bottom: 14px;
+  }
+
+  .section-label {
+    font-size: 0.6rem;
+    margin-bottom: 10px;
+  }
+
+  .lead-text {
+    font-size: 0.85rem;
+    margin-bottom: 32px;
+    line-height: 1.8;
+  }
+
+  .footer {
+    padding: 32px 16px;
+  }
+
+  .footer-logo {
+    font-size: 1.1rem;
+  }
+
+  .info-card {
+    padding: 24px 18px;
+  }
+
+  .info-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .product-card-body {
+    padding: 16px;
+  }
+
+  .tog-card {
+    padding: 20px;
+  }
+
+  .tog-number {
+    font-size: 2rem;
+  }
+
+  .three-col,
+  .four-col {
+    grid-template-columns: 1fr;
+  }
+
+  .tog-row {
+    grid-template-columns: 1fr;
+  }
+
+  .product-card-row {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-bar {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+  }
+
+  .filter-chip {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 56px 16px 32px;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+
+  .section {
+    padding: 32px 14px;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+
+  .lead-text {
+    margin-bottom: 24px;
+  }
+
+  .footer {
+    padding: 28px 14px;
+  }
+}
+
+</style>
+<style>
+/* ─── Page-specific: Sustainability ─── */
+
+/* ── HERO ── */
+.hero {
+  min-height: 80vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 100px 80px;
+  background: linear-gradient(155deg, var(--sh-warm-ivory) 0%, #E8EFE7 40%, var(--sh-sage) 80%, var(--sh-deep-sage) 100%);
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--sh-border);
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -20%; right: 5%;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(122,143,118,0.15) 0%, transparent 70%);
+}
+.hero-tag { font-family: var(--font-body-en); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--sh-text-tertiary); margin-bottom: 20px; position: relative; z-index: 1; }
+.hero h1 { font-family: var(--font-display); font-size: clamp(40px, 5vw, 72px); font-weight: 400; line-height: 1.1; color: var(--sh-midnight); margin-bottom: 24px; position: relative; z-index: 1; }
+.hero h1 em { font-style: italic; color: var(--sh-deep-sage); }
+.hero-desc { font-size: 16px; font-weight: 300; color: var(--sh-text-secondary); max-width: 520px; line-height: 1.9; position: relative; z-index: 1; }
+
+/* ── SECTION ── */
+.section { padding: 100px 80px; border-bottom: 1px solid var(--sh-border); }
+.section-tag { font-family: var(--font-body-en); font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--sh-golden-hour); margin-bottom: 12px; }
+.section-title { font-family: var(--font-display); font-size: clamp(28px, 3vw, 44px); font-weight: 400; line-height: 1.2; color: var(--sh-midnight); margin-bottom: 16px; }
+.section-subtitle { font-size: 15px; font-weight: 300; color: var(--sh-text-secondary); max-width: 560px; line-height: 1.9; margin-bottom: 60px; }
+
+/* ── BAMBOO BENEFITS ── */
+.bamboo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.bamboo-card {
+  background: var(--sh-bg-elevated);
+  border: 1px solid var(--sh-border);
+  border-radius: 20px;
+  padding: 40px 32px;
+  text-align: center;
+  position: relative; overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.bamboo-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(44,44,58,0.08);
+}
+.bamboo-card::before {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--sh-deep-sage), var(--sh-sage));
+}
+.bamboo-visual {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: rgba(122,143,118,0.1);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px;
+}
+.bamboo-visual svg { width: 36px; height: 36px; }
+.bamboo-stat {
+  font-family: var(--font-display);
+  font-size: 52px; font-weight: 400;
+  color: var(--sh-deep-sage);
+  line-height: 1; margin-bottom: 4px;
+}
+.bamboo-stat-unit { font-size: 24px; }
+.bamboo-stat-label {
+  font-size: 14px; font-weight: 500;
+  margin-bottom: 12px;
+}
+.bamboo-stat-desc {
+  font-size: 13px; font-weight: 300;
+  color: var(--sh-text-secondary);
+  line-height: 1.8;
+}
+.bamboo-compare {
+  margin-top: 16px; padding-top: 16px;
+  border-top: 1px solid var(--sh-border);
+  font-size: 12px; font-weight: 300;
+  color: var(--sh-text-tertiary);
+}
+.bamboo-compare strong {
+  color: var(--sh-deep-sage);
+  font-weight: 500;
+}
+
+/* ── PACKAGING TIMELINE ── */
+.timeline-section {
+  padding: 100px 80px;
+  background: var(--sh-cloud);
+  border-bottom: 1px solid var(--sh-border);
+}
+.timeline {
+  position: relative;
+  padding-left: 40px;
+}
+.timeline::before {
+  content: '';
+  position: absolute; top: 16px; bottom: 16px; left: 16px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--sh-sage), var(--sh-linen));
+}
+.timeline-item {
+  position: relative;
+  padding: 0 0 48px 40px;
+}
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-dot {
+  position: absolute; left: -32px; top: 4px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--sh-deep-sage);
+  border: 3px solid var(--sh-cloud);
+  z-index: 1;
+}
+.timeline-dot.future {
+  background: var(--sh-cloud);
+  border-color: var(--sh-linen);
+}
+.timeline-dot.future::after {
+  content: '';
+  position: absolute; inset: 2px;
+  border-radius: 50%;
+  background: var(--sh-sage);
+  opacity: 0.5;
+}
+.timeline-year {
+  font-family: var(--font-body-en);
+  font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--sh-deep-sage);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.timeline-dot.future + .timeline-content .timeline-year { color: var(--sh-text-tertiary); }
+.timeline-content h4 {
+  font-family: var(--font-display);
+  font-size: 22px; font-weight: 500;
+  margin-bottom: 8px;
+}
+.timeline-content p {
+  font-size: 14px; font-weight: 300;
+  color: var(--sh-text-secondary);
+  line-height: 1.8;
+  max-width: 580px;
+}
+.timeline-badge {
+  display: inline-block; margin-top: 8px;
+  font-size: 11px; font-weight: 400;
+  background: rgba(122,143,118,0.12);
+  color: var(--sh-deep-sage);
+  padding: 3px 10px; border-radius: 100px;
+}
+.timeline-badge.future-badge {
+  background: rgba(217,207,195,0.3);
+  color: var(--sh-text-tertiary);
+}
+.timeline-goal-box {
+  margin-top: 60px;
+  background: var(--sh-bg-elevated);
+  border: 1px solid var(--sh-border);
+  border-radius: 16px;
+  padding: 36px 40px;
+  display: flex; gap: 32px; align-items: center;
+}
+.timeline-goal-icon {
+  width: 56px; height: 56px; flex-shrink: 0;
+  border-radius: 14px;
+  background: rgba(122,143,118,0.1);
+  display: flex; align-items: center; justify-content: center;
+}
+.timeline-goal-icon svg { width: 24px; height: 24px; }
+.timeline-goal-box h4 {
+  font-family: var(--font-display);
+  font-size: 22px; font-weight: 500;
+  margin-bottom: 6px;
+}
+.timeline-goal-box p {
+  font-size: 14px; font-weight: 300;
+  color: var(--sh-text-secondary);
+  line-height: 1.8;
+}
+
+/* ── PROGRESS GOALS ── */
+.progress-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+.progress-card {
+  background: var(--sh-bg-elevated);
+  border: 1px solid var(--sh-border);
+  border-radius: 16px;
+  padding: 32px;
+}
+.progress-header {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; margin-bottom: 20px;
+}
+.progress-title { font-size: 15px; font-weight: 500; }
+.progress-deadline {
+  font-family: var(--font-body-en);
+  font-size: 10px; letter-spacing: 1px;
+  color: var(--sh-text-tertiary);
+  background: var(--sh-cloud);
+  padding: 4px 10px; border-radius: 100px;
+  text-transform: uppercase;
+}
+.progress-bar-wrap { margin-bottom: 12px; }
+.progress-label-row {
+  display: flex; justify-content: space-between;
+  margin-bottom: 8px;
+}
+.progress-current-label {
+  font-size: 12px; font-weight: 400;
+  color: var(--sh-text-secondary);
+}
+.progress-nums {
+  font-family: var(--font-body-en);
+  font-size: 12px; font-weight: 500;
+  color: var(--sh-text-secondary);
+}
+.progress-nums .current { color: var(--sh-deep-sage); }
+.pbar-track {
+  height: 10px; border-radius: 100px;
+  background: var(--sh-cloud); overflow: hidden;
+  margin-bottom: 4px;
+}
+.pbar-fill {
+  height: 100%; border-radius: 100px;
+  background: linear-gradient(90deg, var(--sh-sage), var(--sh-deep-sage));
+  transition: width 1.2s ease;
+  position: relative;
+}
+.pbar-fill::after {
+  content: '';
+  position: absolute; right: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--sh-deep-sage);
+  border: 2px solid #fff;
+}
+.progress-milestone {
+  font-size: 12px; font-weight: 300;
+  color: var(--sh-text-tertiary);
+}
+.progress-milestone strong { color: var(--sh-text-secondary); }
+.progress-desc {
+  font-size: 13px; font-weight: 300;
+  color: var(--sh-text-secondary);
+  line-height: 1.8;
+  padding-top: 16px;
+  border-top: 1px solid var(--sh-border);
+}
+
+/* ── EARTH MESSAGE ── */
+.earth-section {
+  min-height: 70vh;
+  position: relative; overflow: hidden;
+  display: flex; align-items: center;
+  background: var(--sh-midnight);
+}
+.earth-bg {
+  position: absolute; inset: 0;
+  background: var(--sh-deep-sage);
+  opacity: 0.15;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 300;
+  color: rgba(44,44,58,0.4);
+  letter-spacing: 0.5px;
+}
+.earth-bg-text {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 300;
+  color: rgba(255,255,255,0.15);
+  letter-spacing: 0.5px;
+}
+.earth-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(44,44,58,0.85) 0%, rgba(44,44,58,0.6) 50%, rgba(44,44,58,0.3) 100%);
+}
+.earth-content {
+  position: relative; z-index: 2;
+  padding: 80px;
+  max-width: 700px;
+}
+.earth-tag {
+  font-family: var(--font-body-en);
+  font-size: 10px; letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--sh-sage);
+  opacity: 0.8;
+  margin-bottom: 24px;
+}
+.earth-quote-mark {
+  font-family: var(--font-display);
+  font-size: 80px; line-height: 0.6;
+  color: var(--sh-sage);
+  opacity: 0.3;
+  display: block; margin-bottom: 24px;
+}
+.earth-quote {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 52px);
+  font-weight: 300; line-height: 1.35;
+  color: rgba(255,255,255,0.9);
+  font-style: italic;
+  margin-bottom: 32px;
+}
+.earth-quote em {
+  color: var(--sh-sage);
+  font-style: normal;
+}
+.earth-body {
+  font-size: 15px; font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.9;
+  max-width: 520px;
+}
+
+/* ── FOOTER ── */
+.footer { background: var(--sh-midnight); color: var(--sh-cloud); text-align: center; padding: 60px 24px; }
+.footer-logo { font-family: var(--font-display); font-size: 1.3rem; font-weight: 300; letter-spacing: 0.05em; margin-bottom: 8px; }
+.footer-text { font-size: 0.8rem; color: var(--sh-linen); font-weight: 300; margin-bottom: 16px; }
+.footer-copy { font-size: 0.7rem; color: var(--sh-text-tertiary); }
+
+/* ── RESPONSIVE (page-specific) ── */
+@media (max-width: 1023px) {
+  .hero { padding: 80px 40px; }
+  .section { padding: 80px 40px; }
+  .timeline-section { padding: 80px 40px; }
+  .bamboo-grid { grid-template-columns: 1fr 1fr; }
+  .progress-grid { grid-template-columns: 1fr; }
+  .earth-content { padding: 60px 40px; }
+  .timeline-goal-box { flex-direction: column; gap: 16px; }
+}
+@media (max-width: 767px) {
+  .hero { padding: 80px 20px 60px; min-height: 60vh; }
+  .hero h1 { font-size: 2.5rem; }
+  .section { padding: 60px 20px; }
+  .timeline-section { padding: 60px 20px; }
+  .bamboo-grid { grid-template-columns: 1fr; }
+  .earth-content { padding: 60px 20px; }
+}
+
+
+/* ══ Mobile Optimization Fix ══ */
+@media (max-width: 767px) {
+  /* 테이블 기본 스크롤 처리 */
+  table { max-width: 100%; }
+  .compare-table-wrap, .table-wrap, .tbl-wrap,
+  .size-table-wrap, .honest-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* 인라인 고정폭 오버플로우 방지 */
+  [style*="width"][style*="px"]:not(img):not(svg) {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 1.5rem !important; }
+  .section-title { font-size: 1.2rem !important; }
+  .lead-text { font-size: 0.82rem; line-height: 1.75; margin-bottom: 20px; }
+  .footer { padding: 28px 14px; }
+  .footer-logo { font-size: 1rem; }
+}
+
+@media (max-width: 767px) {
+  .earth-section { min-height: auto; }
+}
+@media (max-width: 480px) {
+  .timeline { padding-left: 24px; }
+  .timeline-dot { left: -20px; width: 10px; height: 10px; }
+}
+</style>
+</head>
+<body>
+
+<main class="main">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-tag">Category B — Production &amp; Materials · 10</div>
+    <h1>Sustainability —<br><em>Small Steps, Big Love</em></h1>
+    <p class="hero-desc">작은 발걸음이 큰 사랑이 되어요. 지금 당장 완벽할 수는 없어도, 매년 조금씩 나아지고 있어요.</p>
+  </section>
+
+  <!-- Section 1: Bamboo Benefits -->
+  <section class="section">
+    <div class="section-tag">Bamboo</div>
+    <h2 class="section-title">밤부가 환경에 좋은 이유</h2>
+    <p class="section-subtitle">단순히 "친환경 소재"라는 말 대신, 실제 수치로 설명할게요. 밤부는 지구에게 놀랍도록 관대한 식물이에요.</p>
+
+    <div class="bamboo-grid">
+      <div class="bamboo-card">
+        <div class="bamboo-visual">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--sh-deep-sage)" stroke-width="1.5">
+            <path d="M12 22V12M12 12C12 7 8 4 4 4s8 0 8 8z"/>
+            <path d="M12 12c0-5 4-8 8-8s-8 0-8 8z"/>
+          </svg>
+        </div>
+        <div class="bamboo-stat">90<span class="bamboo-stat-unit">%</span></div>
+        <div class="bamboo-stat-label">적은 물 사용량</div>
+        <p class="bamboo-stat-desc">일반 면화 대비 90% 적은 물로 재배돼요. 자연 강수량만으로도 자라는 식물이라 인위적 관개가 거의 필요 없어요.</p>
+        <div class="bamboo-compare">면화 1kg = 물 <strong>10,000L</strong> vs 밤부 = <strong>1/10</strong></div>
+      </div>
+      <div class="bamboo-card">
+        <div class="bamboo-visual">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--sh-deep-sage)" stroke-width="1.5">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+            <polyline points="17 6 23 6 23 12"/>
+          </svg>
+        </div>
+        <div class="bamboo-stat">3<span class="bamboo-stat-unit">년</span></div>
+        <div class="bamboo-stat-label">수확 가능 성장 기간</div>
+        <p class="bamboo-stat-desc">일반 나무가 20~50년 자라야 수확할 수 있는 것과 달리, 밤부는 3~5년이면 수확해요. 세계에서 가장 빠르게 자라는 식물이에요.</p>
+        <div class="bamboo-compare">나무 성장 <strong>30~50년</strong> vs 밤부 <strong>3~5년</strong></div>
+      </div>
+      <div class="bamboo-card">
+        <div class="bamboo-visual">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--sh-deep-sage)" stroke-width="1.5">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div class="bamboo-stat">0<span class="bamboo-stat-unit">회</span></div>
+        <div class="bamboo-stat-label">농약·살충제 사용</div>
+        <p class="bamboo-stat-desc">밤부는 자체적인 항균 성분(쿤竹) 덕분에 살충제 없이도 해충에 강해요. 화학약품 없는 재배가 가능해요.</p>
+        <div class="bamboo-compare">일반 면화 농약 사용량 <strong>전 세계 16%</strong> vs 밤부 <strong>0%</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Packaging Timeline -->
+  <section class="timeline-section">
+    <div class="section-tag">Progress</div>
+    <h2 class="section-title">포장재 개선 히스토리</h2>
+    <p class="section-subtitle">한 번에 다 바꿀 수 없어요. 하지만 매년 한 가지씩은 확실히 바꾸고 있어요.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">2020 — 시작점</div>
+          <h4>일반 폴리 비닐 포장 사용</h4>
+          <p>브랜드 출시 초기, 다른 많은 브랜드처럼 일반 비닐 봉투를 사용했어요. 당시에는 친환경 대안의 단가 차이가 너무 컸어요.</p>
+          <span class="timeline-badge">출발점 인정</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">2021 — 첫 번째 변화</div>
+          <h4>FSC 인증 재생 종이 내지 도입</h4>
+          <p>박스 안쪽 티슈 페이퍼와 카드를 FSC 인증 재생지로 전환했어요. 소비자가 직접 만지는 부분부터 시작했어요.</p>
+          <span class="timeline-badge">완료</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">2022 — 박스 전환</div>
+          <h4>외박스 재생 용지 100% 전환</h4>
+          <p>외부 박스 전체를 FSC 인증 재생 골판지로 바꿨어요. 인쇄 잉크도 콩기름 기반으로 변경했어요.</p>
+          <span class="timeline-badge">완료</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">2023 — 비닐 제거</div>
+          <h4>일반 비닐 봉투 완전 제거</h4>
+          <p>모든 제품 포장에서 일반 PE 비닐을 제거하고, 옥수수 전분 기반 생분해 소재로 교체했어요. 단가 30% 상승을 감수했어요.</p>
+          <span class="timeline-badge">완료</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot future"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">2025 — 진행 중</div>
+          <h4>에어캡 완전 제거 및 대체재 개발</h4>
+          <p>현재 아직 일부 제품에 에어캡(뽁뽁이)을 사용하고 있어요. 종이 완충재로 전환을 진행 중이에요.</p>
+          <span class="timeline-badge future-badge">진행 중 — 70% 완료</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot future"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">2027 — 목표</div>
+          <h4>제로-플라스틱 포장 100% 달성</h4>
+          <p>모든 포장 공정에서 플라스틱을 완전히 제거하는 것이 목표예요. 재활용 가능하거나 생분해되는 소재만으로요.</p>
+          <span class="timeline-badge future-badge">목표</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-goal-box">
+      <div class="timeline-goal-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--sh-deep-sage)" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+          <line x1="9" y1="9" x2="9.01" y2="9"/>
+          <line x1="15" y1="9" x2="15.01" y2="9"/>
+        </svg>
+      </div>
+      <div>
+        <h4>매년 "포장재 탄소 리포트"를 공개해요</h4>
+        <p>포장 생산에 드는 탄소 배출량을 매년 측정하고 공개해요. 숫자가 줄어들 때까지 멈추지 않을 거예요.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Progress Goals -->
+  <section class="section">
+    <div class="section-tag">Targets</div>
+    <h2 class="section-title">구체적인 목표와 현재 진척도</h2>
+    <p class="section-subtitle">막연한 약속 대신 측정 가능한 목표예요. 공개적으로 약속했으니 지켜야 해요.</p>
+
+    <div class="progress-grid">
+      <div class="progress-card">
+        <div class="progress-header">
+          <div class="progress-title">재활용 가능 포장재 비율</div>
+          <div class="progress-deadline">목표 2027</div>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-label-row">
+            <span class="progress-current-label">현재 진척도</span>
+            <span class="progress-nums"><span class="current">72%</span> / 100%</span>
+          </div>
+          <div class="pbar-track"><div class="pbar-fill" id="bar1" style="width:0%"></div></div>
+          <div class="progress-milestone">2025년 목표 <strong>80%</strong> · 2026년 <strong>90%</strong> · 2027년 <strong>100%</strong></div>
+        </div>
+        <p class="progress-desc">현재 외박스, 내지, 태그는 100% 재활용 가능해요. 남은 과제는 에어캡과 일부 봉합 테이프예요.</p>
+      </div>
+
+      <div class="progress-card">
+        <div class="progress-header">
+          <div class="progress-title">밤부 소재 제품 비율</div>
+          <div class="progress-deadline">목표 2026</div>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-label-row">
+            <span class="progress-current-label">현재 진척도</span>
+            <span class="progress-nums"><span class="current">68%</span> / 80%</span>
+          </div>
+          <div class="pbar-track"><div class="pbar-fill" id="bar2" style="width:0%"></div></div>
+          <div class="progress-milestone">전체 SKU 중 밤부 소재 포함 제품 목표 <strong>80%</strong></div>
+        </div>
+        <p class="progress-desc">현재 출시된 24개 SKU 중 16개 제품에 밤부 원단이 포함되어 있어요. 신규 제품 개발 시 밤부 적용을 원칙으로 해요.</p>
+      </div>
+
+      <div class="progress-card">
+        <div class="progress-header">
+          <div class="progress-title">생산 과정 탄소 배출량 감축</div>
+          <div class="progress-deadline">목표 2028</div>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-label-row">
+            <span class="progress-current-label">2020년 대비 감축률</span>
+            <span class="progress-nums"><span class="current">31%</span> / 50%</span>
+          </div>
+          <div class="pbar-track"><div class="pbar-fill" id="bar3" style="width:0%"></div></div>
+          <div class="progress-milestone">2028년까지 <strong>탄소 50% 감축</strong> 목표</div>
+        </div>
+        <p class="progress-desc">생산 공장의 에너지 효율화, 물류 경로 최적화를 통해 2020년 대비 31% 감축했어요. 재생 에너지 전환이 다음 과제예요.</p>
+      </div>
+
+      <div class="progress-card">
+        <div class="progress-header">
+          <div class="progress-title">원단 스크랩 재활용률</div>
+          <div class="progress-deadline">목표 2025</div>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-label-row">
+            <span class="progress-current-label">현재 진척도</span>
+            <span class="progress-nums"><span class="current">89%</span> / 100%</span>
+          </div>
+          <div class="pbar-track"><div class="pbar-fill" id="bar4" style="width:0%"></div></div>
+          <div class="progress-milestone">재단 후 남는 스크랩 원단 <strong>100% 재활용</strong></div>
+        </div>
+        <p class="progress-desc">재단 후 남은 원단 스크랩의 89%를 소품 제작이나 원단 재활용 업체로 연결하고 있어요. 나머지 11%는 처리 방법 개발 중이에요.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Earth Message -->
+  <section class="earth-section">
+    <div class="earth-bg"></div>
+    <div class="earth-bg-text">PHOTO: 자연 속 아이 이미지 — 숲, 나무, 햇살</div>
+    <div class="earth-overlay"></div>
+    <div class="earth-content">
+      <div class="earth-tag">A Message to the Future</div>
+      <span class="earth-quote-mark">"</span>
+      <blockquote class="earth-quote">
+        부모가 아이에게<br>남겨줄 수 있는<br>가장 큰 선물은<br><em>더 나은 지구</em>예요.
+      </blockquote>
+      <p class="earth-body">아이를 위한 제품을 만드는 브랜드가 지구에 무심할 수는 없어요. 지금 당장 완벽하지 않아도, 매년 조금씩 더 나은 방향으로 가는 것 — 그것이 우리가 아이들에게 보여주고 싶은 태도예요.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">SundayHug</div>
+      <div class="footer-text">Designed for Families</div>
+      <div class="footer-copy">&copy; 2025 SundayHug. All rights reserved.</div>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+(function() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('on');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.v').forEach(function(el) {
+    observer.observe(el);
+  });
+})();
+</script>
+</body>
+</html>

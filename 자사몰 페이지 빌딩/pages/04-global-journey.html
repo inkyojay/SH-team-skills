@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Journey — SundayHug Brand Pages</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   SundayHug Pages — Shared Design System
+   브랜드 가이드 기반 공유 CSS
+   ============================================================ */
+
+/* ─── CSS VARIABLES ─── */
+:root {
+  /* Primary Palette */
+  --sh-midnight: #2C2C3A;
+  --sh-cloud: #F7F5F2;
+  --sh-warm-ivory: #FBF9F6;
+  --sh-moon: #E8DFD4;
+  --sh-linen: #D9CFC3;
+
+  /* Signature Colors */
+  --sh-dusty-lavender: #C4B5CB;
+  --sh-sage: #B5C4B1;
+  --sh-soft-apricot: #E8C9A8;
+  --sh-misty-blue: #B3C5D3;
+  --sh-blush: #DEB5A8;
+
+  /* Seasonal Accent */
+  --sh-golden-hour: #D4A574;
+  --sh-deep-sage: #7A8F76;
+  --sh-dusty-rose: #C09B8D;
+  --sh-slate-blue: #8A9BB0;
+
+  /* Semantic Tokens */
+  --sh-text-primary: #2C2C3A;
+  --sh-text-secondary: #6B6B7B;
+  --sh-text-tertiary: #9B9BAB;
+  --sh-border: #E8E4DF;
+  --sh-bg-elevated: #FFFFFF;
+
+  /* Font Stacks */
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body-kr: 'Noto Sans KR', sans-serif;
+  --font-body-en: 'DM Sans', sans-serif;
+}
+
+/* ─── RESET ─── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body-kr);
+  background: var(--sh-warm-ivory);
+  color: var(--sh-text-primary);
+  line-height: 1.7;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+
+/* ─── SIDEBAR NAVIGATION ─── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: var(--sh-midnight);
+  padding: 48px 32px;
+  z-index: 100;
+  overflow-y: auto;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav::-webkit-scrollbar { width: 0; }
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--sh-cloud);
+  margin-bottom: 8px;
+}
+
+.nav-subtitle {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sh-text-tertiary);
+  margin-bottom: 48px;
+}
+
+.nav-section { margin-bottom: 28px; }
+
+.nav-section-title {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sh-linen);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.nav a {
+  display: block;
+  text-decoration: none;
+  color: rgba(247, 245, 242, 0.6);
+  font-size: 0.85rem;
+  padding: 6px 0;
+  transition: all 0.3s ease;
+  font-weight: 300;
+}
+
+.nav a:hover {
+  color: var(--sh-cloud);
+  padding-left: 8px;
+}
+
+.nav a.active {
+  color: var(--sh-cloud);
+  font-weight: 500;
+}
+
+/* ─── MOBILE MENU TOGGLE ─── */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 200;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: var(--sh-bg-elevated);
+  border-radius: 12px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  flex-direction: column;
+  gap: 5px;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--sh-midnight);
+  transition: all 0.3s;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(44, 44, 58, 0.5);
+  z-index: 150;
+}
+
+.overlay.active { display: block; }
+
+/* ─── MAIN CONTENT ─── */
+.main {
+  margin-left: 0;
+  min-height: 100vh;
+}
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 120px 100px;
+  background: linear-gradient(135deg, var(--sh-warm-ivory) 0%, var(--sh-moon) 100%);
+  border-bottom: 1px solid var(--sh-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,165,116,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-label {
+  font-family: var(--font-body-en);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sh-text-tertiary);
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--sh-text-primary);
+  margin-bottom: 20px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--sh-golden-hour);
+}
+
+.hero-sub {
+  font-family: var(--font-body-kr);
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--sh-text-secondary);
+  max-width: 480px;
+  line-height: 1.9;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  margin-top: 48px;
+}
+
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--sh-text-primary);
+}
+
+.hero-stat-label {
+  font-size: 0.75rem;
+  color: var(--sh-text-tertiary);
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+
+/* ─── SECTIONS ─── */
+.section {
+  padding: 100px 100px;
+  border-bottom: 1px solid var(--sh-border);
+}
+
+.section:last-of-type { border-bottom: none; }
+
+.section--warm { background: var(--sh-warm-ivory); }
+.section--cloud { background: var(--sh-cloud); }
+.section--elevated { background: var(--sh-bg-elevated); }
+.section--dark {
+  background: var(--sh-midnight);
+  color: var(--sh-cloud);
+}
+
+.section-label {
+  font-family: var(--font-body-en);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sh-text-tertiary);
+  margin-bottom: 16px;
+}
+
+.section--dark .section-label { color: var(--sh-linen); }
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--sh-text-primary);
+  margin-bottom: 20px;
+}
+
+.section-title em { font-style: italic; color: var(--sh-golden-hour); }
+.section--dark .section-title { color: var(--sh-cloud); }
+.section--dark .section-title em { color: var(--sh-golden-hour); }
+
+.lead-text {
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--sh-text-secondary);
+  max-width: 640px;
+  line-height: 2;
+  margin-bottom: 60px;
+}
+
+.section--dark .lead-text { color: var(--sh-linen); }
+
+/* ─── PRODUCT CARD ─── */
+.product-card {
+  background: var(--sh-bg-elevated);
+  border: 1px solid var(--sh-border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(44,44,58,0.08);
+}
+
+.product-card-image {
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body-en);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: rgba(44,44,58,0.4);
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.product-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-card-body {
+  padding: 24px;
+}
+
+.product-card-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+  color: var(--sh-text-primary);
+}
+
+.product-card-desc {
+  font-size: 0.85rem;
+  color: var(--sh-text-secondary);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.product-card-price {
+  font-family: var(--font-body-en);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--sh-text-primary);
+  margin-bottom: 16px;
+}
+
+.product-card-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+/* ─── CTA BUTTONS ─── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  background: var(--sh-midnight);
+  color: var(--sh-cloud);
+  font-family: var(--font-body-kr);
+  font-size: 0.85rem;
+  font-weight: 400;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: #3D3D4E;
+  box-shadow: 0 4px 16px rgba(44,44,58,0.2);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  background: transparent;
+  color: var(--sh-text-primary);
+  font-family: var(--font-body-kr);
+  font-size: 0.85rem;
+  font-weight: 400;
+  border: 1px solid var(--sh-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-outline:hover {
+  border-color: var(--sh-midnight);
+  box-shadow: 0 2px 8px rgba(44,44,58,0.1);
+}
+
+.section--dark .btn-outline {
+  color: var(--sh-cloud);
+  border-color: rgba(247,245,242,0.3);
+}
+
+.section--dark .btn-outline:hover {
+  border-color: var(--sh-cloud);
+}
+
+/* ─── AGE BADGE ─── */
+.age-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-family: var(--font-body-en);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.age-badge--newborn {
+  background: rgba(232,201,168,0.2);
+  color: #8B7355;
+}
+
+.age-badge--infant {
+  background: rgba(181,196,177,0.2);
+  color: var(--sh-deep-sage);
+}
+
+.age-badge--baby {
+  background: rgba(196,181,203,0.2);
+  color: #6B5A7A;
+}
+
+.age-badge--toddler {
+  background: rgba(179,197,211,0.2);
+  color: var(--sh-slate-blue);
+}
+
+/* ─── MATERIAL CHIP ─── */
+.material-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  border: 1px solid var(--sh-border);
+  background: var(--sh-bg-elevated);
+}
+
+.material-chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.material-chip--silky .material-chip-dot { background: var(--sh-dusty-lavender); }
+.material-chip--triple .material-chip-dot { background: var(--sh-sage); }
+.material-chip--mesh .material-chip-dot { background: var(--sh-misty-blue); }
+
+/* ─── TOG CARD ─── */
+.tog-card {
+  padding: 32px;
+  border-radius: 16px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.tog-card:hover { transform: translateY(-4px); }
+
+.tog-number {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
+.tog-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.tog-temp {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.tog-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* ─── IMAGE PLACEHOLDER ─── */
+.img-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body-en);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(44,44,58,0.35);
+  text-align: center;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+/* ─── TWO COLUMN LAYOUT ─── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.four-col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* ─── INFO CARD ─── */
+.info-card {
+  padding: 40px;
+  background: var(--sh-bg-elevated);
+  border: 1px solid var(--sh-border);
+  border-radius: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(44,44,58,0.06);
+}
+
+.info-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 24px;
+}
+
+.info-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.info-card p {
+  font-size: 0.9rem;
+  color: var(--sh-text-secondary);
+  line-height: 1.8;
+}
+
+/* ─── FILTER CHIPS ─── */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.filter-chip {
+  padding: 8px 20px;
+  border: 1px solid var(--sh-border);
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 400;
+  background: var(--sh-bg-elevated);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-chip:hover {
+  border-color: var(--sh-midnight);
+}
+
+.filter-chip.active {
+  background: var(--sh-midnight);
+  color: var(--sh-cloud);
+  border-color: var(--sh-midnight);
+}
+
+/* ─── FOOTER ─── */
+.footer {
+  padding: 60px 100px;
+  text-align: center;
+  background: var(--sh-midnight);
+  color: var(--sh-linen);
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 300;
+  margin-bottom: 16px;
+  color: var(--sh-cloud);
+}
+
+.footer p {
+  font-size: 0.8rem;
+  color: var(--sh-text-tertiary);
+  line-height: 1.6;
+}
+
+/* ─── SCROLL ANIMATION ─── */
+.v {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.v.on {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1023px) {
+  .nav {
+    transform: translateX(-100%);
+  }
+
+  .nav.open {
+    transform: translateX(0);
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+
+  .hero {
+    padding: 100px 48px 80px;
+    min-height: 60vh;
+  }
+
+  .section {
+    padding: 60px 48px;
+  }
+
+  .footer {
+    padding: 48px;
+  }
+
+  .two-col {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .three-col {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .four-col {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .tog-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .product-card-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-stats {
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    padding: 64px 20px 40px;
+    min-height: auto;
+  }
+
+  .hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .hero::after {
+    width: 200px;
+    height: 200px;
+    opacity: 0.5;
+  }
+
+  .hero-sub {
+    font-size: 0.88rem;
+  }
+
+  .hero-label {
+    margin-bottom: 16px;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .hero-stat-num {
+    font-size: 1.8rem;
+  }
+
+  .section {
+    padding: 40px 20px;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+    margin-bottom: 14px;
+  }
+
+  .section-label {
+    font-size: 0.6rem;
+    margin-bottom: 10px;
+  }
+
+  .lead-text {
+    font-size: 0.85rem;
+    margin-bottom: 32px;
+    line-height: 1.8;
+  }
+
+  .footer {
+    padding: 32px 16px;
+  }
+
+  .footer-logo {
+    font-size: 1.1rem;
+  }
+
+  .info-card {
+    padding: 24px 18px;
+  }
+
+  .info-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .product-card-body {
+    padding: 16px;
+  }
+
+  .tog-card {
+    padding: 20px;
+  }
+
+  .tog-number {
+    font-size: 2rem;
+  }
+
+  .three-col,
+  .four-col {
+    grid-template-columns: 1fr;
+  }
+
+  .tog-row {
+    grid-template-columns: 1fr;
+  }
+
+  .product-card-row {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-bar {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+  }
+
+  .filter-chip {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 56px 16px 32px;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+
+  .section {
+    padding: 32px 14px;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+
+  .lead-text {
+    margin-bottom: 24px;
+  }
+
+  .footer {
+    padding: 28px 14px;
+  }
+}
+
+</style>
+<style>
+/* ─── Page-specific: Global Journey ─── */
+
+/* Hero override — custom gradient */
+.hero {
+  background: linear-gradient(140deg, var(--sh-warm-ivory) 0%, var(--sh-moon) 60%, var(--sh-linen) 100%);
+}
+
+/* 지구 형상 장식 */
+.hero-globe {
+  position: absolute;
+  right: 80px; top: 50%;
+  transform: translateY(-50%);
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  border: 1px solid var(--sh-border);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.hero-globe::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: -40px; right: -40px;
+  height: 1px;
+  background: var(--sh-linen);
+}
+
+.hero-globe::after {
+  content: '';
+  position: absolute;
+  left: 50%; top: -40px; bottom: -40px;
+  width: 1px;
+  background: var(--sh-linen);
+}
+
+/* Hero stat override */
+.hero-stat-num {
+  font-size: 2.8rem;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.hero-stat-label {
+  font-family: var(--font-body-en);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ─── SECTION 1: 국가별 카드 그리드 ─── */
+.countries-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.country-card {
+  background: var(--sh-bg-elevated);
+  border: 1px solid var(--sh-border);
+  border-radius: 4px;
+  padding: 24px 22px;
+  position: relative;
+  transition: box-shadow 0.2s;
+}
+
+.country-card:hover { box-shadow: 0 4px 20px rgba(44,44,58,0.07); }
+
+/* CSS 국기 — 색 블록으로 추상화 */
+.country-flag {
+  width: 36px; height: 24px;
+  border-radius: 2px;
+  margin-bottom: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.flag-kr { background: #fff; }
+.flag-kr::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, #CD2E3A 38%, transparent 38%), radial-gradient(circle at 50% 50%, #003478 0%, transparent 0%); }
+.flag-kr { background: #fff; border: 1px solid #E8E4DF; }
+
+.flag-jp { background: #fff; }
+.flag-jp::after { content: ''; position: absolute; top: 50%; left: 50%; width: 12px; height: 12px; border-radius: 50%; background: #BC002D; transform: translate(-50%,-50%); }
+.flag-jp { border: 1px solid #E8E4DF; }
+
+.flag-us { background: #B22234; }
+.flag-us::before { content: ''; position: absolute; top: 0; left: 0; width: 40%; height: 55%; background: #3C3B6E; }
+
+.flag-de { display: flex; flex-direction: row; }
+.flag-de-inner { display: flex; flex-direction: column; width: 100%; }
+.flag-de-inner::before { content: ''; flex: 1; background: #000000; }
+.flag-de-middle { flex: 1; background: #DD0000; display: none; }
+.flag-de-inner::after { content: ''; flex: 1; background: #FFCE00; }
+
+.flag-gb { background: #012169; }
+.flag-gb::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom right, #fff 44%, transparent 44%), linear-gradient(to bottom left, #fff 44%, transparent 44%); }
+.flag-gb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, transparent 42%, #C8102E 42%, #C8102E 58%, transparent 58%), linear-gradient(to bottom, transparent 35%, #C8102E 35%, #C8102E 65%, transparent 65%); }
+
+.flag-au { background: #00008B; }
+.flag-au::before { content: ''; position: absolute; top: 0; left: 0; width: 45%; height: 55%; background: linear-gradient(to bottom right, #fff 44%, #00008B 44%, #00008B 56%, #fff 56%), linear-gradient(to bottom left, #fff 44%, #00008B 44%, #00008B 56%, #fff 56%); }
+
+.flag-fr { display: flex; flex-direction: row; width: 36px; }
+.flag-fr-b { flex: 1; background: #002395; }
+.flag-fr-w { flex: 1; background: #EDEDED; }
+.flag-fr-r { flex: 1; background: #ED2939; }
+
+.flag-ca { background: #FF0000; }
+.flag-ca::before { content: ''; position: absolute; left: 25%; right: 25%; top: 0; bottom: 0; background: #fff; }
+.flag-ca::after { content: ''; position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; transform: translate(-50%,-50%); background: #FF0000; clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+
+/* 단순 색 블록으로 대체 */
+.flag-simple { border-radius: 2px; margin-bottom: 14px; width: 36px; height: 24px; }
+
+.country-year {
+  font-family: var(--font-body-en);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sh-text-tertiary);
+  margin-bottom: 6px;
+}
+
+.country-name {
+  font-family: var(--font-body-kr);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--sh-text-primary);
+  margin-bottom: 8px;
+}
+
+.country-review {
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--sh-text-secondary);
+  line-height: 1.7;
+  font-style: italic;
+}
+
+.country-platform {
+  margin-top: 12px;
+  font-family: var(--font-body-en);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--sh-text-tertiary);
+}
+
+/* ─── SECTION 2: 어워드 배지 ─── */
+.awards-section { background: var(--sh-midnight); }
+.awards-section .section-label { color: rgba(255,255,255,0.35); }
+.awards-section .section-title { color: #fff; }
+.awards-section .lead-text { color: rgba(255,255,255,0.55); }
+
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.award-badge {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  padding: 28px 24px;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.award-badge:hover { background: rgba(255,255,255,0.07); }
+
+.award-logo-placeholder {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* SVG 로고 대체 */
+.award-logo-placeholder svg {
+  width: 32px; height: 32px;
+}
+
+.award-name {
+  font-family: var(--font-body-en);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 6px;
+}
+
+.award-category {
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 4px;
+}
+
+.award-year {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--sh-golden-hour);
+  font-weight: 300;
+}
+
+/* ─── SECTION 3: 전시회 포토 갤러리 ─── */
+.expo-section { background: var(--sh-cloud); }
+
+.expo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.expo-item {
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--sh-bg-elevated);
+}
+
+.expo-photo {
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.expo-photo .photo-label {
+  font-family: var(--font-body-en);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(44,44,58,0.4);
+  text-align: center;
+  padding: 12px;
+}
+
+.expo-info {
+  padding: 20px 20px;
+}
+
+.expo-info h5 {
+  font-family: var(--font-body-kr);
+  font-size: 0.88rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.expo-info p {
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--sh-text-secondary);
+}
+
+/* ─── SECTION 4: 캐러셀 리뷰 ─── */
+.reviews-track {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.review-card {
+  background: var(--sh-bg-elevated);
+  border: 1px solid var(--sh-border);
+  border-radius: 4px;
+  padding: 36px 32px;
+  position: relative;
+}
+
+/* 인용 부호 CSS */
+.review-quote-mark {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  line-height: 0.7;
+  color: var(--sh-linen);
+  position: absolute;
+  top: 24px; left: 24px;
+  font-style: italic;
+  pointer-events: none;
+  user-select: none;
+}
+
+.review-text {
+  font-family: var(--font-body-kr);
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--sh-text-secondary);
+  line-height: 1.85;
+  margin-bottom: 24px;
+  padding-top: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid var(--sh-border);
+  padding-top: 20px;
+}
+
+.reviewer-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.reviewer-name {
+  font-family: var(--font-body-kr);
+  font-size: 0.82rem;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.reviewer-meta {
+  font-family: var(--font-body-en);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--sh-text-tertiary);
+}
+
+/* FOOTER override */
+.footer-logo { font-size: 1.3rem; }
+.footer-text { font-size: 0.8rem; color: var(--sh-linen); font-weight: 300; margin-bottom: 16px; }
+.footer-copy { font-size: 0.7rem; color: var(--sh-text-tertiary); }
+
+/* RESPONSIVE (page-specific) */
+@media (max-width: 1023px) {
+  .hero-globe { display: none; }
+  .countries-grid { grid-template-columns: repeat(3, 1fr); }
+  .awards-grid { grid-template-columns: repeat(2, 1fr); }
+  .expo-grid { grid-template-columns: repeat(2, 1fr); }
+  .reviews-track { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 767px) {
+  .countries-grid { grid-template-columns: repeat(2, 1fr); }
+  .awards-grid { grid-template-columns: repeat(2, 1fr); }
+  .expo-grid { grid-template-columns: 1fr; }
+}
+
+
+/* ══ Mobile Optimization Fix ══ */
+@media (max-width: 767px) {
+  /* 테이블 기본 스크롤 처리 */
+  table { max-width: 100%; }
+  .compare-table-wrap, .table-wrap, .tbl-wrap,
+  .size-table-wrap, .honest-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* 인라인 고정폭 오버플로우 방지 */
+  [style*="width"][style*="px"]:not(img):not(svg) {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 1.5rem !important; }
+  .section-title { font-size: 1.2rem !important; }
+  .lead-text { font-size: 0.82rem; line-height: 1.75; margin-bottom: 20px; }
+  .footer { padding: 28px 14px; }
+  .footer-logo { font-size: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<main class="main">
+
+  <!-- 히어로 -->
+  <section class="hero">
+    <div class="hero-label">Brand Essentials — 04</div>
+    <h1>Global Journey —<br><em>From Korea to the World</em></h1>
+    <p class="hero-sub">한국에서 시작한 썬데이허그의 이야기가 지금은 20개국 이상의 가족들에게 닿아 있습니다. 언어는 달라도, 아이를 향한 마음은 같아요.</p>
+
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">20+</div>
+        <div class="hero-stat-label">Countries</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">1M</div>
+        <div class="hero-stat-label">Products Sold</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">2015</div>
+        <div class="hero-stat-label">Founded</div>
+      </div>
+    </div>
+
+    <div class="hero-globe"></div>
+  </section>
+
+  <!-- 섹션 1: 국가별 카드 -->
+  <section class="section">
+    <div class="section-label">Global Presence</div>
+    <div class="section-title">세계 <em>각국의 가족들</em></div>
+    <p class="lead-text">썬데이허그는 현재 20개국 이상에서 판매되고 있습니다. 각국 플랫폼의 특성에 맞게 현지화된 서비스를 제공하며, 각 지역 부모들의 피드백을 제품 개발에 반영하고 있어요.</p>
+
+    <div class="countries-grid">
+
+      <div class="country-card">
+        <div class="flag-simple" style="background: linear-gradient(to bottom, #ffffff 33%, #CD2E3A 33%, #CD2E3A 66%, #003478 66%); border: 1px solid #E8E4DF;"></div>
+        <div class="country-year">2015 — Since Founding</div>
+        <div class="country-name">대한민국</div>
+        <div class="country-review">"아이 수면이 2시간에서 5시간으로 늘었어요. 스와들 하나로 이렇게 달라질 수 있다니."</div>
+        <div class="country-platform">네이버 스마트스토어 · 쿠팡 · 자사몰</div>
+      </div>
+
+      <div class="country-card">
+        <div class="flag-simple" style="background: #fff; border: 1px solid #E8E4DF; position: relative; overflow: hidden;">
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:#BC002D;"></div>
+        </div>
+        <div class="country-year">2016 — Japan</div>
+        <div class="country-name">일본</div>
+        <div class="country-review">"素材の柔らかさに驚きました。赤ちゃんの肌にぴったりです。"<br><span style="font-size:0.72rem;color:var(--sh-text-tertiary);">(소재의 부드러움에 놀랐습니다. 아기 피부에 딱 맞아요.)</span></div>
+        <div class="country-platform">라쿠텐 · 아마존 재팬</div>
+      </div>
+
+      <div class="country-card">
+        <div class="flag-simple" style="background: repeating-linear-gradient(to bottom, #B22234 0px, #B22234 8%, transparent 8%, transparent 16%); border-bottom: 1px solid #E8E4DF;"></div>
+        <div class="country-year">2019 — United States</div>
+        <div class="country-name">미국</div>
+        <div class="country-review">"Best bamboo swaddle I've ever tried. The texture is incredibly soft and my baby slept through the night."</div>
+        <div class="country-platform">아마존 US · 자사몰 (EN)</div>
+      </div>
+
+      <div class="country-card">
+        <div class="flag-simple" style="background: linear-gradient(to bottom, #000000 33%, #DD0000 33%, #DD0000 66%, #FFCE00 66%);"></div>
+        <div class="country-year">2019 — Germany</div>
+        <div class="country-name">독일</div>
+        <div class="country-review">"Ausgezeichnete Qualität. Das Material ist weich und die Verarbeitung ist tadellos."<br><span style="font-size:0.72rem;color:var(--sh-text-tertiary);">(뛰어난 품질. 소재도 부드럽고 마감도 흠잡을 데 없어요.)</span></div>
+        <div class="country-platform">OTTO · 아마존 DE</div>
+      </div>
+
+      <div class="country-card">
+        <div class="flag-simple" style="background: #012169; position: relative; overflow: hidden;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to bottom right,#fff 44%,transparent 44%),linear-gradient(to bottom left,#fff 44%,transparent 44%);"></div>
+        </div>
+        <div class="country-year">2020 — United Kingdom</div>
+        <div class="country-name">영국</div>
+        <div class="country-review">"Genuinely the softest swaddle we've used. Our newborn sleeps much more soundly now."</div>
+        <div class="country-platform">아마존 UK · Not On The High Street</div>
+      </div>
+
+      <div class="country-card">
+        <div class="flag-simple" style="background: linear-gradient(to right, #002395 33%, #EDEDED 33%, #EDEDED 66%, #ED2939 66%);"></div>
+        <div class="country-year">2020 — France</div>
+        <div class="country-name">프랑스</div>
+        <div class="country-review">"Tissu extraordinairement doux, design épuré. Parfait pour notre bébé."<br><span style="font-size:0.72rem;color:var(--sh-text-tertiary);">(매우 부드러운 소재, 깔끔한 디자인. 우리 아이에게 완벽해요.)</span></div>
+        <div class="country-platform">아마존 FR</div>
+      </div>
+
+      <div class="country-card">
+        <div class="flag-simple" style="background: #00008B; position: relative; overflow: hidden;">
+          <div style="position:absolute;top:2px;right:2px;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.7);"></div>
+        </div>
+        <div class="country-year">2021 — Australia</div>
+        <div class="country-name">호주</div>
+        <div class="country-review">"The perfect swaddle for Australia's warm climate. Breathable and gorgeous."</div>
+        <div class="country-platform">아마존 AU</div>
+      </div>
+
+      <div class="country-card">
+        <div class="flag-simple" style="background: linear-gradient(to right, #FF0000 25%, #FFFFFF 25%, #FFFFFF 75%, #FF0000 75%);"></div>
+        <div class="country-year">2022 — Canada</div>
+        <div class="country-name">캐나다</div>
+        <div class="country-review">"Incredible quality. We've recommended it to every parent we know."</div>
+        <div class="country-platform">아마존 CA</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 섹션 2: 어워드 -->
+  <section class="section awards-section">
+    <div class="section-label">Recognition</div>
+    <div class="section-title" style="color:#fff;">글로벌 <em style="color:var(--sh-soft-apricot);">미디어 & 어워드</em></div>
+    <p class="lead-text">전 세계 육아 전문 미디어와 리테일러가 썬데이허그의 품질을 인정해 왔습니다. 상을 받기 위해 일하는 것이 아니라, 제대로 된 제품을 만들다 보니 따라오게 된 결과예요.</p>
+
+    <div class="awards-grid">
+      <div class="award-badge">
+        <div class="award-logo-placeholder" style="background:rgba(181,196,177,0.15);">
+          <svg viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="12" stroke="rgba(181,196,177,0.7)" stroke-width="1"/>
+            <path d="M16 8l1.8 5.5h5.8l-4.7 3.4 1.8 5.5L16 19l-4.7 3.4 1.8-5.5L8.4 13.5h5.8z" fill="rgba(181,196,177,0.5)"/>
+          </svg>
+        </div>
+        <div class="award-name">What to Expect</div>
+        <div class="award-category">Best Baby Swaddle Award</div>
+        <div class="award-year">2022</div>
+      </div>
+
+      <div class="award-badge">
+        <div class="award-logo-placeholder" style="background:rgba(179,197,211,0.15);">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect x="8" y="8" width="16" height="16" rx="2" stroke="rgba(179,197,211,0.7)" stroke-width="1"/>
+            <path d="M12 16h8M16 12v8" stroke="rgba(179,197,211,0.6)" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="award-name">Babylist</div>
+        <div class="award-category">Editor's Pick — Sleep</div>
+        <div class="award-year">2023</div>
+      </div>
+
+      <div class="award-badge">
+        <div class="award-logo-placeholder" style="background:rgba(222,181,168,0.15);">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M16 6 L19 13 L27 13 L21 18 L23 25 L16 21 L9 25 L11 18 L5 13 L13 13 Z" stroke="rgba(222,181,168,0.7)" stroke-width="1" fill="rgba(222,181,168,0.15)"/>
+          </svg>
+        </div>
+        <div class="award-name">Stiftung Warentest</div>
+        <div class="award-category">Sehr Gut — Pucksäcke</div>
+        <div class="award-year">2022</div>
+      </div>
+
+      <div class="award-badge">
+        <div class="award-logo-placeholder" style="background:rgba(212,165,116,0.12);">
+          <svg viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="11" stroke="rgba(212,165,116,0.6)" stroke-width="1"/>
+            <circle cx="16" cy="16" r="6" stroke="rgba(212,165,116,0.4)" stroke-width="1"/>
+            <circle cx="16" cy="16" r="2" fill="rgba(212,165,116,0.5)"/>
+          </svg>
+        </div>
+        <div class="award-name">Mother &amp; Baby</div>
+        <div class="award-category">Gold Award — Swaddling</div>
+        <div class="award-year">2023</div>
+      </div>
+
+      <div class="award-badge">
+        <div class="award-logo-placeholder" style="background:rgba(196,181,203,0.15);">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M8 24 L16 6 L24 24" stroke="rgba(196,181,203,0.7)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="11" y1="19" x2="21" y2="19" stroke="rgba(196,181,203,0.5)" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="award-name">Australian Parents</div>
+        <div class="award-category">Product of the Year</div>
+        <div class="award-year">2022</div>
+      </div>
+
+      <div class="award-badge">
+        <div class="award-logo-placeholder" style="background:rgba(138,155,176,0.15);">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect x="7" y="12" width="18" height="12" rx="2" stroke="rgba(138,155,176,0.6)" stroke-width="1"/>
+            <path d="M11 12V10a5 5 0 0 1 10 0v2" stroke="rgba(138,155,176,0.6)" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="award-name">Le Bonbon</div>
+        <div class="award-category">Coup de Coeur Bébé</div>
+        <div class="award-year">2021</div>
+      </div>
+
+      <div class="award-badge">
+        <div class="award-logo-placeholder" style="background:rgba(181,196,177,0.15);">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M16 8 C10 8, 6 12, 6 16 C6 22, 11 26, 16 26 C21 26, 26 22, 26 16 C26 12, 22 8, 16 8Z" stroke="rgba(181,196,177,0.6)" stroke-width="1" fill="none"/>
+            <line x1="6" y1="16" x2="26" y2="16" stroke="rgba(181,196,177,0.4)" stroke-width="1"/>
+            <path d="M16 8 C13 12, 13 20, 16 26 C19 20, 19 12, 16 8Z" stroke="rgba(181,196,177,0.4)" stroke-width="0.8" fill="none"/>
+          </svg>
+        </div>
+        <div class="award-name">育児ファン</div>
+        <div class="award-category">ベストスワドル賞</div>
+        <div class="award-year">2023</div>
+      </div>
+
+      <div class="award-badge">
+        <div class="award-logo-placeholder" style="background:rgba(222,181,168,0.15);">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M16 6 C9 6, 6 11, 6 16 C6 21, 9 26, 16 26 C23 26, 26 21, 26 16 C26 11, 23 6, 16 6Z" fill="rgba(222,181,168,0.1)" stroke="rgba(222,181,168,0.6)" stroke-width="1"/>
+            <path d="M12 16l3 3 6-6" stroke="rgba(222,181,168,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="award-name">KidsInTheHouse</div>
+        <div class="award-category">Top Rated Baby Product</div>
+        <div class="award-year">2024</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 섹션 3: 전시회 갤러리 -->
+  <section class="section expo-section">
+    <div class="section-label">Exhibitions</div>
+    <div class="section-title">세계와 <em>만나는 순간들</em></div>
+    <p class="lead-text">전시회는 우리에게 제품을 보여주는 자리가 아닙니다. 각국 부모들을 직접 만나고, 그들의 진짜 필요를 듣고, 현지 파트너와 관계를 만들어 가는 시간이에요.</p>
+
+    <div class="expo-grid">
+      <div class="expo-item">
+        <div class="expo-photo">
+          <img src="images/expo/cologne-kindjugend.png" alt="Kind + Jugend 쾰른 전시 부스" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="expo-info">
+          <h5>Kind + Jugend 2023</h5>
+          <p>독일 쾰른 — 유럽 최대 베이비 박람회 참가. 50개국 바이어 접촉, 독일·베네룩스 파트너십 체결.</p>
+        </div>
+      </div>
+
+      <div class="expo-item">
+        <div class="expo-photo">
+          <img src="images/expo/lasvegas-abckids.png" alt="ABC Kids Expo 라스베이거스" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="expo-info">
+          <h5>ABC Kids Expo 2022</h5>
+          <p>미국 라스베이거스 — 북미 시장 첫 전시 참가. 아마존 US 바이어와 직접 미팅 성사.</p>
+        </div>
+      </div>
+
+      <div class="expo-item">
+        <div class="expo-photo">
+          <img src="images/expo/tokyo-babyworld.png" alt="일본 Baby World 도쿄 전시" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="expo-info">
+          <h5>Baby World Tokyo 2023</h5>
+          <p>일본 도쿄 — 라쿠텐과 공동 참가. 현지 육아 인플루언서 60명과의 브랜드 세션 진행.</p>
+        </div>
+      </div>
+
+      <div class="expo-item">
+        <div class="expo-photo">
+          <img src="images/expo/seoul-babyfair.png" alt="서울 베이비페어 부스" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="expo-info">
+          <h5>코엑스 베이비페어 2024</h5>
+          <p>서울 코엑스 — 창립 이후 매년 참가. 2024년 방문객 수 8,400명, 브랜드 체험 프로그램 운영.</p>
+        </div>
+      </div>
+
+      <div class="expo-item">
+        <div class="expo-photo">
+          <img src="images/expo/madrid-puericultura.png" alt="Puericultura Madrid 스페인 전시" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="expo-info">
+          <h5>Puericultura Madrid 2023</h5>
+          <p>스페인 마드리드 — 남유럽 시장 첫 진출. 스페인·포르투갈·이탈리아 유통 파트너 탐색.</p>
+        </div>
+      </div>
+
+      <div class="expo-item">
+        <div class="expo-photo">
+          <img src="images/expo/sydney-babyexpo.png" alt="Sydney Baby &amp; Toddler Expo 시드니" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="expo-info">
+          <h5>Sydney Baby &amp; Toddler Expo 2022</h5>
+          <p>호주 시드니 — 오세아니아 시장 진출 첫 전시. 호주 현지 유통사와 파트너십 체결.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 섹션 4: 리뷰 캐러셀 -->
+  <section class="section">
+    <div class="section-label">Global Reviews</div>
+    <div class="section-title">각국 부모들의 <em>한마디</em></div>
+    <p class="lead-text">언어가 달라도, 아이를 향한 마음은 같습니다. 세계 곳곳에서 썬데이허그를 선택한 부모들의 이야기예요.</p>
+
+    <div class="reviews-track">
+      <div class="review-card">
+        <div class="review-quote-mark">"</div>
+        <div class="review-text">처음에는 가격이 좀 부담됐는데, 한 번 써보고 바로 두 개 더 구매했어요. 정말 스와들 하나로 이렇게 수면 시간이 달라질 수 있다는 걸 체감했습니다.</div>
+        <div class="reviewer-info">
+          <div class="reviewer-avatar" style="background: var(--sh-blush);"></div>
+          <div>
+            <div class="reviewer-name">김지수 님</div>
+            <div class="reviewer-meta">Korea · 6개월 아기 엄마 · Naver 리뷰</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-quote-mark">"</div>
+        <div class="review-text">The moment we wrapped our newborn in the bamboo swaddle, she stopped crying. We've tried 4 different brands before this. Nothing compared.</div>
+        <div class="reviewer-info">
+          <div class="reviewer-avatar" style="background: var(--sh-misty-blue);"></div>
+          <div>
+            <div class="reviewer-name">Sarah M.</div>
+            <div class="reviewer-meta">United States · Newborn mom · Amazon Review</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-quote-mark">"</div>
+        <div class="review-text">Wir haben den Schlafsack jetzt drei Monate und er ist wie neu. Die Nähte sind perfekt, der Stoff fühlt sich immer noch toll an.</div>
+        <div class="reviewer-info">
+          <div class="reviewer-avatar" style="background: var(--sh-sage);"></div>
+          <div>
+            <div class="reviewer-name">Anna K.</div>
+            <div class="reviewer-meta">Germany · 3 Monate altes Baby · OTTO Review</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-quote-mark">"</div>
+        <div class="review-text">このおくるみを使い始めてから、赤ちゃんが朝まで寝るようになりました。素材も縫製も本当に良いです。</div>
+        <div class="reviewer-info">
+          <div class="reviewer-avatar" style="background: var(--sh-soft-apricot);"></div>
+          <div>
+            <div class="reviewer-name">田中 美咲 さん</div>
+            <div class="reviewer-meta">Japan · 新生児のお母さん · 楽天レビュー</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-quote-mark">"</div>
+        <div class="review-text">Perfect for Australian summers — incredibly breathable. My baby doesn't overheat at night anymore. Will never go back to our old swaddle.</div>
+        <div class="reviewer-info">
+          <div class="reviewer-avatar" style="background: var(--sh-linen);"></div>
+          <div>
+            <div class="reviewer-name">Emily R.</div>
+            <div class="reviewer-meta">Australia · 4 months baby · Amazon AU</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-quote-mark">"</div>
+        <div class="review-text">Qualité irréprochable, design épuré — exactement ce que je cherchais pour ma fille. Le tissu en bambou est vraiment doux et respirant.</div>
+        <div class="reviewer-info">
+          <div class="reviewer-avatar" style="background: var(--sh-dusty-lavender);"></div>
+          <div>
+            <div class="reviewer-name">Claire D.</div>
+            <div class="reviewer-meta">France · Maman de 2 mois · Amazon FR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">SundayHug</div>
+      <div class="footer-text">Designed for Families</div>
+      <div class="footer-copy">&copy; 2025 SundayHug. All rights reserved.</div>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+(function() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('on');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.v').forEach(function(el) {
+    observer.observe(el);
+  });
+})();
+</script>
+</body>
+</html>
