@@ -118,6 +118,47 @@ python3 scripts/generate-catalog.py
 | 마케팅 | `marketing/` | CRO, 카피, 전략 |
 | 도구 | `tools/` | 유틸리티, 스킬 생성 |
 
+## API 키 설정 가이드
+
+일부 스킬은 외부 API 키가 필요합니다. 환경변수로 설정하세요.
+
+### 보유 중인 키 (이미 설정됨)
+
+| API | 환경변수 | 사용 스킬 |
+|-----|---------|----------|
+| 네이버 데이터랩 | MCP `naver-search`로 연동 | trend-radar, product-scout |
+| 네이버 검색광고 | MCP `naver-search`로 연동 | trend-radar, product-scout |
+| Gemini API | `GEMINI_API_KEY` | viral-shorts-maker, naver-blog-seo-writer |
+| Claude API | `ANTHROPIC_API_KEY` | viral-shorts-maker, content-pipeline |
+
+### 신규 발급 필요 (모두 무료)
+
+| API | 환경변수 | 발급 URL | 사용 스킬 |
+|-----|---------|---------|----------|
+| YouTube Data API v3 | `YOUTUBE_API_KEY` | https://console.cloud.google.com | trend-radar |
+| Instagram Graph API | `INSTAGRAM_ACCESS_TOKEN` | Meta Business Suite | trend-radar, content-pipeline |
+| Pinterest API v5 | `PINTEREST_ACCESS_TOKEN` | https://developers.pinterest.com | trend-radar, product-scout |
+| Reddit API | `REDDIT_CLIENT_ID` / `REDDIT_SECRET` | https://www.reddit.com/prefs/apps | trend-radar, product-scout |
+
+### 선택 (유료, 필요 시)
+
+| API | 환경변수 | 비용 | 사용 스킬 |
+|-----|---------|------|----------|
+| Apify (1688/Amazon) | `APIFY_API_TOKEN` | 무료~$49/mo | product-scout |
+| SerpAPI (Google Trends) | `SERPAPI_KEY` | $75/mo | trend-radar |
+
+### 설정 방법
+
+```bash
+# .env 또는 쉘 프로파일에 추가
+export GEMINI_API_KEY="your-key"
+export YOUTUBE_API_KEY="your-key"
+export REDDIT_CLIENT_ID="your-id"
+export REDDIT_SECRET="your-secret"
+```
+
+> 네이버 API는 MCP `naver-search` 서버로 이미 연동되어 있어 별도 설정 불필요.
+
 ## 브랜드별 작업 콘텐츠
 
 상세페이지, 브랜드 스토리 등 브랜드별 작업 콘텐츠는 `output/` 하위에 브랜드 폴더로 관리합니다.
