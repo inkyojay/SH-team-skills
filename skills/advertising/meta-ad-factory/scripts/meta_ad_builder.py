@@ -541,6 +541,10 @@ h1{{font-size:22px;font-weight:900;margin-bottom:4px;}}
 .img-cmd-copy{{display:block;margin-top:6px;background:#238636;color:#fff;border:none;border-radius:4px;padding:5px 10px;font-size:10px;font-weight:700;cursor:pointer;width:100%;}}
 .img-cmd-copy:hover{{background:#2ea043;}}
 .img-toast-video{{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#7ee787;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:700;display:none;z-index:9999;border:1px solid #238636;}}
+.img-vid-status{{margin-top:6px;}}
+.img-vid-bar{{height:4px;background:#e5e7eb;border-radius:4px;overflow:hidden;margin-bottom:4px;}}
+.img-vid-fill{{height:100%;background:{primary};border-radius:4px;transition:width 0.4s ease,background 0.3s;width:0%;}}
+.img-vid-msg{{font-size:10px;color:#555;line-height:1.4;word-break:break-all;}}
 
 /* Modal */
 .modal{{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:1000;padding:20px;overflow:auto;}}
@@ -767,50 +771,44 @@ def _tone_ko(tone: str) -> str:
 
 
 def _build_images_section(cfg: ProductConfig) -> str:
-    """원본 소스 이미지 갤러리 HTML 섹션 생성 (🎬 영상 광고 버튼 포함)."""
-    primary = cfg.colors["primary"]
+    """원본 소스 이미지 갤러리 HTML 섹션 생성 (🎬 원클릭 영상 생성 버튼 포함)."""
     slug = cfg.product_slug
-    # make_video_ad.py 절대 경로 (preview-grid.html 위치와 무관하게 동작)
-    script_path = "/Users/inkyo/Projects/team-skills/skills/advertising/meta-ad-factory/scripts/make_video_ad.py"
+    VIDEO_SERVER = "http://localhost:5173"
 
     cards = []
     for key, src in cfg.images.items():
         s = str(src)
-        # URL 결정: CDN이면 그대로, 로컬 경로면 file:// 변환
         if s.startswith(("http://", "https://")):
             img_src = s
             dl_href = s
             dl_target = ' target="_blank"'
-            img_arg = s          # 명령어에서 그대로 사용
+            img_arg = s
         else:
             abs_path = Path(s).resolve()
             img_src = abs_path.as_uri()
             dl_href = img_src
             dl_target = ''
-            img_arg = str(abs_path)  # 로컬 절대경로
+            img_arg = str(abs_path)
         filename = Path(s).name
-        card_id = f"cmd_{slug}_{key}".replace("-", "_").replace(".", "_")
-
-        # 생성될 CLI 명령어 (9:16 기본)
-        cmd_916 = f"python3 {script_path} \\\n  --image \"{img_arg}\" \\\n  --slug {slug} \\\n  --ratio 9:16 \\\n  --duration 5"
-        cmd_11  = f"python3 {script_path} \\\n  --image \"{img_arg}\" \\\n  --slug {slug} \\\n  --ratio 1:1 \\\n  --duration 5"
+        card_id = f"vc_{slug}_{key}".replace("-", "_").replace(".", "_")
+        # JSON 이스케이프된 값 (JS 인라인 삽입용)
+        img_arg_js = img_arg.replace("\\", "\\\\").replace('"', '\\"')
+        slug_js = slug.replace('"', '\\"')
 
         cards.append(f"""
-  <div class="img-card">
+  <div class="img-card" id="card_{card_id}">
     <img src="{img_src}" alt="{escape(key)}" loading="lazy" onerror="this.style.background='#e5e7eb';this.alt='이미지 없음'">
     <div class="img-card-body">
       <div class="img-card-key">{escape(key)}</div>
       <div class="img-card-key" style="color:#aaa;font-size:10px;">{escape(filename)}</div>
       <a class="img-card-dl" href="{dl_href}" download="{escape(filename)}"{dl_target}>⬇ 원본 다운로드</a>
-      <button class="img-card-video" onclick="toggleCmd('{card_id}')">🎬 영상 광고 만들기</button>
-      <div class="img-cmd-panel" id="{card_id}">
-        <div style="font-size:10px;color:#8b949e;margin-bottom:4px;">터미널에서 실행 → video/ 폴더에 MP4 저장</div>
-        <div style="font-size:10px;color:#58a6ff;margin-bottom:4px;font-weight:700;">▶ 9:16 릴스·스토리</div>
-        <div class="img-cmd-code" id="{card_id}_916">{escape(cmd_916)}</div>
-        <button class="img-cmd-copy" onclick="copyCmd('{card_id}_916')">📋 명령어 복사 (9:16)</button>
-        <div style="font-size:10px;color:#58a6ff;margin-top:8px;margin-bottom:4px;font-weight:700;">▶ 1:1 피드</div>
-        <div class="img-cmd-code" id="{card_id}_11">{escape(cmd_11)}</div>
-        <button class="img-cmd-copy" onclick="copyCmd('{card_id}_11')">📋 명령어 복사 (1:1)</button>
+      <div style="display:flex;gap:4px;margin-top:4px;">
+        <button class="img-card-video" style="flex:1;" onclick="makeVideo('{card_id}','{img_arg_js}','{slug_js}','9:16')">🎬 9:16</button>
+        <button class="img-card-video" style="flex:1;" onclick="makeVideo('{card_id}','{img_arg_js}','{slug_js}','1:1')">🎬 1:1</button>
+      </div>
+      <div class="img-vid-status" id="status_{card_id}" style="display:none;">
+        <div class="img-vid-bar"><div class="img-vid-fill" id="fill_{card_id}"></div></div>
+        <div class="img-vid-msg" id="msg_{card_id}">대기 중...</div>
       </div>
     </div>
   </div>""")
@@ -819,13 +817,101 @@ def _build_images_section(cfg: ProductConfig) -> str:
     return f"""
 <div class="img-section">
   <div class="img-section-title">📷 원본 소스 이미지</div>
-  <div class="img-section-sub">원본 사진 {len(cards)}장 · ⬇ 다운로드 · 🎬 Kling AI 영상 광고 명령어 생성</div>
+  <div class="img-section-sub">원본 사진 {len(cards)}장 · ⬇ 다운로드 · 🎬 원클릭 영상 광고 생성
+    <span id="srv-badge" style="margin-left:8px;font-size:10px;padding:2px 8px;border-radius:10px;background:#fee2e2;color:#991b1b;">서버 꺼짐</span>
+  </div>
   <button class="img-toggle" onclick="{toggle_js}">▼ 원본 사진 보기 ({len(cards)}장)</button>
   <div class="img-gallery">
     {"".join(cards)}
   </div>
 </div>
-<div class="img-toast-video" id="toastVideo">✅ 명령어가 복사되었습니다!</div>"""
+<div class="img-toast-video" id="toastVideo"></div>
+<script>
+const VIDEO_SERVER = '{VIDEO_SERVER}';
+
+// ── 서버 연결 상태 체크 ────────────────────────────────────────────────────────
+(function checkServer(){{
+  const badge = document.getElementById('srv-badge');
+  fetch(VIDEO_SERVER, {{mode:'cors'}})
+    .then(r=>r.json())
+    .then(d=>{{
+      badge.style.background = '#dcfce7';
+      badge.style.color = '#166534';
+      badge.textContent = d.mode === 'mock' ? '🧪 Mock 서버 켜짐' : '🎬 Kling 서버 켜짐';
+    }})
+    .catch(()=>{{
+      badge.style.background = '#fee2e2';
+      badge.style.color = '#991b1b';
+      badge.textContent = '⚠️ 서버 꺼짐 — python3 video_server.py --mock';
+    }});
+  setTimeout(checkServer, 5000);
+}})();
+
+// ── 영상 생성 요청 ─────────────────────────────────────────────────────────────
+function makeVideo(cardId, image, slug, ratio){{
+  const statusEl = document.getElementById('status_'+cardId);
+  const fillEl   = document.getElementById('fill_'+cardId);
+  const msgEl    = document.getElementById('msg_'+cardId);
+  if(!statusEl) return;
+
+  statusEl.style.display = 'block';
+  fillEl.style.width = '5%';
+  msgEl.textContent = '서버에 요청 중...';
+
+  fetch(VIDEO_SERVER+'/make-video', {{
+    method:'POST',
+    headers:{{'Content-Type':'application/json'}},
+    body: JSON.stringify({{image, slug, ratio, duration:5}})
+  }})
+  .then(r=>r.json())
+  .then(d=>{{
+    if(d.error){{ msgEl.textContent='❌ '+d.error; return; }}
+    msgEl.textContent = '생성 중... (job: '+d.job_id+')';
+    fillEl.style.width = '15%';
+    pollJob(d.job_id, cardId, fillEl, msgEl);
+  }})
+  .catch(e=>{{
+    msgEl.textContent = '❌ 서버 연결 실패. python3 video_server.py --mock 실행 후 재시도';
+  }});
+}}
+
+function pollJob(jobId, cardId, fillEl, msgEl){{
+  let pct = 20;
+  const iv = setInterval(()=>{{
+    fetch(VIDEO_SERVER+'/status/'+jobId)
+      .then(r=>r.json())
+      .then(d=>{{
+        if(d.status==='running'){{
+          pct = Math.min(pct+8, 85);
+          fillEl.style.width = pct+'%';
+          const last = d.log && d.log.length ? d.log[d.log.length-1] : '처리 중...';
+          msgEl.textContent = last.replace(/^\\s+/,'');
+        }} else if(d.status==='done'){{
+          clearInterval(iv);
+          fillEl.style.width = '100%';
+          fillEl.style.background = '#22c55e';
+          const dest = d.dest || 'video/ 폴더';
+          msgEl.innerHTML = '✅ 완료! <a href="#" onclick="alert(\\''+dest+'\\')">저장 위치 확인</a>';
+          showToast('✅ 영상 완료! video/ 폴더에 저장됨');
+        }} else if(d.status==='error'){{
+          clearInterval(iv);
+          fillEl.style.background = '#ef4444';
+          fillEl.style.width = '100%';
+          msgEl.textContent = '❌ '+(d.error||'오류 발생');
+        }}
+      }})
+      .catch(()=>clearInterval(iv));
+  }}, 2000);
+}}
+
+function showToast(msg){{
+  const t = document.getElementById('toastVideo');
+  if(!t) return;
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(()=>{{ t.style.display='none'; }}, 3000);
+}}
+</script>"""
 
 
 def build_ads(cfg: ProductConfig, output_dir: Path) -> list[AdSpec]:

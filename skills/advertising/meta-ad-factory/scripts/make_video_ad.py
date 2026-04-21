@@ -197,6 +197,80 @@ def download_video(url: str, dest: Path) -> None:
     urllib.request.urlretrieve(url, dest)
 
 
+# ── Mock 모드 (ffmpeg 로컬 테스트) ────────────────────────────────────────────
+
+# ratio → ffmpeg 해상도
+RATIO_SIZES = {
+    "9:16": "1080:1920",
+    "1:1":  "1080:1080",
+    "4:5":  "1080:1350",
+    "16:9": "1920:1080",
+}
+
+def _run_mock(image: str, dest: Path, ratio: str, duration: int, prompt: str) -> None:
+    """ffmpeg으로 이미지 → 정적 MP4 (Kling 없이 파이프라인 전체 테스트)."""
+    import subprocess
+    import tempfile
+
+    print(f"\n🧪 Mock 모드 — ffmpeg 로컬 테스트")
+    print(f"  비율    : {ratio}  길이: {duration}초")
+    print(f"  출력    : {dest}")
+
+    # 이미지 확보 (CDN URL이면 임시 다운로드)
+    if image.startswith(("http://", "https://")):
+        suffix = Path(image).suffix or ".jpg"
+        tmp = tempfile.NamedTemporaryFile(suffix=suffix, delete=False)
+        print(f"  📥 이미지 다운로드 중...")
+        urllib.request.urlretrieve(image, tmp.name)
+        img_path = tmp.name
+    else:
+        img_path = str(Path(image).resolve())
+
+    size = RATIO_SIZES.get(ratio, "1080:1920")
+    w, h = size.split(":")
+
+    dest.parent.mkdir(parents=True, exist_ok=True)
+
+    # ffmpeg: 이미지 → 정적 MP4 (ken-burns 효과 흉내)
+    cmd = [
+        "ffmpeg", "-y",
+        "-loop", "1",
+        "-i", img_path,
+        "-vf", (
+            f"scale={w}:{h}:force_original_aspect_ratio=decrease,"
+            f"pad={w}:{h}:(ow-iw)/2:(oh-ih)/2:color=black,"
+            f"zoompan=z='min(zoom+0.002,1.3)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'"
+            f":d={duration * 25}:s={w}x{h}:fps=25"
+        ),
+        "-t", str(duration),
+        "-c:v", "libx264",
+        "-pix_fmt", "yuv420p",
+        "-movflags", "+faststart",
+        str(dest),
+    ]
+    print(f"  🎬 ffmpeg 인코딩 중...")
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        # zoompan 실패 시 단순 정적 버전으로 폴백
+        cmd_simple = [
+            "ffmpeg", "-y",
+            "-loop", "1", "-i", img_path,
+            "-vf", f"scale={w}:{h}:force_original_aspect_ratio=decrease,pad={w}:{h}:(ow-iw)/2:(oh-ih)/2:color=black",
+            "-t", str(duration),
+            "-c:v", "libx264", "-pix_fmt", "yuv420p",
+            "-movflags", "+faststart",
+            str(dest),
+        ]
+        subprocess.run(cmd_simple, capture_output=True, check=True)
+
+    size_kb = dest.stat().st_size // 1024
+    print(f"\n✅ Mock MP4 생성 완료!")
+    print(f"   저장 위치 : {dest}")
+    print(f"   파일 크기 : {size_kb:,} KB")
+    print(f"   Finder 열기: open \"{dest.parent}\"")
+    print(f"\n  ⚠️  이 파일은 테스트용입니다. 실제 Kling 영상은 --mock 없이 실행하세요.")
+
+
 # ── 메인 ──────────────────────────────────────────────────────────────────────
 
 def find_output_dir(slug: str) -> Path:
@@ -238,7 +312,29 @@ def main() -> None:
                     help=f"CFG scale 0.0~1.0 (기본: {DEFAULT_CFG})")
     ap.add_argument("--output", "-o", default=None,
                     help="출력 파일 경로 (기본: 자동)")
+    ap.add_argument("--mock", action="store_true",
+                    help="Mock 모드: Kling API 없이 ffmpeg으로 로컬 테스트 MP4 생성")
     args = ap.parse_args()
+
+    # ── 프롬프트 결정 ──────────────────────────────────────────────────────────
+    prompt = args.prompt or RATIO_PROMPTS.get(args.ratio, RATIO_PROMPTS["9:16"])
+
+    # ── 저장 경로 결정 ─────────────────────────────────────────────────────────
+    _, img_name = (args.image, Path(args.image).name) if args.image.startswith("http") \
+        else (args.image, Path(args.image).name)
+    if args.output:
+        dest = Path(args.output)
+    else:
+        out_dir = find_output_dir(args.slug)
+        stem = Path(img_name).stem
+        ratio_safe = args.ratio.replace(":", "x")
+        suffix = "_MOCK" if args.mock else ""
+        dest = out_dir / "video" / f"{stem}_{args.duration}s_{ratio_safe}{suffix}.mp4"
+
+    # ── Mock 모드: ffmpeg으로 로컬 테스트 ─────────────────────────────────────
+    if args.mock:
+        _run_mock(args.image, dest, args.ratio, args.duration, prompt)
+        return
 
     # ── API 키 확인 ────────────────────────────────────────────────────────────
     ak = os.environ.get("KLING_ACCESS_KEY", "")
@@ -248,10 +344,9 @@ def main() -> None:
         print()
         print("  export KLING_ACCESS_KEY='your-access-key'")
         print("  export KLING_SECRET_KEY='your-secret-key'")
+        print()
+        print("  💡 로컬 테스트: --mock 플래그 사용 (ffmpeg으로 MP4 생성)")
         sys.exit(1)
-
-    # ── 프롬프트 결정 ──────────────────────────────────────────────────────────
-    prompt = args.prompt or RATIO_PROMPTS.get(args.ratio, RATIO_PROMPTS["9:16"])
 
     # ── 이미지 처리 ────────────────────────────────────────────────────────────
     print(f"\n🎬 Kling Image-to-Video 시작")
@@ -261,7 +356,7 @@ def main() -> None:
     print(f"  비율    : {args.ratio}  길이: {args.duration}초")
     print(f"  프롬프트: {prompt[:80]}...")
 
-    image_value, img_name = image_to_value(args.image)
+    image_value, img_name2 = image_to_value(args.image)
     print(f"  이미지  : {'CDN URL' if args.image.startswith('http') else '로컬(base64)'}")
 
     # ── JWT 생성 ───────────────────────────────────────────────────────────────
@@ -284,15 +379,6 @@ def main() -> None:
     # ── 폴링 ──────────────────────────────────────────────────────────────────
     video_url = poll_task(token, task_id)
     print(f"  🎥 비디오 URL: {video_url[:80]}...")
-
-    # ── 저장 경로 결정 ─────────────────────────────────────────────────────────
-    if args.output:
-        dest = Path(args.output)
-    else:
-        out_dir = find_output_dir(args.slug)
-        stem = Path(img_name).stem
-        ratio_safe = args.ratio.replace(":", "x")
-        dest = out_dir / "video" / f"{stem}_{args.duration}s_{ratio_safe}.mp4"
 
     # ── 다운로드 ───────────────────────────────────────────────────────────────
     download_video(video_url, dest)
