@@ -287,9 +287,9 @@ def fetch_stat_report(
 
 def _cli():
     parser = argparse.ArgumentParser(description="네이버 검색광고 Stat Report 다운로더")
-    parser.add_argument("--customer-id", default=os.environ.get("NAVER_AD_CUSTOMER_ID"))
-    parser.add_argument("--api-key", default=os.environ.get("NAVER_AD_API_KEY"))
-    parser.add_argument("--secret-key", default=os.environ.get("NAVER_AD_SECRET_KEY"))
+    parser.add_argument("--customer-id", default=os.environ.get("NAVER_CUSTOMER_ID"))
+    parser.add_argument("--api-key", default=os.environ.get("NAVER_API_KEY"))
+    parser.add_argument("--secret-key", default=os.environ.get("NAVER_SECRET_KEY"))
     parser.add_argument("--report-tp", required=True,
                         choices=list(REPORT_COLUMNS.keys()),
                         help="리포트 타입")

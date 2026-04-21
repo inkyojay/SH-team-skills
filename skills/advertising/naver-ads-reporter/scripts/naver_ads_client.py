@@ -6,9 +6,9 @@ HMAC-SHA256 서명 생성, 헤더 구성, GET/POST 요청 유틸리티를 제공
 다른 스크립트에서 import하여 사용한다.
 
 환경변수:
-  NAVER_AD_CUSTOMER_ID  (광고주 번호)
-  NAVER_AD_API_KEY      (액세스라이선스)
-  NAVER_AD_SECRET_KEY   (비밀키)
+  NAVER_CUSTOMER_ID  (광고주 번호)
+  NAVER_API_KEY      (액세스라이선스)
+  NAVER_SECRET_KEY   (비밀키)
 """
 
 from __future__ import annotations
@@ -44,12 +44,12 @@ class NaverAdsCredentials:
     def from_env(cls) -> "NaverAdsCredentials":
         """환경변수에서 크레덴셜 로드."""
         missing = []
-        cid = os.environ.get("NAVER_AD_CUSTOMER_ID")
-        key = os.environ.get("NAVER_AD_API_KEY")
-        sec = os.environ.get("NAVER_AD_SECRET_KEY")
-        if not cid: missing.append("NAVER_AD_CUSTOMER_ID")
-        if not key: missing.append("NAVER_AD_API_KEY")
-        if not sec: missing.append("NAVER_AD_SECRET_KEY")
+        cid = os.environ.get("NAVER_CUSTOMER_ID")
+        key = os.environ.get("NAVER_API_KEY")
+        sec = os.environ.get("NAVER_SECRET_KEY")
+        if not cid: missing.append("NAVER_CUSTOMER_ID")
+        if not key: missing.append("NAVER_API_KEY")
+        if not sec: missing.append("NAVER_SECRET_KEY")
         if missing:
             raise RuntimeError(
                 f"환경변수 누락: {', '.join(missing)}\n"
@@ -65,8 +65,11 @@ class NaverAdsCredentials:
 def _generate_signature(timestamp: str, method: str, path: str, secret_key: str) -> str:
     """
     HMAC-SHA256 서명 생성.
-    네이버 검색광고 API는 hex digest 형식.
-    message = {timestamp}.{method}.{path}
+    네이버 검색광고 API 공식 규격:
+      message = {timestamp}.{METHOD}.{path}
+      HMAC-SHA256(secret_key.encode("utf-8"), message.encode("utf-8"))
+      → hexdigest() 반환
+    ref: searchad.naver.com developer guide
     """
     message = f"{timestamp}.{method}.{path}"
     return hmac.new(
@@ -236,9 +239,9 @@ def _cli():
     """
     import argparse
     parser = argparse.ArgumentParser(description="네이버 검색광고 API 클라이언트 테스트")
-    parser.add_argument("--customer-id", default=os.environ.get("NAVER_AD_CUSTOMER_ID"))
-    parser.add_argument("--api-key", default=os.environ.get("NAVER_AD_API_KEY"))
-    parser.add_argument("--secret-key", default=os.environ.get("NAVER_AD_SECRET_KEY"))
+    parser.add_argument("--customer-id", default=os.environ.get("NAVER_CUSTOMER_ID"))
+    parser.add_argument("--api-key", default=os.environ.get("NAVER_API_KEY"))
+    parser.add_argument("--secret-key", default=os.environ.get("NAVER_SECRET_KEY"))
     parser.add_argument("--test", action="store_true", help="캠페인 목록 조회로 인증 테스트")
     args = parser.parse_args()
 

@@ -132,9 +132,9 @@ def main():
   python run_report.py --customer-id XXX --api-key YYY --secret-key ZZZ --preset yesterday
         """,
     )
-    parser.add_argument("--customer-id", default=os.environ.get("NAVER_AD_CUSTOMER_ID"))
-    parser.add_argument("--api-key", default=os.environ.get("NAVER_AD_API_KEY"))
-    parser.add_argument("--secret-key", default=os.environ.get("NAVER_AD_SECRET_KEY"))
+    parser.add_argument("--customer-id", default=os.environ.get("NAVER_CUSTOMER_ID"))
+    parser.add_argument("--api-key", default=os.environ.get("NAVER_API_KEY"))
+    parser.add_argument("--secret-key", default=os.environ.get("NAVER_SECRET_KEY"))
     parser.add_argument("--preset",
                         choices=["yesterday", "last7", "last14", "last30",
                                  "thismonth", "lastmonth", "lastweek"])
@@ -163,7 +163,7 @@ def main():
     if not (args.customer_id and args.api_key and args.secret_key):
         print("\n❌ 크레덴셜 누락.", file=sys.stderr)
         print("다음 중 하나로 제공하세요:", file=sys.stderr)
-        print("  1) 환경변수: NAVER_AD_CUSTOMER_ID, NAVER_AD_API_KEY, NAVER_AD_SECRET_KEY", file=sys.stderr)
+        print("  1) 환경변수: NAVER_CUSTOMER_ID, NAVER_API_KEY, NAVER_SECRET_KEY", file=sys.stderr)
         print("  2) CLI 인자: --customer-id, --api-key, --secret-key", file=sys.stderr)
         print("\n값 확인: searchad.naver.com > 도구 > API 사용 관리", file=sys.stderr)
         sys.exit(1)
