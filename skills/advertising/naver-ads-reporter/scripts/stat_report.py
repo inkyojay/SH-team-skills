@@ -149,20 +149,24 @@ def poll_until_built(client: NaverAdsClient, job_id: str, timeout: int = POLL_TI
 def download_report(client: NaverAdsClient, job: dict, output_path: Optional[str] = None) -> bytes:
     """
     BUILT 상태 job의 downloadUrl에서 TSV 파일 다운로드.
-    downloadUrl은 인증이 필요한 경우와 아닌 경우가 모두 있음 — 우선 인증 없이 시도.
+    report-download 엔드포인트는 authtoken이 URL에 포함되지만
+    일반 Naver 인증 헤더(X-Timestamp, X-API-KEY 등)도 함께 필요함.
+    서명 path는 쿼리스트링 제외한 /report-download 만 사용.
     """
+    from naver_ads_client import _build_headers
+    from urllib.parse import urlparse
+
     url = job.get("downloadUrl")
     if not url:
         raise RuntimeError(f"downloadUrl 없음. job={job}")
 
-    # 일부 응답은 직접 URL, 일부는 GET /stat-reports/{id}/download 형태
+    # 서명에 사용할 path = query 제외한 순수 경로
+    path = urlparse(url).path  # "/report-download"
+
     for attempt in range(3):
         try:
-            headers = {"Authorization": f"Bearer {client.creds.api_key}"}
-            # 우선 인증 헤더 없이 시도 (presigned url)
-            resp = requests.get(url, timeout=60)
-            if resp.status_code == 401 or resp.status_code == 403:
-                resp = requests.get(url, headers=headers, timeout=60)
+            headers = _build_headers(client.creds, "GET", path)
+            resp = requests.get(url, headers=headers, timeout=60)
             resp.raise_for_status()
             content = resp.content
             # 일부 리포트는 gzip 압축

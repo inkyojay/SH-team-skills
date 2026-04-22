@@ -13,6 +13,7 @@ HMAC-SHA256 서명 생성, 헤더 구성, GET/POST 요청 유틸리티를 제공
 
 from __future__ import annotations
 
+import base64
 import hashlib
 import hmac
 import json
@@ -65,18 +66,14 @@ class NaverAdsCredentials:
 def _generate_signature(timestamp: str, method: str, path: str, secret_key: str) -> str:
     """
     HMAC-SHA256 서명 생성.
-    네이버 검색광고 API 공식 규격:
-      message = {timestamp}.{METHOD}.{path}
-      HMAC-SHA256(secret_key.encode("utf-8"), message.encode("utf-8"))
-      → hexdigest() 반환
-    ref: searchad.naver.com developer guide
+    네이버 검색광고 API 공식 규격 (github.com/naver/searchad-apidoc):
+      message = "{timestamp}.{method}.{path}"
+      key     = bytes(secret_key, "utf-8")   ← raw string, NOT base64-decoded
+      result  = base64.b64encode(hmac.digest())  ← hex 아님!
     """
-    message = f"{timestamp}.{method}.{path}"
-    return hmac.new(
-        secret_key.encode("utf-8"),
-        message.encode("utf-8"),
-        hashlib.sha256,
-    ).hexdigest()
+    message = "{}.{}.{}".format(timestamp, method, path)
+    h = hmac.new(bytes(secret_key, "utf-8"), bytes(message, "utf-8"), hashlib.sha256)
+    return base64.b64encode(h.digest()).decode("utf-8")
 
 
 def _build_headers(creds: NaverAdsCredentials, method: str, path: str) -> dict:
