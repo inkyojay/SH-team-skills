@@ -1,0 +1,26 @@
+<!--=============================================================
+  SECTION: Social Proof (SNS 후기)
+  ORDER: 16
+  REQUIRED: 🔶 선택
+  BACKGROUND: warm
+  PURPOSE: SNS 후기/UGC 카드 그리드로 실제 사용 후기 전달.
+
+  DATA REQUIRED:
+  - {{#social_reviews}} : SNS 후기 배열 (3~6개)
+    각 항목: { image, username, quote }
+=============================================================-->
+<div class="sec warm">
+  <div class="sec-label tx-center">Social Proof</div>
+  <div class="sec-title tx-center">실제 사용하시는 분들의<br>SNS 후기</div>
+  <div class="social-grid">
+    {{#social_reviews}}
+    <div class="social-card">
+      <div class="social-card-img"><img src="{{image}}" alt=""></div>
+      <div class="social-card-body">
+        <div class="social-card-user">@{{username}}</div>
+        <div class="social-quote">{{quote}}</div>
+      </div>
+    </div>
+    {{/social_reviews}}
+  </div>
+</div>

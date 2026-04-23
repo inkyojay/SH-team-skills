@@ -1,0 +1,10 @@
+@import url('../../_global-palettes.css');
+
+/* ============================================
+   카카오 메시지 전용: midnight-luxe 프레임 오버라이드
+   ============================================ */
+
+/* midnight-luxe 카카오 프레임 특수 처리: 다크 배경에 밝은 텍스트 */
+[data-palette="midnight-luxe"] .kakao-frame{
+  color:#fff;
+}

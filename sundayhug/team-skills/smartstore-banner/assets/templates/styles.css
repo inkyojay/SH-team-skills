@@ -1,0 +1,106 @@
+/* 스마트스토어 배너 공통 스타일 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 색상 변수 */
+:root {
+    --bg-beige: #C9C4A8;
+    --bg-beige-light: #D4D0B8;
+    --accent-yellow: #F5C518;
+    --accent-orange: #E67E22;
+    --accent-blue: #7FB3D5;
+    --accent-green: #82C341;
+    --text-dark: #333333;
+    --text-white: #FFFFFF;
+}
+
+/* 장식 도형들 */
+.decoration {
+    position: absolute;
+    pointer-events: none;
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+.circle-filled {
+    background: var(--accent-yellow);
+}
+
+.circle-outline {
+    border: 4px solid var(--accent-blue);
+    background: transparent;
+}
+
+.arc {
+    border: 4px solid;
+    border-radius: 50%;
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+}
+
+.pentagon {
+    background: var(--accent-orange);
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+}
+
+/* 쿠폰 티켓 스타일 */
+.coupon-ticket {
+    background: var(--accent-yellow);
+    padding: 20px 30px;
+    position: relative;
+    display: inline-block;
+    min-width: 200px;
+}
+
+.coupon-ticket::before,
+.coupon-ticket::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--bg-beige);
+    border-radius: 50%;
+}
+
+.coupon-ticket::before {
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.coupon-ticket::after {
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.coupon-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+    letter-spacing: 2px;
+}
+
+.coupon-value {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--text-dark);
+    line-height: 1.1;
+}
+
+.coupon-desc {
+    font-size: 14px;
+    color: var(--text-dark);
+    margin-top: 8px;
+}

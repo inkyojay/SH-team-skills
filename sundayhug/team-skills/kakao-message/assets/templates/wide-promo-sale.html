@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=800">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .wide-promo-sale {
+            width: 800px;
+            height: 600px;
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sale-badge {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background: white;
+            color: #FF6B6B;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 40px;
+        }
+
+        .text-section {
+            flex: 1;
+            color: white;
+        }
+
+        .discount-text {
+            font-size: 80px;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .discount-text span {
+            font-size: 48px;
+        }
+
+        .promo-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .promo-subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+
+        .promo-period {
+            font-size: 14px;
+            opacity: 0.8;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .image-section {
+            width: 320px;
+            height: 320px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            max-width: 280px;
+            max-height: 280px;
+            object-fit: contain;
+        }
+
+        .bottom-cta {
+            background: white;
+            color: #FF6B6B;
+            padding: 16px 40px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+            align-self: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wide-promo-sale">
+        <div class="sale-badge">{{BADGE_TEXT}}</div>
+
+        <div class="main-content">
+            <div class="text-section">
+                <div class="discount-text">{{DISCOUNT}}<span>%</span></div>
+                <h1 class="promo-title">{{TITLE}}</h1>
+                <p class="promo-subtitle">{{SUBTITLE}}</p>
+                <span class="promo-period">{{PERIOD}}</span>
+            </div>
+
+            <div class="image-section">
+                <img src="{{PRODUCT_IMAGE}}" alt="제품" class="product-image">
+            </div>
+        </div>
+
+        <div class="bottom-cta">{{CTA_TEXT}}</div>
+    </div>
+</body>
+</html>

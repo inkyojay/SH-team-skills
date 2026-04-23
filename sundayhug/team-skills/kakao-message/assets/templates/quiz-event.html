@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=800">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .quiz-event {
+            width: 800px;
+            height: 400px;
+            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding: 50px;
+        }
+
+        /* 장식 요소 */
+        .sparkle {
+            position: absolute;
+            font-size: 24px;
+        }
+        .s1 { top: 30px; left: 60px; }
+        .s2 { top: 80px; right: 100px; }
+        .s3 { bottom: 60px; left: 200px; }
+        .s4 { bottom: 40px; right: 60px; }
+
+        .quiz-icon {
+            width: 140px;
+            height: 140px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            margin-right: 50px;
+            flex-shrink: 0;
+        }
+
+        .content-section {
+            color: white;
+            flex: 1;
+        }
+
+        .quiz-badge {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        .quiz-question {
+            font-size: 28px;
+            font-weight: 800;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .quiz-hint {
+            font-size: 16px;
+            opacity: 0.85;
+            margin-bottom: 24px;
+        }
+
+        .quiz-prize {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.15);
+            padding: 16px 24px;
+            border-radius: 12px;
+            width: fit-content;
+        }
+
+        .prize-icon {
+            font-size: 28px;
+        }
+
+        .prize-text {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .cta-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 40px;
+        }
+
+        .cta-button {
+            background: #FEE500;
+            color: #191919;
+            padding: 18px 40px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .cta-sub {
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-event">
+        <span class="sparkle s1">✨</span>
+        <span class="sparkle s2">⭐</span>
+        <span class="sparkle s3">💫</span>
+        <span class="sparkle s4">✨</span>
+
+        <div class="quiz-icon">{{QUIZ_ICON}}</div>
+
+        <div class="content-section">
+            <div class="quiz-badge">{{BADGE_TEXT}}</div>
+            <h1 class="quiz-question">{{QUESTION}}</h1>
+            <p class="quiz-hint">{{HINT}}</p>
+            <div class="quiz-prize">
+                <span class="prize-icon">🎁</span>
+                <span class="prize-text">{{PRIZE_TEXT}}</span>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <div class="cta-button">{{CTA_TEXT}}</div>
+            <span class="cta-sub">{{CTA_SUB}}</span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg-light: #f5f2ee;
+    --text-dark: #2c2520;
+    --text-mid: #6b5d52;
+    --text-light: #999;
+    --accent-pink: #e8a0b4;
+    --panel-bg: #faf8f5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1350px;
+    overflow: hidden;
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg-light);
+  }
+
+  .ad-container {
+    width: 1080px;
+    height: 1350px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 상단 60% - 제품 이미지 영역 */
+  .image-area {
+    flex: 0 0 810px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+  }
+
+  /* 이미지 위 특징 포인트 콜아웃 */
+  .feature-callout {
+    position: absolute;
+    top: 80px;
+    left: 70px;
+    z-index: 3;
+  }
+
+  .callout-bracket {
+    font-size: 72px;
+    font-weight: 200;
+    color: var(--text-dark);
+    line-height: 0.6;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .callout-text {
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-dark);
+    line-height: 1.5;
+    padding-top: 8px;
+  }
+
+  /* 하단 40% - 정보 패널 */
+  .info-panel {
+    flex: 1;
+    background: var(--panel-bg);
+    padding: 40px 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .info-left {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .new-badge {
+    display: inline-block;
+    width: fit-content;
+    background: transparent;
+    border: 2px solid var(--accent-pink);
+    color: var(--accent-pink);
+    font-size: 20px;
+    font-weight: 500;
+    font-style: italic;
+    padding: 6px 24px;
+    border-radius: 50px;
+  }
+
+  .info-subhead {
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--text-mid);
+    line-height: 1.4;
+  }
+
+  .info-product-name {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--text-dark);
+    letter-spacing: -1px;
+  }
+
+  /* 우측 프로모션 뱃지 */
+  .promo-badge {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: var(--text-mid);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+  <div class="ad-container">
+    <div class="image-area">
+      <img class="product-image" src="{{IMAGE_PATH}}" alt="product">
+      <div class="feature-callout">
+        <span class="callout-bracket">(</span>
+        <span class="callout-text">{{FEATURE_TEXT}}</span>
+      </div>
+    </div>
+
+    <div class="info-panel">
+      <div class="info-left">
+        <span class="new-badge">{{BADGE_TEXT}}</span>
+        <div class="info-subhead">{{SUBHEAD}}</div>
+        <div class="info-product-name">{{PRODUCT_NAME}}</div>
+      </div>
+      <div class="promo-badge">{{DISCOUNT_RATE}}</div>
+    </div>
+  </div>
+</body>
+</html>

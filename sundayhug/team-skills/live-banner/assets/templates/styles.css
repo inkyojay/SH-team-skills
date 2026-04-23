@@ -1,0 +1,424 @@
+/* 쇼핑라이브 배너 스타일 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    overflow: hidden;
+}
+
+/* ===== 공통 ===== */
+.banner {
+    position: relative;
+    overflow: hidden;
+}
+
+/* ===== 혜택 배너 (750x250) ===== */
+.benefit-banner {
+    width: 750px;
+    height: 250px;
+    background: #F5F0E8;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+}
+
+.benefit-banner .content {
+    flex: 1;
+    padding-right: 30px;
+}
+
+.benefit-banner .badge {
+    display: inline-flex;
+    align-items: center;
+    background: #E74C3C;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 8px 20px;
+    border-radius: 25px;
+    margin-bottom: 15px;
+}
+
+.benefit-banner .badge-num {
+    margin-right: 8px;
+}
+
+.benefit-banner .title-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.benefit-banner .divider {
+    width: 2px;
+    height: 24px;
+    background: #DDD;
+    margin: 0 15px;
+}
+
+.benefit-banner .product-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+}
+
+.benefit-banner .description {
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+    line-height: 1.5;
+}
+
+.benefit-banner .description .highlight {
+    color: #E74C3C;
+    font-weight: 700;
+}
+
+.benefit-banner .product-image {
+    width: 200px;
+    height: 180px;
+    border-radius: 16px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.benefit-banner .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ===== 라이브 메인 배너 (720x1280) ===== */
+.live-main-banner {
+    width: 720px;
+    height: 1280px;
+    background: linear-gradient(180deg, #F8F4F0 0%, #EDE6DE 100%);
+    padding: 40px 35px;
+}
+
+.live-main-banner .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.live-main-banner .brand-logo {
+    font-size: 16px;
+    font-weight: 500;
+    color: #999;
+    letter-spacing: 1px;
+}
+
+.live-main-banner .live-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.live-main-banner .live-badge .live-icon {
+    background: #E74C3C;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+.live-main-banner .live-badge .platform {
+    font-size: 14px;
+    color: #666;
+}
+
+.live-main-banner .main-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 40px;
+    line-height: 1.4;
+}
+
+.live-main-banner .product-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.live-main-banner .product-item {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+.live-main-banner .product-item .image {
+    width: 180px;
+    height: 140px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.live-main-banner .product-item .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.live-main-banner .product-item .info {
+    flex: 1;
+}
+
+.live-main-banner .product-item .mode-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.live-main-banner .product-item .mode-subtitle {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.live-main-banner .product-item .mode-desc {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* ===== 이벤트 배너 ===== */
+.event-banner {
+    width: 720px;
+    height: 900px;
+    background: linear-gradient(180deg, #E74C3C 0%, #C0392B 100%);
+    position: relative;
+    padding: 40px;
+    color: white;
+    overflow: hidden;
+}
+
+.event-banner .snow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(circle, white 1px, transparent 1px),
+        radial-gradient(circle, white 1px, transparent 1px);
+    background-size: 50px 50px, 30px 30px;
+    background-position: 0 0, 25px 25px;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.event-banner .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+}
+
+.event-banner .brand-logo {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    opacity: 0.9;
+}
+
+.event-banner .live-info {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.event-banner .live-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255,255,255,0.2);
+    padding: 8px 20px;
+    border-radius: 25px;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.event-banner .live-badge .icon {
+    background: white;
+    color: #E74C3C;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.event-banner .live-badge .datetime {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.event-banner .event-subtitle {
+    font-size: 18px;
+    opacity: 0.9;
+    margin-bottom: 5px;
+}
+
+.event-banner .event-product {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.event-banner .price-section {
+    text-align: center;
+    margin: 30px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.event-banner .price-label {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.event-banner .price-value {
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.event-banner .price-value .won {
+    font-size: 48px;
+}
+
+.event-banner .product-preview {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.event-banner .phone-frame {
+    width: 200px;
+    background: white;
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.event-banner .phone-frame .time {
+    font-size: 12px;
+    color: #E74C3C;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.event-banner .phone-frame .preview-title {
+    font-size: 11px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.event-banner .phone-frame .preview-image {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #F5F5F5;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.event-banner .phone-frame .preview-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.event-banner .decorations {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    font-size: 80px;
+    z-index: 1;
+}
+
+/* ===== 프로모션 배너 (정사각형) ===== */
+.promo-banner {
+    width: 720px;
+    height: 720px;
+    background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%);
+    padding: 50px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.promo-banner .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.promo-banner .brand-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.promo-banner .brand-logo {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+.promo-banner .live-badge {
+    background: rgba(255,255,255,0.2);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.promo-banner .main-content {
+    text-align: center;
+}
+
+.promo-banner .event-title {
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.promo-banner .event-desc {
+    font-size: 20px;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+.promo-banner .cta-section {
+    text-align: center;
+}
+
+.promo-banner .cta-button {
+    display: inline-block;
+    background: white;
+    color: #E74C3C;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 16px 50px;
+    border-radius: 50px;
+}

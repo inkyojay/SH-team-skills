@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=800">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .carousel-commerce-intro {
+            width: 800px;
+            height: 1100px;
+            background: linear-gradient(180deg, #FFF9F0 0%, #FFF5E8 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            padding: 40px 50px;
+            text-align: center;
+        }
+
+        .event-badge {
+            background: #FF6B6B;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .main-title {
+            font-size: 40px;
+            font-weight: 900;
+            color: #2D2D2D;
+            line-height: 1.3;
+            margin-bottom: 12px;
+        }
+
+        .sub-title {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .image-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .product-image {
+            max-width: 600px;
+            max-height: 500px;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 60px rgba(0,0,0,0.15));
+        }
+
+        .bottom-section {
+            background: white;
+            padding: 40px 50px;
+            text-align: center;
+        }
+
+        .benefit-list {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .benefit-item {
+            text-align: center;
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: #FFF0E8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 12px;
+        }
+
+        .benefit-text {
+            font-size: 14px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .cta-button {
+            background: #2D2D2D;
+            color: white;
+            padding: 18px 60px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .swipe-hint {
+            font-size: 13px;
+            color: #999;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-commerce-intro">
+        <div class="header">
+            <div class="event-badge">{{BADGE_TEXT}}</div>
+            <h1 class="main-title">{{TITLE_LINE_1}}<br>{{TITLE_LINE_2}}</h1>
+            <p class="sub-title">{{SUBTITLE}}</p>
+        </div>
+
+        <div class="image-section">
+            <img src="{{MAIN_IMAGE}}" alt="메인 이미지" class="product-image">
+        </div>
+
+        <div class="bottom-section">
+            <div class="benefit-list">
+                <div class="benefit-item">
+                    <div class="benefit-icon">{{BENEFIT_ICON_1}}</div>
+                    <div class="benefit-text">{{BENEFIT_TEXT_1}}</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">{{BENEFIT_ICON_2}}</div>
+                    <div class="benefit-text">{{BENEFIT_TEXT_2}}</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">{{BENEFIT_ICON_3}}</div>
+                    <div class="benefit-text">{{BENEFIT_TEXT_3}}</div>
+                </div>
+            </div>
+            <div class="cta-button">{{CTA_TEXT}}</div>
+            <p class="swipe-hint">옆으로 밀어서 상품 보기 →</p>
+        </div>
+    </div>
+</body>
+</html>

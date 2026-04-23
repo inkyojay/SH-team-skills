@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=800">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .carousel-commerce-item {
+            width: 800px;
+            height: 800px;
+            background: white;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .image-section {
+            height: 500px;
+            background: #F8F8F8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .product-image {
+            max-width: 400px;
+            max-height: 420px;
+            object-fit: contain;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            background: #FF5A5A;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+        .wishlist-btn {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .info-section {
+            flex: 1;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand {
+            font-size: 13px;
+            font-weight: 600;
+            color: #999;
+            margin-bottom: 8px;
+        }
+
+        .product-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #191919;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .product-desc {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .price-section {
+            margin-top: auto;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .discount-rate {
+            font-size: 28px;
+            font-weight: 900;
+            color: #FF5A5A;
+        }
+
+        .sale-price {
+            font-size: 28px;
+            font-weight: 800;
+            color: #191919;
+        }
+
+        .original-price {
+            font-size: 16px;
+            color: #bbb;
+            text-decoration: line-through;
+        }
+
+        .cta-button {
+            background: #191919;
+            color: white;
+            padding: 18px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .review-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .stars {
+            color: #FFB800;
+            font-size: 16px;
+        }
+
+        .review-count {
+            font-size: 13px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-commerce-item">
+        <div class="image-section">
+            <img src="{{PRODUCT_IMAGE}}" alt="제품" class="product-image">
+            <div class="discount-badge">{{DISCOUNT}}%</div>
+            <div class="wishlist-btn">♡</div>
+        </div>
+
+        <div class="info-section">
+            <div class="brand">{{BRAND_NAME}}</div>
+            <h2 class="product-name">{{PRODUCT_NAME}}</h2>
+            <p class="product-desc">{{PRODUCT_DESC}}</p>
+
+            <div class="price-section">
+                <div class="review-info">
+                    <span class="stars">★★★★★</span>
+                    <span class="review-count">{{REVIEW_COUNT}}개 리뷰</span>
+                </div>
+                <div class="price-row">
+                    <span class="discount-rate">{{DISCOUNT}}%</span>
+                    <span class="sale-price">{{SALE_PRICE}}원</span>
+                    <span class="original-price">{{ORIGINAL_PRICE}}원</span>
+                </div>
+                <div class="cta-button">{{CTA_TEXT}}</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

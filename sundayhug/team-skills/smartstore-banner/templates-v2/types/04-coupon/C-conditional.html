@@ -1,0 +1,37 @@
+<!--=============================================================
+  TYPE: 쿠폰 배너 (Coupon Banner)
+  VARIATION: C — Conditional (조건부 쿠폰)
+  DIMENSIONS: 720 × 360px
+  PURPOSE: 쿠폰 다운로드 유도 — 구매 조건 상세 안내
+  IMAGE SPEC: 좌측 제품 이미지
+=============================================================-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>쿠폰 배너 - C Conditional</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../_base-styles.css">
+<link rel="stylesheet" href="../../_palettes.css">
+</head>
+<body style="margin:0;padding:0;background:#eee;">
+<div class="ss-frame" data-type="coupon">
+  <div style="display:flex;width:100%;height:100%;background:var(--palette-gradient);">
+    <!-- Left product image -->
+    <div style="flex:0 0 280px;overflow:hidden;">
+      <img src="../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/feature-03-01.jpg" alt="실키밤부 슬리핑백" style="width:100%;height:100%;object-fit:cover;">
+    </div>
+    <!-- Right coupon card -->
+    <div style="flex:0 0 300px;display:flex;align-items:center;justify-content:center;padding:40px;">
+      <div class="ss-coupon-card" style="width:100%;padding:28px 24px;">
+        <div style="font-family:var(--font-en);font-size:13px;font-weight:600;letter-spacing:.1em;color:var(--accent);margin-bottom:8px;">FIRST PURCHASE</div>
+        <div class="ss-coupon-amount" style="font-size:44px;">20,000원</div>
+        <div style="width:60%;height:1px;background:var(--line);margin:12px auto;"></div>
+        <div class="ss-coupon-condition" style="font-size:15px;">7만원 이상 구매 시</div>
+        <div style="font-size:13px;color:var(--sub);margin-top:6px;">사용기한: 발급일로부터 14일</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

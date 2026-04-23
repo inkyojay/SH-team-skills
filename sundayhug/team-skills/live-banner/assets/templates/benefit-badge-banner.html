@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=750">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .benefit-badge-banner {
+            width: 750px;
+            height: 250px;
+            background: #F5F0E8;
+            display: flex;
+            align-items: center;
+            padding: 24px 32px;
+            position: relative;
+            font-family: 'Pretendard', -apple-system, sans-serif;
+        }
+
+        .badge-section {
+            position: absolute;
+            top: 20px;
+            left: 32px;
+        }
+
+        .event-badge {
+            display: inline-block;
+            background: {{BADGE_COLOR}};
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .content-section {
+            flex: 1;
+            padding-top: 40px;
+        }
+
+        .benefit-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #333;
+            line-height: 1.3;
+            margin-bottom: 12px;
+        }
+
+        .benefit-title .highlight {
+            color: {{BADGE_COLOR}};
+        }
+
+        .benefit-desc {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .product-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .product-image {
+            width: 140px;
+            height: 140px;
+            object-fit: contain;
+        }
+
+        .count-badge {
+            background: {{BADGE_COLOR}};
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="benefit-badge-banner">
+        <!-- 배지 -->
+        <div class="badge-section">
+            <span class="event-badge">{{BADGE_TEXT}}</span>
+        </div>
+
+        <!-- 콘텐츠 -->
+        <div class="content-section">
+            <div class="benefit-title">
+                {{PRODUCT_NAME}}<br>
+                <span class="highlight">{{BENEFIT_TEXT}}</span>
+            </div>
+            <p class="benefit-desc">{{DESCRIPTION}}</p>
+        </div>
+
+        <!-- 제품 이미지 + 인원 -->
+        <div class="product-section">
+            <img src="{{PRODUCT_IMAGE}}" alt="제품" class="product-image">
+            <div class="count-badge">{{COUNT}}명</div>
+        </div>
+    </div>
+</body>
+</html>

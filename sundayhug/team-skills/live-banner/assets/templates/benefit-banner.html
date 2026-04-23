@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=750">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="banner benefit-banner">
+        <!-- 좌측 콘텐츠 -->
+        <div class="content">
+            <!-- 혜택 뱃지 -->
+            <div class="badge">
+                <span class="badge-num">혜택 {{BENEFIT_NUM}}</span>
+            </div>
+
+            <!-- 타이틀 영역 -->
+            <div class="title-row">
+                <span class="product-title">{{PRODUCT_TITLE}}</span>
+            </div>
+
+            <!-- 설명 -->
+            <div class="description">
+                {{DESCRIPTION_LINE_1}}<br>
+                <span class="highlight">{{DESCRIPTION_LINE_2}}</span>
+            </div>
+        </div>
+
+        <!-- 우측 제품 이미지 -->
+        <div class="product-image">
+            <img src="{{PRODUCT_IMAGE}}" alt="제품">
+        </div>
+    </div>
+</body>
+</html>

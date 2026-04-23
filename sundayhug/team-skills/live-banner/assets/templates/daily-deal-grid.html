@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=720">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .daily-deal-grid {
+            width: 720px;
+            height: 1280px;
+            background: linear-gradient(180deg, #F8F4F0 0%, #EDE8E2 100%);
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            padding: 40px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .live-only-tag {
+            font-size: 14px;
+            color: #A38068;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .main-title {
+            font-size: 40px;
+            font-weight: 800;
+            color: #333;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-card.full-width {
+            grid-column: span 2;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            text-align: left;
+        }
+
+        .product-badge {
+            display: inline-block;
+            background: #4A90A4;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .product-badge .discount {
+            background: #E74C3C;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-right: 6px;
+        }
+
+        .product-image {
+            width: 100%;
+            max-width: 200px;
+            height: 160px;
+            object-fit: contain;
+            margin: 12px 0;
+        }
+
+        .full-width .product-image {
+            width: 200px;
+            height: 140px;
+            flex-shrink: 0;
+        }
+
+        .product-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            font-size: 22px;
+            font-weight: 800;
+            color: #333;
+        }
+
+        .full-width .product-info {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="daily-deal-grid">
+        <!-- 헤더 -->
+        <div class="header">
+            <div class="live-only-tag">LIVE ONLY</div>
+            <div class="main-title">하루 특가</div>
+        </div>
+
+        <!-- 제품 그리드 -->
+        <div class="product-grid">
+            <!-- 제품 1 -->
+            <div class="product-card">
+                <div class="product-badge">
+                    <span class="discount">{{DISCOUNT_1}}%</span> {{BADGE_1}}
+                </div>
+                <img src="{{PRODUCT_IMAGE_1}}" alt="제품1" class="product-image">
+                <div class="product-name">{{PRODUCT_NAME_1}}</div>
+                <div class="product-price">{{PRICE_1}}원</div>
+            </div>
+
+            <!-- 제품 2 -->
+            <div class="product-card">
+                <div class="product-badge">
+                    <span class="discount">{{DISCOUNT_2}}%</span> {{BADGE_2}}
+                </div>
+                <img src="{{PRODUCT_IMAGE_2}}" alt="제품2" class="product-image">
+                <div class="product-name">{{PRODUCT_NAME_2}}</div>
+                <div class="product-price">{{PRICE_2}}원</div>
+            </div>
+
+            <!-- 제품 3 (전체 너비) -->
+            <div class="product-card full-width">
+                <img src="{{PRODUCT_IMAGE_3}}" alt="제품3" class="product-image">
+                <div class="product-info">
+                    <div class="product-badge">
+                        <span class="discount">{{DISCOUNT_3}}%</span> {{BADGE_3}}
+                    </div>
+                    <div class="product-name">{{PRODUCT_NAME_3}}</div>
+                    <div class="product-price">{{PRICE_3}}원</div>
+                </div>
+            </div>
+
+            <!-- 제품 4 -->
+            <div class="product-card">
+                <div class="product-badge">
+                    <span class="discount">{{DISCOUNT_4}}%</span> {{BADGE_4}}
+                </div>
+                <img src="{{PRODUCT_IMAGE_4}}" alt="제품4" class="product-image">
+                <div class="product-name">{{PRODUCT_NAME_4}}</div>
+                <div class="product-price">{{PRICE_4}}원</div>
+            </div>
+
+            <!-- 제품 5 -->
+            <div class="product-card">
+                <div class="product-badge">
+                    <span class="discount">{{DISCOUNT_5}}%</span> {{BADGE_5}}
+                </div>
+                <img src="{{PRODUCT_IMAGE_5}}" alt="제품5" class="product-image">
+                <div class="product-name">{{PRODUCT_NAME_5}}</div>
+                <div class="product-price">{{PRICE_5}}원</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

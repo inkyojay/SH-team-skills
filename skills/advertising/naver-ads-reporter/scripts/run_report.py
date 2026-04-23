@@ -74,44 +74,120 @@ def resolve_date_preset(preset: str) -> tuple[str, str]:
 
 # ───────── 마스터 조회 ─────────
 
-def build_maps(client: NaverAdsClient) -> tuple[dict, dict]:
+def build_full_maps(client: NaverAdsClient) -> dict:
     """
-    campaign_id → name, keyword_id → keyword 매핑 빌드.
-    키워드는 adgroup별로 순회해야 하므로 시간이 걸림 → 실패해도 진행.
+    마스터 데이터 전체 수집:
+      campaign_map    : campaign_id  → campaign_name
+      adgroup_map     : adgroup_id   → adgroup_name
+      ad_map          : ad_id        → {headline, description, url}
+      keyword_map     : keyword_id   → keyword_text
+      kw_by_adgroup   : adgroup_id   → [keyword_text, ...]
+      ag_campaign_map : adgroup_id   → campaign_id
     """
-    campaign_map = {}
-    keyword_map = {}
+    maps = {
+        "campaign_map": {},
+        "adgroup_map": {},
+        "ad_map": {},
+        "keyword_map": {},
+        "kw_by_adgroup": {},
+        "ag_campaign_map": {},
+    }
 
+    # 1) 캠페인
     try:
         campaigns = client.list_campaigns()
         for c in campaigns:
             cid = c.get("nccCampaignId")
             if cid:
-                campaign_map[cid] = c.get("name", cid)
-        print(f"  ✓ 캠페인 {len(campaign_map)}개 매핑")
+                maps["campaign_map"][cid] = c.get("name", cid)
+        print(f"  ✓ 캠페인 {len(maps['campaign_map'])}개")
     except NaverAdsAPIError as e:
-        print(f"  ⚠️  캠페인 조회 실패 ({e}) — ID로 표시됩니다.", file=sys.stderr)
+        print(f"  ⚠️  캠페인 조회 실패: {e}", file=sys.stderr)
 
+    # 2) 광고그룹 + 소재 + 키워드
     try:
         adgroups = client.list_adgroups()
-        print(f"  ✓ 광고그룹 {len(adgroups)}개 발견, 키워드 매핑 중...")
+        print(f"  ✓ 광고그룹 {len(adgroups)}개 — 소재·키워드 수집 중...")
         for ag in adgroups:
             ag_id = ag.get("nccAdgroupId")
+            cmp_id = ag.get("nccCampaignId")
             if not ag_id:
                 continue
+            maps["adgroup_map"][ag_id] = ag.get("name", ag_id)
+            if cmp_id:
+                maps["ag_campaign_map"][ag_id] = cmp_id
+
+            # 소재 (headline + description)
+            try:
+                ads = client.list_ads(ag_id)
+                for a in ads:
+                    aid = a.get("nccAdId")
+                    if not aid:
+                        continue
+                    ad_info = a.get("ad", {})
+                    headline = ad_info.get("headline", "")
+                    desc = ad_info.get("description", "")
+                    url = ""
+                    if isinstance(ad_info.get("pc"), dict):
+                        url = ad_info["pc"].get("display", "")
+                    maps["ad_map"][aid] = {
+                        "headline": headline,
+                        "description": desc,
+                        "url": url,
+                        "type": a.get("type", ""),
+                    }
+            except NaverAdsAPIError:
+                pass
+
+            # 키워드
             try:
                 kws = client.list_keywords(ag_id)
+                texts = []
                 for k in kws:
                     kid = k.get("nccKeywordId")
+                    ktext = k.get("keyword", "")
                     if kid:
-                        keyword_map[kid] = k.get("keyword", kid)
+                        maps["keyword_map"][kid] = ktext
+                    if ktext:
+                        texts.append(ktext)
+                if texts:
+                    maps["kw_by_adgroup"][ag_id] = texts
             except NaverAdsAPIError:
-                continue
-        print(f"  ✓ 키워드 {len(keyword_map)}개 매핑")
-    except NaverAdsAPIError as e:
-        print(f"  ⚠️  광고그룹/키워드 조회 실패 ({e})", file=sys.stderr)
+                pass
 
-    return campaign_map, keyword_map
+        print(f"  ✓ 소재 {len(maps['ad_map'])}개, 키워드 {len(maps['keyword_map'])}개")
+    except NaverAdsAPIError as e:
+        print(f"  ⚠️  광고그룹 조회 실패: {e}", file=sys.stderr)
+
+    return maps
+
+
+def enrich_df(df, maps: dict) -> "pd.DataFrame":
+    """DataFrame에 이름 컬럼 추가."""
+    import pandas as pd
+    df = df.copy()
+
+    if "campaign_id" in df.columns:
+        df["campaign_name"] = df["campaign_id"].map(maps["campaign_map"]).fillna(df["campaign_id"])
+
+    if "adgroup_id" in df.columns:
+        df["adgroup_name"] = df["adgroup_id"].map(maps["adgroup_map"]).fillna(df["adgroup_id"])
+
+    if "ad_id" in df.columns:
+        df["ad_headline"] = df["ad_id"].map(
+            lambda x: maps["ad_map"].get(x, {}).get("headline", "")
+        )
+        df["ad_description"] = df["ad_id"].map(
+            lambda x: maps["ad_map"].get(x, {}).get("description", "")
+        )
+        df["ad_url"] = df["ad_id"].map(
+            lambda x: maps["ad_map"].get(x, {}).get("url", "")
+        )
+        df["ad_type"] = df["ad_id"].map(
+            lambda x: maps["ad_map"].get(x, {}).get("type", "")
+        )
+
+    return df
 
 
 # ───────── 메인 ─────────
@@ -181,11 +257,12 @@ def main():
         print("키 값을 다시 확인해 주세요.", file=sys.stderr)
         sys.exit(1)
 
-    # 마스터 매핑
-    campaign_map, keyword_map = {}, {}
+    # 마스터 매핑 (캠페인명 + 광고그룹명 + 소재 + 키워드)
+    maps = {"campaign_map": {}, "adgroup_map": {}, "ad_map": {},
+            "keyword_map": {}, "kw_by_adgroup": {}, "ag_campaign_map": {}}
     if not args.skip_master:
-        print("\n🗂️  마스터 데이터 수집...")
-        campaign_map, keyword_map = build_maps(client)
+        print("\n🗂️  마스터 데이터 수집 (캠페인·소재·키워드)...")
+        maps = build_full_maps(client)
 
     cache_dir = Path(args.cache_dir)
     cache_dir.mkdir(parents=True, exist_ok=True)
@@ -204,6 +281,21 @@ def main():
         print("\n⚠️  AD 데이터 없음. 리포트 생성 중단.", file=sys.stderr)
         sys.exit(1)
 
+    # AD_CONVERSION 리포트 (전환 데이터)
+    df_conv = None
+    print("\n📊 AD_CONVERSION 리포트 수집 중...")
+    try:
+        df_conv = fetch_stat_report(
+            client,
+            report_tp="AD_CONVERSION",
+            date_from=date_from,
+            date_to=date_to,
+            output_dir=str(cache_dir / "AD_CONVERSION"),
+        )
+        print(f"  ✓ 전환 데이터 {len(df_conv)} rows")
+    except Exception as e:
+        print(f"  ⚠️  전환 리포트 실패: {e}", file=sys.stderr)
+
     # Shopping 리포트 (선택)
     df_shop = None
     if args.include_shopping:
@@ -219,15 +311,18 @@ def main():
         except Exception as e:
             print(f"  ⚠️  쇼핑검색광고 리포트 실패: {e}", file=sys.stderr)
 
+    # 마스터 데이터로 이름 컬럼 추가
+    df_ad = enrich_df(df_ad, maps)
+
     # HTML 생성
     print("\n🎨 HTML 리포트 생성 중...")
     output_path = render_report(
         df_ad=df_ad,
+        df_conv=df_conv,
         df_shopping=df_shop,
         date_from=date_from,
         date_to=date_to,
-        keyword_map=keyword_map if keyword_map else None,
-        campaign_map=campaign_map if campaign_map else None,
+        maps=maps,
         output_path=args.output,
     )
 

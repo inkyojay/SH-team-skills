@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>꿀잠 슬리핑백_실키 밤부 — 썬데이허그</title>
+<style>
+/*  SundayHug Detail Page — v2
+    No emoji. Dummy images. Mobile-first.
+    PDF feedback applied.
+───────────────────────────────────────── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --cream:#FDF8F2;--warm-white:#FEFCF9;--soft-beige:#F5EDE3;
+  --gold-beige:#C4A882;--deep-beige:#A68B6B;
+  --sage-green:#8FADA4;--mist-blue:#B5C7D3;--blush-pink:#E8C4C4;--lavender:#C5B9D0;
+  --soft-black:#3D3D3D;--warm-gray:#7A7A7A;--light-gray:#D4D0CC;--pale-gray:#F0EDEA;
+  --moon-gold:#E8D5A8;--night-navy:#2C3E50;--white:#FFFFFF;
+  --white-cream:#F8F1E8;--oat-beige:#E8DDD0;--baby-pink:#F2D4D4;
+  --jade-green:#B8D8D0;--cloud-blue:#C5D5E4;--bloom-lav:#D4C8E0;
+  --section-py:clamp(48px,8vw,88px);
+  --px:clamp(16px,4vw,48px);
+  --max-w:780px;
+  --r:14px;--r-sm:10px;
+}
+
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--warm-white);color:var(--soft-black);line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:68px;
+}
+
+/* ── Shared ── */
+section{padding:var(--section-py) var(--px)}
+.inner{max-width:var(--max-w);margin:0 auto}
+.label{font-size:.62rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold-beige);margin-bottom:6px;display:block}
+.t{font-size:clamp(1.25rem,3.2vw,1.7rem);font-weight:700;color:var(--soft-black);line-height:1.35;margin-bottom:8px}
+.sub{font-size:clamp(.82rem,1.6vw,.9rem);color:var(--warm-gray);margin-bottom:28px;max-width:480px}
+
+/* placeholder images */
+.ph{
+  background:var(--soft-beige);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--light-gray);font-size:.7rem;font-weight:500;
+  letter-spacing:.5px;text-align:center;
+  border:1px dashed var(--light-gray);
+  overflow:hidden;position:relative;
+}
+.ph span{position:relative;z-index:1;padding:8px}
+
+/* fade */
+.fi{opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s}
+.fi.vis{opacity:1;transform:translateY(0)}
+
+
+/* ══════════════════════════════════════
+   S1 — HERO
+   ══════════════════════════════════════ */
+.hero{
+  padding:0;position:relative;overflow:hidden;
+  background:linear-gradient(175deg,var(--cream) 0%,var(--soft-beige) 40%,var(--moon-gold) 100%);
+}
+.hero-img.ph{width:100%;aspect-ratio:3/4;max-height:560px;border:none;border-radius:0}
+.hero-body{padding:32px var(--px) 40px;text-align:center}
+.hero-body h1{
+  font-size:clamp(1.5rem,4.5vw,2.4rem);font-weight:800;line-height:1.28;margin-bottom:10px;
+}
+.hero-body h1 em{font-style:normal;color:var(--deep-beige)}
+.hero-sub{font-size:clamp(.84rem,1.8vw,1rem);color:var(--warm-gray);margin-bottom:18px}
+.hero-rating{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:.78rem;color:var(--deep-beige);
+  background:rgba(255,255,255,.55);padding:5px 14px;border-radius:18px;margin-bottom:12px;
+}
+.hero-rating .stars{color:#D4A843;letter-spacing:1px}
+.hero-price{font-size:1.5rem;font-weight:700;margin-bottom:16px}
+.hero-price small{font-size:.78rem;font-weight:400;color:var(--warm-gray);margin-left:2px}
+
+.hero-points{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+  margin-bottom:20px;text-align:center;
+}
+.hero-pt{
+  background:rgba(255,255,255,.5);border-radius:var(--r-sm);padding:14px 8px;
+}
+.hero-pt strong{display:block;font-size:.78rem;color:var(--soft-black);margin-bottom:2px}
+.hero-pt span{font-size:.68rem;color:var(--warm-gray)}
+
+.hero-cta{
+  display:inline-block;padding:13px 36px;
+  background:var(--deep-beige);color:var(--white);
+  font-size:.88rem;font-weight:600;border-radius:28px;
+  text-decoration:none;transition:background .2s;
+}
+.hero-cta:hover{background:var(--gold-beige)}
+
+
+/* ══════════════════════════════════════
+   S2 — REAL REVIEWS (moved up per PDF)
+   ══════════════════════════════════════ */
+.reviews{background:var(--warm-white)}
+.rv-header{text-align:center;margin-bottom:24px}
+.rv-score{font-size:2.6rem;font-weight:800;color:var(--deep-beige);line-height:1}
+.rv-stars{color:#D4A843;font-size:.95rem;letter-spacing:2px;margin:4px 0}
+.rv-count{font-size:.75rem;color:var(--warm-gray)}
+
+.rv-title{
+  font-size:1rem;font-weight:700;text-align:center;
+  margin-bottom:20px;color:var(--soft-black);
+}
+
+.rv-cards{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:20px}
+.rv-card{
+  background:var(--cream);border-radius:var(--r);padding:20px 18px;
+  border:1px solid var(--pale-gray);
+}
+.rv-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.rv-name{font-size:.75rem;font-weight:600}
+.rv-st{font-size:.7rem;color:#D4A843}
+.rv-card p{font-size:.82rem;line-height:1.7;margin-bottom:8px}
+.rv-opt{font-size:.66rem;color:var(--warm-gray);background:var(--pale-gray);display:inline-block;padding:3px 10px;border-radius:10px}
+
+.rv-tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.rv-tag{padding:5px 14px;border-radius:18px;font-size:.72rem;font-weight:500;background:rgba(196,168,130,.1);color:var(--deep-beige);border:1px solid rgba(196,168,130,.12)}
+
+
+/* ══════════════════════════════════════
+   S3 — WHY SLEEPING BAG (per PDF)
+   ══════════════════════════════════════ */
+.why-sb{background:var(--cream)}
+
+.why-categories{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+  margin-bottom:28px;
+}
+.why-cat{
+  background:var(--warm-white);border-radius:var(--r);padding:20px 14px;
+  text-align:center;border:1px solid var(--pale-gray);
+}
+.why-cat-img.ph{width:100%;aspect-ratio:1/1;border-radius:var(--r-sm);margin-bottom:10px;border:none}
+.why-cat h4{font-size:.82rem;font-weight:700;margin-bottom:2px}
+.why-cat .cat-sub{font-size:.7rem;font-weight:600;color:var(--deep-beige);margin-bottom:6px;display:block}
+.why-cat p{font-size:.7rem;color:var(--warm-gray);line-height:1.55}
+
+.why-warn{
+  background:var(--warm-white);border-radius:var(--r);
+  padding:18px 20px;border-left:3px solid var(--deep-beige);
+  font-size:.78rem;color:var(--soft-black);line-height:1.7;
+}
+.why-warn strong{color:var(--deep-beige);display:block;margin-bottom:4px;font-size:.82rem}
+
+
+/* ══════════════════════════════════════
+   S4 — BRAND STORY (per PDF)
+   ══════════════════════════════════════ */
+.brand-story{background:var(--warm-white)}
+.bs-img.ph{width:100%;aspect-ratio:16/9;border-radius:var(--r);margin-bottom:24px;border:none}
+
+.bs-developer{
+  display:grid;grid-template-columns:64px 1fr;gap:16px;
+  background:var(--cream);border-radius:var(--r);padding:20px;
+  align-items:center;margin-bottom:20px;
+  border:1px solid var(--pale-gray);
+}
+.bs-avatar.ph{width:64px;height:64px;border-radius:50%;border:none}
+.bs-dev-info h4{font-size:.88rem;font-weight:700;margin-bottom:2px}
+.bs-dev-info span{font-size:.72rem;color:var(--gold-beige);font-weight:600;display:block;margin-bottom:4px}
+.bs-dev-info p{font-size:.78rem;color:var(--warm-gray);line-height:1.6}
+
+.bs-text{font-size:.85rem;color:var(--warm-gray);line-height:1.85}
+.bs-text strong{color:var(--soft-black)}
+
+
+/* ══════════════════════════════════════
+   S5 — MATERIAL SHOPPING GUIDE (per PDF)
+   ══════════════════════════════════════ */
+.mat-guide{background:var(--cream)}
+.mg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.mg-card{
+  background:var(--warm-white);border-radius:var(--r);overflow:hidden;
+  border:1px solid var(--pale-gray);transition:transform .2s;position:relative;
+}
+.mg-card.current{border:2px solid var(--gold-beige)}
+.mg-card.current::after{
+  content:'지금 보고 있는 제품';position:absolute;top:0;left:0;right:0;
+  background:var(--deep-beige);color:var(--white);font-size:.6rem;font-weight:600;
+  text-align:center;padding:4px 0;letter-spacing:1px;
+}
+.mg-thumb.ph{width:100%;aspect-ratio:3/4;border:none;border-radius:0}
+.mg-info{padding:14px 12px;text-align:center}
+.mg-info h4{font-size:.82rem;font-weight:700;margin-bottom:2px}
+.mg-info .mg-feat{font-size:.7rem;color:var(--deep-beige);font-weight:600;margin-bottom:4px;display:block}
+.mg-info .mg-season{font-size:.68rem;color:var(--warm-gray);margin-bottom:6px;display:block}
+.mg-info .mg-spec{font-size:.65rem;color:var(--light-gray)}
+
+
+/* ══════════════════════════════════════
+   S6 — WHY SILKY BAMBU IS SPECIAL
+   ══════════════════════════════════════ */
+.silky{background:var(--warm-white)}
+
+/* --- Zigzag layout (always 2-col, mobile=desktop) --- */
+.silky-grid{display:grid;grid-template-columns:1fr;gap:0}
+.silky-item{
+  display:grid;grid-template-columns:1fr 1fr;
+  background:var(--cream);overflow:hidden;
+  border-bottom:1px solid var(--pale-gray);
+}
+.silky-item:last-child{border-bottom:none}
+.silky-item:nth-child(even){direction:rtl}
+.silky-item:nth-child(even) > *{direction:ltr}
+
+.silky-img.ph{
+  width:100%;height:100%;min-height:200px;border:none;border-radius:0;
+}
+.silky-item:nth-child(1) .silky-img{background:linear-gradient(135deg,#E8DDD0,#F5EDE3)}
+.silky-item:nth-child(2) .silky-img{background:linear-gradient(135deg,var(--mist-blue),#D6E4ED)}
+.silky-item:nth-child(3) .silky-img{background:linear-gradient(135deg,var(--sage-green),#B5D4CC)}
+
+.silky-body{padding:clamp(16px,4vw,40px);display:flex;flex-direction:column;justify-content:center}
+.silky-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:26px;height:26px;border-radius:50%;
+  background:var(--deep-beige);color:var(--white);
+  font-size:.6rem;font-weight:700;margin-bottom:10px;
+}
+.silky-item h4{font-size:clamp(.88rem,2.2vw,1.3rem);font-weight:700;margin-bottom:6px;line-height:1.3}
+.silky-item p{font-size:clamp(.72rem,1.4vw,.9rem);color:var(--warm-gray);line-height:1.7}
+
+.silky-spec{
+  margin-top:0;background:var(--cream);border-radius:0 0 var(--r) var(--r);
+  padding:14px 20px;display:flex;align-items:center;justify-content:center;gap:20px;
+  font-size:.75rem;color:var(--warm-gray);
+  border:1px solid var(--pale-gray);border-top:none;
+}
+.silky-spec strong{color:var(--soft-black);margin-right:3px}
+
+/* --- 2x2 Tile Grid (image-overlay style like reference) --- */
+.silky-tiles{
+  display:grid;grid-template-columns:1fr 1fr;gap:6px;
+  margin-top:20px;
+}
+.stile{
+  position:relative;border-radius:var(--r);overflow:hidden;
+  aspect-ratio:1/1;
+}
+.stile .ph{
+  position:absolute;inset:0;border:none;border-radius:0;
+}
+.stile:nth-child(1) .ph{background:linear-gradient(135deg,#D4C8B0,#E8DDD0)}
+.stile:nth-child(2) .ph{background:linear-gradient(135deg,#A8C4BD,#C5DDD6)}
+.stile:nth-child(3) .ph{background:linear-gradient(135deg,#B0C4D4,#C8D8E8)}
+.stile:nth-child(4) .ph{background:linear-gradient(135deg,#C4B8A0,#DDD4C4)}
+
+.stile-overlay{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  padding:clamp(12px,3vw,24px);
+  background:linear-gradient(0deg,rgba(61,61,61,.55) 0%,transparent 60%);
+  z-index:2;
+}
+.stile-icon{
+  width:clamp(36px,8vw,52px);height:clamp(36px,8vw,52px);
+  border:1.5px solid rgba(255,255,255,.7);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:8px;
+  color:var(--white);font-size:clamp(.5rem,1.2vw,.65rem);
+  font-weight:600;letter-spacing:.5px;text-align:center;
+  backdrop-filter:blur(4px);background:rgba(255,255,255,.08);
+}
+.stile-title{
+  color:var(--white);font-size:clamp(.7rem,1.8vw,.88rem);
+  font-weight:700;text-align:center;letter-spacing:.5px;
+  text-shadow:0 1px 4px rgba(0,0,0,.3);
+}
+
+
+/* ══════════════════════════════════════
+   S7 — 8 CHECKPOINTS OVERVIEW
+   ══════════════════════════════════════ */
+.checkpoints{background:var(--cream)}
+.cp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.cp-card{
+  background:var(--warm-white);border-radius:var(--r);
+  padding:16px 14px;text-align:center;
+  border:1px solid var(--pale-gray);
+}
+.cp-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:24px;height:24px;border-radius:50%;
+  background:var(--deep-beige);color:var(--white);
+  font-size:.62rem;font-weight:700;margin-bottom:8px;
+}
+.cp-card h4{font-size:.78rem;font-weight:600;line-height:1.4}
+
+
+/* ══════════════════════════════════════
+   S8 — CHECKPOINT DETAILS
+   ══════════════════════════════════════ */
+.cp-details{background:var(--warm-white)}
+.cpd-item{margin-bottom:32px}
+.cpd-item:last-child{margin-bottom:0}
+.cpd-img.ph{width:100%;aspect-ratio:4/3;border-radius:var(--r);margin-bottom:16px;border:none}
+.cpd-label{
+  display:inline-block;padding:3px 10px;border-radius:12px;
+  background:var(--deep-beige);color:var(--white);
+  font-size:.62rem;font-weight:600;margin-bottom:8px;letter-spacing:.5px;
+}
+.cpd-item h3{font-size:1rem;font-weight:700;margin-bottom:6px}
+.cpd-item p{font-size:.82rem;color:var(--warm-gray);line-height:1.75}
+
+
+/* ══════════════════════════════════════
+   S9 — COLOR & DESIGN
+   ══════════════════════════════════════ */
+.colors{background:var(--cream)}
+.clr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.clr-card{
+  border-radius:var(--r);overflow:hidden;
+  background:var(--warm-white);border:1px solid var(--pale-gray);
+  transition:transform .2s;
+}
+.clr-card:hover{transform:translateY(-3px)}
+.clr-swatch{height:100px;position:relative}
+.clr-swatch .ph{position:absolute;inset:0;border:none;border-radius:0}
+.clr-info{padding:12px 10px;text-align:center}
+.clr-info strong{display:block;font-size:.75rem;color:var(--soft-black);margin-bottom:1px}
+.clr-info span{font-size:.65rem;color:var(--warm-gray);font-style:italic}
+
+
+/* ══════════════════════════════════════
+   S10 — SIZE-SPECIFIC DESIGN (per PDF)
+   ══════════════════════════════════════ */
+.size-design{background:var(--warm-white)}
+.sd-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.sd-card{
+  background:var(--cream);border-radius:var(--r);overflow:hidden;
+  border:1px solid var(--pale-gray);
+}
+.sd-card-img.ph{width:100%;aspect-ratio:3/4;border:none;border-radius:0}
+.sd-card-body{padding:16px 14px}
+.sd-card-body h4{font-size:.88rem;font-weight:700;margin-bottom:6px}
+.sd-feat-list{list-style:none}
+.sd-feat-list li{
+  font-size:.75rem;color:var(--warm-gray);
+  padding:4px 0;border-bottom:1px solid var(--pale-gray);
+  display:flex;align-items:center;gap:6px;
+}
+.sd-feat-list li:last-child{border-bottom:none}
+.sd-dot{width:5px;height:5px;border-radius:50%;background:var(--gold-beige);flex-shrink:0}
+
+
+/* ══════════════════════════════════════
+   S11 — HOW TO WEAR (per PDF)
+   ══════════════════════════════════════ */
+.how-to{background:var(--cream)}
+.ht-steps{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.ht-step{
+  background:var(--warm-white);border-radius:var(--r);overflow:hidden;
+  border:1px solid var(--pale-gray);
+}
+.ht-step-img.ph{width:100%;aspect-ratio:4/3;border:none;border-radius:0}
+.ht-step-body{padding:14px}
+.ht-step-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:22px;height:22px;border-radius:50%;
+  background:var(--deep-beige);color:var(--white);
+  font-size:.6rem;font-weight:700;margin-bottom:6px;
+}
+.ht-step-body h4{font-size:.8rem;font-weight:600;margin-bottom:3px}
+.ht-step-body p{font-size:.72rem;color:var(--warm-gray);line-height:1.55}
+
+
+/* ══════════════════════════════════════
+   S12 — SIZE GUIDE
+   ══════════════════════════════════════ */
+.size{background:var(--warm-white)}
+.size-tbl-wrap{
+  background:var(--cream);border-radius:var(--r);overflow:hidden;
+  margin-bottom:16px;border:1px solid var(--pale-gray);
+}
+.size-tbl{width:100%;border-collapse:collapse;font-size:.78rem}
+.size-tbl thead{background:var(--deep-beige);color:var(--white)}
+.size-tbl th{padding:12px 10px;text-align:center;font-weight:600;font-size:.7rem;letter-spacing:.5px}
+.size-tbl td{padding:13px 10px;text-align:center;border-bottom:1px solid var(--pale-gray)}
+.size-tbl tbody tr:last-child td{border-bottom:none}
+
+.size-tip{
+  background:rgba(143,173,164,.08);border:1px solid rgba(143,173,164,.2);
+  border-radius:var(--r-sm);padding:14px 16px;
+  font-size:.78rem;color:var(--soft-black);line-height:1.6;
+}
+.size-tip strong{color:var(--sage-green)}
+
+
+/* ══════════════════════════════════════
+   S13 — COMPARISON TABLE
+   ══════════════════════════════════════ */
+.compare{background:var(--cream)}
+.cmp-wrap{border-radius:var(--r);overflow:hidden;border:1px solid var(--pale-gray)}
+.cmp-tbl{width:100%;border-collapse:collapse;font-size:.75rem}
+.cmp-tbl thead th{
+  padding:13px 8px;text-align:center;font-weight:600;font-size:.72rem;
+  background:var(--pale-gray);color:var(--soft-black);
+}
+.cmp-tbl thead th.hl{background:var(--deep-beige);color:var(--white)}
+.cmp-tbl td{padding:11px 8px;text-align:center;border-bottom:1px solid var(--pale-gray);vertical-align:middle}
+.cmp-tbl td:first-child{text-align:left;font-weight:500}
+.cmp-tbl td.hl{background:rgba(196,168,130,.04);font-weight:600;color:var(--deep-beige)}
+.cmp-tbl tbody tr:last-child td{border-bottom:none}
+.g{color:var(--sage-green);font-weight:600}
+.b{color:#C48B8B;font-weight:500}
+.m{color:var(--warm-gray)}
+
+
+/* ══════════════════════════════════════
+   S14 — SAFETY
+   ══════════════════════════════════════ */
+.safety{background:var(--night-navy);color:var(--white)}
+.safety .label{color:var(--moon-gold)}
+.safety .t{color:var(--white)}
+.safety .sub{color:rgba(255,255,255,.55)}
+
+.s-badges{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.s-badge{
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--r);padding:22px 14px;text-align:center;
+}
+.s-badge-icon.ph{
+  width:48px;height:48px;border-radius:50%;margin:0 auto 10px;
+  border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);
+  color:rgba(255,255,255,.4);font-size:.55rem;
+}
+.s-badge strong{font-size:.78rem;display:block;margin-bottom:3px}
+.s-badge small{font-size:.66rem;color:rgba(255,255,255,.5)}
+
+.safety-quote{
+  text-align:center;font-size:.92rem;font-weight:500;
+  color:var(--moon-gold);font-style:italic;padding-top:4px;
+}
+
+
+/* ══════════════════════════════════════
+   S15 — FAQ
+   ══════════════════════════════════════ */
+.faq{background:var(--warm-white)}
+.faq-item{
+  border:1px solid var(--pale-gray);border-radius:var(--r-sm);
+  margin-bottom:8px;overflow:hidden;background:var(--cream);
+  transition:border-color .2s;
+}
+.faq-item:hover{border-color:var(--gold-beige)}
+.faq-q{
+  width:100%;text-align:left;background:none;border:none;
+  padding:15px 16px;font-size:.84rem;font-weight:600;
+  color:var(--soft-black);cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:inherit;line-height:1.45;
+}
+.faq-q::after{
+  content:'+';font-size:1.1rem;font-weight:400;
+  color:var(--gold-beige);transition:transform .25s;
+  min-width:18px;text-align:center;
+}
+.faq-item.open .faq-q::after{content:'\2212'}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s,padding .3s;padding:0 16px}
+.faq-item.open .faq-a{max-height:280px;padding:0 16px 16px}
+.faq-a p{font-size:.8rem;color:var(--warm-gray);line-height:1.75}
+
+
+/* ══════════════════════════════════════
+   S16 — CROSS-SELL
+   ══════════════════════════════════════ */
+.crosssell{background:var(--cream)}
+.cs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.cs-card{
+  background:var(--warm-white);border-radius:var(--r);overflow:hidden;
+  border:1px solid var(--pale-gray);transition:transform .2s;
+}
+.cs-card:hover{transform:translateY(-3px)}
+.cs-thumb.ph{width:100%;aspect-ratio:3/4;border:none;border-radius:0}
+.cs-info{padding:12px 10px}
+.cs-info h4{font-size:.78rem;font-weight:600;margin-bottom:3px}
+.cs-price{font-size:.78rem;color:var(--deep-beige);font-weight:700}
+.cs-orig{font-size:.68rem;color:var(--light-gray);text-decoration:line-through;margin-left:4px}
+
+.journey-mini{
+  background:var(--warm-white);border-radius:var(--r);padding:22px 16px;
+  border:1px solid var(--pale-gray);
+}
+.journey-mini h4{font-size:.65rem;letter-spacing:2px;color:var(--gold-beige);font-weight:600;text-align:center;margin-bottom:16px}
+.jm-steps{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap}
+.jm-step{text-align:center;flex:0 0 auto;padding:4px 8px}
+.jm-dot{width:12px;height:12px;border-radius:50%;margin:0 auto 4px;border:2px solid var(--white);box-shadow:0 0 0 1.5px var(--gold-beige)}
+.jm-step:nth-child(1) .jm-dot{background:var(--blush-pink)}
+.jm-step:nth-child(3) .jm-dot{background:var(--moon-gold)}
+.jm-step:nth-child(5) .jm-dot{background:var(--sage-green);box-shadow:0 0 0 3px rgba(143,173,164,.3)}
+.jm-step:nth-child(7) .jm-dot{background:var(--mist-blue)}
+.jm-step span{font-size:.65rem;color:var(--soft-black);font-weight:500;display:block}
+.jm-step small{font-size:.58rem;color:var(--warm-gray)}
+.jm-arr{color:var(--light-gray);font-size:.65rem;padding:0 2px}
+.jm-step.cur span{color:var(--deep-beige);font-weight:700}
+
+
+/* ══════════════════════════════════════
+   S17 — SHIPPING
+   ══════════════════════════════════════ */
+.shipping{background:var(--warm-white)}
+.ship-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ship-card{
+  text-align:center;background:var(--cream);border-radius:var(--r);
+  padding:22px 14px;border:1px solid var(--pale-gray);
+}
+.ship-icon.ph{
+  width:40px;height:40px;border-radius:50%;margin:0 auto 10px;
+  border:none;background:rgba(196,168,130,.1);color:var(--warm-gray);font-size:.5rem;
+}
+.ship-card h4{font-size:.82rem;font-weight:600;margin-bottom:5px}
+.ship-card p{font-size:.72rem;color:var(--warm-gray);line-height:1.55}
+
+
+/* ══════════════════════════════════════
+   STICKY CTA
+   ══════════════════════════════════════ */
+.sticky-cta{
+  position:fixed;bottom:0;left:0;right:0;z-index:999;
+  background:rgba(253,248,242,.95);backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-top:1px solid var(--pale-gray);
+  padding:10px var(--px);
+  transform:translateY(100%);transition:transform .3s;
+}
+.sticky-cta.show{transform:translateY(0)}
+.sticky-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.sticky-name{font-size:.78rem;font-weight:600}
+.sticky-price{font-size:.92rem;font-weight:700;color:var(--deep-beige);margin-left:8px}
+.sticky-btn{
+  padding:11px 28px;background:var(--deep-beige);color:var(--white);
+  font-size:.84rem;font-weight:600;border:none;border-radius:22px;
+  cursor:pointer;transition:background .2s;font-family:inherit;
+}
+.sticky-btn:hover{background:var(--gold-beige)}
+
+
+/* ══════════════════════════════════════
+   RESPONSIVE — MOBILE OPTIMIZED
+   ══════════════════════════════════════ */
+
+/* Tablet */
+@media(min-width:601px){
+  .rv-cards{grid-template-columns:1fr 1fr}
+  .clr-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+/* Desktop */
+@media(min-width:901px){
+  .hero{display:grid;grid-template-columns:1fr 1fr;align-items:center}
+  .hero-img.ph{aspect-ratio:auto;height:100%;min-height:520px}
+  .hero-body{text-align:left;padding:48px}
+  .rv-cards{grid-template-columns:repeat(3,1fr)}
+  .clr-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+/* Mobile-specific tweaks */
+@media(max-width:600px){
+  .hero-points{grid-template-columns:repeat(3,1fr);gap:6px}
+  .hero-pt{padding:10px 6px}
+  .hero-pt strong{font-size:.72rem}
+  .hero-pt span{font-size:.62rem}
+
+  .why-categories{grid-template-columns:repeat(3,1fr);gap:8px}
+  .why-cat{padding:14px 8px}
+  .why-cat h4{font-size:.72rem}
+  .why-cat p{font-size:.62rem}
+
+  .mg-grid{grid-template-columns:repeat(3,1fr);gap:8px}
+  .mg-info h4{font-size:.72rem}
+  .mg-info .mg-feat{font-size:.62rem}
+  .mg-info .mg-season{font-size:.6rem}
+  .mg-info .mg-spec{font-size:.58rem}
+
+  .cp-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .cp-card{padding:14px 10px}
+
+  .s-badges{grid-template-columns:repeat(3,1fr);gap:8px}
+  .s-badge{padding:16px 8px}
+  .s-badge strong{font-size:.7rem}
+  .s-badge small{font-size:.6rem}
+  .s-badge-icon.ph{width:36px;height:36px}
+
+  .cs-grid{grid-template-columns:repeat(3,1fr);gap:8px}
+  .cs-info h4{font-size:.7rem}
+
+  .ship-grid{grid-template-columns:repeat(3,1fr);gap:8px}
+  .ship-card{padding:16px 8px}
+  .ship-card h4{font-size:.72rem}
+  .ship-card p{font-size:.65rem}
+
+  .silky-spec{flex-direction:column;gap:6px;text-align:center}
+
+  .sd-grid{gap:10px}
+
+  .ht-steps{grid-template-columns:repeat(2,1fr);gap:8px}
+
+  .cmp-tbl{font-size:.65rem}
+  .cmp-tbl thead th{padding:10px 5px;font-size:.62rem}
+  .cmp-tbl td{padding:9px 5px}
+
+  .jm-steps{gap:4px}
+  .jm-arr{display:none}
+  .jm-step{padding:4px 6px}
+
+  .sticky-name{font-size:.7rem}
+  .sticky-price{font-size:.82rem}
+  .sticky-btn{padding:10px 22px;font-size:.78rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ S1 — HERO ══ -->
+<section class="hero">
+  <div class="hero-img ph"><span>메인 제품 이미지<br>슬리핑백을 입은 아이가<br>편안히 잠든 모습</span></div>
+  <div class="hero-body">
+    <h1>실키한 밤부가 감싸는,<br><em>아이의 꿀잠</em></h1>
+    <p class="hero-sub">속싸개 졸업 후, 이불 대신 입는 잠옷.<br>밤새 걷어차도 따뜻한 슬리핑백.</p>
+    <div class="hero-rating">
+      <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      4.9점 (227개 리뷰)
+    </div>
+    <div class="hero-price">54,900<small>원</small></div>
+    <div class="hero-points">
+      <div class="hero-pt">
+        <strong>실키 밤부</strong>
+        <span>실크처럼 부드러운 원단</span>
+      </div>
+      <div class="hero-pt">
+        <strong>안전 설계</strong>
+        <span>양방향 지퍼 + 스냅</span>
+      </div>
+      <div class="hero-pt">
+        <strong>국내 생산</strong>
+        <span>전 공정 100% 국내</span>
+      </div>
+    </div>
+    <a class="hero-cta" href="#colors">꿀잠 선물하기</a>
+  </div>
+</section>
+
+
+<!-- ══ S2 — REAL REVIEWS ══ -->
+<section class="reviews">
+  <div class="inner fi">
+    <div class="rv-header">
+      <span class="label">Real Reviews</span>
+      <div class="rv-score">4.9</div>
+      <div class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="rv-count">227명의 꿀잠 후기</div>
+    </div>
+    <p class="rv-title">실사용 리뷰가 말해주는 꿀잠의 비결</p>
+
+    <div class="rv-cards">
+      <div class="rv-card">
+        <div class="rv-top"><span class="rv-name">하늘맘</span><span class="rv-st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+        <p>"발이 차가운 아기라 늘 걱정이었는데, 슬리핑백 입히고 안심이에요. 발끝까지 포근하게 감싸줘서 밤새 편안하게 자요."</p>
+        <span class="rv-opt">클라우드블루 / S</span>
+      </div>
+      <div class="rv-card">
+        <div class="rv-top"><span class="rv-name">소율아빠</span><span class="rv-st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+        <p>"스와들로 수면 의식하던 아이인데 자연스럽게 슬리핑백으로 넘어갔어요! 손이 자유로워지니까 뒤집기도 안전하고요."</p>
+        <span class="rv-opt">오트베이지 / M</span>
+      </div>
+      <div class="rv-card">
+        <div class="rv-top"><span class="rv-name">쥬니마미</span><span class="rv-st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+        <p>"이불 걷어찰 걱정도 이제 끝이에요. 아기도 저도 같이 통잠 잘 수 있게 도와준 아이템! S 쓰다가 M 재구매했어요."</p>
+        <span class="rv-opt">블룸라벤더 / S &rarr; M 재구매</span>
+      </div>
+    </div>
+
+    <div class="rv-tags">
+      <span class="rv-tag">#보송보송</span>
+      <span class="rv-tag">#이불안걷어차</span>
+      <span class="rv-tag">#부드러워요</span>
+      <span class="rv-tag">#색감예뻐요</span>
+      <span class="rv-tag">#재구매의사있음</span>
+      <span class="rv-tag">#선물로좋아요</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ S3 — WHY SLEEPING BAG ══ -->
+<section class="why-sb">
+  <div class="inner fi">
+    <span class="label">When to Use</span>
+    <h2 class="t">슬리핑백, 이럴 때 추천해요</h2>
+    <p class="sub">스와들, 슬리핑백, 수면조끼 — 아이의 성장 단계에 맞는 수면 아이템이 다릅니다</p>
+
+    <div class="why-categories">
+      <div class="why-cat">
+        <div class="why-cat-img ph"><span>스와들 착용<br>신생아 이미지</span></div>
+        <h4>스와들</h4>
+        <span class="cat-sub">모로반사가 잦은 신생아</span>
+        <p>갑작스러운 팔·다리 움직임으로 잠에서 자주 깨는 신생아 시기에 몸을 부드럽게 감싸 수면 안정이 필요한 순간에 사용하세요.</p>
+      </div>
+      <div class="why-cat">
+        <div class="why-cat-img ph" style="border-color:var(--gold-beige)"><span>슬리핑백 착용<br>영아 이미지</span></div>
+        <h4>슬리핑백</h4>
+        <span class="cat-sub">스와들 졸업 후 수면 안정</span>
+        <p>뒤집기를 시작하며 스와들을 졸업한 다음 단계. 이불 대신 입혀 발 시림 걱정 없는 잠자리를 만들어줍니다.</p>
+      </div>
+      <div class="why-cat">
+        <div class="why-cat-img ph"><span>수면조끼 착용<br>유아 이미지</span></div>
+        <h4>수면조끼</h4>
+        <span class="cat-sub">활동적인 아이의 자유로운 수면</span>
+        <p>걷고 뛰는 것이 익숙해지며 움직임이 많아진 시기. 가볍게 걸쳐 잠들기 전과 후에도 편안하게 사용할 수 있어요.</p>
+      </div>
+    </div>
+
+    <div class="why-warn">
+      <strong>이불은 아직 위험해요</strong>
+      느슨한 이불·담요는 질식·SIDS 위험을 높이기 때문에 배제하고, 보온을 위해서는 '착용하는 형태'의 수면조끼(슬리핑백)와 같은 수면 의류를 사용하는 것이 안전하다고 국제 소아과학회(AAP)가 권장합니다.
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ S4 — BRAND STORY ══ -->
+<section class="brand-story">
+  <div class="inner fi">
+    <span class="label">Brand Story</span>
+    <h2 class="t">아이의 수면을 연구하는 브랜드</h2>
+    <p class="sub">썬데이허그는 우리 아이의 밤을 조용히 감싸안는 유아 수면용품 전문 브랜드입니다</p>
+
+    <div class="bs-img ph"><span>브랜드 스토리 이미지 — 아이가 침대에서 편안히 잠든 모습 / 수면과 관련된 감성 이미지</span></div>
+
+    <div class="bs-developer">
+      <div class="bs-avatar ph"><span>인물</span></div>
+      <div class="bs-dev-info">
+        <h4>수면컨설팅 전문업체와 공동개발</h4>
+        <span>대한민국 대표 수면컨설팅업체 슬립베러베이비와 함께 만들었습니다</span>
+        <p>수면컨설팅 1위 브랜드 슬립베러베이비 김지현 대표의 전문 자문을 통해 아이의 수면 패턴과 안전을 과학적으로 설계했습니다.</p>
+      </div>
+    </div>
+
+    <p class="bs-text">
+      아기의 수면은 늘 달라집니다. 시기마다 다르고, 둘러싼 환경에 따라서도 달라집니다.
+      매일 새롭게 변하는 하루의 끝, <strong>썬데이허그는 그 순간을 언제나 포근히 안아주고 싶었습니다.</strong>
+      편안한 수면은 아이를 편안히 감싸주는 환경에서 시작됩니다.
+      "스와들업으로 완성한 수면루틴, 슬리핑백으로 자연스럽게 단계 업 하세요."
+    </p>
+  </div>
+</section>
+
+
+<!-- ══ S5 — MATERIAL SHOPPING GUIDE ══ -->
+<section class="mat-guide">
+  <div class="inner fi">
+    <span class="label">Material Guide</span>
+    <h2 class="t">꿀잠 슬리핑백 소재별 쇼핑 가이드</h2>
+    <p class="sub">어떤 소재를 사야하는지 확인 후, 하단 상세페이지에서 자세히 살펴보세요</p>
+
+    <div class="mg-grid">
+      <div class="mg-card current">
+        <div class="mg-thumb ph"><span>실키밤부<br>제품 이미지</span></div>
+        <div class="mg-info">
+          <h4>실키밤부</h4>
+          <span class="mg-feat">실크처럼 부드러움 / 저자극</span>
+          <span class="mg-season">사계절 전반</span>
+          <span class="mg-spec">실키 밤부 95% + 스판 덱스 5%</span>
+        </div>
+      </div>
+      <div class="mg-card">
+        <div class="mg-thumb ph"><span>코튼메쉬<br>제품 이미지</span></div>
+        <div class="mg-info">
+          <h4>코튼메쉬</h4>
+          <span class="mg-feat">뛰어난 통기성 / 가벼운 착용감</span>
+          <span class="mg-season">무더운 여름철</span>
+          <span class="mg-spec">코튼 97% + 나일론 3%</span>
+        </div>
+      </div>
+      <div class="mg-card">
+        <div class="mg-thumb ph"><span>트리플밤부<br>제품 이미지</span></div>
+        <div class="mg-info">
+          <h4>트리플밤부</h4>
+          <span class="mg-feat">3겹 밤부원단 / 뛰어난 보온성</span>
+          <span class="mg-season">추운 겨울철</span>
+          <span class="mg-spec">밤부 60% + 코튼 40%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ S6 — WHY SILKY BAMBU ══ -->
+<section class="silky">
+  <div class="inner fi">
+    <span class="label">Premium Bamboo</span>
+    <h2 class="t">썬데이허그 실키밤부가 특별한 이유</h2>
+    <p class="sub">대나무에서 태어난 실키 밤부 원단, 아이의 여린 피부를 위해 선택한 소재입니다</p>
+
+    <div class="silky-grid" style="border-radius:var(--r);overflow:hidden;border:1px solid var(--pale-gray)">
+      <div class="silky-item">
+        <div class="silky-img ph"><span>밤부 원단 클로즈업 — 실크처럼 부드러운 표면 질감과 광택<br>아이 피부에 닿는 촉감이 느껴지는 이미지</span></div>
+        <div class="silky-body">
+          <span class="silky-num">01</span>
+          <h4>Silk Touch</h4>
+          <p>실크처럼 부드러운 촉감으로 예민한 아이의 피부에 자극을 최소화합니다. 아토피, 민감성 피부 아이에게도 안심하고 사용할 수 있습니다.</p>
+        </div>
+      </div>
+      <div class="silky-item">
+        <div class="silky-img ph"><span>밤부 원단 흡습·건조 테스트 이미지<br>물방울이 빠르게 흡수되는 모습 또는 빨래 건조 장면</span></div>
+        <div class="silky-body">
+          <span class="silky-num">02</span>
+          <h4>Quick Dry</h4>
+          <p>밤부소재의 우수한 통기성으로 쉽고 빠르게 건조가 가능합니다. 면 대비 3배 뛰어난 흡습·속건 성능으로 땀이 많은 아이도 보송하게.</p>
+        </div>
+      </div>
+      <div class="silky-item">
+        <div class="silky-img ph"><span>깨끗하고 청결한 수면 환경 이미지<br>밤부 원단의 천연 항균 기능을 시각적으로 표현</span></div>
+        <div class="silky-body">
+          <span class="silky-num">03</span>
+          <h4>Anti-Bacterial</h4>
+          <p>세균 증식을 억제하여 깨끗하고 편안한 수면 환경을 유지합니다. 밤부 원단 고유의 천연 항균 기능으로 별도의 화학처리 없이도 청결합니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="silky-spec">
+      <span><strong>소재</strong> 밤부 레이온 95% + 스판덱스 5%</span>
+      <span><strong>생산</strong> 100% 국내 제조</span>
+      <span><strong>인증</strong> KC 안전인증 완료</span>
+    </div>
+
+    <!-- 2x2 타일 그리드: 소재 특성 오버레이 -->
+    <div class="silky-tiles">
+      <div class="stile">
+        <div class="ph" style="border:none;border-radius:0;position:absolute;inset:0">실키 밤부 원단 클로즈업 이미지</div>
+        <div class="stile-overlay">
+          <div class="stile-icon">SILK</div>
+          <div class="stile-title">실크같은 터치감</div>
+        </div>
+      </div>
+      <div class="stile">
+        <div class="ph" style="border:none;border-radius:0;position:absolute;inset:0">통기성 표현 이미지</div>
+        <div class="stile-overlay">
+          <div class="stile-icon">DRY</div>
+          <div class="stile-title">빠른 흡습 · 속건</div>
+        </div>
+      </div>
+      <div class="stile">
+        <div class="ph" style="border:none;border-radius:0;position:absolute;inset:0">아이 피부 클로즈업 이미지</div>
+        <div class="stile-overlay">
+          <div class="stile-icon">SAFE</div>
+          <div class="stile-title">저자극 · 항균</div>
+        </div>
+      </div>
+      <div class="stile">
+        <div class="ph" style="border:none;border-radius:0;position:absolute;inset:0">4계절 착용 이미지</div>
+        <div class="stile-overlay">
+          <div class="stile-icon">TEMP</div>
+          <div class="stile-title">4계절 체온 조절</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══ S7 — 8 CHECKPOINTS ══ -->
+<section class="checkpoints">
+  <div class="inner fi">
+    <span class="label">Check Point</span>
+    <h2 class="t">한눈에 보는 꿀잠 슬리핑백 8가지 포인트</h2>
+    <p class="sub">아이의 안전과 부모의 편의를 모두 생각한 설계</p>
+
+    <div class="cp-grid">
+      <div class="cp-card"><span class="cp-num">1</span><h4>발끝까지 감싸주는<br>입는 이불구조</h4></div>
+      <div class="cp-card"><span class="cp-num">2</span><h4>편리한 투웨이<br>지퍼 시스템</h4></div>
+      <div class="cp-card"><span class="cp-num">3</span><h4>어깨 스냅버튼<br>(S사이즈 전용)</h4></div>
+      <div class="cp-card"><span class="cp-num">4</span><h4>실키 밤부<br>원단 내용</h4></div>
+      <div class="cp-card"><span class="cp-num">5</span><h4>자유로운 두팔로<br>뒤집기시기에도 OK</h4></div>
+      <div class="cp-card"><span class="cp-num">6</span><h4>쓸림걱정 없는<br>지퍼 커버</h4></div>
+      <div class="cp-card"><span class="cp-num">7</span><h4>100%<br>Made in Korea</h4></div>
+      <div class="cp-card"><span class="cp-num">8</span><h4>무형광<br>안심 지퍼</h4></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ S8 — CHECKPOINT DETAILS ══ -->
+<section class="cp-details">
+  <div class="inner fi">
+
+    <div class="cpd-item">
+      <div class="cpd-img ph"><span>아이가 슬리핑백을 입고 누워있는 모습 — 발끝까지 감싸진 이불구조 강조<br>(수면조끼 착용 시 vs 슬리핑백 착용 시 비교 이미지)</span></div>
+      <span class="cpd-label">Point 01</span>
+      <h3>발끝까지 따뜻한 입는 이불</h3>
+      <p>밤새 배는 물론 발끝까지 포근히 감싸주는 입는 이불 구조. 체온 유지, 얼굴 덮힘 방지, 낙상 위험 감소까지. 이불을 걷어차는 아이도 밤새 따뜻하게 잠들 수 있습니다.</p>
+    </div>
+
+    <div class="cpd-item">
+      <div class="cpd-img ph"><span>투웨이 지퍼 클로즈업 — 위아래 양방향 열림 모습<br>기저귀 교체 시 하단만 열어 사용하는 장면</span></div>
+      <span class="cpd-label">Point 02</span>
+      <h3>편리한 투웨이 지퍼 시스템</h3>
+      <p>실용적인 스냅 버튼과 양방향 지퍼가 적용되어 기저귀 교체가 빠르고 간편합니다. 편리한 착용, 기저귀 교체, 활동까지 모두 고려한 2-way 지퍼 설계.</p>
+    </div>
+
+    <div class="cpd-item">
+      <div class="cpd-img ph"><span>어깨 스냅버튼 클로즈업 — 잠든 아이를 깨우지 않고 착탈의하는 모습<br>(S사이즈 전용 기능임을 표기)</span></div>
+      <span class="cpd-label">Point 03</span>
+      <h3>어깨 스냅 버튼 (S사이즈)</h3>
+      <p>머리 위로 넘기지 않고 어깨 부분을 열어 편하게 착탈의. 잠든 아이를 깨우지 않고 입히고 벗길 수 있습니다. S사이즈 전용 디테일입니다.</p>
+    </div>
+
+    <div class="cpd-item">
+      <div class="cpd-img ph"><span>밤부 원단 질감 클로즈업 — 실키한 광택과 부드러운 드레이프</span></div>
+      <span class="cpd-label">Point 04</span>
+      <h3>실키 밤부 원단</h3>
+      <p>실키밤부의 차가운 성질 덕분에 에어컨 바람에도 아기를 포근하고 적당한 온도로 지켜줍니다. 면 대비 3배 흡습, 천연 항균, 실크 같은 촉감의 프리미엄 원단.</p>
+    </div>
+
+    <div class="cpd-item">
+      <div class="cpd-img ph"><span>아기가 뒤집기를 시작한 모습 — 팔이 자유로운 슬리핑백 착용 상태<br>뒤집기를 시작한 아기에게 이상적인 디자인</span></div>
+      <span class="cpd-label">Point 05</span>
+      <h3>자유로운 두 팔, 뒤집기에도 안전</h3>
+      <p>속싸개와 달리 아기의 팔을 자유롭게 움직일 수 있어 뒤집기를 시작하는 아기에게 이상적입니다. 더 이상 속싸개를 졸업하고 슬리핑백으로 안전한 수면환경을 만들어 주세요.</p>
+    </div>
+
+    <div class="cpd-item">
+      <div class="cpd-img ph"><span>지퍼 커버 디테일 클로즈업 — 원단이 지퍼를 감싸 피부에 닿지 않는 구조</span></div>
+      <span class="cpd-label">Point 06</span>
+      <h3>쓸림 걱정 없는 지퍼 커버</h3>
+      <p>지퍼 안쪽에 원단 커버를 덧대어 아이의 피부에 금속 부분이 직접 닿지 않도록 설계했습니다. 턱 부분의 지퍼 상단에도 원단 보호대가 있어 목이나 턱에 자극을 주지 않습니다.</p>
+    </div>
+
+    <div class="cpd-item">
+      <div class="cpd-img ph"><span>국내 생산 공정 이미지 — 원단 재단, 봉제, 검수 과정<br>Made in Korea 강조</span></div>
+      <span class="cpd-label">Point 07</span>
+      <h3>100% Made in Korea</h3>
+      <p>원단 선택부터 재단, 봉제, 검수까지 전 공정을 대한민국에서 직접 관리합니다. 부모의 마음으로, 한 땀 한 땀. 소재가 아이보리색 위주인 이유도 무형광이기 때문이에요.</p>
+    </div>
+
+    <div class="cpd-item">
+      <div class="cpd-img ph"><span>무형광 안심 지퍼 클로즈업 — 형광증백제 미사용 지퍼 디테일</span></div>
+      <span class="cpd-label">Point 08</span>
+      <h3>무형광 안심 지퍼</h3>
+      <p>형광증백제를 사용하지 않은 안심 지퍼를 적용했습니다. 아이의 피부에 닿는 모든 부분에 유해물질 걱정 없는 소재만을 사용합니다.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══ S9 — COLOR & DESIGN ══ -->
+<section class="colors" id="colors">
+  <div class="inner fi">
+    <span class="label">Colors</span>
+    <h2 class="t">스타일을 가리지 않는 심플한 컬러 디자인</h2>
+    <p class="sub">깔끔하고 심플한 디자인으로 알록달록 다양한 패턴이 있는 실내복도, 심플한 무지 실내복에도 모두 매칭이 잘 됩니다</p>
+
+    <div class="clr-grid">
+      <div class="clr-card">
+        <div class="clr-swatch"><div class="ph" style="background:var(--white-cream)"><span>화이트크림<br>착용 이미지</span></div></div>
+        <div class="clr-info"><strong>화이트크림</strong><span>달빛처럼 포근한 따뜻함</span></div>
+      </div>
+      <div class="clr-card">
+        <div class="clr-swatch"><div class="ph" style="background:var(--oat-beige)"><span>오트베이지<br>착용 이미지</span></div></div>
+        <div class="clr-info"><strong>오트베이지</strong><span>자연 그대로의 편안한 중립</span></div>
+      </div>
+      <div class="clr-card">
+        <div class="clr-swatch"><div class="ph" style="background:var(--baby-pink)"><span>베이비핑크<br>착용 이미지</span></div></div>
+        <div class="clr-info"><strong>베이비핑크</strong><span>사랑스러운 핑크</span></div>
+      </div>
+      <div class="clr-card">
+        <div class="clr-swatch"><div class="ph" style="background:var(--jade-green)"><span>제이드그린<br>착용 이미지</span></div></div>
+        <div class="clr-info"><strong>제이드그린</strong><span>밤부 숲의 싱그러운 초록</span></div>
+      </div>
+      <div class="clr-card">
+        <div class="clr-swatch"><div class="ph" style="background:var(--cloud-blue)"><span>클라우드블루<br>착용 이미지</span></div></div>
+        <div class="clr-info"><strong>클라우드블루</strong><span>새벽 하늘의 고요한 파랑</span></div>
+      </div>
+      <div class="clr-card">
+        <div class="clr-swatch"><div class="ph" style="background:var(--bloom-lav)"><span>블룸라벤더<br>착용 이미지</span></div></div>
+        <div class="clr-info"><strong>블룸라벤더</strong><span>라벤더 꽃향기처럼 평온한 밤</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ S10 — SIZE-SPECIFIC DESIGN ══ -->
+<section class="size-design">
+  <div class="inner fi">
+    <span class="label">Size Design</span>
+    <h2 class="t">아이 성장 단계와 활동에 맞춘 사이즈별 맞춤 디자인</h2>
+    <p class="sub">꿀잠 슬리핑백은 사이즈마다 기능이 다릅니다</p>
+
+    <div class="sd-grid">
+      <div class="sd-card">
+        <div class="sd-card-img ph"><span>S 사이즈 제품<br>도식화 또는 착용 이미지<br>(스냅버튼, 지퍼 위치 표시)</span></div>
+        <div class="sd-card-body">
+          <h4>S size &mdash; STEP 1</h4>
+          <ul class="sd-feat-list">
+            <li><span class="sd-dot"></span>양쪽 스냅버튼</li>
+            <li><span class="sd-dot"></span>2way 지퍼설계</li>
+            <li><span class="sd-dot"></span>8겹이상 OR 우단</li>
+            <li><span class="sd-dot"></span>뒤집기를 시작한 아기에게</li>
+            <li><span class="sd-dot"></span>6~18개월 권장</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sd-card">
+        <div class="sd-card-img ph"><span>M 사이즈 제품<br>도식화 또는 착용 이미지<br>(풀집업, 지퍼 위치 표시)</span></div>
+        <div class="sd-card-body">
+          <h4>M size &mdash; STEP 2</h4>
+          <ul class="sd-feat-list">
+            <li><span class="sd-dot"></span>풀집업 스타일</li>
+            <li><span class="sd-dot"></span>2way 지퍼설계</li>
+            <li><span class="sd-dot"></span>M 24개월~ / L 30개월~</li>
+            <li><span class="sd-dot"></span>쑥쑥 자라는 유아에게</li>
+            <li><span class="sd-dot"></span>18~36개월 권장</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ S11 — HOW TO WEAR ══ -->
+<section class="how-to">
+  <div class="inner fi">
+    <span class="label">How to Wear</span>
+    <h2 class="t">손쉬운 착용방법</h2>
+    <p class="sub">잠든 아이를 깨우지 않고 편하게 입히는 방법</p>
+
+    <div class="ht-steps">
+      <div class="ht-step">
+        <div class="ht-step-img ph"><span>Step 1 이미지<br>슬리핑백 위에<br>아이를 눕히는 모습</span></div>
+        <div class="ht-step-body">
+          <span class="ht-step-num">1</span>
+          <h4>슬리핑백 위에 아이를 눕혀주세요</h4>
+          <p>슬리핑백을 펼쳐놓고 지퍼를 열어둔 상태에서 아이를 눕혀주세요.</p>
+        </div>
+      </div>
+      <div class="ht-step">
+        <div class="ht-step-img ph"><span>Step 2 이미지<br>지퍼를 올려<br>채워주는 모습</span></div>
+        <div class="ht-step-body">
+          <span class="ht-step-num">2</span>
+          <h4>지퍼를 위로 채워주면 끝!</h4>
+          <p>어깨 스냅을 채우고(S사이즈) 지퍼를 아래에서 위로 올려주면 착용 완료. S사이즈는 어깨 스냅버튼도 채워주세요.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ S12 — SIZE GUIDE ══ -->
+<section class="size">
+  <div class="inner fi">
+    <span class="label">Size Info</span>
+    <h2 class="t">아기 성장에 맞는 사이즈 선택하기</h2>
+    <p class="sub">우리 아이의 키와 연령을 확인하고 성장 단계에 맞는 적합한 사이즈를 선택해 주세요</p>
+
+    <div class="size-tbl-wrap">
+      <table class="size-tbl">
+        <thead><tr><th>사이즈</th><th>권장 월령</th><th>키</th><th>체중</th><th>슬리핑백 길이</th></tr></thead>
+        <tbody>
+          <tr><td><strong>S</strong></td><td>6~18개월</td><td>65~80cm</td><td>7~11kg</td><td>약 70cm</td></tr>
+          <tr><td><strong>M</strong></td><td>18~36개월</td><td>80~100cm</td><td>11~15kg</td><td>약 85cm</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="size-tip">
+      <strong>사이즈 고민되시나요?</strong> 카카오톡으로 아이의 키와 체중을 알려주시면 맞춤 추천해 드립니다.
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ S13 — COMPARISON ══ -->
+<section class="compare">
+  <div class="inner fi">
+    <span class="label">Compare</span>
+    <h2 class="t">왜 슬리핑백인가요?</h2>
+    <p class="sub">이불, 속싸개와 비교해 보면 차이가 분명합니다</p>
+
+    <div class="cmp-wrap">
+      <table class="cmp-tbl">
+        <thead><tr><th></th><th class="hl">꿀잠 슬리핑백</th><th>일반 이불</th><th>속싸개</th></tr></thead>
+        <tbody>
+          <tr><td>뒤집기 안전</td><td class="hl g">팔 자유, 안전</td><td class="b">질식 위험</td><td class="b">팔 고정</td></tr>
+          <tr><td>기저귀 교체</td><td class="hl g">양방향 지퍼</td><td class="m">매번 제거</td><td class="m">풀어야 함</td></tr>
+          <tr><td>이불 걷힘</td><td class="hl g">착용형 방지</td><td class="b">걷어참</td><td class="m">—</td></tr>
+          <tr><td>체온 조절</td><td class="hl g">밤부 자연 조절</td><td class="m">소재 따라 상이</td><td class="m">소재 따라 상이</td></tr>
+          <tr><td>수면 연속성</td><td class="hl g">높음</td><td class="b">낮음</td><td class="m">보통</td></tr>
+          <tr><td>이동 편의</td><td class="hl g">접어서 휴대</td><td class="b">부피 큼</td><td class="g">가벼움</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ S14 — SAFETY ══ -->
+<section class="safety">
+  <div class="inner fi" style="text-align:center">
+    <span class="label">Safety</span>
+    <h2 class="t">안심하고 선택하세요</h2>
+    <p class="sub" style="margin-left:auto;margin-right:auto">아이에게 입히는 모든 것, 안전이 최우선입니다</p>
+
+    <div class="s-badges">
+      <div class="s-badge">
+        <div class="s-badge-icon ph"><span>KC</span></div>
+        <strong>KC 안전인증</strong>
+        <small>국가 공인 어린이 제품 안전 기준 통과</small>
+      </div>
+      <div class="s-badge">
+        <div class="s-badge-icon ph"><span>TEST</span></div>
+        <strong>유해물질 테스트</strong>
+        <small>포름알데히드, 중금속 등 불검출</small>
+      </div>
+      <div class="s-badge">
+        <div class="s-badge-icon ph"><span>KR</span></div>
+        <strong>국내 전 공정</strong>
+        <small>원단~검수 국내 직접 관리</small>
+      </div>
+    </div>
+
+    <p class="safety-quote">"내 아이에게 입힐 수 있는가를 기준으로 만듭니다."</p>
+  </div>
+</section>
+
+
+<!-- ══ S15 — FAQ ══ -->
+<section class="faq">
+  <div class="inner fi">
+    <span class="label">FAQ</span>
+    <h2 class="t">자주 묻는 질문</h2>
+    <p class="sub">궁금한 점이 있으시면 카카오톡으로 문의해 주세요</p>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">세탁은 어떻게 하나요?</button>
+        <div class="faq-a"><p>세탁기 사용이 가능합니다. 찬물 또는 미지근한 물에 울코스나 섬세 코스로 세탁해 주세요. 건조기 사용은 가능하나 저온 건조를 권장합니다. 밤부 원단 특성상 빠르게 건조되어 자연 건조도 편리합니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">S와 M 사이즈 중 어떤 걸 골라야 하나요?</button>
+        <div class="faq-a"><p>6~18개월(키 65~80cm) 아이에게는 S사이즈를, 18~36개월(키 80~100cm) 아이에게는 M사이즈를 추천합니다. 여유 있게 입히고 싶으시다면 한 사이즈 위를 선택해도 좋습니다. 카카오톡으로 아이의 키와 체중을 알려주시면 맞춤 추천해 드립니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">여름에도 사용할 수 있나요?</button>
+        <div class="faq-a"><p>네, 실키밤부는 사계절 모두 사용할 수 있습니다. 밤부 원단은 여름에는 시원하고 겨울에는 따뜻한 천연 체온 조절 기능이 있어요. 한여름에는 얇은 속옷만 입히고 슬리핑백을 사용하시면 됩니다. 더 시원한 착용감을 원하시면 코튼메쉬 라인도 확인해 보세요.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">속싸개에서 슬리핑백으로 언제 바꿔야 하나요?</button>
+        <div class="faq-a"><p>아기가 뒤집기를 시작하면 반드시 속싸개 사용을 중단하고 슬리핑백으로 전환해야 합니다. 보통 생후 4~6개월 전후이며, 아이마다 차이가 있으므로 뒤집기 징후를 주의 깊게 관찰해 주세요. 뒤집기 전이라도 팔을 빼려는 시도가 보이면 전환 시기입니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">지퍼가 아이 피부에 닿지 않나요?</button>
+        <div class="faq-a"><p>지퍼 안쪽에 원단 커버를 덧대어 아이의 피부에 금속 부분이 직접 닿지 않도록 설계했습니다. 턱 부분의 지퍼 상단에도 원단 보호대가 있어 목이나 턱에 자극을 주지 않습니다. 무형광 안심 지퍼를 사용하여 유해물질 걱정도 없습니다.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ S16 — CROSS-SELL ══ -->
+<section class="crosssell">
+  <div class="inner fi">
+    <span class="label">More Items</span>
+    <h2 class="t">함께 하면 더 좋은 꿀잠 아이템</h2>
+    <p class="sub">아이의 성장 단계에 맞는 수면 제품을 만나보세요</p>
+
+    <div class="cs-grid">
+      <div class="cs-card">
+        <div class="cs-thumb ph"><span>신생아<br>속싸개 블랭킷<br>제품 이미지</span></div>
+        <div class="cs-info"><h4>신생아 속싸개 블랭킷</h4><span class="cs-price">14,900원</span><span class="cs-orig">24,900원</span></div>
+      </div>
+      <div class="cs-card">
+        <div class="cs-thumb ph"><span>나비잠<br>꿀잠 속싸개<br>제품 이미지</span></div>
+        <div class="cs-info"><h4>나비잠 꿀잠 속싸개</h4><span class="cs-price">21,900원</span><span class="cs-orig">37,900원</span></div>
+      </div>
+      <div class="cs-card">
+        <div class="cs-thumb ph"><span>신생아<br>짱구 베개<br>제품 이미지</span></div>
+        <div class="cs-info"><h4>신생아 짱구 베개</h4><span class="cs-price">19,900원</span><span class="cs-orig">29,900원</span></div>
+      </div>
+    </div>
+
+    <div class="journey-mini">
+      <h4>꿀잠 유니버스 — 성장 여정</h4>
+      <div class="jm-steps">
+        <div class="jm-step"><div class="jm-dot"></div><span>속싸개 블랭킷</span><small>신생아</small></div>
+        <span class="jm-arr">&rarr;</span>
+        <div class="jm-step"><div class="jm-dot"></div><span>꿀잠 속싸개</span><small>1~4개월</small></div>
+        <span class="jm-arr">&rarr;</span>
+        <div class="jm-step cur"><div class="jm-dot"></div><span>꿀잠 슬리핑백</span><small>4~36개월</small></div>
+        <span class="jm-arr">&rarr;</span>
+        <div class="jm-step"><div class="jm-dot"></div><span>윈터 슬리핑백</span><small>겨울 전용</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ S17 — SHIPPING ══ -->
+<section class="shipping">
+  <div class="inner fi">
+    <span class="label">Shipping &amp; Service</span>
+    <h2 class="t">배송 · 교환 · 고객센터</h2>
+
+    <div class="ship-grid">
+      <div class="ship-card">
+        <div class="ship-icon ph"><span>배송</span></div>
+        <h4>배송 안내</h4>
+        <p>3만원 이상 무료 배송<br>평일 오후 2시 이전 결제 시 당일 출고<br>제주/도서산간 추가비 발생</p>
+      </div>
+      <div class="ship-card">
+        <div class="ship-icon ph"><span>교환</span></div>
+        <h4>교환 · 반품</h4>
+        <p>수령 후 7일 이내 접수 가능<br>미개봉·미착용 상품에 한함<br>고객 변심 시 왕복 배송비 부담</p>
+      </div>
+      <div class="ship-card">
+        <div class="ship-icon ph"><span>CS</span></div>
+        <h4>고객센터</h4>
+        <p>카카오톡 @썬데이허그<br>평일 10:00~17:00<br>점심 12:00~13:00 / 주말 휴무</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- STICKY CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <div class="sticky-inner">
+    <div><span class="sticky-name">꿀잠 슬리핑백_실키 밤부</span><span class="sticky-price">54,900원</span></div>
+    <button class="sticky-btn">구매하기</button>
+  </div>
+</div>
+
+
+<!-- SCRIPTS -->
+<script>
+// fade-in
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:.06,rootMargin:'0px 0px -24px 0px'});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+
+// FAQ
+document.querySelectorAll('.faq-q').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const it=b.parentElement,was=it.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!was)it.classList.add('open');
+  });
+});
+
+// Sticky CTA
+const hero=document.querySelector('.hero');
+const cta=document.getElementById('stickyCta');
+new IntersectionObserver(es=>{es.forEach(e=>{cta.classList.toggle('show',!e.isIntersecting)})},{threshold:0}).observe(hero);
+</script>
+
+</body>
+</html>

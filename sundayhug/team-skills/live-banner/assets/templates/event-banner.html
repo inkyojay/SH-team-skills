@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=720">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="banner event-banner">
+        <!-- 눈 효과 오버레이 -->
+        <div class="snow"></div>
+
+        <!-- 상단 헤더 -->
+        <div class="header">
+            <div class="brand-logo">{{BRAND_NAME}}</div>
+            <div class="brand-logo">{{PLATFORM}}</div>
+        </div>
+
+        <!-- 라이브 정보 -->
+        <div class="live-info">
+            <div class="live-badge">
+                <span class="icon">LIVE</span>
+                <span class="datetime">{{LIVE_DATE}} {{LIVE_TIME}}</span>
+            </div>
+            <div class="event-subtitle">{{EVENT_SUBTITLE}}</div>
+            <div class="event-product">{{PRODUCT_NAME}}</div>
+        </div>
+
+        <!-- 가격 섹션 -->
+        <div class="price-section">
+            <div class="price-label">{{PRICE_LABEL}}</div>
+            <div class="price-value">
+                {{PRICE}}<span class="won">원</span>
+            </div>
+        </div>
+
+        <!-- 제품 미리보기 (폰 프레임) -->
+        <div class="product-preview">
+            <div class="phone-frame">
+                <div class="time">{{PREVIEW_TIME}}</div>
+                <div class="preview-title">{{PREVIEW_TITLE}}</div>
+                <div class="preview-image">
+                    <img src="{{PRODUCT_IMAGE}}" alt="제품">
+                </div>
+            </div>
+        </div>
+
+        <!-- 장식 요소 -->
+        <div class="decorations">{{DECORATION_EMOJI}}</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,267 @@
+/* 썬데이허그 인스타그램 템플릿 디자인 시스템
+   HTML → 이미지 변환용 고정 프레임
+   _palettes.css 내용도 함께 삽입하세요 */
+
+@import url('../_global-variables.css');
+
+/* BODY (인스타그램 전용) */
+body{font-family:var(--font-body);background:var(--bg);color:var(--dark);line-height:1.8;font-weight:300;-webkit-font-smoothing:antialiased;}
+
+/* FRAME CONTAINERS */
+.ig-frame {
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--dark);
+  -webkit-font-smoothing: antialiased;
+}
+.ig-frame[data-type="feed"]      { width: 1080px; height: 1080px; }
+.ig-frame[data-type="card"]      { width: 1080px; height: 1350px; }
+.ig-frame[data-type="reels"]     { width: 1080px; height: 1920px; }
+.ig-frame[data-type="story"]     { width: 1080px; height: 1920px; }
+
+/* TYPOGRAPHY */
+.ig-title {
+  font-family: var(--font-body);
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--dark);
+}
+.ig-subtitle {
+  font-family: var(--font-body);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--body);
+}
+.ig-badge {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 100px;
+  font-family: var(--font-en);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  background: var(--palette-badge-bg);
+  color: var(--palette-badge-text);
+}
+.ig-price {
+  font-family: var(--font-en);
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--dark);
+}
+.ig-price-orig {
+  font-family: var(--font-en);
+  font-size: 28px;
+  font-weight: 400;
+  text-decoration: line-through;
+  color: var(--sub);
+}
+.ig-discount {
+  font-family: var(--font-en);
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--danger);
+}
+.ig-label {
+  font-family: var(--font-en);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* HERO IMAGE */
+.ig-hero-img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* OVERLAYS */
+.ig-overlay {
+  position: absolute;
+  left: 0; right: 0;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+.ig-overlay.bottom {
+  bottom: 0;
+  padding-top: 200px;
+  background: linear-gradient(to top, rgba(26,26,26,.85) 0%, rgba(26,26,26,.4) 50%, transparent 100%);
+  justify-content: flex-end;
+}
+.ig-overlay.top {
+  top: 0;
+  padding-bottom: 200px;
+  background: linear-gradient(to bottom, rgba(26,26,26,.7) 0%, transparent 100%);
+}
+.ig-overlay.full {
+  top: 0; bottom: 0;
+  background: rgba(26,26,26,.45);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.ig-overlay .ig-title { color: #fff; }
+.ig-overlay .ig-subtitle { color: rgba(255,255,255,.8); }
+.ig-overlay .ig-price { color: #fff; }
+
+/* CENTER LAYOUT */
+.ig-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 80px;
+  text-align: center;
+  background: var(--palette-gradient);
+}
+
+/* CARD NEWS */
+.ig-slide-number {
+  font-family: var(--font-en);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--sub);
+  letter-spacing: .1em;
+}
+
+/* CTA BUTTON */
+.ig-cta-button {
+  display: inline-block;
+  padding: 24px 64px;
+  border-radius: 100px;
+  font-size: 28px;
+  font-weight: 600;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* SPLIT LAYOUT */
+.ig-split {
+  display: flex;
+  width: 100%; height: 100%;
+}
+.ig-split-text {
+  flex: 0 0 50%;
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--bg-warm);
+}
+.ig-split-img {
+  flex: 0 0 50%;
+  overflow: hidden;
+  position: relative;
+}
+.ig-split-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* TOP IMAGE + BOTTOM INFO */
+.ig-top-img {
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+.ig-card-body {
+  padding: 60px;
+  background: var(--bg);
+}
+.ig-card-body.gradient { background: var(--palette-gradient); }
+
+/* BRAND BAR */
+.ig-brand-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.ig-brand-logo {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* PRODUCT INFO */
+.ig-product-info {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+/* HIGHLIGHT COVER */
+.ig-highlight-circle {
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.ig-highlight-circle img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* REVIEW QUOTE */
+.ig-quote {
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.6;
+  color: #fff;
+}
+
+/* VOTE/POLL */
+.ig-poll-option {
+  padding: 24px 40px;
+  border: 2px solid var(--line);
+  border-radius: 16px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--dark);
+  background: var(--bg);
+}
+
+/* SOCIAL PROOF */
+.ig-stat {
+  text-align: center;
+}
+.ig-stat-number {
+  font-family: var(--font-en);
+  font-size: 72px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.ig-stat-label {
+  font-size: 24px;
+  color: var(--body);
+  margin-top: 8px;
+}
+
+/* STRIP */
+.ig-strip {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 24px 60px;
+  background: rgba(26,26,26,.7);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+}

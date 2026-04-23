@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=750">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .coupon-banner-mo {
+            width: 750px;
+            height: 900px;
+            background: #C9C4A8;
+            position: relative;
+            overflow: hidden;
+            padding: 60px 50px;
+        }
+
+        /* 장식 곡선 */
+        .curve-deco {
+            position: absolute;
+            bottom: 150px;
+            left: -100px;
+            right: -100px;
+            height: 300px;
+            border: 4px solid #D4C87D;
+            border-radius: 50%;
+            border-top: none;
+            opacity: 0.5;
+        }
+
+        /* 상단 텍스트 */
+        .text-section {
+            text-align: center;
+            margin-bottom: 50px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .main-title {
+            font-size: 56px;
+            font-weight: 900;
+            color: #333;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .sub-text {
+            font-size: 16px;
+            color: #666;
+        }
+
+        /* 쿠폰들 */
+        .coupons-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .coupon-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .coupon-ticket {
+            background: #F5C518;
+            padding: 20px 32px;
+            position: relative;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .coupon-ticket.large {
+            min-width: 280px;
+            padding: 24px 40px;
+        }
+
+        .coupon-ticket::before,
+        .coupon-ticket::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #C9C4A8;
+            border-radius: 50%;
+        }
+
+        .coupon-ticket::before {
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .coupon-ticket::after {
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .coupon-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #333;
+            letter-spacing: 2px;
+        }
+
+        .coupon-value {
+            font-size: 42px;
+            font-weight: 900;
+            color: #333;
+            line-height: 1.1;
+        }
+
+        .coupon-ticket.large .coupon-value {
+            font-size: 52px;
+        }
+
+        .coupon-desc {
+            font-size: 14px;
+            color: #333;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="coupon-banner-mo">
+        <!-- 장식 곡선 -->
+        <div class="curve-deco"></div>
+
+        <!-- 상단 텍스트 -->
+        <div class="text-section">
+            <h1 class="main-title">{{MAIN_TITLE_1}}<br>{{MAIN_TITLE_2}}</h1>
+            <p class="sub-text">{{SUB_TEXT}}</p>
+        </div>
+
+        <!-- 쿠폰들 -->
+        <div class="coupons-section">
+            <div class="coupon-row">
+                <div class="coupon-ticket">
+                    <div class="coupon-label">COUPON</div>
+                    <div class="coupon-value">{{COUPON_VALUE_1}}</div>
+                </div>
+                <div class="coupon-ticket">
+                    <div class="coupon-label">COUPON</div>
+                    <div class="coupon-value">{{COUPON_VALUE_2}}</div>
+                    <div class="coupon-desc">{{COUPON_DESC_2}}</div>
+                </div>
+            </div>
+            <div class="coupon-ticket large">
+                <div class="coupon-label">COUPON</div>
+                <div class="coupon-value">{{COUPON_VALUE_3}}</div>
+                <div class="coupon-desc">{{COUPON_DESC_3}}</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

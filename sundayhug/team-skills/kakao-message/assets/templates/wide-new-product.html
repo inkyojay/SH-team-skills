@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=800">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .wide-new-product {
+            width: 800px;
+            height: 600px;
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+        }
+
+        /* 장식 요소 */
+        .deco-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+        .deco-1 { width: 300px; height: 300px; background: #E8D5B7; top: -100px; right: -50px; }
+        .deco-2 { width: 200px; height: 200px; background: #E8D5B7; bottom: -50px; left: 100px; }
+
+        .content-left {
+            flex: 1;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .new-badge {
+            background: linear-gradient(90deg, #D4AF37, #F4E5C2);
+            color: #1a1a2e;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 20px;
+            width: fit-content;
+        }
+
+        .product-name {
+            font-size: 36px;
+            font-weight: 800;
+            color: white;
+            line-height: 1.3;
+            margin-bottom: 16px;
+        }
+
+        .product-desc {
+            font-size: 16px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .price-section {
+            margin-bottom: 24px;
+        }
+
+        .price-original {
+            font-size: 18px;
+            color: rgba(255,255,255,0.5);
+            text-decoration: line-through;
+            margin-right: 12px;
+        }
+
+        .price-sale {
+            font-size: 32px;
+            font-weight: 800;
+            color: #D4AF37;
+        }
+
+        .cta-button {
+            background: linear-gradient(90deg, #D4AF37, #F4E5C2);
+            color: #1a1a2e;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .content-right {
+            width: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .product-image-wrapper {
+            width: 320px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+        }
+    </style>
+</head>
+<body>
+    <div class="wide-new-product">
+        <div class="deco-circle deco-1"></div>
+        <div class="deco-circle deco-2"></div>
+
+        <div class="content-left">
+            <div class="new-badge">NEW ARRIVAL</div>
+            <h1 class="product-name">{{PRODUCT_NAME}}</h1>
+            <p class="product-desc">{{DESCRIPTION}}</p>
+            <div class="price-section">
+                <span class="price-original">{{ORIGINAL_PRICE}}원</span>
+                <span class="price-sale">{{SALE_PRICE}}원</span>
+            </div>
+            <div class="cta-button">{{CTA_TEXT}}</div>
+        </div>
+
+        <div class="content-right">
+            <div class="product-image-wrapper">
+                <img src="{{PRODUCT_IMAGE}}" alt="제품" class="product-image">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

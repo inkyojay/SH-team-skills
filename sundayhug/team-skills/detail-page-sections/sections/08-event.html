@@ -1,0 +1,51 @@
+<!--=============================================================
+  SECTION: Event (프로모션)
+  ORDER: 08 (Review 뒤)
+  REQUIRED: 🔶 선택 — 프로모션 진행 중일 때만
+  BACKGROUND: white
+  PURPOSE: 한정 혜택/사은품으로 구매 긴급성과 부가가치를 전달한다.
+           "지금 안 사면 손해"라는 심리적 트리거.
+
+  DESIGN NOTES:
+  - event-urgency: 상단 빨간 바 (선착순/한정 표시)
+  - event-badge: "EVENT" 라벨
+  - event-gifts: 2x2 사은품 그리드
+  - event-cta: 이벤트 전용 구매 버튼
+
+  DATA REQUIRED:
+  - {{event_urgency_text}} : 긴급성 문구 (예: "선착순 200명 한정 / 소진 시 종료")
+  - {{event_banner_image}} : 이벤트 배너 이미지 URL
+  - {{event_title_html}}   : 이벤트 제목
+  - {{event_desc}}         : 이벤트 설명
+  - {{#event_gifts}}       : 사은품 배열 (2~4개)
+    각 항목: { image, name, condition }
+  - {{event_note}}         : 하단 주의사항
+  - {{purchase_url}}       : 구매 링크
+=============================================================-->
+<div class="sec v">
+  <div class="sec-label tx-center">Special Offer</div>
+  <div class="sec-title tx-center">지금 구매하면 드리는<br>특별한 혜택</div>
+
+  <div class="event v">
+    <div class="event-badge">EVENT</div>
+    <div class="event-urgency">{{event_urgency_text}}</div>
+    <div class="event-img"><img src="{{event_banner_image}}" alt="이벤트 배너"></div>
+    <div class="event-body">
+      <div class="event-title">{{event_title_html}}</div>
+      <div class="event-desc">{{event_desc}}</div>
+      <div class="event-gifts">
+        {{#event_gifts}}
+        <div class="event-gift">
+          <div class="event-gift-img"><img src="{{image}}" alt=""></div>
+          <div class="event-gift-info">
+            <h5>{{name}}</h5>
+            <p>{{condition}}</p>
+          </div>
+        </div>
+        {{/event_gifts}}
+      </div>
+      <div class="event-note">{{event_note}}</div>
+      <a href="{{purchase_url}}" class="event-cta">지금 구매하기</a>
+    </div>
+  </div>
+</div>

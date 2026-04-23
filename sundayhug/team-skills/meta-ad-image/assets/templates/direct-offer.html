@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+  :root {
+    --accent-orange: #f0864a;
+    --text-dark: #2c2520;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1350px;
+    overflow: hidden;
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--accent-orange);
+  }
+
+  .ad-container {
+    width: 1080px;
+    height: 1350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* 상단 오퍼 영역 */
+  .offer-area {
+    padding: 72px 80px 24px;
+  }
+
+  .offer-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 8px 28px;
+    border-radius: 30px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+
+  .offer-big {
+    font-size: 96px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    letter-spacing: -2px;
+  }
+
+  .offer-detail {
+    font-size: 30px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.85);
+    margin-top: 12px;
+  }
+
+  /* 제품 이미지 영역 */
+  .product-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 100px;
+  }
+
+  .product-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+  }
+
+  /* 하단 CTA */
+  .cta-area {
+    padding: 24px 80px 64px;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: #fff;
+    color: var(--accent-orange);
+    font-size: 28px;
+    font-weight: 700;
+    padding: 18px 52px;
+    border-radius: 12px;
+  }
+
+  .brand-name {
+    font-size: 18px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 4px;
+    margin-top: 16px;
+  }
+</style>
+</head>
+<body>
+  <div class="ad-container">
+    <div class="offer-area">
+      <div class="offer-badge">{{BADGE_TEXT}}</div>
+      <div class="offer-big">{{DISCOUNT_RATE}}</div>
+      <div class="offer-detail">{{OFFER_DETAIL}}</div>
+    </div>
+
+    <div class="product-area">
+      <img class="product-image" src="{{IMAGE_PATH}}" alt="product">
+    </div>
+
+    <div class="cta-area">
+      <div class="cta-button">{{CTA_TEXT}}</div>
+      <div class="brand-name">{{BRAND_NAME}}</div>
+    </div>
+  </div>
+</body>
+</html>

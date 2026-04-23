@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=800">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .list-item {
+            width: 800px;
+            height: 400px;
+            background: white;
+            position: relative;
+            overflow: hidden;
+            padding: 30px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .list-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #191919;
+        }
+
+        .view-all {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .items-grid {
+            display: flex;
+            gap: 20px;
+        }
+
+        .item-card {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item-image-wrapper {
+            width: 100%;
+            height: 180px;
+            background: #F5F5F5;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .item-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #FF5A5A;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .item-badge.blue { background: #5A9CFF; }
+        .item-badge.green { background: #00C73C; }
+
+        .item-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #191919;
+            margin-bottom: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .item-price {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .discount {
+            font-size: 14px;
+            font-weight: 800;
+            color: #FF5A5A;
+        }
+
+        .price {
+            font-size: 16px;
+            font-weight: 800;
+            color: #191919;
+        }
+    </style>
+</head>
+<body>
+    <div class="list-item">
+        <div class="header">
+            <h2 class="list-title">{{LIST_TITLE}}</h2>
+            <span class="view-all">전체보기 ></span>
+        </div>
+
+        <div class="items-grid">
+            <div class="item-card">
+                <div class="item-image-wrapper">
+                    <img src="{{ITEM_IMAGE_1}}" alt="상품1" class="item-image">
+                    <span class="item-badge">{{ITEM_BADGE_1}}</span>
+                </div>
+                <div class="item-name">{{ITEM_NAME_1}}</div>
+                <div class="item-price">
+                    <span class="discount">{{ITEM_DISCOUNT_1}}%</span>
+                    <span class="price">{{ITEM_PRICE_1}}원</span>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-image-wrapper">
+                    <img src="{{ITEM_IMAGE_2}}" alt="상품2" class="item-image">
+                    <span class="item-badge blue">{{ITEM_BADGE_2}}</span>
+                </div>
+                <div class="item-name">{{ITEM_NAME_2}}</div>
+                <div class="item-price">
+                    <span class="discount">{{ITEM_DISCOUNT_2}}%</span>
+                    <span class="price">{{ITEM_PRICE_2}}원</span>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-image-wrapper">
+                    <img src="{{ITEM_IMAGE_3}}" alt="상품3" class="item-image">
+                    <span class="item-badge green">{{ITEM_BADGE_3}}</span>
+                </div>
+                <div class="item-name">{{ITEM_NAME_3}}</div>
+                <div class="item-price">
+                    <span class="discount">{{ITEM_DISCOUNT_3}}%</span>
+                    <span class="price">{{ITEM_PRICE_3}}원</span>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-image-wrapper">
+                    <img src="{{ITEM_IMAGE_4}}" alt="상품4" class="item-image">
+                    <span class="item-badge">{{ITEM_BADGE_4}}</span>
+                </div>
+                <div class="item-name">{{ITEM_NAME_4}}</div>
+                <div class="item-price">
+                    <span class="discount">{{ITEM_DISCOUNT_4}}%</span>
+                    <span class="price">{{ITEM_PRICE_4}}원</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

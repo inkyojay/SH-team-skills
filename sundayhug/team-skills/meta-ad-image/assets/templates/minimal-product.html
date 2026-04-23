@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+  :root {
+    --bg-ivory: #faf8f5;
+    --text-dark: #2c2520;
+    --text-mid: #6b5d52;
+    --text-light: #8c7b6e;
+    --border-light: #d5c8b5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1350px;
+    overflow: hidden;
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg-ivory);
+  }
+
+  .ad-container {
+    width: 1080px;
+    height: 1350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* 브랜드명 상단 */
+  .brand-name {
+    position: absolute;
+    top: 72px;
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--text-light);
+    letter-spacing: 6px;
+  }
+
+  /* 제품 이미지 */
+  .product-image-wrap {
+    width: 640px;
+    margin-bottom: 48px;
+  }
+
+  .product-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 16px;
+  }
+
+  /* 제품명 */
+  .product-name {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text-dark);
+    letter-spacing: -0.5px;
+  }
+
+  /* 서브 카피 */
+  .subhead {
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--text-mid);
+    margin-top: 16px;
+  }
+
+  /* 구분선 */
+  .line {
+    width: 56px;
+    height: 2px;
+    background: var(--border-light);
+    margin-top: 40px;
+  }
+
+  /* CTA */
+  .cta {
+    position: absolute;
+    bottom: 72px;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--text-light);
+    letter-spacing: 3px;
+    padding: 12px 28px;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+  }
+</style>
+</head>
+<body>
+  <div class="ad-container">
+    <div class="brand-name">{{BRAND_NAME}}</div>
+
+    <div class="product-image-wrap">
+      <img class="product-image" src="{{IMAGE_PATH}}" alt="product">
+    </div>
+
+    <div class="product-name">{{PRODUCT_NAME}}</div>
+    <div class="subhead">{{SUBHEAD}}</div>
+    <div class="line"></div>
+
+    <div class="cta">{{CTA_TEXT}}</div>
+  </div>
+</body>
+</html>

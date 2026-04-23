@@ -1,0 +1,15 @@
+@import url('../../_global-palettes.css');
+
+/* ============================================
+   네이버 쇼핑라이브 전용: midnight-luxe 프레임 오버라이드
+   ============================================ */
+
+/* midnight-luxe dark mode */
+[data-palette="midnight-luxe"] .nlb-frame{background:#2C2C3A;color:#fff;}
+[data-palette="midnight-luxe"] .nlb-title{color:#fff;}
+[data-palette="midnight-luxe"] .nlb-subtitle{color:rgba(255,255,255,.7);}
+[data-palette="midnight-luxe"] .nlb-price{color:#fff;}
+[data-palette="midnight-luxe"] .nlb-countdown{background:rgba(255,255,255,.1);color:#fff;}
+[data-palette="midnight-luxe"] .nlb-product-name{color:#fff;}
+[data-palette="midnight-luxe"] .nlb-product-price{color:#fff;}
+[data-palette="midnight-luxe"] .nlb-benefit-card{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.15);}

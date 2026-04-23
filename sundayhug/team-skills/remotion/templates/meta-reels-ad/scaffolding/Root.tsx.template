@@ -1,0 +1,79 @@
+import { Composition } from "remotion";
+import { MetaReelsAd } from "./MetaReelsAd";
+import type { AdConfig } from "./types";
+
+// ─── 광고 설정 ───
+const adConfig: AdConfig = {
+  brand: {
+    name: "{{BRAND_NAME}}",
+    color: "{{BRAND_COLOR}}",
+  },
+  rating: {
+    score: "4.9",
+    reviewCount: "227개 리뷰",
+  },
+  transitionDurationFrames: 8,
+  scenes: [
+    {
+      videoSrc: "scene1.mp4",
+      videoStartFrom: 0,
+      durationSeconds: 3,
+      caption: { line1: "후킹 카피", line2: "첫 줄" },
+      narrationSrc: "audio/scene1.mp3",
+      showBrandLogo: true,
+    },
+    {
+      videoSrc: "scene2.mp4",
+      durationSeconds: 3,
+      caption: { line1: "문제 제기", line2: "두 번째 줄" },
+      narrationSrc: "audio/scene2.mp3",
+    },
+    {
+      videoSrc: "scene3.mp4",
+      durationSeconds: 4,
+      caption: { line1: "솔루션", line2: "세 번째 줄" },
+      narrationSrc: "audio/scene3.mp3",
+    },
+    {
+      videoSrc: "scene4.mp4",
+      durationSeconds: 3,
+      caption: { line1: "소재/혜택", line2: "네 번째 줄" },
+      narrationSrc: "audio/scene4.mp3",
+    },
+    {
+      videoSrc: "scene5.mp4",
+      videoStartFrom: 10,
+      durationSeconds: 3,
+      caption: { line1: "CTA 카피", line2: "마지막 줄", emoji: "✨" },
+      narrationSrc: "audio/scene5.mp3",
+      showRatingBadge: true,
+    },
+  ],
+};
+
+// ─── 총 길이 계산 ───
+const totalSeconds = adConfig.scenes.reduce(
+  (sum, s) => sum + s.durationSeconds,
+  0,
+);
+const fps = 30;
+const transitionOverlap =
+  ((adConfig.transitionDurationFrames ?? 8) * (adConfig.scenes.length - 1)) /
+  fps;
+const totalDurationFrames = Math.round(
+  (totalSeconds - transitionOverlap) * fps,
+);
+
+export const RemotionRoot: React.FC = () => {
+  return (
+    <Composition
+      id="{{COMPOSITION_ID}}"
+      component={MetaReelsAd}
+      durationInFrames={totalDurationFrames}
+      fps={fps}
+      width={1080}
+      height={1920}
+      defaultProps={{ config: adConfig }}
+    />
+  );
+};

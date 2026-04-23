@@ -1,0 +1,2333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=700, user-scalable=yes">
+    <title>상세페이지 섹션별 템플릿 가이드 | SUNDAYHUG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #FAF8F5;
+            --warm-white: #FFFFFF;
+            --sand: #E8E2DA;
+            --gold: #C9A227;
+            --gold-light: #E8D5A3;
+            --deep-navy: #1C2632;
+            --charcoal: #2D2D2D;
+            --text-primary: #1A1A1A;
+            --text-secondary: #4A4A4A;
+            --text-muted: #888888;
+            --border: #E5E5E5;
+            --coral: #D4907E;
+            --soft-green: #7A9E7E;
+            --code-bg: #2D2D2D;
+            --code-text: #E6E6E6;
+        }
+
+        html, body {
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, sans-serif;
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-primary);
+            background: var(--warm-white);
+            min-width: 700px;
+        }
+
+        /* ===== 사이드바 스타일 ===== */
+        .template-sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 260px;
+            height: 100vh;
+            background: #1C2632;
+            padding: 20px 0;
+            overflow-y: auto;
+            z-index: 9999;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .template-sidebar .sidebar-header {
+            padding: 20px 25px 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 15px;
+        }
+
+        .template-sidebar .sidebar-title {
+            color: #C9A227;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .template-sidebar .sidebar-subtitle {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.75rem;
+        }
+
+        .template-sidebar h3 {
+            color: #C9A227;
+            font-size: 0.75rem;
+            padding: 15px 25px 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .template-sidebar ul {
+            list-style: none;
+        }
+
+        .template-sidebar li {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .template-sidebar a {
+            display: block;
+            padding: 12px 25px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .template-sidebar a:hover {
+            background: rgba(255,255,255,0.1);
+            color: #C9A227;
+            padding-left: 30px;
+        }
+
+        .template-sidebar .section-num {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: rgba(201, 162, 39, 0.2);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            font-size: 0.7rem;
+            margin-right: 10px;
+            color: #C9A227;
+        }
+
+        .template-sidebar .section-type {
+            display: block;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.4);
+            margin-top: 2px;
+            margin-left: 34px;
+        }
+
+        .main-content-wrapper {
+            margin-left: 260px;
+            padding: 0;
+        }
+
+        /* 사이드바 토글 버튼 */
+        .sidebar-toggle {
+            position: fixed;
+            left: 260px;
+            top: 20px;
+            width: 30px;
+            height: 30px;
+            background: #1C2632;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            color: white;
+            cursor: pointer;
+            z-index: 10000;
+            font-size: 14px;
+        }
+
+        .sidebar-toggle:hover {
+            background: #C9A227;
+        }
+
+        body.sidebar-hidden .template-sidebar {
+            transform: translateX(-260px);
+        }
+
+        body.sidebar-hidden .main-content-wrapper {
+            margin-left: 0;
+        }
+
+        body.sidebar-hidden .sidebar-toggle {
+            left: 0;
+        }
+
+        /* ===== 가이드 헤더 ===== */
+        .guide-header {
+            background: linear-gradient(135deg, #1C2632 0%, #2D3A4A 100%);
+            padding: 80px 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .guide-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .guide-header p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 30px;
+        }
+
+        .guide-header .version-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--gold);
+            color: var(--deep-navy);
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 20px;
+        }
+
+        /* ===== 섹션 공통 ===== */
+        .guide-section {
+            padding: 80px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .guide-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-header {
+            margin-bottom: 40px;
+        }
+
+        .section-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-bottom: 15px;
+        }
+
+        .section-header h2 {
+            font-family: 'Gowun Batang', serif;
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .section-header .section-purpose {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            padding: 15px 20px;
+            background: var(--cream);
+            border-left: 4px solid var(--gold);
+            border-radius: 0 8px 8px 0;
+            margin-top: 15px;
+        }
+
+        /* ===== 기능 태그 ===== */
+        .feature-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .feature-tag {
+            padding: 6px 14px;
+            background: rgba(201, 162, 39, 0.15);
+            color: #8B7420;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 20px;
+        }
+
+        .feature-tag.blue {
+            background: rgba(28, 38, 50, 0.1);
+            color: var(--deep-navy);
+        }
+
+        .feature-tag.coral {
+            background: rgba(212, 144, 126, 0.2);
+            color: #B5604A;
+        }
+
+        /* ===== 코드 블록 ===== */
+        .code-block {
+            background: var(--code-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 25px 0;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .code-header span {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .code-header .copy-btn {
+            padding: 5px 12px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 4px;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .code-header .copy-btn:hover {
+            background: var(--gold);
+            color: var(--deep-navy);
+        }
+
+        .code-content {
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        .code-content pre {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: var(--code-text);
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .code-content .tag { color: #E06C75; }
+        .code-content .attr { color: #D19A66; }
+        .code-content .value { color: #98C379; }
+        .code-content .comment { color: #5C6370; }
+        .code-content .class { color: #61AFEF; }
+
+        /* ===== 커스터마이징 테이블 ===== */
+        .customize-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9rem;
+        }
+
+        .customize-table th,
+        .customize-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .customize-table th {
+            background: var(--cream);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .customize-table td {
+            color: var(--text-secondary);
+        }
+
+        .customize-table code {
+            background: rgba(0,0,0,0.05);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #E06C75;
+        }
+
+        /* ===== 프리뷰 영역 ===== */
+        .preview-box {
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 25px 0;
+            background: var(--cream);
+        }
+
+        .preview-box .preview-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        /* ===== 렌더링 미리보기 영역 ===== */
+        .preview-section {
+            margin: 25px 0;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .preview-section .preview-header {
+            background: linear-gradient(135deg, #f8f6f3 0%, #f0ede8 100%);
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .preview-section .preview-header::before {
+            content: '👁';
+            font-size: 1rem;
+        }
+
+        .preview-section .preview-header span {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .preview-section .preview-content {
+            padding: 0;
+            background: #fff;
+            overflow: hidden;
+        }
+
+        .preview-section .preview-content.scaled {
+            transform-origin: top left;
+            transform: scale(0.65);
+            width: 153.8%;
+            margin-bottom: -35%;
+        }
+
+        .preview-section .preview-content.mini-scaled {
+            transform-origin: top left;
+            transform: scale(0.5);
+            width: 200%;
+            margin-bottom: -50%;
+        }
+
+        /* ===== 템플릿 미리보기용 스타일 (template_v4 복제) ===== */
+        .preview-content .serif { font-family: 'Gowun Batang', 'Playfair Display', serif; letter-spacing: -0.02em; }
+
+        /* Hero Preview */
+        .preview-content .hero-section-preview {
+            background-color: #E8DFD5;
+            background-image: linear-gradient(135deg, #E8DFD5 0%, #D4C8BA 100%);
+            min-height: 400px;
+            padding: 40px 0 50px 0;
+            text-align: center;
+            position: relative;
+        }
+        .preview-content .hero-logo-preview { margin-bottom: 25px; }
+        .preview-content .logo-placeholder-preview {
+            width: 130px; height: 40px;
+            background: linear-gradient(135deg, #f5f0e8 0%, #ebe5db 100%);
+            border: 1px dashed #C4A77D; border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto;
+            font-family: 'Gowun Batang', serif; font-size: 0.85rem; font-weight: 600;
+            color: #8B7355; letter-spacing: 2px;
+        }
+        .preview-content .sub-copy-preview {
+            font-size: 0.95rem; color: #5C4A3D; font-weight: 500;
+            line-height: 1.5; margin-top: 20px; margin-bottom: 15px;
+        }
+        .preview-content .main-copy-preview {
+            font-family: 'Noto Sans KR', sans-serif; font-size: 1.5rem; font-weight: 700;
+            color: #5C4A3D; line-height: 1.4; margin-bottom: 30px;
+        }
+        .preview-content .hero-points-preview {
+            display: flex; justify-content: center; gap: 12px;
+            max-width: 550px; margin: 0 auto; padding: 0 15px;
+        }
+        .preview-content .hero-point-preview {
+            text-align: center; flex: 1; max-width: 160px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .preview-content .point-icon-preview {
+            margin-bottom: 10px; height: 50px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem;
+        }
+        .preview-content .point-text-preview {
+            background: rgba(255, 255, 255, 0.65);
+            border-radius: 12px; backdrop-filter: blur(8px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            padding: 14px 16px; width: 100%; min-height: 80px;
+        }
+        .preview-content .point-text-preview .num {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.85rem; font-weight: 600; color: #5C4A3D;
+            margin-bottom: 8px; letter-spacing: 1px;
+        }
+        .preview-content .point-text-preview p {
+            font-size: 0.85rem; color: var(--text-primary);
+            line-height: 1.4; font-weight: 500;
+        }
+
+        /* Review Preview */
+        .preview-content .review-preview {
+            background: var(--cream); padding: 40px 20px;
+        }
+        .preview-content .section-label-preview {
+            font-size: 0.9rem; letter-spacing: 3px; color: var(--gold);
+            text-transform: uppercase; font-weight: 600;
+            margin-bottom: 10px; text-align: center;
+        }
+        .preview-content .section-title-preview {
+            font-family: 'Gowun Batang', serif; font-size: 1.5rem; font-weight: 500;
+            color: var(--text-primary); margin-bottom: 20px; text-align: center;
+        }
+        .preview-content .highlight-text-preview {
+            color: var(--gold); font-weight: 700; position: relative;
+        }
+        .preview-content .highlight-text-preview::after {
+            content: ''; position: absolute; left: 0; bottom: 2px;
+            width: 100%; height: 6px; background: rgba(201, 162, 39, 0.25); z-index: -1;
+        }
+        .preview-content .review-cards-preview {
+            display: flex; flex-direction: column; gap: 15px;
+            max-width: 500px; margin: 0 auto;
+        }
+        .preview-content .review-card-preview {
+            background: var(--warm-white); padding: 20px 25px;
+            border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex; align-items: center; gap: 18px;
+        }
+        .preview-content .review-image-preview {
+            width: 80px; height: 80px; min-width: 80px;
+            background: #F5F0E8; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+        }
+        .preview-content .review-card-content-preview { flex: 1; }
+        .preview-content .stars-preview {
+            font-size: 1rem; color: var(--gold); margin-bottom: 8px;
+        }
+        .preview-content .review-card-preview p {
+            font-size: 1rem; color: var(--text-secondary);
+            line-height: 1.5; margin-bottom: 6px; font-weight: 500;
+        }
+        .preview-content .reviewer-preview {
+            font-size: 0.85rem !important; color: var(--text-muted) !important;
+        }
+        .preview-content .review-highlight-bg-preview {
+            background: linear-gradient(180deg, transparent 50%, rgba(201, 162, 39, 0.3) 50%);
+            padding: 0 2px; font-weight: 600; color: var(--text-primary);
+        }
+
+        /* Guidebook Preview */
+        .preview-content .guidebook-preview {
+            max-width: 500px; margin: 30px auto;
+            background: #FFFDF9; border: 1px solid #D5CEC2;
+            border-radius: 2px 8px 8px 2px;
+            box-shadow: -4px 0 8px rgba(0,0,0,0.03), 0 15px 40px rgba(0,0,0,0.1);
+            position: relative; overflow: hidden;
+        }
+        .preview-content .guidebook-preview::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 25px;
+            background: linear-gradient(90deg, #E8E0D5 0%, #F5F0E8 100%);
+            border-right: 1px solid #D5CEC2;
+        }
+        .preview-content .guidebook-header-preview {
+            background: linear-gradient(135deg, #5C4A3D 0%, #4A3B30 100%);
+            color: white; text-align: center; padding: 25px 20px;
+            margin-left: 25px; border-bottom: 2px solid #3D2E24;
+        }
+        .preview-content .guidebook-header-preview h3 {
+            font-family: 'Gowun Batang', serif; font-size: 1.3rem;
+            font-weight: 700; letter-spacing: 2px; margin-bottom: 5px;
+        }
+        .preview-content .guidebook-header-preview p {
+            font-size: 1rem; opacity: 0.9;
+        }
+        .preview-content .guide-page-preview {
+            margin-left: 25px; padding: 25px 20px;
+            border-bottom: 1px dashed #E5DDD0;
+            display: flex; gap: 20px; align-items: flex-start;
+        }
+        .preview-content .guide-page-preview.featured {
+            background: linear-gradient(135deg, #FFFBF0 0%, #FFF8E8 100%);
+            border: 2px solid var(--gold); border-radius: 10px;
+            position: relative;
+        }
+        .preview-content .guide-page-preview.featured::after {
+            content: '추천 ★'; position: absolute; bottom: 10px; right: 10px;
+            background: var(--gold); color: white;
+            font-size: 0.65rem; font-weight: 700;
+            padding: 4px 10px; border-radius: 15px;
+        }
+        .preview-content .guide-left-preview {
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+        }
+        .preview-content .guide-step-preview {
+            font-size: 1rem; font-weight: 800; color: #5C4A3D;
+            letter-spacing: 1px; text-align: center;
+        }
+        .preview-content .guide-page-preview.featured .guide-step-preview { color: var(--gold); }
+        .preview-content .guide-image-preview {
+            width: 100px; height: 110px; background: #F5F0E8;
+            border-radius: 10px; display: flex;
+            align-items: center; justify-content: center;
+            font-size: 2rem; border: 1px solid #E8E2DA;
+        }
+        .preview-content .guide-content-preview { flex: 1; }
+        .preview-content .guide-title-row-preview {
+            display: flex; align-items: center; gap: 10px;
+            margin-bottom: 8px; flex-wrap: wrap;
+        }
+        .preview-content .guide-title-preview {
+            font-size: 1.2rem; font-weight: 700; color: var(--text-primary);
+        }
+        .preview-content .guide-desc-preview {
+            font-size: 0.75rem; color: #fff; background: #5C4A3D;
+            border-radius: 15px; padding: 5px 12px; white-space: nowrap;
+        }
+        .preview-content .guide-detail-preview {
+            font-family: 'Gowun Batang', serif; font-size: 0.9rem;
+            color: var(--text-secondary); line-height: 1.6;
+            padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.06);
+        }
+        .preview-content .guide-tags-preview {
+            font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;
+        }
+
+        /* Brand Story Preview */
+        .preview-content .brand-story-preview {
+            background: linear-gradient(180deg, #1C2632 0%, #0D1117 100%);
+            padding: 50px 30px; text-align: center; color: white;
+            position: relative; overflow: hidden;
+        }
+        .preview-content .star-dot-preview {
+            position: absolute; width: 3px; height: 3px;
+            background: rgba(255, 255, 255, 0.6); border-radius: 50%;
+        }
+        .preview-content .brand-story-preview .section-label-preview { color: rgba(255,255,255,0.6); }
+        .preview-content .brand-story-preview .section-title-preview { color: white; }
+        .preview-content .brand-intro-preview {
+            display: inline-block; font-size: 1rem;
+            color: var(--gold); letter-spacing: 3px;
+            border-bottom: 1px solid var(--gold); padding-bottom: 4px;
+        }
+        .preview-content .brand-text-preview {
+            font-family: 'Gowun Batang', serif; font-size: 1rem;
+            color: rgba(255, 255, 255, 0.85); line-height: 1.8;
+            max-width: 450px; margin: 25px auto 0;
+        }
+        .preview-content .brand-ending-preview {
+            font-family: 'Gowun Batang', serif; font-size: 1.1rem;
+            color: var(--gold); margin-top: 30px; font-weight: 500;
+        }
+
+        /* Material Preview */
+        .preview-content .material-preview {
+            padding: 40px 20px; background: #fff;
+        }
+        .preview-content .material-table-preview {
+            width: 100%; border-collapse: collapse; font-size: 0.85rem;
+        }
+        .preview-content .material-table-preview th,
+        .preview-content .material-table-preview td {
+            padding: 12px 15px; text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .preview-content .material-table-preview th {
+            background: var(--cream); font-weight: 600;
+        }
+        .preview-content .season-tag-preview {
+            display: inline-block; padding: 3px 10px;
+            border-radius: 12px; font-size: 0.7rem; font-weight: 600;
+            margin-top: 5px;
+        }
+        .preview-content .season-tag-preview.gold {
+            background: rgba(201, 162, 39, 0.15); color: #8B7420;
+        }
+        .preview-content .season-tag-preview.coral {
+            background: rgba(212, 144, 126, 0.2); color: #B5604A;
+        }
+
+        /* Check Point Preview */
+        .preview-content .checkpoint-preview {
+            padding: 40px 20px; background: #fff;
+        }
+        .preview-content .checkpoint-num-preview {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem; font-weight: 600;
+            color: var(--gold); letter-spacing: 2px;
+            text-align: center; margin-bottom: 10px;
+        }
+        .preview-content .detail-item-preview {
+            display: flex; gap: 25px; align-items: center;
+            margin: 20px 0;
+        }
+        .preview-content .detail-item-preview.reverse { flex-direction: row-reverse; }
+        .preview-content .detail-image-preview {
+            width: 180px; height: 140px; min-width: 180px;
+            background: var(--cream); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem;
+        }
+        .preview-content .detail-content-preview { flex: 1; }
+        .preview-content .detail-num-preview {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem; font-weight: 700;
+            color: rgba(201, 162, 39, 0.3); margin-bottom: 8px;
+        }
+        .preview-content .detail-content-preview h4 {
+            font-size: 1.1rem; font-weight: 600;
+            color: var(--text-primary); margin-bottom: 8px;
+        }
+        .preview-content .detail-content-preview p {
+            font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;
+        }
+
+        /* Care Guide Preview */
+        .preview-content .care-preview { padding: 40px 20px; background: var(--cream); }
+        .preview-content .care-grid-preview {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 15px; max-width: 500px; margin: 0 auto;
+        }
+        .preview-content .care-item-preview {
+            background: white; border-radius: 12px;
+            padding: 20px 15px; text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .preview-content .care-icon-preview {
+            width: 45px; height: 45px; margin: 0 auto 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+        }
+        .preview-content .care-item-preview p {
+            font-size: 0.75rem; color: var(--text-secondary); line-height: 1.4;
+        }
+
+        /* Footer CTA Preview */
+        .preview-content .footer-cta-preview {
+            background: linear-gradient(180deg, #1C2632 0%, #0D1117 100%);
+            padding: 50px 20px; text-align: center; color: white;
+        }
+        .preview-content .footer-cta-preview h2 {
+            font-family: 'Gowun Batang', serif; font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        .preview-content .footer-cta-preview > p {
+            font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-bottom: 30px;
+        }
+        .preview-content .other-products-preview {
+            display: flex; justify-content: center; gap: 20px;
+        }
+        .preview-content .product-link-preview {
+            text-decoration: none; color: white;
+        }
+        .preview-content .product-thumb-preview {
+            width: 100px; height: 100px; background: rgba(255,255,255,0.1);
+            border-radius: 12px; margin-bottom: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem;
+        }
+        .preview-content .product-link-preview p {
+            font-size: 0.8rem; color: rgba(255,255,255,0.8);
+        }
+
+        /* ===== 컬러 팔레트 ===== */
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .color-swatch-item {
+            text-align: center;
+        }
+
+        .color-swatch-box {
+            width: 100%;
+            height: 60px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .color-swatch-item .color-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .color-swatch-item .color-code {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* ===== 팁 박스 ===== */
+        .tip-box {
+            padding: 20px 25px;
+            background: linear-gradient(135deg, #FFF9E8 0%, #FFFBF0 100%);
+            border: 1px solid #E8D5A3;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+
+        .tip-box h4 {
+            color: var(--gold);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tip-box p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ===== 레이아웃 다이어그램 ===== */
+        .layout-diagram {
+            background: var(--cream);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 25px 0;
+        }
+
+        .layout-diagram .diagram-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .layout-box {
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .layout-box.highlight {
+            border-color: var(--gold);
+            background: rgba(201, 162, 39, 0.1);
+        }
+
+        .layout-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .layout-row .layout-box {
+            flex: 1;
+        }
+
+        /* ===== 서브섹션 ===== */
+        .subsection {
+            margin: 40px 0;
+            padding-top: 30px;
+            border-top: 1px dashed var(--border);
+        }
+
+        .subsection:first-of-type {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .subsection h3 {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .subsection h3::before {
+            content: '▸';
+            color: var(--gold);
+        }
+
+        /* ===== 조합 가이드 ===== */
+        .combination-guide {
+            background: var(--deep-navy);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 25px 0;
+            color: white;
+        }
+
+        .combination-guide h4 {
+            color: var(--gold);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .combination-flow {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .combination-item {
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        .combination-arrow {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        /* 푸터 */
+        .guide-footer {
+            background: var(--cream);
+            padding: 40px;
+            text-align: center;
+        }
+
+        .guide-footer p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== 사이드바 ===== -->
+    <nav class="template-sidebar">
+        <div class="sidebar-header">
+            <p class="sidebar-title">TEMPLATE GUIDE</p>
+            <p class="sidebar-subtitle">상세페이지 섹션별 가이드 v4</p>
+        </div>
+
+        <h3>Basic</h3>
+        <ul>
+            <li><a href="#intro"><span class="section-num">0</span>시작하기</a></li>
+            <li><a href="#colors"><span class="section-num">C</span>컬러 팔레트</a></li>
+        </ul>
+
+        <h3>Sections</h3>
+        <ul>
+            <li>
+                <a href="#hero">
+                    <span class="section-num">1</span>Hero 메인
+                    <span class="section-type">글래스모피즘 포인트</span>
+                </a>
+            </li>
+            <li>
+                <a href="#review">
+                    <span class="section-num">2</span>Review 리뷰
+                    <span class="section-type">세로형 카드</span>
+                </a>
+            </li>
+            <li>
+                <a href="#when">
+                    <span class="section-num">3</span>When 사용시기
+                    <span class="section-type">가이드북 + 메모</span>
+                </a>
+            </li>
+            <li>
+                <a href="#brand">
+                    <span class="section-num">4</span>Brand 브랜드
+                    <span class="section-type">밤하늘 테마</span>
+                </a>
+            </li>
+            <li>
+                <a href="#material">
+                    <span class="section-num">5</span>Material 소재
+                    <span class="section-type">테이블 + 노트북</span>
+                </a>
+            </li>
+            <li>
+                <a href="#checkpoint">
+                    <span class="section-num">6</span>Check Point
+                    <span class="section-type">4그룹 레이아웃</span>
+                </a>
+            </li>
+            <li>
+                <a href="#dev">
+                    <span class="section-num">7</span>Development
+                    <span class="section-type">개발 스토리</span>
+                </a>
+            </li>
+            <li>
+                <a href="#color">
+                    <span class="section-num">8</span>Color 컬러
+                    <span class="section-type">컬러 그리드</span>
+                </a>
+            </li>
+            <li>
+                <a href="#size">
+                    <span class="section-num">9</span>Size 사이즈
+                    <span class="section-type">사이즈 카드</span>
+                </a>
+            </li>
+            <li>
+                <a href="#howto">
+                    <span class="section-num">10</span>How to 착용법
+                    <span class="section-type">스텝 가이드</span>
+                </a>
+            </li>
+            <li>
+                <a href="#sizeguide">
+                    <span class="section-num">11</span>Size Guide
+                    <span class="section-type">사이즈표</span>
+                </a>
+            </li>
+            <li>
+                <a href="#info">
+                    <span class="section-num">12</span>Product Info
+                    <span class="section-type">제품 정보</span>
+                </a>
+            </li>
+            <li>
+                <a href="#care">
+                    <span class="section-num">13</span>Care 관리
+                    <span class="section-type">아이콘 가이드</span>
+                </a>
+            </li>
+            <li>
+                <a href="#footer">
+                    <span class="section-num">14</span>Footer CTA
+                    <span class="section-type">교차 판매</span>
+                </a>
+            </li>
+        </ul>
+
+        <h3>Guide</h3>
+        <ul>
+            <li><a href="#combination">섹션 조합 가이드</a></li>
+        </ul>
+    </nav>
+
+    <button class="sidebar-toggle" onclick="document.body.classList.toggle('sidebar-hidden')">◀</button>
+
+    <!-- ===== 메인 콘텐츠 ===== -->
+    <div class="main-content-wrapper">
+
+        <!-- 가이드 헤더 -->
+        <header class="guide-header">
+            <h1>TEMPLATE SECTIONS GUIDE</h1>
+            <p>썬데이허그 상세페이지 섹션별 템플릿 가이드</p>
+            <span class="version-badge">Version 4.0</span>
+        </header>
+
+        <!-- ==================== 시작하기 ==================== -->
+        <section class="guide-section" id="intro">
+            <div class="section-header">
+                <span class="section-number">0</span>
+                <h2>시작하기</h2>
+                <p class="section-purpose">이 가이드는 상세페이지 제작 시 필요한 섹션별 HTML 템플릿과 사용법을 정리한 문서입니다. 각 섹션을 복사하여 필요에 맞게 커스터마이징하세요.</p>
+            </div>
+
+            <div class="subsection">
+                <h3>파일 구조</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>폴더 구조</span>
+                    </div>
+                    <div class="code-content">
+<pre>/template/
+├── template_guide_v1.html        <span class="comment"># 전체 템플릿 (v4 기준)</span>
+├── TEMPLATE_SECTIONS_GUIDE.html  <span class="comment"># 이 가이드 문서</span>
+├── TEMPLATE_SECTIONS_GUIDE.md    <span class="comment"># 마크다운 가이드</span>
+└── assets/                       <span class="comment"># 이미지 폴더</span>
+    ├── hero_baby.png
+    └── checkpoint_baby.png</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>공통 헤더 구조</h3>
+                <p>모든 섹션에서 공통으로 사용되는 헤더 구조입니다.</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>HTML</span>
+                        <button class="copy-btn">복사</button>
+                    </div>
+                    <div class="code-content">
+<pre><span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"section-label"</span><span class="tag">&gt;</span>SECTION LABEL<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;h2</span> <span class="attr">class=</span><span class="value">"section-title"</span><span class="tag">&gt;</span>섹션 제목<span class="tag">&lt;/h2&gt;</span>
+<span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"section-desc"</span><span class="tag">&gt;</span>섹션 설명 텍스트<span class="tag">&lt;/p&gt;</span></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 컬러 팔레트 ==================== -->
+        <section class="guide-section" id="colors">
+            <div class="section-header">
+                <span class="section-number">C</span>
+                <h2>컬러 팔레트</h2>
+                <p class="section-purpose">브랜드 컬러 시스템입니다. CSS 변수로 정의되어 있어 일관된 디자인을 유지할 수 있습니다.</p>
+            </div>
+
+            <div class="color-palette">
+                <div class="color-swatch-item">
+                    <div class="color-swatch-box" style="background: #FAF8F5;"></div>
+                    <p class="color-name">Cream</p>
+                    <p class="color-code">#FAF8F5</p>
+                </div>
+                <div class="color-swatch-item">
+                    <div class="color-swatch-box" style="background: #C9A227;"></div>
+                    <p class="color-name">Gold</p>
+                    <p class="color-code">#C9A227</p>
+                </div>
+                <div class="color-swatch-item">
+                    <div class="color-swatch-box" style="background: #1C2632;"></div>
+                    <p class="color-name">Deep Navy</p>
+                    <p class="color-code">#1C2632</p>
+                </div>
+                <div class="color-swatch-item">
+                    <div class="color-swatch-box" style="background: #E8E2DA;"></div>
+                    <p class="color-name">Sand</p>
+                    <p class="color-code">#E8E2DA</p>
+                </div>
+                <div class="color-swatch-item">
+                    <div class="color-swatch-box" style="background: #1A1A1A;"></div>
+                    <p class="color-name">Text Primary</p>
+                    <p class="color-code">#1A1A1A</p>
+                </div>
+                <div class="color-swatch-item">
+                    <div class="color-swatch-box" style="background: #4A4A4A;"></div>
+                    <p class="color-name">Text Secondary</p>
+                    <p class="color-code">#4A4A4A</p>
+                </div>
+                <div class="color-swatch-item">
+                    <div class="color-swatch-box" style="background: #D4907E;"></div>
+                    <p class="color-name">Coral</p>
+                    <p class="color-code">#D4907E</p>
+                </div>
+                <div class="color-swatch-item">
+                    <div class="color-swatch-box" style="background: #7A9E7E;"></div>
+                    <p class="color-name">Soft Green</p>
+                    <p class="color-code">#7A9E7E</p>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>CSS 변수</span>
+                    <button class="copy-btn">복사</button>
+                </div>
+                <div class="code-content">
+<pre><span class="class">:root</span> {
+    <span class="attr">--cream:</span> <span class="value">#FAF8F5</span>;           <span class="comment">/* 배경용 크림색 */</span>
+    <span class="attr">--warm-white:</span> <span class="value">#FFFFFF</span>;      <span class="comment">/* 기본 흰색 */</span>
+    <span class="attr">--sand:</span> <span class="value">#E8E2DA</span>;            <span class="comment">/* 모래색 */</span>
+    <span class="attr">--gold:</span> <span class="value">#C9A227</span>;            <span class="comment">/* 포인트 골드 */</span>
+    <span class="attr">--deep-navy:</span> <span class="value">#1C2632</span>;       <span class="comment">/* 다크 배경 */</span>
+    <span class="attr">--text-primary:</span> <span class="value">#1A1A1A</span>;   <span class="comment">/* 본문 기본 */</span>
+    <span class="attr">--text-secondary:</span> <span class="value">#4A4A4A</span>; <span class="comment">/* 본문 보조 */</span>
+    <span class="attr">--text-muted:</span> <span class="value">#888888</span>;      <span class="comment">/* 흐린 텍스트 */</span>
+    <span class="attr">--coral:</span> <span class="value">#D4907E</span>;           <span class="comment">/* 여름용 태그 */</span>
+    <span class="attr">--soft-green:</span> <span class="value">#7A9E7E</span>;     <span class="comment">/* 그린 */</span>
+}</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 1: Hero ==================== -->
+        <section class="guide-section" id="hero">
+            <div class="section-header">
+                <span class="section-number">1</span>
+                <h2>Hero 메인 섹션</h2>
+                <p class="section-purpose">상세페이지 최상단 메인 비주얼 영역입니다. 브랜드 로고, 제품명, 핵심 포인트 3개를 노출합니다.</p>
+            </div>
+
+            <div class="feature-tags">
+                <span class="feature-tag">배경 이미지</span>
+                <span class="feature-tag">글래스모피즘</span>
+                <span class="feature-tag">포인트 카드 3개</span>
+            </div>
+
+            <div class="subsection">
+                <h3>레이아웃 구조</h3>
+                <div class="layout-diagram">
+                    <p class="diagram-title">Hero Section Layout</p>
+                    <div class="layout-box">브랜드 로고</div>
+                    <div class="layout-box">서브 카피 (2줄)</div>
+                    <div class="layout-box highlight">메인 카피 (제품명)</div>
+                    <div class="layout-box" style="min-height: 200px;">배경 이미지 영역<br>(hero_baby.png)</div>
+                    <div class="layout-row">
+                        <div class="layout-box">Point 1</div>
+                        <div class="layout-box">Point 2</div>
+                        <div class="layout-box">Point 3</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>HTML 템플릿</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>HTML</span>
+                        <button class="copy-btn">복사</button>
+                    </div>
+                    <div class="code-content">
+<pre><span class="tag">&lt;section</span> <span class="attr">class=</span><span class="value">"hero-section"</span><span class="tag">&gt;</span>
+    <span class="comment">&lt;!-- 브랜드 로고 --&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"hero-logo"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"logo-placeholder"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;span&gt;</span>BRAND_NAME<span class="tag">&lt;/span&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+
+    <span class="comment">&lt;!-- 서브 카피 --&gt;</span>
+    <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"sub-copy"</span><span class="tag">&gt;</span>
+        서브 카피 라인 1<span class="tag">&lt;br&gt;</span>
+        서브 카피 라인 2
+    <span class="tag">&lt;/p&gt;</span>
+
+    <span class="comment">&lt;!-- 메인 카피 --&gt;</span>
+    <span class="tag">&lt;h2</span> <span class="attr">class=</span><span class="value">"main-copy"</span><span class="tag">&gt;</span>제품 메인 타이틀<span class="tag">&lt;/h2&gt;</span>
+
+    <span class="comment">&lt;!-- 포인트 카드 영역 --&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"hero-points-wrapper"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"hero-points-box"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"hero-points-title"</span><span class="tag">&gt;</span>Different Point<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"hero-points"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"hero-point"</span><span class="tag">&gt;</span>
+                    <span class="tag">&lt;span</span> <span class="attr">class=</span><span class="value">"point-icon"</span><span class="tag">&gt;</span>
+                        <span class="tag">&lt;img</span> <span class="attr">src=</span><span class="value">"icon1.png"</span> <span class="attr">alt=</span><span class="value">"아이콘"</span><span class="tag">&gt;</span>
+                    <span class="tag">&lt;/span&gt;</span>
+                    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"point-text"</span><span class="tag">&gt;</span>
+                        <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"num"</span><span class="tag">&gt;</span>✦ point 1<span class="tag">&lt;/p&gt;</span>
+                        <span class="tag">&lt;p&gt;</span>포인트 설명<span class="tag">&lt;br&gt;</span>두 줄로<span class="tag">&lt;/p&gt;</span>
+                    <span class="tag">&lt;/div&gt;</span>
+                <span class="tag">&lt;/div&gt;</span>
+                <span class="comment">&lt;!-- point 2, 3 반복 --&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/section&gt;</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>커스터마이징 포인트</h3>
+                <table class="customize-table">
+                    <tr>
+                        <th>항목</th>
+                        <th>클래스/속성</th>
+                        <th>설명</th>
+                    </tr>
+                    <tr>
+                        <td>배경 이미지</td>
+                        <td><code>.hero-section</code></td>
+                        <td>CSS에서 <code>background-image: url('파일명.png')</code></td>
+                    </tr>
+                    <tr>
+                        <td>배경 색상</td>
+                        <td><code>.hero-section</code></td>
+                        <td><code>background-color: #E8DFD5</code></td>
+                    </tr>
+                    <tr>
+                        <td>포인트 개수</td>
+                        <td><code>.hero-points</code></td>
+                        <td>2~4개 조절 가능</td>
+                    </tr>
+                    <tr>
+                        <td>아이콘 크기</td>
+                        <td><code>.point-icon img</code></td>
+                        <td>60x60px 권장</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="tip-box">
+                <h4>💡 Tip</h4>
+                <p>배경 이미지가 없을 경우 <code>background-color</code>만 설정하면 됩니다. 포인트 카드 위치는 <code>.hero-points-wrapper</code>의 <code>padding-top</code>으로 조절합니다.</p>
+            </div>
+
+            <!-- 미리보기 -->
+            <div class="preview-section">
+                <div class="preview-header"><span>미리보기 (Preview)</span></div>
+                <div class="preview-content">
+                    <div class="hero-section-preview">
+                        <div class="hero-logo-preview">
+                            <div class="logo-placeholder-preview">BRAND</div>
+                        </div>
+                        <p class="sub-copy-preview">아이의 편안한 잠을 위한<br>프리미엄 슬립웨어</p>
+                        <h2 class="main-copy-preview">꿀잠 슬리핑백</h2>
+                        <div class="hero-points-preview">
+                            <div class="hero-point-preview">
+                                <span class="point-icon-preview">🌙</span>
+                                <div class="point-text-preview">
+                                    <p class="num">✦ point 1</p>
+                                    <p>숙면을 위한<br>최적의 온도</p>
+                                </div>
+                            </div>
+                            <div class="hero-point-preview">
+                                <span class="point-icon-preview">🍃</span>
+                                <div class="point-text-preview">
+                                    <p class="num">✦ point 2</p>
+                                    <p>자연 유래<br>친환경 소재</p>
+                                </div>
+                            </div>
+                            <div class="hero-point-preview">
+                                <span class="point-icon-preview">👶</span>
+                                <div class="point-text-preview">
+                                    <p class="num">✦ point 3</p>
+                                    <p>안전한<br>뒤집기 디자인</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 2: Review ==================== -->
+        <section class="guide-section" id="review">
+            <div class="section-header">
+                <span class="section-number">2</span>
+                <h2>Review 리뷰 섹션</h2>
+                <p class="section-purpose">고객 리뷰/후기 하이라이트 영역입니다. 신뢰도 및 구매 전환율 향상에 효과적입니다.</p>
+            </div>
+
+            <div class="feature-tags">
+                <span class="feature-tag">세로형 카드</span>
+                <span class="feature-tag">원형 이미지</span>
+                <span class="feature-tag">하이라이트 텍스트</span>
+            </div>
+
+            <div class="subsection">
+                <h3>레이아웃 구조</h3>
+                <div class="layout-diagram">
+                    <p class="diagram-title">Review Card Layout</p>
+                    <div class="layout-row">
+                        <div class="layout-box" style="width: 120px; min-width: 120px; border-radius: 50%;">원형<br>이미지</div>
+                        <div class="layout-box" style="flex: 1; text-align: left;">
+                            ★★★★★ 별점<br>
+                            <strong>"핵심 한줄 요약"</strong><br>
+                            작성자 · 정보<br>
+                            <span style="color: #888;">상세 후기 내용...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>HTML 템플릿</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>HTML</span>
+                        <button class="copy-btn">복사</button>
+                    </div>
+                    <div class="code-content">
+<pre><span class="tag">&lt;section</span> <span class="attr">class=</span><span class="value">"review-highlight"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"section-label"</span><span class="tag">&gt;</span>Real Review<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;h2</span> <span class="attr">class=</span><span class="value">"section-title"</span><span class="tag">&gt;</span>
+        고객님들의 <span class="tag">&lt;span</span> <span class="attr">class=</span><span class="value">"highlight-text"</span><span class="tag">&gt;</span>핵심키워드<span class="tag">&lt;/span&gt;</span> 후기
+    <span class="tag">&lt;/h2&gt;</span>
+    <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"section-desc"</span><span class="tag">&gt;</span>설명 텍스트<span class="tag">&lt;/p&gt;</span>
+
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"review-cards"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"review-card"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"review-image"</span><span class="tag">&gt;</span>리뷰 이미지<span class="tag">&lt;/div&gt;</span>
+            <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"review-card-content"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"stars"</span><span class="tag">&gt;</span>★★★★★<span class="tag">&lt;/p&gt;</span>
+                <span class="tag">&lt;p&gt;</span>"<span class="tag">&lt;span</span> <span class="attr">class=</span><span class="value">"review-highlight-bg"</span><span class="tag">&gt;</span>강조 키워드<span class="tag">&lt;/span&gt;</span> 한줄 요약!"<span class="tag">&lt;/p&gt;</span>
+                <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"reviewer"</span><span class="tag">&gt;</span>김** · 6개월 아기<span class="tag">&lt;/p&gt;</span>
+                <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"review-detail"</span><span class="tag">&gt;</span>상세 후기 내용...<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="comment">&lt;!-- 카드 반복 (권장 3개) --&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/section&gt;</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>강조 스타일</h3>
+                <table class="customize-table">
+                    <tr>
+                        <th>클래스</th>
+                        <th>효과</th>
+                        <th>용도</th>
+                    </tr>
+                    <tr>
+                        <td><code>.highlight-text</code></td>
+                        <td>골드 + 밑줄 하이라이트</td>
+                        <td>섹션 제목 내 키워드</td>
+                    </tr>
+                    <tr>
+                        <td><code>.review-highlight-bg</code></td>
+                        <td>노란색 형광펜 효과</td>
+                        <td>리뷰 내 핵심 문구</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 미리보기 -->
+            <div class="preview-section">
+                <div class="preview-header"><span>미리보기 (Preview)</span></div>
+                <div class="preview-content">
+                    <div class="review-preview">
+                        <p class="section-label-preview">Real Review</p>
+                        <h2 class="section-title-preview">고객님들의 <span class="highlight-text-preview">꿀잠</span> 후기</h2>
+                        <div class="review-cards-preview">
+                            <div class="review-card-preview">
+                                <div class="review-image-preview">👶</div>
+                                <div class="review-card-content-preview">
+                                    <p class="stars-preview">★★★★★</p>
+                                    <p>"<span class="review-highlight-bg-preview">진짜 꿀잠</span> 자요!"</p>
+                                    <p class="reviewer-preview">김** · 6개월 아기</p>
+                                </div>
+                            </div>
+                            <div class="review-card-preview">
+                                <div class="review-image-preview">😴</div>
+                                <div class="review-card-content-preview">
+                                    <p class="stars-preview">★★★★★</p>
+                                    <p>"밤새 <span class="review-highlight-bg-preview">뒤집어도 안심</span>돼요"</p>
+                                    <p class="reviewer-preview">이** · 8개월 아기</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 3: When ==================== -->
+        <section class="guide-section" id="when">
+            <div class="section-header">
+                <span class="section-number">3</span>
+                <h2>When 사용시기 섹션</h2>
+                <p class="section-purpose">제품 사용 시기/단계 가이드입니다. 성장 단계별 제품을 추천하고 현재 제품을 강조합니다.</p>
+            </div>
+
+            <div class="feature-tags">
+                <span class="feature-tag">가이드북 스타일</span>
+                <span class="feature-tag">STEP 레이아웃</span>
+                <span class="feature-tag">추천 뱃지</span>
+                <span class="feature-tag">메모지 주의사항</span>
+            </div>
+
+            <div class="subsection">
+                <h3>레이아웃 구조</h3>
+                <div class="layout-diagram">
+                    <p class="diagram-title">Guidebook Layout</p>
+                    <div class="layout-box highlight">SLEEP SOLUTION GUIDE (헤더)</div>
+                    <div class="layout-row">
+                        <div class="layout-box" style="width: 160px;">STEP 1<br>이미지</div>
+                        <div class="layout-box" style="flex: 1;">제품명 + 설명 뱃지<br>상세 설명<br>#해시태그</div>
+                    </div>
+                    <div class="layout-row">
+                        <div class="layout-box highlight" style="width: 160px;">STEP 2<br>이미지<br>⭐추천</div>
+                        <div class="layout-box highlight" style="flex: 1;">현재 제품 (강조)<br>골드 테두리</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>HTML 템플릿 - 가이드북</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>HTML - Guidebook</span>
+                        <button class="copy-btn">복사</button>
+                    </div>
+                    <div class="code-content">
+<pre><span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"guidebook"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"guidebook-header"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;h3&gt;</span>GUIDE TITLE<span class="tag">&lt;/h3&gt;</span>
+        <span class="tag">&lt;p&gt;</span>가이드 부제목<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+
+    <span class="comment">&lt;!-- 일반 STEP --&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"guide-page"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"guide-left"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"guide-step"</span><span class="tag">&gt;</span>STEP 1<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"guide-image"</span><span class="tag">&gt;</span>제품 이미지<span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"guide-content"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"guide-title-row"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;h4</span> <span class="attr">class=</span><span class="value">"guide-title"</span><span class="tag">&gt;</span>제품명<span class="tag">&lt;/h4&gt;</span>
+                <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"guide-desc"</span><span class="tag">&gt;</span>한줄 설명 뱃지<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+            <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"guide-detail"</span><span class="tag">&gt;</span>상세 설명<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"guide-tags"</span><span class="tag">&gt;</span>#해시태그1 #해시태그2<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+
+    <span class="comment">&lt;!-- 추천 STEP (featured) --&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"guide-page featured"</span><span class="tag">&gt;</span>
+        <span class="comment">&lt;!-- 골드 테두리 + 추천 뱃지 자동 적용 --&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>HTML 템플릿 - 메모 주의사항</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>HTML - Memo Notice</span>
+                        <button class="copy-btn">복사</button>
+                    </div>
+                    <div class="code-content">
+<pre><span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"memo-notice"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"memo-tape memo-tape-left"</span><span class="tag">&gt;&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"memo-content"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;h5&gt;</span>⚠ 주의사항 제목<span class="tag">&lt;/h5&gt;</span>
+        <span class="tag">&lt;p&gt;</span>주의사항 내용<span class="tag">&lt;br&gt;</span>
+            <span class="tag">&lt;span</span> <span class="attr">class=</span><span class="value">"red-pencil-underline"</span><span class="tag">&gt;</span>밑줄 강조<span class="tag">&lt;/span&gt;</span>
+        <span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"footnote"</span><span class="tag">&gt;</span>*각주 설명<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <h4>💡 추천 뱃지 텍스트 변경</h4>
+                <p>CSS에서 <code>.guide-page.featured::after { content: '뒤집기단계에 추천 ★'; }</code>를 수정하면 됩니다.</p>
+            </div>
+
+            <!-- 미리보기 -->
+            <div class="preview-section">
+                <div class="preview-header"><span>미리보기 (Preview)</span></div>
+                <div class="preview-content">
+                    <div class="guidebook-preview">
+                        <div class="guidebook-header-preview">
+                            <h3>SLEEP SOLUTION GUIDE</h3>
+                            <p>수면 솔루션 가이드</p>
+                        </div>
+                        <div class="guide-page-preview">
+                            <div class="guide-left-preview">
+                                <p class="guide-step-preview">STEP 1</p>
+                                <div class="guide-image-preview">👶</div>
+                            </div>
+                            <div class="guide-content-preview">
+                                <div class="guide-title-row-preview">
+                                    <h4 class="guide-title-preview">신생아 속싸개</h4>
+                                    <p class="guide-desc-preview">모로반사 안정</p>
+                                </div>
+                                <p class="guide-detail-preview">신생아 시기의 모로반사를 잡아주는 속싸개로 안정적인 수면을 도와줍니다.</p>
+                                <p class="guide-tags-preview">#신생아 #모로반사 #속싸개</p>
+                            </div>
+                        </div>
+                        <div class="guide-page-preview featured">
+                            <div class="guide-left-preview">
+                                <p class="guide-step-preview">STEP 2</p>
+                                <div class="guide-image-preview">🌙</div>
+                            </div>
+                            <div class="guide-content-preview">
+                                <div class="guide-title-row-preview">
+                                    <h4 class="guide-title-preview">슬리핑백</h4>
+                                    <p class="guide-desc-preview">뒤집기 시작 후</p>
+                                </div>
+                                <p class="guide-detail-preview">뒤집기를 시작한 아기에게 안전하고 편안한 수면 환경을 제공합니다.</p>
+                                <p class="guide-tags-preview">#뒤집기 #슬리핑백 #안전수면</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 4: Brand ==================== -->
+        <section class="guide-section" id="brand">
+            <div class="section-header">
+                <span class="section-number">4</span>
+                <h2>Brand Story 섹션</h2>
+                <p class="section-purpose">브랜드 소개 및 철학을 전달하는 감성적 스토리텔링 영역입니다.</p>
+            </div>
+
+            <div class="feature-tags">
+                <span class="feature-tag">밤하늘 테마</span>
+                <span class="feature-tag">별 장식</span>
+                <span class="feature-tag">세리프 폰트</span>
+            </div>
+
+            <div class="subsection">
+                <h3>HTML 템플릿</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>HTML</span>
+                        <button class="copy-btn">복사</button>
+                    </div>
+                    <div class="code-content">
+<pre><span class="tag">&lt;section</span> <span class="attr">class=</span><span class="value">"brand-story"</span><span class="tag">&gt;</span>
+    <span class="comment">&lt;!-- 별 장식 (20개) --&gt;</span>
+    <span class="tag">&lt;span</span> <span class="attr">class=</span><span class="value">"star-dot dot-1"</span><span class="tag">&gt;&lt;/span&gt;</span>
+    <span class="comment">&lt;!-- ... dot-2 ~ dot-20 --&gt;</span>
+
+    <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"section-label"</span><span class="tag">&gt;</span>Brand Story<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;h2</span> <span class="attr">class=</span><span class="value">"section-title"</span><span class="tag">&gt;</span>브랜드 슬로건<span class="tag">&lt;/h2&gt;</span>
+    <span class="tag">&lt;p&gt;</span>
+        <span class="tag">&lt;span</span> <span class="attr">class=</span><span class="value">"brand-intro"</span><span class="tag">&gt;</span>브랜드 한줄 소개<span class="tag">&lt;/span&gt;&lt;br&gt;&lt;br&gt;</span>
+        브랜드 스토리 본문...
+    <span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"brand-ending"</span><span class="tag">&gt;</span>마무리 문구 (골드 강조)<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/section&gt;</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 미리보기 -->
+            <div class="preview-section">
+                <div class="preview-header"><span>미리보기 (Preview)</span></div>
+                <div class="preview-content">
+                    <div class="brand-story-preview">
+                        <span class="star-dot-preview" style="top: 15%; left: 10%;"></span>
+                        <span class="star-dot-preview" style="top: 25%; left: 85%;"></span>
+                        <span class="star-dot-preview" style="top: 60%; left: 15%;"></span>
+                        <span class="star-dot-preview" style="top: 70%; left: 90%;"></span>
+                        <span class="star-dot-preview" style="top: 40%; left: 5%;"></span>
+                        <p class="section-label-preview">Brand Story</p>
+                        <h2 class="section-title-preview">아이의 꿈을 지키는 밤</h2>
+                        <p>
+                            <span class="brand-intro-preview">SUNDAYHUG</span>
+                        </p>
+                        <p class="brand-text-preview">
+                            매일 밤, 아이가 평화롭게 잠들 수 있도록<br>
+                            엄마의 마음으로 만들었습니다.<br><br>
+                            안전하고 편안한 수면 환경을 위해<br>
+                            모든 디테일에 정성을 담았습니다.
+                        </p>
+                        <p class="brand-ending-preview">— 아이의 꿈을 응원합니다 —</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 5: Material ==================== -->
+        <section class="guide-section" id="material">
+            <div class="section-header">
+                <span class="section-number">5</span>
+                <h2>Material Guide 섹션</h2>
+                <p class="section-purpose">소재/원단 비교 가이드입니다. 시즌별/용도별 제품 선택을 돕습니다.</p>
+            </div>
+
+            <div class="feature-tags">
+                <span class="feature-tag">비교 테이블</span>
+                <span class="feature-tag">시즌 태그</span>
+                <span class="feature-tag">노트북 스타일</span>
+            </div>
+
+            <div class="subsection">
+                <h3>시즌 태그 종류</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>HTML</span>
+                        <button class="copy-btn">복사</button>
+                    </div>
+                    <div class="code-content">
+<pre><span class="tag">&lt;span</span> <span class="attr">class=</span><span class="value">"season-tag gold"</span><span class="tag">&gt;</span>사계절<span class="tag">&lt;/span&gt;</span>   <span class="comment">&lt;!-- 골드 --&gt;</span>
+<span class="tag">&lt;span</span> <span class="attr">class=</span><span class="value">"season-tag coral"</span><span class="tag">&gt;</span>여름용<span class="tag">&lt;/span&gt;</span>   <span class="comment">&lt;!-- 코랄 --&gt;</span>
+<span class="tag">&lt;span</span> <span class="attr">class=</span><span class="value">"season-tag blue"</span><span class="tag">&gt;</span>겨울용<span class="tag">&lt;/span&gt;</span>    <span class="comment">&lt;!-- 블루 --&gt;</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>HTML 템플릿 - 소재 테이블</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>HTML</span>
+                        <button class="copy-btn">복사</button>
+                    </div>
+                    <div class="code-content">
+<pre><span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"material-compare-new"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;table</span> <span class="attr">class=</span><span class="value">"material-table"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;thead&gt;</span>
+            <span class="tag">&lt;tr&gt;</span>
+                <span class="tag">&lt;th</span> <span class="attr">class=</span><span class="value">"category-col"</span><span class="tag">&gt;&lt;/th&gt;</span>
+                <span class="tag">&lt;th&gt;</span>특징<span class="tag">&lt;/th&gt;</span>
+                <span class="tag">&lt;th&gt;</span>소재구성<span class="tag">&lt;/th&gt;</span>
+            <span class="tag">&lt;/tr&gt;</span>
+        <span class="tag">&lt;/thead&gt;</span>
+        <span class="tag">&lt;tbody&gt;</span>
+            <span class="tag">&lt;tr&gt;</span>
+                <span class="tag">&lt;td</span> <span class="attr">class=</span><span class="value">"category-label"</span><span class="tag">&gt;</span>
+                    소재명<span class="tag">&lt;br&gt;</span>
+                    <span class="tag">&lt;span</span> <span class="attr">class=</span><span class="value">"season-tag gold"</span><span class="tag">&gt;</span>사계절<span class="tag">&lt;/span&gt;</span>
+                <span class="tag">&lt;/td&gt;</span>
+                <span class="tag">&lt;td&gt;</span>특징 설명<span class="tag">&lt;/td&gt;</span>
+                <span class="tag">&lt;td&gt;</span>소재 구성<span class="tag">&lt;/td&gt;</span>
+            <span class="tag">&lt;/tr&gt;</span>
+        <span class="tag">&lt;/tbody&gt;</span>
+    <span class="tag">&lt;/table&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 미리보기 -->
+            <div class="preview-section">
+                <div class="preview-header"><span>미리보기 (Preview)</span></div>
+                <div class="preview-content">
+                    <div class="material-preview">
+                        <p class="section-label-preview" style="margin-bottom: 20px;">Material Guide</p>
+                        <h2 class="section-title-preview" style="margin-bottom: 30px;">소재별 가이드</h2>
+                        <table class="material-table-preview">
+                            <thead>
+                                <tr>
+                                    <th style="width: 25%;">소재</th>
+                                    <th>특징</th>
+                                    <th>소재구성</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        실키밤부<br>
+                                        <span class="season-tag-preview gold">사계절</span>
+                                    </td>
+                                    <td>부드럽고 시원한 촉감<br>체온 조절 우수</td>
+                                    <td>대나무 레이온 70%<br>면 30%</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        쿨맥스<br>
+                                        <span class="season-tag-preview coral">여름용</span>
+                                    </td>
+                                    <td>뛰어난 통기성<br>빠른 흡습 건조</td>
+                                    <td>쿨맥스 100%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 6: Check Point ==================== -->
+        <section class="guide-section" id="checkpoint">
+            <div class="section-header">
+                <span class="section-number">6</span>
+                <h2>Check Point 섹션</h2>
+                <p class="section-purpose">제품 특장점/기능을 상세하게 소개하는 핵심 섹션입니다. 4개의 서브 포인트로 구성됩니다.</p>
+            </div>
+
+            <div class="feature-tags">
+                <span class="feature-tag">밤하늘 배경</span>
+                <span class="feature-tag">반달 헤더</span>
+                <span class="feature-tag">4개 레이아웃</span>
+            </div>
+
+            <div class="subsection">
+                <h3>구조 개요</h3>
+                <div class="layout-diagram">
+                    <p class="diagram-title">Check Point 구조</p>
+                    <div class="layout-box highlight">반달 헤더 (밤하늘 + 제목)</div>
+                    <div class="layout-box">POINT 01: 이미지 3개 교차 레이아웃</div>
+                    <div class="layout-box">POINT 02: 중앙 배치 레이아웃</div>
+                    <div class="layout-box">POINT 03: 세로 + 가로 이미지</div>
+                    <div class="layout-box">POINT 04: 가로 이미지 3개</div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>POINT 01 - 이미지 3개 교차</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>HTML - detail-section</span>
+                        <button class="copy-btn">복사</button>
+                    </div>
+                    <div class="code-content">
+<pre><span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"detail-section"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"checkpoint-num"</span><span class="tag">&gt;</span>✦ POINT 01<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;h3</span> <span class="attr">class=</span><span class="value">"section-title"</span><span class="tag">&gt;</span>포인트 제목<span class="tag">&lt;/h3&gt;</span>
+
+    <span class="comment">&lt;!-- 좌 이미지 - 우 텍스트 --&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"detail-item"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"detail-image"</span><span class="tag">&gt;</span>이미지<span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"detail-content"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"detail-num"</span><span class="tag">&gt;</span>01<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;h4&gt;</span>소제목<span class="tag">&lt;/h4&gt;</span>
+            <span class="tag">&lt;p&gt;</span>설명...<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+
+    <span class="comment">&lt;!-- 우 이미지 - 좌 텍스트 (reverse) --&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"detail-item reverse"</span><span class="tag">&gt;</span>...<span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>POINT 02 - 중앙 배치</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>HTML - checkpoint-centered</span>
+                        <button class="copy-btn">복사</button>
+                    </div>
+                    <div class="code-content">
+<pre><span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"checkpoint-centered"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"checkpoint-num"</span><span class="tag">&gt;</span>✦ POINT 02<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;h3&gt;</span>포인트 제목<span class="tag">&lt;/h3&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"centered-image"</span><span class="tag">&gt;</span>이미지<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"centered-details"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"centered-detail-item"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;h4&gt;</span>소제목<span class="tag">&lt;/h4&gt;</span>
+            <span class="tag">&lt;p&gt;</span>설명...<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>POINT 03 - 세로+가로 이미지</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>HTML - checkpoint-point3</span>
+                        <button class="copy-btn">복사</button>
+                    </div>
+                    <div class="code-content">
+<pre><span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"checkpoint-point3"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"checkpoint-num"</span><span class="tag">&gt;</span>✦ POINT 03<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;h3&gt;</span>포인트 제목<span class="tag">&lt;/h3&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"main-vertical-image"</span><span class="tag">&gt;</span>메인 세로 이미지<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"small-images-row"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"small-horizontal-image"</span><span class="tag">&gt;</span>이미지 1<span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"small-horizontal-image"</span><span class="tag">&gt;</span>이미지 2<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"point3-details"</span><span class="tag">&gt;</span>...<span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>POINT 04 - 가로 이미지 3개</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>HTML - checkpoint-point4</span>
+                        <button class="copy-btn">복사</button>
+                    </div>
+                    <div class="code-content">
+<pre><span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"checkpoint-point4"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"point4-header"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"checkpoint-num"</span><span class="tag">&gt;</span>✦ POINT 04<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;h3&gt;</span>포인트 제목<span class="tag">&lt;/h3&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"point4-item"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"point4-image"</span><span class="tag">&gt;</span>이미지<span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"point4-content"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;h4&gt;</span>소제목<span class="tag">&lt;/h4&gt;</span>
+            <span class="tag">&lt;p&gt;</span>설명...<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+    <span class="comment">&lt;!-- 아이템 반복 --&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 미리보기 -->
+            <div class="preview-section">
+                <div class="preview-header"><span>미리보기 (Preview)</span></div>
+                <div class="preview-content">
+                    <div class="checkpoint-preview">
+                        <p class="checkpoint-num-preview">✦ POINT 01</p>
+                        <h3 class="section-title-preview" style="margin-bottom: 25px;">안전한 수면 환경</h3>
+                        <div class="detail-item-preview">
+                            <div class="detail-image-preview">🛡️</div>
+                            <div class="detail-content-preview">
+                                <p class="detail-num-preview">01</p>
+                                <h4>안전 지퍼 설계</h4>
+                                <p>아기 피부에 닿지 않는 안전 지퍼 커버로<br>뒤집기 시에도 안전합니다.</p>
+                            </div>
+                        </div>
+                        <div class="detail-item-preview reverse">
+                            <div class="detail-image-preview">🌡️</div>
+                            <div class="detail-content-preview">
+                                <p class="detail-num-preview">02</p>
+                                <h4>체온 조절 시스템</h4>
+                                <p>통기성 좋은 소재로<br>적정 체온을 유지합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 7: Development ==================== -->
+        <section class="guide-section" id="dev">
+            <div class="section-header">
+                <span class="section-number">7</span>
+                <h2>Development Story 섹션</h2>
+                <p class="section-purpose">제품 개발 스토리와 전문가 협업/인증을 강조하는 섹션입니다.</p>
+            </div>
+
+            <div class="feature-tags">
+                <span class="feature-tag">프로필 카드</span>
+                <span class="feature-tag">인용구</span>
+                <span class="feature-tag blue">신뢰도 강조</span>
+            </div>
+
+            <div class="subsection">
+                <h3>HTML 템플릿</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>HTML</span>
+                        <button class="copy-btn">복사</button>
+                    </div>
+                    <div class="code-content">
+<pre><span class="tag">&lt;section</span> <span class="attr">class=</span><span class="value">"dev-story"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"section-label"</span><span class="tag">&gt;</span>Development Story<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;h2</span> <span class="attr">class=</span><span class="value">"section-title"</span><span class="tag">&gt;</span>전문가와 함께 개발했습니다<span class="tag">&lt;/h2&gt;</span>
+
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"dev-content"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"dev-quote"</span><span class="tag">&gt;</span>핵심 인용구 메시지<span class="tag">&lt;/p&gt;</span>
+
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"dev-profile"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"photo"</span><span class="tag">&gt;</span>프로필 사진<span class="tag">&lt;/div&gt;</span>
+            <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"dev-profile-info"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;h4&gt;</span>직함 <span class="tag">&lt;span</span> <span class="attr">class=</span><span class="value">"award-icon"</span><span class="tag">&gt;</span>★<span class="tag">&lt;/span&gt;</span>수상<span class="tag">&lt;/h4&gt;</span>
+                <span class="tag">&lt;p&gt;</span>이름/소속<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"dev-text"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;p&gt;</span>개발 스토리 본문...<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/section&gt;</span></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 8-14: 간단 섹션들 ==================== -->
+        <section class="guide-section" id="color">
+            <div class="section-header">
+                <span class="section-number">8</span>
+                <h2>Color Option 섹션</h2>
+                <p class="section-purpose">컬러 옵션을 시각적으로 보여주는 섹션입니다.</p>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>HTML - 컬러 그리드</span>
+                    <button class="copy-btn">복사</button>
+                </div>
+                <div class="code-content">
+<pre><span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"color-grid"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"color-item"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"color-swatch"</span> <span class="attr">style=</span><span class="value">"background: #F5F0E8;"</span><span class="tag">&gt;&lt;/div&gt;</span>
+        <span class="tag">&lt;p&gt;</span>컬러명<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+    <span class="comment">&lt;!-- 컬러 반복 --&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+                </div>
+            </div>
+
+            <!-- 미리보기 -->
+            <div class="preview-section">
+                <div class="preview-header"><span>미리보기 (Preview)</span></div>
+                <div class="preview-content" style="padding: 30px;">
+                    <div class="color-palette" style="max-width: 400px; margin: 0 auto;">
+                        <div class="color-swatch-item">
+                            <div class="color-swatch-box" style="background: #F5F0E8;"></div>
+                            <p class="color-name">Cream</p>
+                        </div>
+                        <div class="color-swatch-item">
+                            <div class="color-swatch-box" style="background: #B8C5D3;"></div>
+                            <p class="color-name">Sky Blue</p>
+                        </div>
+                        <div class="color-swatch-item">
+                            <div class="color-swatch-box" style="background: #D4C1B0;"></div>
+                            <p class="color-name">Beige</p>
+                        </div>
+                        <div class="color-swatch-item">
+                            <div class="color-swatch-box" style="background: #C8B8A8;"></div>
+                            <p class="color-name">Oatmeal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="guide-section" id="size">
+            <div class="section-header">
+                <span class="section-number">9</span>
+                <h2>Size Design 섹션</h2>
+                <p class="section-purpose">사이즈별 디자인 차이점을 보여주는 섹션입니다.</p>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>HTML - 사이즈 카드</span>
+                    <button class="copy-btn">복사</button>
+                </div>
+                <div class="code-content">
+<pre><span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"size-compare"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"size-card"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"size-card-header"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;h4&gt;</span>STEP 1<span class="tag">&lt;/h4&gt;</span>
+            <span class="tag">&lt;p&gt;</span>S size (~8M)<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"size-card-image"</span><span class="tag">&gt;</span>도식화<span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"size-features"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;span</span> <span class="attr">class=</span><span class="value">"size-feature"</span><span class="tag">&gt;</span>기능태그<span class="tag">&lt;/span&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="guide-section" id="howto">
+            <div class="section-header">
+                <span class="section-number">10</span>
+                <h2>How to Wear 섹션</h2>
+                <p class="section-purpose">착용/사용 방법을 단계별로 안내하는 섹션입니다.</p>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>HTML</span>
+                    <button class="copy-btn">복사</button>
+                </div>
+                <div class="code-content">
+<pre><span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"howto-steps"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"howto-step"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"step-image"</span><span class="tag">&gt;</span>STEP 이미지<span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"step-num"</span><span class="tag">&gt;</span>STEP 1<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;p&gt;</span>설명...<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="guide-section" id="sizeguide">
+            <div class="section-header">
+                <span class="section-number">11</span>
+                <h2>Size Guide 섹션</h2>
+                <p class="section-purpose">사이즈 상세 정보 테이블입니다.</p>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>HTML</span>
+                    <button class="copy-btn">복사</button>
+                </div>
+                <div class="code-content">
+<pre><span class="tag">&lt;table</span> <span class="attr">class=</span><span class="value">"size-table"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;thead&gt;</span>
+        <span class="tag">&lt;tr&gt;</span>
+            <span class="tag">&lt;th&gt;</span>사이즈<span class="tag">&lt;/th&gt;</span>
+            <span class="tag">&lt;th&gt;</span>권장 월령<span class="tag">&lt;/th&gt;</span>
+            <span class="tag">&lt;th&gt;</span>권장 키<span class="tag">&lt;/th&gt;</span>
+            <span class="tag">&lt;th&gt;</span>총 길이<span class="tag">&lt;/th&gt;</span>
+        <span class="tag">&lt;/tr&gt;</span>
+    <span class="tag">&lt;/thead&gt;</span>
+    <span class="tag">&lt;tbody&gt;</span>
+        <span class="tag">&lt;tr&gt;</span>
+            <span class="tag">&lt;td&gt;&lt;strong&gt;</span>S<span class="tag">&lt;/strong&gt;&lt;/td&gt;</span>
+            <span class="tag">&lt;td&gt;</span>3~9개월<span class="tag">&lt;/td&gt;</span>
+            <span class="tag">&lt;td&gt;</span>60~70cm<span class="tag">&lt;/td&gt;</span>
+            <span class="tag">&lt;td&gt;</span>64cm<span class="tag">&lt;/td&gt;</span>
+        <span class="tag">&lt;/tr&gt;</span>
+    <span class="tag">&lt;/tbody&gt;</span>
+<span class="tag">&lt;/table&gt;</span></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="guide-section" id="info">
+            <div class="section-header">
+                <span class="section-number">12</span>
+                <h2>Product Info 섹션</h2>
+                <p class="section-purpose">제품 상세 정보 (법적 필수 표기) 테이블입니다.</p>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>HTML</span>
+                    <button class="copy-btn">복사</button>
+                </div>
+                <div class="code-content">
+<pre><span class="tag">&lt;table</span> <span class="attr">class=</span><span class="value">"info-table"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+        <span class="tag">&lt;th&gt;</span>제품명<span class="tag">&lt;/th&gt;</span>
+        <span class="tag">&lt;td&gt;</span>제품 이름<span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+        <span class="tag">&lt;th&gt;</span>소재<span class="tag">&lt;/th&gt;</span>
+        <span class="tag">&lt;td&gt;</span>소재 구성<span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+    <span class="comment">&lt;!-- 행 반복 --&gt;</span>
+<span class="tag">&lt;/table&gt;</span></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="guide-section" id="care">
+            <div class="section-header">
+                <span class="section-number">13</span>
+                <h2>Care Guide 섹션</h2>
+                <p class="section-purpose">세탁/관리 방법을 아이콘 기반으로 안내하는 섹션입니다.</p>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>HTML</span>
+                    <button class="copy-btn">복사</button>
+                </div>
+                <div class="code-content">
+<pre><span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"care-grid"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"care-item"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"care-icon"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;svg&gt;</span><span class="comment">&lt;!-- 아이콘 SVG --&gt;</span><span class="tag">&lt;/svg&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;p&gt;</span>30°C 이하<span class="tag">&lt;br&gt;</span>미온수 세탁<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+    <span class="comment">&lt;!-- 4개 권장 --&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+                </div>
+            </div>
+
+            <!-- 미리보기 -->
+            <div class="preview-section">
+                <div class="preview-header"><span>미리보기 (Preview)</span></div>
+                <div class="preview-content">
+                    <div class="care-preview">
+                        <p class="section-label-preview">Care Guide</p>
+                        <h2 class="section-title-preview" style="margin-bottom: 30px;">세탁 & 관리 방법</h2>
+                        <div class="care-grid-preview">
+                            <div class="care-item-preview">
+                                <div class="care-icon-preview">🌡️</div>
+                                <p>30°C 이하<br>미온수 세탁</p>
+                            </div>
+                            <div class="care-item-preview">
+                                <div class="care-icon-preview">🧴</div>
+                                <p>중성세제<br>사용</p>
+                            </div>
+                            <div class="care-item-preview">
+                                <div class="care-icon-preview">🚫</div>
+                                <p>표백제<br>사용 금지</p>
+                            </div>
+                            <div class="care-item-preview">
+                                <div class="care-icon-preview">☀️</div>
+                                <p>그늘에서<br>건조</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="guide-section" id="footer">
+            <div class="section-header">
+                <span class="section-number">14</span>
+                <h2>Footer CTA 섹션</h2>
+                <p class="section-purpose">다른 제품 연결 및 교차 판매를 유도하는 섹션입니다.</p>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>HTML</span>
+                    <button class="copy-btn">복사</button>
+                </div>
+                <div class="code-content">
+<pre><span class="tag">&lt;section</span> <span class="attr">class=</span><span class="value">"footer-cta"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"footer-dots"</span><span class="tag">&gt;</span>
+        <span class="comment">&lt;!-- fd-1 ~ fd-16 별 장식 --&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;h2&gt;</span>다른 제품 보러가기<span class="tag">&lt;/h2&gt;</span>
+    <span class="tag">&lt;p&gt;</span>브랜드의 다양한 제품을 만나보세요<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"other-products"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;a</span> <span class="attr">href=</span><span class="value">"URL"</span> <span class="attr">class=</span><span class="value">"product-link"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"product-thumb"</span><span class="tag">&gt;</span>제품 이미지<span class="tag">&lt;/div&gt;</span>
+            <span class="tag">&lt;p&gt;</span>제품명<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/a&gt;</span>
+        <span class="comment">&lt;!-- 2~4개 권장 --&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/section&gt;</span>
+
+<span class="tag">&lt;footer&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"footer-inner"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"footer-logo"</span><span class="tag">&gt;</span>BRAND_NAME<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"footer-tagline"</span><span class="tag">&gt;</span>브랜드 태그라인<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;p</span> <span class="attr">class=</span><span class="value">"footer-copy"</span><span class="tag">&gt;</span>© 2025 BRAND. All rights reserved.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/footer&gt;</span></pre>
+                </div>
+            </div>
+
+            <!-- 미리보기 -->
+            <div class="preview-section">
+                <div class="preview-header"><span>미리보기 (Preview)</span></div>
+                <div class="preview-content">
+                    <div class="footer-cta-preview">
+                        <h2>다른 제품 보러가기</h2>
+                        <p>썬데이허그의 다양한 제품을 만나보세요</p>
+                        <div class="other-products-preview">
+                            <a class="product-link-preview" style="cursor: pointer;">
+                                <div class="product-thumb-preview">👶</div>
+                                <p>속싸개</p>
+                            </a>
+                            <a class="product-link-preview" style="cursor: pointer;">
+                                <div class="product-thumb-preview">🌙</div>
+                                <p>슬리핑백</p>
+                            </a>
+                            <a class="product-link-preview" style="cursor: pointer;">
+                                <div class="product-thumb-preview">🍼</div>
+                                <p>수유쿠션</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 섹션 조합 가이드 ==================== -->
+        <section class="guide-section" id="combination">
+            <div class="section-header">
+                <span class="section-number">★</span>
+                <h2>섹션 조합 가이드</h2>
+                <p class="section-purpose">제품 유형에 따른 권장 섹션 조합입니다.</p>
+            </div>
+
+            <div class="subsection">
+                <h3>필수 섹션</h3>
+                <div class="feature-tags">
+                    <span class="feature-tag">Hero</span>
+                    <span class="feature-tag">Product Info</span>
+                    <span class="feature-tag">Footer</span>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>의류/패션 제품</h3>
+                <div class="combination-guide">
+                    <h4>권장 순서</h4>
+                    <div class="combination-flow">
+                        <span class="combination-item">Hero</span>
+                        <span class="combination-arrow">→</span>
+                        <span class="combination-item">Review</span>
+                        <span class="combination-arrow">→</span>
+                        <span class="combination-item">Material</span>
+                        <span class="combination-arrow">→</span>
+                        <span class="combination-item">Check Point</span>
+                        <span class="combination-arrow">→</span>
+                        <span class="combination-item">Color</span>
+                        <span class="combination-arrow">→</span>
+                        <span class="combination-item">Size</span>
+                        <span class="combination-arrow">→</span>
+                        <span class="combination-item">How to</span>
+                        <span class="combination-arrow">→</span>
+                        <span class="combination-item">Care</span>
+                        <span class="combination-arrow">→</span>
+                        <span class="combination-item">Footer</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>기능성 제품</h3>
+                <div class="combination-guide">
+                    <h4>권장 순서</h4>
+                    <div class="combination-flow">
+                        <span class="combination-item">Hero</span>
+                        <span class="combination-arrow">→</span>
+                        <span class="combination-item">Review</span>
+                        <span class="combination-arrow">→</span>
+                        <span class="combination-item">When</span>
+                        <span class="combination-arrow">→</span>
+                        <span class="combination-item">Check Point</span>
+                        <span class="combination-arrow">→</span>
+                        <span class="combination-item">Development</span>
+                        <span class="combination-arrow">→</span>
+                        <span class="combination-item">Material</span>
+                        <span class="combination-arrow">→</span>
+                        <span class="combination-item">Footer</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>단순 제품</h3>
+                <div class="combination-guide">
+                    <h4>권장 순서</h4>
+                    <div class="combination-flow">
+                        <span class="combination-item">Hero</span>
+                        <span class="combination-arrow">→</span>
+                        <span class="combination-item">Review</span>
+                        <span class="combination-arrow">→</span>
+                        <span class="combination-item">Check Point</span>
+                        <span class="combination-arrow">→</span>
+                        <span class="combination-item">Color</span>
+                        <span class="combination-arrow">→</span>
+                        <span class="combination-item">Product Info</span>
+                        <span class="combination-arrow">→</span>
+                        <span class="combination-item">Footer</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 푸터 -->
+        <footer class="guide-footer">
+            <p>SUNDAYHUG Template Guide v4.0</p>
+            <p>Last Updated: 2025-02</p>
+        </footer>
+
+    </div><!-- /.main-content-wrapper -->
+
+    <script>
+        // 복사 버튼 기능
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const codeBlock = this.closest('.code-block');
+                const code = codeBlock.querySelector('pre').innerText;
+                navigator.clipboard.writeText(code).then(() => {
+                    this.textContent = '복사됨!';
+                    setTimeout(() => {
+                        this.textContent = '복사';
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

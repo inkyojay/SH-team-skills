@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=800">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .wide-minimal {
+            width: 800px;
+            height: 600px;
+            background: #FAFAFA;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .content-section {
+            flex: 1;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .brand-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #999;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .product-name {
+            font-size: 32px;
+            font-weight: 300;
+            color: #191919;
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+
+        .product-name strong {
+            font-weight: 700;
+        }
+
+        .product-desc {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .price-section {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .price {
+            font-size: 28px;
+            font-weight: 700;
+            color: #191919;
+        }
+
+        .price-original {
+            font-size: 16px;
+            color: #bbb;
+            text-decoration: line-through;
+        }
+
+        .cta-button {
+            background: #191919;
+            color: white;
+            padding: 16px 32px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .image-section {
+            width: 400px;
+            background: #F0F0F0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image {
+            max-width: 320px;
+            max-height: 480px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div class="wide-minimal">
+        <div class="content-section">
+            <div class="brand-name">{{BRAND_NAME}}</div>
+            <h1 class="product-name">{{PRODUCT_NAME}}</h1>
+            <p class="product-desc">{{DESCRIPTION}}</p>
+            <div class="price-section">
+                <span class="price">{{SALE_PRICE}}원</span>
+                <span class="price-original">{{ORIGINAL_PRICE}}원</span>
+            </div>
+            <div class="cta-button">{{CTA_TEXT}}</div>
+        </div>
+
+        <div class="image-section">
+            <img src="{{PRODUCT_IMAGE}}" alt="제품" class="product-image">
+        </div>
+    </div>
+</body>
+</html>

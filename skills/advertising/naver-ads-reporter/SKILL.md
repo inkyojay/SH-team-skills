@@ -51,9 +51,9 @@ STEP 4  인터랙티브 HTML 리포트 생성 + /mnt/user-data/outputs 저장
 
 ### 확인 순서
 1. **환경변수 우선 확인**:
-   - `NAVER_AD_CUSTOMER_ID`
-   - `NAVER_AD_API_KEY`
-   - `NAVER_AD_SECRET_KEY`
+   - `NAVER_CUSTOMER_ID`
+   - `NAVER_API_KEY`
+   - `NAVER_SECRET_KEY`
 2. 없으면 사용자에게 직접 요청:
    ```
    네이버 검색광고 API 크레덴셜이 필요합니다. searchad.naver.com
@@ -106,9 +106,9 @@ GET {downloadUrl}  →  TSV 파일
 ```bash
 cd /mnt/skills/user/naver-ads-reporter
 python scripts/stat_report.py \
-  --customer-id $NAVER_AD_CUSTOMER_ID \
-  --api-key $NAVER_AD_API_KEY \
-  --secret-key $NAVER_AD_SECRET_KEY \
+  --customer-id $NAVER_CUSTOMER_ID \
+  --api-key $NAVER_API_KEY \
+  --secret-key $NAVER_SECRET_KEY \
   --report-tp AD \
   --date-from 2026-04-14 \
   --date-to 2026-04-20 \

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .pc-main-banner {
+            width: 1920px;
+            height: 640px;
+            background: #C9C4A8;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 장식 도형들 */
+        .deco-1 { top: 40px; left: 120px; width: 50px; height: 50px; background: #F5E050; border-radius: 50%; }
+        .deco-2 { top: 80px; right: 300px; width: 80px; height: 80px; border: 5px solid #7FB3D5; border-radius: 50%; background: transparent; }
+        .deco-3 { top: 150px; left: 80px; width: 60px; height: 70px; background: #E8A85C; clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); }
+        .deco-4 { bottom: 100px; right: 150px; width: 40px; height: 40px; background: #F5E050; border-radius: 50%; }
+        .deco-5 { bottom: 80px; left: 200px; width: 50px; height: 25px; border: 4px solid #82C341; border-radius: 50px 50px 0 0; border-bottom: none; }
+        .deco-6 { top: 200px; right: 100px; width: 40px; height: 20px; border: 4px solid #E67E22; border-radius: 0 0 40px 40px; border-top: none; }
+
+        /* 중앙 콘텐츠 */
+        .content-center {
+            text-align: center;
+            z-index: 10;
+        }
+
+        .event-date {
+            font-size: 18px;
+            color: #666;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .event-title {
+            font-size: 56px;
+            font-weight: 800;
+            color: #333;
+            letter-spacing: 8px;
+            margin-bottom: 12px;
+        }
+
+        .event-subtitle {
+            font-size: 16px;
+            color: #666;
+        }
+
+        /* 제품 이미지들 */
+        .products-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 20px;
+            padding: 0 100px;
+        }
+
+        .product-item {
+            max-height: 300px;
+            object-fit: contain;
+        }
+
+        .product-item.large {
+            max-height: 360px;
+        }
+    </style>
+</head>
+<body>
+    <div class="pc-main-banner">
+        <!-- 장식 도형들 -->
+        <div class="decoration deco-1"></div>
+        <div class="decoration deco-2"></div>
+        <div class="decoration deco-3"></div>
+        <div class="decoration deco-4"></div>
+        <div class="decoration deco-5"></div>
+        <div class="decoration deco-6"></div>
+
+        <!-- 중앙 콘텐츠 -->
+        <div class="content-center">
+            <div class="event-date">{{EVENT_DATE}}</div>
+            <h1 class="event-title">{{EVENT_TITLE}}</h1>
+            <p class="event-subtitle">{{EVENT_SUBTITLE}}</p>
+        </div>
+
+        <!-- 제품 이미지들 -->
+        <div class="products-container">
+            <img src="{{PRODUCT_IMAGE_1}}" alt="제품1" class="product-item">
+            <img src="{{PRODUCT_IMAGE_2}}" alt="제품2" class="product-item">
+            <img src="{{PRODUCT_IMAGE_3}}" alt="제품3" class="product-item large">
+            <img src="{{PRODUCT_IMAGE_4}}" alt="제품4" class="product-item">
+            <img src="{{PRODUCT_IMAGE_5}}" alt="제품5" class="product-item">
+        </div>
+    </div>
+</body>
+</html>

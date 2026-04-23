@@ -1,0 +1,272 @@
+/* 카드뉴스 기본 스타일 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    width: 1080px;
+    height: 1350px;
+    overflow: hidden;
+}
+
+/* === 커버 카드 === */
+.card-cover {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #FFF5E6 0%, #FFE4CC 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+    text-align: center;
+}
+
+.card-cover .brand {
+    position: absolute;
+    top: 40px;
+    font-size: 24px;
+    color: #999;
+    letter-spacing: 4px;
+}
+
+.card-cover .episode {
+    font-size: 28px;
+    color: #E07A5F;
+    margin-bottom: 20px;
+}
+
+.card-cover .title {
+    font-size: 56px;
+    font-weight: 700;
+    color: #333;
+    line-height: 1.4;
+    margin-bottom: 40px;
+}
+
+.card-cover .subtitle {
+    font-size: 32px;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* === 콘텐츠 카드 === */
+.card-content {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #FFF9F0 0%, #FFF5E6 100%);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.card-content .brand {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    color: #BBB;
+    letter-spacing: 3px;
+}
+
+.card-content .visual-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 60px 40px;
+}
+
+.card-content .visual-area img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.card-content .visual-area .icon {
+    font-size: 200px;
+}
+
+.card-content .text-area {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 50px 60px;
+    min-height: 300px;
+}
+
+.card-content .text-area .heading {
+    font-size: 36px;
+    font-weight: 700;
+    color: #E07A5F;
+    margin-bottom: 20px;
+}
+
+.card-content .text-area .body {
+    font-size: 30px;
+    color: #444;
+    line-height: 1.7;
+}
+
+/* === 인포그래픽 카드 === */
+.card-info {
+    width: 100%;
+    height: 100%;
+    background: #FFF9F0;
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-info .brand {
+    text-align: center;
+    font-size: 20px;
+    color: #BBB;
+    letter-spacing: 3px;
+    margin-bottom: 60px;
+}
+
+.card-info .title {
+    font-size: 44px;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.card-info .items {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+}
+
+.card-info .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.card-info .item .number {
+    width: 60px;
+    height: 60px;
+    background: #E07A5F;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.card-info .item .text {
+    font-size: 28px;
+    color: #444;
+    line-height: 1.6;
+}
+
+/* === 요약 카드 === */
+.card-summary {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px;
+    text-align: center;
+}
+
+.card-summary .brand {
+    position: absolute;
+    top: 40px;
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 4px;
+}
+
+.card-summary .title {
+    font-size: 48px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 50px;
+}
+
+.card-summary .points {
+    text-align: left;
+}
+
+.card-summary .point {
+    font-size: 32px;
+    color: white;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.card-summary .point::before {
+    content: "✓ ";
+}
+
+/* === CTA 카드 === */
+.card-cta {
+    width: 100%;
+    height: 100%;
+    background: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px;
+    text-align: center;
+}
+
+.card-cta .brand {
+    position: absolute;
+    top: 40px;
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 4px;
+}
+
+.card-cta .message {
+    font-size: 44px;
+    font-weight: 700;
+    color: white;
+    line-height: 1.5;
+    margin-bottom: 60px;
+}
+
+.card-cta .action {
+    font-size: 28px;
+    color: #E07A5F;
+}
+
+/* === 색상 변형 === */
+.theme-blue {
+    --primary: #4A90A4;
+    --secondary: #6BB3C9;
+    --bg-start: #E8F4F8;
+    --bg-end: #D4EBF2;
+}
+
+.theme-green {
+    --primary: #5D9B6B;
+    --secondary: #7DB989;
+    --bg-start: #E8F5EA;
+    --bg-end: #D4EBD8;
+}
+
+.theme-purple {
+    --primary: #7B68A6;
+    --secondary: #9D8EC2;
+    --bg-start: #F0EBF8;
+    --bg-end: #E4DCF2;
+}

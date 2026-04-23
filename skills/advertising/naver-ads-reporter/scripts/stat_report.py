@@ -54,20 +54,26 @@ from naver_ads_client import NaverAdsClient, NaverAdsCredentials, NaverAdsAPIErr
 # 파싱 시 컬럼 개수로 자동 추론 + 사용자가 override 가능.
 
 REPORT_COLUMNS = {
+    # 실제 TSV 14컬럼 기준 (검증 완료 2026-04-22)
+    # col7 = bsn_num (비즈채널 숫자 ID, 성과지표 아님)
+    # col9=impressions, col10=clicks, col11=cost(원), col12=conv_cnt, col13=avg_rank
     "AD": [
         "date", "customer_id", "campaign_id", "adgroup_id", "keyword_id",
-        "ad_id", "business_channel_id", "media", "pc_mobile_type",
-        "impressions", "clicks", "cost", "avg_rank",
+        "ad_id", "business_channel_id", "bsn_num", "pc_mobile_type",
+        "impressions", "clicks", "cost", "conv_cnt", "avg_rank",
     ],
     "AD_DETAIL": [
         "date", "customer_id", "campaign_id", "adgroup_id", "keyword_id",
-        "ad_id", "business_channel_id", "media", "pc_mobile_type",
-        "impressions", "clicks", "cost", "avg_rank",
+        "ad_id", "business_channel_id", "bsn_num", "pc_mobile_type",
+        "impressions", "clicks", "cost", "conv_cnt", "avg_rank",
+        "ctr", "avg_cpc",
     ],
+    # AD_CONVERSION 13컬럼 (검증 완료)
+    # col9=conv_session, col10=conv_type(string), col11=conversions, col12=conversion_value(원)
     "AD_CONVERSION": [
         "date", "customer_id", "campaign_id", "adgroup_id", "keyword_id",
-        "ad_id", "business_channel_id", "media", "pc_mobile_type",
-        "conv_type", "conversions", "conversion_value",
+        "ad_id", "business_channel_id", "bsn_num", "pc_mobile_type",
+        "conv_session", "conv_type", "conversions", "conversion_value",
     ],
     "KEYWORD": [
         "date", "customer_id", "campaign_id", "adgroup_id", "keyword_id",

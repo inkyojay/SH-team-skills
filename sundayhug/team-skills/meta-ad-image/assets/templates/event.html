@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg-cream: #f5f1e8;
+    --text-dark: #2c2520;
+    --text-mid: #6b5d52;
+    --accent-red: #e84d3d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1350px;
+    overflow: hidden;
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg-cream);
+  }
+
+  .ad-container {
+    width: 1080px;
+    height: 1350px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* 상단 브랜드 + 카피 */
+  .top-area {
+    width: 100%;
+    padding: 80px 80px 40px;
+    text-align: center;
+  }
+
+  .brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .brand-name {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--text-dark);
+  }
+
+  .brand-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--accent-red);
+    border-radius: 8px;
+  }
+
+  .brand-icon::after {
+    content: "▶";
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .headline {
+    font-size: 50px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.4;
+    letter-spacing: -1.5px;
+    margin-bottom: 32px;
+  }
+
+  /* 뱃지 + 이벤트 일시 */
+  .event-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--accent-red);
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 8px 24px;
+    border-radius: 8px;
+    letter-spacing: 2px;
+  }
+
+  .event-date {
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--text-mid);
+  }
+
+  /* 중앙 제품 이미지 */
+  .product-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px 60px;
+  }
+
+  .product-image {
+    max-height: 750px;
+    max-width: 900px;
+    object-fit: contain;
+  }
+</style>
+</head>
+<body>
+  <div class="ad-container">
+    <div class="top-area">
+      <div class="brand-row">
+        <span class="brand-name">{{BRAND_NAME}}</span>
+        <span class="brand-icon"></span>
+      </div>
+      <div class="headline">{{HEADLINE}}</div>
+      <div class="event-info">
+        <span class="badge">{{BADGE_TEXT}}</span>
+        <span class="event-date">{{EVENT_DATE}}</span>
+      </div>
+    </div>
+
+    <div class="product-area">
+      <img class="product-image" src="{{IMAGE_PATH}}" alt="product">
+    </div>
+  </div>
+</body>
+</html>

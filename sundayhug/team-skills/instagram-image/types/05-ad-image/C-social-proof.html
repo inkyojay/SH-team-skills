@@ -1,0 +1,65 @@
+<!--=============================================================
+  TYPE: 광고 이미지 (Ad Image)
+  VARIATION: C — Social Proof
+  DIMENSIONS: 1080 × 1080px (1:1)
+  PURPOSE: 광고용 — 사회적 증거 (리뷰/평점/판매량)
+  IMAGE SPEC: 1080 × 540px (상단 절반)
+=============================================================-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>광고 이미지 - C Social Proof</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../_base-styles.css">
+<link rel="stylesheet" href="../../_palettes.css">
+</head>
+<body style="margin:0;padding:0;background:#eee;">
+<div class="ig-frame" data-type="feed">
+  <div style="display:flex;flex-direction:column;height:100%;">
+    <!-- Top: Product image -->
+    <div style="flex:0 0 50%;position:relative;overflow:hidden;">
+      <img src="../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="실키밤부 슬리핑백" style="width:100%;height:100%;object-fit:cover;">
+      <div style="position:absolute;top:32px;left:32px;">
+        <span class="ig-badge">BEST SELLER</span>
+      </div>
+    </div>
+
+    <!-- Bottom: Social proof -->
+    <div style="flex:1;background:var(--palette-gradient);padding:48px 60px;display:flex;flex-direction:column;justify-content:center;">
+      <div style="text-align:center;margin-bottom:32px;">
+        <div style="font-size:24px;font-weight:600;color:var(--accent-dark);margin-bottom:8px;">엄마들의 선택</div>
+        <div style="font-size:36px;font-weight:700;color:var(--dark);">실키밤부 슬리핑백</div>
+      </div>
+
+      <!-- Stats row -->
+      <div style="display:flex;gap:16px;margin-bottom:32px;">
+        <div class="ig-stat" style="flex:1;">
+          <div class="ig-stat-number" style="font-size:56px;">4.9</div>
+          <div class="ig-stat-label" style="font-size:20px;">평균 평점</div>
+        </div>
+        <div style="width:1px;background:var(--palette-card-border);"></div>
+        <div class="ig-stat" style="flex:1;">
+          <div class="ig-stat-number" style="font-size:56px;">3,847</div>
+          <div class="ig-stat-label" style="font-size:20px;">실 구매 리뷰</div>
+        </div>
+        <div style="width:1px;background:var(--palette-card-border);"></div>
+        <div class="ig-stat" style="flex:1;">
+          <div class="ig-stat-number" style="font-size:56px;">98%</div>
+          <div class="ig-stat-label" style="font-size:20px;">만족도</div>
+        </div>
+      </div>
+
+      <!-- Price + brand -->
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div class="ig-product-info" style="margin-top:0;">
+          <span class="ig-discount" style="font-size:36px;">52%</span>
+          <span class="ig-price" style="font-size:36px;">29,900원</span>
+        </div>
+        <span class="ig-brand-logo" style="color:var(--accent-dark);font-size:22px;">Sunday Hug</span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

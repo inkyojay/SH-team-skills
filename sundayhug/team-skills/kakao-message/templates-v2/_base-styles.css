@@ -1,0 +1,1137 @@
+/* 썬데이허그 카카오 메시지 템플릿 디자인 시스템
+   800px 고정 프레임 기반 카카오 메시지 이미지 생성용
+   이 파일의 내용을 <style> 태그 안에 삽입하세요
+   _palettes.css 내용도 함께 삽입하세요 */
+
+@import url('../_global-variables.css');
+
+/* ============================================
+   BODY (카카오 전용)
+   ============================================ */
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--dark);
+  line-height:1.8;
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ============================================
+   KAKAO FRAME CONTAINERS
+   ============================================ */
+
+.kakao-frame {
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--dark);
+  -webkit-font-smoothing: antialiased;
+}
+.kakao-frame[data-type="image"]     { width: 800px; height: 400px; }
+.kakao-frame[data-type="wide"]      { width: 800px; height: 600px; }
+.kakao-frame[data-type="square"]    { width: 800px; height: 800px; }
+.kakao-frame[data-type="header"]    { width: 800px; height: 400px; }
+.kakao-frame[data-type="list-item"] { width: 800px; height: 800px; }
+.kakao-frame[data-type="alimtalk"]  { width: 800px; min-height: 400px; }
+
+/* ============================================
+   4. TYPOGRAPHY (pixel sizes for 800px canvas)
+   ============================================ */
+
+.km-title {
+  font-family: var(--font-body);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #fff;
+}
+.km-subtitle {
+  font-family: var(--font-body);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+.km-body {
+  font-family: var(--font-body);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+.km-price {
+  font-family: var(--font-en);
+  font-size: 44px;
+  font-weight: 700;
+  color: #fff;
+}
+.km-price-orig {
+  font-family: var(--font-en);
+  font-size: 24px;
+  font-weight: 400;
+  text-decoration: line-through;
+  color: rgba(255,255,255,.5);
+}
+.km-discount {
+  font-family: var(--font-en);
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--danger);
+}
+.km-label {
+  font-family: var(--font-en);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.km-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 100px;
+  font-family: var(--font-en);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  background: var(--palette-badge-bg);
+  color: var(--palette-badge-text);
+}
+.km-cta {
+  display: inline-block;
+  padding: 16px 48px;
+  border-radius: 8px;
+  font-size: 24px;
+  font-weight: 600;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* ============================================
+   5. LAYOUT — Hero & Overlays
+   ============================================ */
+
+/* Hero image — fills frame */
+.km-hero-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Gradient overlays */
+.km-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+.km-overlay.bottom {
+  bottom: 0;
+  padding-top: 120px;
+  background: linear-gradient(to top, rgba(26,26,26,.8) 0%, rgba(26,26,26,.4) 50%, transparent 100%);
+  justify-content: flex-end;
+}
+.km-overlay.top {
+  top: 0;
+  padding-bottom: 120px;
+  background: linear-gradient(to bottom, rgba(26,26,26,.7) 0%, transparent 100%);
+}
+.km-overlay.full {
+  top: 0;
+  bottom: 0;
+  background: rgba(26,26,26,.45);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.km-overlay.light {
+  background: linear-gradient(to top, rgba(255,255,255,.9) 0%, rgba(255,255,255,.5) 50%, transparent 100%);
+}
+.km-overlay.light .km-title { color: var(--dark); }
+.km-overlay.light .km-price { color: var(--dark); }
+.km-overlay.light .km-price-orig { color: var(--sub); }
+
+/* Product info block */
+.km-product-info {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* ============================================
+   6. LAYOUT — Brand Bar
+   ============================================ */
+
+.km-brand-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 40px;
+  background: var(--dark2);
+}
+.km-brand-bar-logo {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255,255,255,.6);
+}
+.km-brand-bar-text {
+  font-family: var(--font-en);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  color: rgba(255,255,255,.35);
+}
+
+/* ============================================
+   7. LAYOUT — List Items
+   ============================================ */
+
+.km-list-item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 40px;
+  border-bottom: 1px solid var(--line);
+}
+.km-list-item:last-child { border-bottom: none; }
+.km-list-item-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--bg-warm);
+}
+.km-list-item-img img { width: 100%; height: 100%; object-fit: cover; }
+.km-list-item-body { flex: 1; }
+.km-list-item-name {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.km-list-item-desc {
+  font-size: 20px;
+  color: var(--body);
+  margin-bottom: 12px;
+}
+.km-list-item-prices {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.km-list-item-discount {
+  font-family: var(--font-en);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--danger);
+}
+.km-list-item-price {
+  font-family: var(--font-en);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--dark);
+}
+.km-list-item-orig {
+  font-family: var(--font-en);
+  font-size: 20px;
+  color: var(--sub);
+  text-decoration: line-through;
+}
+
+/* ============================================
+   8. CAROUSEL CARDS
+   ============================================ */
+
+.km-card {
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--dark);
+  -webkit-font-smoothing: antialiased;
+}
+.km-card[data-type="feed"]     { width: 800px; height: 600px; }
+.km-card[data-type="commerce"] { width: 800px; height: 800px; }
+
+/* ============================================
+   9. COMMERCE LAYOUT
+   ============================================ */
+
+.km-commerce-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+.km-commerce-body { padding: 40px; }
+.km-commerce-category {
+  font-family: var(--font-en);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.km-commerce-name {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 12px;
+  line-height: 1.35;
+}
+.km-commerce-desc {
+  font-size: 22px;
+  color: var(--body);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.km-commerce-prices {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.km-commerce-discount {
+  font-family: var(--font-en);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--danger);
+}
+.km-commerce-price {
+  font-family: var(--font-en);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--dark);
+}
+.km-commerce-orig {
+  font-family: var(--font-en);
+  font-size: 22px;
+  color: var(--sub);
+  text-decoration: line-through;
+}
+.km-commerce-badge {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-family: var(--font-en);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  background: var(--palette-badge-bg);
+  color: var(--palette-badge-text);
+}
+
+/* ============================================
+   10. ALIMTALK STYLES
+   ============================================ */
+
+.km-alimtalk {
+  padding: 40px;
+  background: var(--bg);
+}
+.km-alimtalk-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid var(--dark);
+}
+.km-alimtalk-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-warm);
+  flex-shrink: 0;
+}
+.km-alimtalk-logo img { width: 100%; height: 100%; object-fit: cover; }
+.km-alimtalk-brand {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--dark);
+}
+.km-alimtalk-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 24px;
+  line-height: 1.4;
+}
+.km-alimtalk-body {
+  font-size: 22px;
+  color: var(--body);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.km-alimtalk-divider {
+  height: 1px;
+  background: var(--line);
+  margin: 24px 0;
+}
+.km-alimtalk-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 22px;
+}
+.km-alimtalk-row:last-child { border-bottom: none; }
+.km-alimtalk-row-label { color: var(--sub); }
+.km-alimtalk-row-value { font-weight: 600; color: var(--dark); }
+.km-alimtalk-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+  margin-top: 8px;
+  border-top: 2px solid var(--dark);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--dark);
+}
+.km-alimtalk-note {
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--bg-warm);
+  border-radius: 8px;
+  font-size: 18px;
+  color: var(--body);
+  line-height: 1.7;
+}
+.km-alimtalk-btn {
+  display: block;
+  text-align: center;
+  padding: 20px;
+  margin-top: 24px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 22px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ============================================
+   11. ITEM LIST ALIMTALK
+   ============================================ */
+
+.km-itemlist { padding: 40px; }
+.km-itemlist-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.km-itemlist-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 24px;
+}
+.km-itemlist-item {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+}
+.km-itemlist-item:last-child { border-bottom: none; }
+.km-itemlist-item-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--bg-warm);
+}
+.km-itemlist-item-img img { width: 100%; height: 100%; object-fit: cover; }
+.km-itemlist-item-body { flex: 1; }
+.km-itemlist-item-name {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+.km-itemlist-item-desc {
+  font-size: 18px;
+  color: var(--body);
+  margin-bottom: 8px;
+}
+.km-itemlist-item-price {
+  font-family: var(--font-en);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--dark);
+}
+.km-itemlist-item-qty {
+  font-size: 18px;
+  color: var(--sub);
+}
+.km-itemlist-summary {
+  margin-top: 24px;
+  padding: 24px;
+  background: var(--bg-warm);
+  border-radius: 8px;
+}
+.km-itemlist-summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 20px;
+}
+.km-itemlist-summary-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  margin-top: 8px;
+  border-top: 2px solid var(--dark);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* ============================================
+   12. EVENT-SPECIFIC
+   ============================================ */
+
+.km-event-title {
+  font-family: var(--font-body);
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #fff;
+}
+.km-event-subtitle {
+  font-size: 28px;
+  font-weight: 400;
+  color: rgba(255,255,255,.8);
+  margin-top: 8px;
+}
+.km-event-period {
+  font-family: var(--font-en);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  color: rgba(255,255,255,.6);
+  margin-top: 16px;
+}
+
+/* ============================================
+   13. LIFESTYLE-SPECIFIC
+   ============================================ */
+
+.km-lifestyle-quote {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 300;
+  font-style: italic;
+  color: #fff;
+  line-height: 1.6;
+}
+.km-lifestyle-brand {
+  font-family: var(--font-en);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: .25em;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+/* ============================================
+   14. PREMIUM COMMERCE
+   ============================================ */
+
+.km-premium-img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+}
+.km-premium-body {
+  padding: 32px 40px;
+  text-align: center;
+  background: var(--palette-gradient);
+}
+.km-premium-label {
+  font-family: var(--font-en);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.km-premium-name {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+.km-premium-prices {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 12px;
+}
+
+/* ============================================
+   15. BUNDLE COMMERCE CARD
+   ============================================ */
+
+.km-bundle-hero {
+  position: relative;
+  width: 100%;
+  height: 500px;
+}
+.km-bundle-hero img { width: 100%; height: 100%; object-fit: cover; }
+.km-bundle-body {
+  padding: 32px 40px;
+  background: var(--bg);
+}
+.km-bundle-label {
+  font-family: var(--font-en);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.km-bundle-name {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+.km-bundle-items {
+  font-size: 18px;
+  color: var(--body);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.km-bundle-prices {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+/* ============================================
+   16. SALE CARD OVERLAY
+   ============================================ */
+
+.km-sale-tag {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  z-index: 2;
+  padding: 12px 24px;
+  background: var(--danger);
+  color: #fff;
+  font-family: var(--font-en);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  border-radius: 4px;
+}
+.km-sale-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px 40px;
+  background: linear-gradient(to top, rgba(26,26,26,.85) 0%, transparent 100%);
+  z-index: 1;
+}
+
+/* ============================================
+   17. STORY CARD
+   ============================================ */
+
+.km-story-num {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.km-story-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+.km-story-body {
+  font-size: 22px;
+  color: rgba(255,255,255,.7);
+  line-height: 1.6;
+}
+
+/* ============================================
+   18. CURATED LIST HEADER
+   ============================================ */
+
+.km-curated-header {
+  padding: 32px 40px;
+  background: var(--palette-gradient);
+  text-align: center;
+}
+.km-curated-label {
+  font-family: var(--font-en);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.km-curated-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+/* ============================================
+   19. RECOMMENDATION ALIMTALK
+   ============================================ */
+
+.km-rec-card {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+.km-rec-card-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.km-rec-card-img img { width: 100%; height: 100%; object-fit: cover; }
+.km-rec-card-body { flex: 1; }
+.km-rec-card-name {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+.km-rec-card-desc {
+  font-size: 18px;
+  color: var(--body);
+  margin-bottom: 8px;
+}
+.km-rec-card-prices {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.km-rec-card-discount {
+  font-family: var(--font-en);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--danger);
+}
+.km-rec-card-price {
+  font-family: var(--font-en);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+/* ============================================
+   20. SPLIT LAYOUT — 좌우 분할형
+   ============================================ */
+
+.km-split {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.km-split-text {
+  flex: 0 0 50%;
+  padding: 48px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--bg-warm);
+}
+.km-split-img {
+  flex: 0 0 50%;
+  overflow: hidden;
+  position: relative;
+}
+.km-split-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* 6:4 split (wider text) */
+.km-split.w60 .km-split-text { flex: 0 0 60%; }
+.km-split.w60 .km-split-img  { flex: 0 0 40%; }
+/* 4:6 split (wider image) */
+.km-split.w40 .km-split-text { flex: 0 0 40%; }
+.km-split.w40 .km-split-img  { flex: 0 0 60%; }
+
+/* ============================================
+   21. INFO BAR — 하단 정보 바
+   ============================================ */
+
+.km-info-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 28px 40px;
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+}
+.km-info-bar-left { flex: 1; }
+.km-info-bar-name {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+.km-info-bar-desc {
+  font-size: 16px;
+  color: var(--body);
+}
+.km-info-bar-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+.km-info-bar-discount {
+  font-family: var(--font-en);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--danger);
+}
+.km-info-bar-price {
+  font-family: var(--font-en);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--dark);
+}
+.km-info-bar-orig {
+  font-family: var(--font-en);
+  font-size: 16px;
+  color: var(--sub);
+  text-decoration: line-through;
+}
+
+/* ============================================
+   22. CENTER CARD — 중앙 정렬형
+   ============================================ */
+
+.km-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 48px;
+  text-align: center;
+  background: var(--palette-gradient);
+}
+.km-center .km-title { color: var(--dark); }
+.km-center .km-subtitle { color: var(--body); }
+
+/* ============================================
+   23. STRIP — 하단 브랜드 스트립
+   ============================================ */
+
+.km-strip {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 40px;
+  background: rgba(26,26,26,.7);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+}
+.km-strip-brand {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255,255,255,.7);
+}
+.km-strip-text {
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(255,255,255,.6);
+}
+
+/* ============================================
+   24. TOP-IMAGE CARD — 상단 이미지 + 하단 정보
+   ============================================ */
+
+.km-top-img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  display: block;
+}
+.km-card-body {
+  padding: 32px 40px;
+  background: var(--bg);
+}
+.km-card-body.gradient { background: var(--palette-gradient); }
+.km-card-body.center { text-align: center; }
+
+/* ============================================
+   25. CAROUSEL COVER CARD — 캐러셀 첫 페이지
+   ============================================ */
+
+.km-cover-text{
+  position:absolute;top:0;left:0;right:0;bottom:0;z-index:1;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:48px 56px;
+}
+.km-cover-tag{
+  font-family:var(--font-en);font-size:13px;font-weight:500;
+  letter-spacing:.2em;color:var(--accent);margin-bottom:8px;
+}
+.km-cover-title{
+  font-size:40px;font-weight:700;color:var(--dark);
+  line-height:1.3;margin-bottom:12px;
+}
+.km-cover-sub{
+  font-size:18px;color:var(--body);line-height:1.5;
+}
+.km-cover-date{
+  font-family:var(--font-en);font-size:14px;font-weight:500;
+  letter-spacing:.05em;color:var(--sub);margin-top:12px;
+}
+/* 커버: 라이프스타일 오버레이 (어둡게) */
+.km-cover-text.overlay{
+  background:linear-gradient(180deg,rgba(26,26,26,.5) 0%,rgba(26,26,26,.25) 100%);
+}
+.km-cover-text.overlay .km-cover-tag{color:rgba(255,255,255,.8);}
+.km-cover-text.overlay .km-cover-title{color:#fff;}
+.km-cover-text.overlay .km-cover-sub{color:rgba(255,255,255,.7);}
+.km-cover-text.overlay .km-cover-date{color:rgba(255,255,255,.5);}
+/* 커버: 그라데이션 배경 (이미지 없음) */
+.km-cover-gradient{
+  width:100%;height:100%;background:var(--palette-gradient);
+  display:flex;flex-direction:column;justify-content:center;
+  align-items:center;text-align:center;padding:48px;
+}
+
+/* ============================================
+   26. DUAL PRODUCT CARD — 2개 제품 비교
+   ============================================ */
+
+.km-dual{
+  display:flex;gap:24px;padding:0 40px;
+}
+.km-dual-item{
+  flex:1;text-align:center;
+}
+.km-dual-img{
+  width:100%;aspect-ratio:1;object-fit:cover;
+  border-radius:8px;display:block;
+}
+.km-dual-name{
+  font-size:20px;font-weight:600;color:var(--dark);margin-top:14px;
+}
+.km-dual-desc{
+  font-size:14px;color:var(--sub);margin-top:4px;
+}
+.km-dual-size{
+  display:inline-block;padding:4px 14px;
+  border:1px solid var(--line);border-radius:4px;
+  font-family:var(--font-en);font-size:13px;font-weight:500;
+  color:var(--body);margin-top:8px;
+}
+.km-dual-price-row{
+  display:flex;align-items:center;justify-content:center;
+  gap:6px;margin-top:10px;
+}
+.km-dual-discount{
+  font-family:var(--font-en);font-size:18px;font-weight:700;color:var(--danger);
+}
+.km-dual-price{
+  font-family:var(--font-en);font-size:18px;font-weight:700;color:var(--dark);
+}
+.km-dual-orig{
+  font-family:var(--font-en);font-size:14px;color:var(--sub);text-decoration:line-through;
+}
+/* 사이즈 뱃지 (강조) */
+.km-size-badge{
+  display:inline-block;padding:4px 14px;
+  background:var(--palette-badge-bg);color:var(--palette-badge-text);
+  border-radius:4px;font-family:var(--font-en);font-size:12px;
+  font-weight:700;letter-spacing:.05em;margin-top:8px;
+}
+
+/* ============================================
+   27. TRIPLE PRODUCT LIST — 3개 제품 넘버링
+   ============================================ */
+
+.km-triple{
+  padding:28px 40px;
+}
+.km-triple-item{
+  display:flex;align-items:center;gap:16px;
+  padding:20px 0;
+  border-bottom:1px solid var(--line);
+}
+.km-triple-item:last-child{border-bottom:none;}
+.km-triple-num{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--palette-badge-bg);color:var(--palette-badge-text);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-en);font-size:14px;font-weight:700;
+  flex-shrink:0;
+}
+.km-triple-img{
+  width:88px;height:88px;border-radius:8px;
+  object-fit:cover;flex-shrink:0;display:block;
+}
+.km-triple-body{flex:1;min-width:0;}
+.km-triple-desc{
+  font-size:14px;color:var(--sub);margin-bottom:2px;
+}
+.km-triple-name{
+  font-size:18px;font-weight:600;color:var(--dark);
+}
+.km-triple-price-row{
+  display:flex;align-items:baseline;gap:6px;margin-top:4px;
+}
+.km-triple-badge{
+  display:inline-block;padding:2px 8px;
+  background:var(--palette-badge-bg);color:var(--palette-badge-text);
+  border-radius:3px;font-family:var(--font-en);font-size:11px;
+  font-weight:700;
+}
+.km-triple-price{
+  font-family:var(--font-en);font-size:16px;font-weight:700;color:var(--dark);
+}
+
+/* ============================================
+   28. OPTION COMPARE CARD — 옵션 A/B 비교
+   ============================================ */
+
+.km-option-header{
+  display:flex;gap:12px;justify-content:center;margin-bottom:20px;
+}
+.km-option-tab{
+  padding:8px 24px;border:1px solid var(--line);border-radius:100px;
+  font-size:15px;font-weight:500;color:var(--body);
+  background:var(--bg);
+}
+.km-option-tab.active{
+  border-color:var(--dark);color:var(--dark);font-weight:600;
+  background:var(--bg);
+}
+.km-option-products{
+  display:flex;gap:16px;padding:0 40px;
+}
+.km-option-item{
+  flex:1;text-align:center;
+}
+.km-option-img{
+  width:100%;height:200px;object-fit:cover;border-radius:8px;display:block;
+}
+.km-option-name{font-size:16px;font-weight:500;color:var(--dark);margin-top:10px;}
+
+/* 가격 비교 테이블 */
+.km-price-table{
+  padding:16px 40px;
+}
+.km-price-row{
+  display:flex;justify-content:space-between;
+  padding:8px 0;font-size:15px;color:var(--body);
+}
+.km-price-row.highlight{
+  font-weight:700;color:var(--dark);
+}
+.km-price-row .km-price-label{color:var(--sub);}
+.km-price-row .km-price-value{font-family:var(--font-en);font-weight:600;}
+
+/* ============================================
+   29. COUPON SECTION — 쿠폰 영역
+   ============================================ */
+
+.km-coupon-section{
+  display:flex;gap:12px;padding:16px 40px;
+}
+.km-coupon{
+  flex:1;padding:16px 20px;
+  border:1px dashed var(--accent);border-radius:8px;
+  text-align:center;background:var(--bg-warm);
+}
+.km-coupon-amount{
+  font-family:var(--font-en);font-size:22px;font-weight:700;
+  color:var(--accent-dark);margin-bottom:2px;
+}
+.km-coupon-label{
+  font-size:13px;color:var(--sub);
+}
+
+/* ============================================
+   30. MIDNIGHT-LUXE DARK OVERRIDES
+   ============================================ */
+
+[data-palette="midnight-luxe"] .kakao-frame { background: var(--dark2); }
+[data-palette="midnight-luxe"] .km-commerce-body { background: var(--dark2); }
+[data-palette="midnight-luxe"] .km-commerce-name { color: #fff; }
+[data-palette="midnight-luxe"] .km-commerce-desc { color: rgba(255,255,255,.6); }
+[data-palette="midnight-luxe"] .km-commerce-price { color: #fff; }
+[data-palette="midnight-luxe"] .km-list-item { border-bottom-color: rgba(255,255,255,.1); }
+[data-palette="midnight-luxe"] .km-list-item-name { color: #fff; }
+[data-palette="midnight-luxe"] .km-list-item-price { color: #fff; }
+[data-palette="midnight-luxe"] .km-alimtalk { background: var(--dark2); }
+[data-palette="midnight-luxe"] .km-alimtalk-brand { color: #fff; }
+[data-palette="midnight-luxe"] .km-alimtalk-title { color: #fff; }
+[data-palette="midnight-luxe"] .km-alimtalk-body { color: rgba(255,255,255,.7); }
+[data-palette="midnight-luxe"] .km-alimtalk-row-value { color: #fff; }
+[data-palette="midnight-luxe"] .km-alimtalk-total { color: #fff; border-top-color: rgba(255,255,255,.2); }
+[data-palette="midnight-luxe"] .km-alimtalk-header { border-bottom-color: rgba(255,255,255,.2); }
+[data-palette="midnight-luxe"] .km-alimtalk-note { background: rgba(255,255,255,.05); color: rgba(255,255,255,.6); }
+[data-palette="midnight-luxe"] .km-premium-body { background: var(--dark2); }
+[data-palette="midnight-luxe"] .km-premium-name { color: #fff; }
+[data-palette="midnight-luxe"] .km-bundle-body { background: var(--dark2); }
+[data-palette="midnight-luxe"] .km-bundle-name { color: #fff; }
+[data-palette="midnight-luxe"] .km-bundle-items { color: rgba(255,255,255,.6); }
+[data-palette="midnight-luxe"] .km-curated-header { background: var(--dark2); }
+[data-palette="midnight-luxe"] .km-curated-title { color: #fff; }
+[data-palette="midnight-luxe"] .km-itemlist { background: var(--dark2); }
+[data-palette="midnight-luxe"] .km-itemlist-title { color: #fff; }
+[data-palette="midnight-luxe"] .km-itemlist-item-name { color: #fff; }
+[data-palette="midnight-luxe"] .km-itemlist-item-price { color: #fff; }
+[data-palette="midnight-luxe"] .km-itemlist-item { border-bottom-color: rgba(255,255,255,.1); }
+[data-palette="midnight-luxe"] .km-itemlist-summary { background: rgba(255,255,255,.05); }
+[data-palette="midnight-luxe"] .km-itemlist-summary-total { border-top-color: rgba(255,255,255,.2); color: #fff; }
+[data-palette="midnight-luxe"] .km-dual-name { color: #fff; }
+[data-palette="midnight-luxe"] .km-dual-price { color: #fff; }
+[data-palette="midnight-luxe"] .km-triple-item { border-bottom-color: rgba(255,255,255,.1); }
+[data-palette="midnight-luxe"] .km-triple-name { color: #fff; }
+[data-palette="midnight-luxe"] .km-triple-price { color: #fff; }
+[data-palette="midnight-luxe"] .km-cover-title { color: #fff; }
+[data-palette="midnight-luxe"] .km-cover-sub { color: rgba(255,255,255,.7); }
+[data-palette="midnight-luxe"] .km-option-tab { border-color: rgba(255,255,255,.2); color: rgba(255,255,255,.5); background: transparent; }
+[data-palette="midnight-luxe"] .km-option-tab.active { border-color: #fff; color: #fff; }
+[data-palette="midnight-luxe"] .km-option-name { color: #fff; }
+[data-palette="midnight-luxe"] .km-coupon { border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.05); }
+[data-palette="midnight-luxe"] .km-coupon-amount { color: var(--accent); }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="sunday_hug_styles.css">
+</head>
+<body>
+    <div class="card card-product-sh">
+        <!-- 배경 이미지 (제품 사진 또는 텍스처) -->
+        <img class="background" src="{{BACKGROUND_IMAGE}}" alt="">
+
+        <!-- 상단 그라데이션 오버레이 -->
+        <div class="overlay"></div>
+
+        <!-- 콘텐츠 -->
+        <div class="content">
+            <!-- 브랜드명 (상단 중앙) -->
+            <div class="brand">{{BRAND_NAME}}</div>
+
+            <!-- 제품 정보 영역 (좌측) -->
+            <div class="product-info">
+                <div class="product-badge">{{BADGE_ICON}}</div>
+                <h1 class="product-name">{{PRODUCT_NAME}}</h1>
+                <p class="product-subtitle">{{PRODUCT_SUBTITLE}}</p>
+                <p class="product-price">₩ {{PRICE}}</p>
+            </div>
+
+            <!-- 하단 감성 카피 -->
+            <div class="bottom-copy">
+                <p>{{COPY_LINE_1}}</p>
+                <p>{{COPY_LINE_2}}</p>
+                <p class="highlight">{{COPY_LINE_3}}</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

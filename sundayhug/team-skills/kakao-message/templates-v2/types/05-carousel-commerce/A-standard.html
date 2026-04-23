@@ -1,0 +1,47 @@
+<!--=============================================================
+  TYPE: 캐러셀 커머스형 (Carousel Commerce)
+  VARIATION: A — Standard · 커버 + 단일 제품 카드
+  DIMENSIONS: 800 × 800px per card (1:1)
+  PURPOSE: 커버로 프로모션 소개 → 개별 제품 카드
+  IMAGE SPEC: 커버 800×800px · 제품 800×500px (cover 적용)
+=============================================================-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>캐러셀 커머스 - A Standard</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../_base-styles.css">
+<link rel="stylesheet" href="../../_palettes.css">
+</head>
+<body style="margin:0;padding:0;background:#eee;">
+
+<!-- Card 1: Cover -->
+<div class="km-card" data-type="commerce">
+  <img class="km-hero-img" src="../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="커버">
+  <div class="km-cover-text overlay" style="justify-content:flex-end;padding-bottom:64px;">
+    <div class="km-cover-tag">NEW COLLECTION</div>
+    <div class="km-cover-title">봄 슬리핑백 컬렉션<br>최대 52% 특가</div>
+    <div class="km-cover-sub" style="color:rgba(255,255,255,.7);">실키밤부 · 트리플밤부 · 메쉬</div>
+    <div class="km-cover-date" style="color:rgba(255,255,255,.5);">2026.03.13(목) — 03.20(목)</div>
+  </div>
+</div>
+
+<!-- Card 2: Single Product -->
+<div class="km-card" data-type="commerce" style="margin-top:20px;">
+  <img class="km-commerce-img" src="../../../../../projects/detail-pages/current/images/sleepsack-silky-bamboo/lifestyle-02.jpg" alt="실키밤부 슬리핑백" style="height:500px;">
+  <div class="km-commerce-body" style="padding:32px 40px;">
+    <div class="km-commerce-badge">BEST</div>
+    <div class="km-commerce-category">SLEEPING BAG</div>
+    <div class="km-commerce-name">실키밤부 슬리핑백</div>
+    <div class="km-commerce-desc" style="font-size:20px;margin-bottom:12px;">화이트크림 · S / M / L</div>
+    <div class="km-commerce-prices">
+      <span class="km-commerce-discount">52%</span>
+      <span class="km-commerce-price">29,900원</span>
+      <span class="km-commerce-orig">62,000원</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

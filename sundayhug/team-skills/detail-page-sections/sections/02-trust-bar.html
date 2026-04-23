@@ -1,0 +1,26 @@
+<!--=============================================================
+  SECTION: Trust Bar
+  ORDER: 02 (Hero 바로 아래)
+  REQUIRED: ✅ 필수
+  BACKGROUND: dark2
+  PURPOSE: 히어로 직후 핵심 신뢰 포인트 3가지를 즉시 노출하여
+           스크롤 전에 '이 제품은 믿을 수 있다'는 인상을 심는다.
+
+  DESIGN NOTES:
+  - dark 배경에 white 텍스트, 항목 사이 세로 구분선
+  - 각 항목은 메인 텍스트 + small 부가설명
+  - 보통 3개 항목: 인증, 제조, 소재 관련
+
+  DATA REQUIRED:
+  - {{trust_items}} : 3개 항목 배열
+    각 항목: { main: "KC 인증", sub: "안전확인 완료" }
+
+  CUSTOMIZATION:
+  - 제품에 따라 항목 내용만 변경 (구조는 동일)
+  - 예: 힙시트 → "KC인증 / 인체공학설계 / 국내생산"
+=============================================================-->
+<div class="trust-bar">
+  <div class="trust-bar-item">{{trust_1_main}}<small>{{trust_1_sub}}</small></div>
+  <div class="trust-bar-item">{{trust_2_main}}<small>{{trust_2_sub}}</small></div>
+  <div class="trust-bar-item">{{trust_3_main}}<small>{{trust_3_sub}}</small></div>
+</div>

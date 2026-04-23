@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+  :root {
+    --bg-warm: #f2ede7;
+    --text-dark: #2c2520;
+    --text-mid: #6b5d52;
+    --text-light: #999;
+    --card-bg: rgba(255, 255, 255, 0.92);
+    --accent-pink: #e8a0b4;
+    --star-color: #f5c518;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1350px;
+    overflow: hidden;
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg-warm);
+  }
+
+  .ad-container {
+    width: 1080px;
+    height: 1350px;
+    position: relative;
+  }
+
+  /* 배경 제품 이미지 */
+  .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+  }
+
+  /* 전체 살짝 밝은 오버레이 */
+  .overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(242, 237, 231, 0.25);
+    z-index: 1;
+  }
+
+  /* 브랜드명 */
+  .brand-name {
+    position: absolute;
+    top: 60px;
+    left: 70px;
+    z-index: 3;
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--text-mid);
+    letter-spacing: 1px;
+  }
+
+  /* 리뷰 말풍선 영역 */
+  .reviews {
+    position: absolute;
+    top: 280px;
+    right: 50px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 520px;
+  }
+
+  .review-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 24px 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  }
+
+  .review-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .stars {
+    color: var(--star-color);
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+
+  .reviewer {
+    font-size: 18px;
+    color: var(--text-light);
+  }
+
+  .review-text {
+    font-size: 23px;
+    font-weight: 400;
+    color: var(--text-dark);
+    line-height: 1.5;
+  }
+
+  .review-text strong {
+    font-weight: 700;
+  }
+
+  /* 하단 CTA 영역 */
+  .bottom-area {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    z-index: 3;
+    padding: 40px 70px 60px;
+    background: linear-gradient(
+      0deg,
+      rgba(242, 237, 231, 0.95) 0%,
+      rgba(242, 237, 231, 0.9) 60%,
+      rgba(242, 237, 231, 0) 100%
+    );
+  }
+
+  .bottom-subhead {
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--text-mid);
+    margin-bottom: 8px;
+  }
+
+  .bottom-headline {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.35;
+    letter-spacing: -1.5px;
+    margin-bottom: 20px;
+  }
+
+  .bottom-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cta-text {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text-mid);
+    background: rgba(255,255,255,0.7);
+    padding: 10px 28px;
+    border-radius: 8px;
+  }
+
+  .discount-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--accent-pink);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .discount-label {
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+
+  .discount-value {
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="ad-container">
+    <img class="product-image" src="{{IMAGE_PATH}}" alt="product">
+    <div class="overlay"></div>
+
+    <div class="brand-name">{{BRAND_NAME}}</div>
+
+    <div class="reviews">
+      <div class="review-card">
+        <div class="review-top">
+          <span class="stars">★★★★★</span>
+          <span class="reviewer">{{REVIEWER_1}}</span>
+        </div>
+        <div class="review-text">{{REVIEW_1}}</div>
+      </div>
+      <div class="review-card">
+        <div class="review-top">
+          <span class="stars">★★★★★</span>
+          <span class="reviewer">{{REVIEWER_2}}</span>
+        </div>
+        <div class="review-text">{{REVIEW_2}}</div>
+      </div>
+      <div class="review-card">
+        <div class="review-top">
+          <span class="stars">★★★★★</span>
+          <span class="reviewer">{{REVIEWER_3}}</span>
+        </div>
+        <div class="review-text">{{REVIEW_3}}</div>
+      </div>
+    </div>
+
+    <div class="bottom-area">
+      <div class="bottom-subhead">{{SUBHEAD}}</div>
+      <div class="bottom-headline">{{HEADLINE}}</div>
+      <div class="bottom-row">
+        <span class="cta-text">{{PRODUCT_NAME}}</span>
+        <div class="discount-circle">
+          <span class="discount-label">UP TO</span>
+          <span class="discount-value">{{DISCOUNT_RATE}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

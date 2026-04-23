@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+  :root {
+    --text-dark: #2c2520;
+    --accent-red: #e84d3d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1350px;
+    overflow: hidden;
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: #faf8f5;
+  }
+
+  .ad-container {
+    width: 1080px;
+    height: 1350px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* 배경 이미지 - 살짝 탈색/저채도 */
+  .bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.95) saturate(0.85);
+  }
+
+  /* 노이즈 그레인 오버레이 */
+  .grain {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* 상단 유저 프로필 UI */
+  .user-bar {
+    position: absolute;
+    top: 48px;
+    left: 52px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .user-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .user-name {
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+  }
+
+  /* 하트 */
+  .heart-icon {
+    position: absolute;
+    top: 52px;
+    right: 52px;
+    z-index: 3;
+    font-size: 40px;
+    color: var(--accent-red);
+    text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+
+  /* 하단 인용 영역 */
+  .quote-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    padding: 100px 60px 60px;
+    background: linear-gradient(
+      0deg,
+      rgba(0,0,0,0.68) 0%,
+      rgba(0,0,0,0.4) 55%,
+      transparent 100%
+    );
+  }
+
+  .quote-text {
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.55;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+    letter-spacing: -0.5px;
+  }
+
+  .hashtags {
+    font-size: 20px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 16px;
+    letter-spacing: 0.3px;
+  }
+</style>
+</head>
+<body>
+  <div class="ad-container">
+    <img class="bg-image" src="{{IMAGE_PATH}}" alt="ugc">
+    <div class="grain"></div>
+
+    <div class="user-bar">
+      <div class="user-avatar">{{USER_EMOJI}}</div>
+      <div class="user-name">{{USERNAME}}</div>
+    </div>
+
+    <div class="heart-icon">♥</div>
+
+    <div class="quote-bar">
+      <div class="quote-text">{{QUOTE_TEXT}}</div>
+      <div class="hashtags">{{HASHTAGS}}</div>
+    </div>
+  </div>
+</body>
+</html>

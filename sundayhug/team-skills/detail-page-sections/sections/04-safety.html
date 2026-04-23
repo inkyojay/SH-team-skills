@@ -1,0 +1,77 @@
+<!--=============================================================
+  SECTION: Safety (문제 인식)
+  ORDER: 04 (Intro 뒤, Key Features 앞)
+  REQUIRED: 🔶 선택 — 안전 이슈가 있는 제품에만 사용
+  BACKGROUND: white
+  PURPOSE: 고객이 인식하지 못한 위험/문제를 뉴스·전문가 근거로 환기시켜
+           "이 문제를 해결해야 한다"는 인식을 만든다.
+           → 바로 다음 Key Features에서 해결책을 제시하는 흐름.
+
+  WHEN TO USE:
+  - 슬리핑백 (영아 수면 질식 위험)
+  - 카시트 (교통사고 안전)
+  - 아기띠/힙시트 (척추 안전)
+  - 안전과 직접 관련 없는 제품은 이 섹션 생략
+
+  DESIGN NOTES:
+  - safety-news: 뉴스 헤드라인 그리드 (2x2)
+  - cmp: 비교 컬럼 (나쁜 vs 좋은)
+  - callout: 전문가 권고 인용 박스
+  - 이 섹션 뒤에 thin-line 구분선 배치
+
+  DATA REQUIRED:
+  - {{safety_title}}        : 섹션 제목
+  - {{safety_desc}}         : 간단 설명
+  - {{safety_news_headline}}: 뉴스 박스 헤드라인
+  - {{#news_items}}         : 뉴스 항목 배열 (4개)
+    각 항목: { src: "SBS", text: "뉴스 헤드라인..." }
+  - {{safety_news_footer}}  : 뉴스 박스 하단 문구
+  - {{bad_option_name}}     : 비교 왼쪽 이름 (예: "일반 이불")
+  - {{good_option_name}}    : 비교 오른쪽 이름 (예: "슬리핑백")
+  - {{#bad_points}}         : 나쁜 점 배열
+  - {{#good_points}}        : 좋은 점 배열
+  - {{callout_label}}       : 콜아웃 라벨 (예: "AAP RECOMMENDATION")
+  - {{callout_text_html}}   : 콜아웃 내용
+=============================================================-->
+<div class="sec v">
+  <div class="sec-label">Why {{product_name_short}}?</div>
+  <div class="sec-title">{{safety_title}}</div>
+  <div class="sec-desc">{{safety_desc}}</div>
+
+  <div class="safety-news v">
+    <div class="safety-news-head">{{safety_news_headline}}</div>
+    <div class="safety-news-grid">
+      {{#news_items}}
+      <div class="safety-news-item">
+        <div class="safety-news-src">{{src}}</div>
+        <div class="safety-news-txt">{{text}}</div>
+      </div>
+      {{/news_items}}
+    </div>
+    <div class="safety-news-footer">{{safety_news_footer}}</div>
+  </div>
+
+  <div class="cmp v">
+    <div class="cmp-col bad">
+      <div class="cmp-hd bad">{{bad_option_name}}</div>
+      <div class="cmp-img"><img src="{{bad_image}}" alt="{{bad_option_name}}"></div>
+      <div class="cmp-list">
+        {{#bad_points}}<li>{{.}}</li>{{/bad_points}}
+      </div>
+    </div>
+    <div class="cmp-col good">
+      <div class="cmp-hd good">{{good_option_name}}</div>
+      <div class="cmp-img"><img src="{{good_image}}" alt="{{good_option_name}}"></div>
+      <div class="cmp-list">
+        {{#good_points}}<li>{{.}}</li>{{/good_points}}
+      </div>
+    </div>
+  </div>
+
+  <div class="callout v">
+    <div class="callout-label">{{callout_label}}</div>
+    <div class="callout-text">{{callout_text_html}}</div>
+  </div>
+</div>
+
+<div class="thin-line"></div>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=720">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .live-only-price {
+            width: 720px;
+            height: 1280px;
+            background: linear-gradient(180deg, #F8F4F0 0%, #EDE8E2 100%);
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            padding: 40px;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .live-only-tag {
+            font-size: 14px;
+            color: #A38068;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .main-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #333;
+        }
+
+        .discount-badge {
+            display: inline-block;
+            background: #E74C3C;
+            color: white;
+            font-size: 48px;
+            font-weight: 900;
+            padding: 12px 28px;
+            border-radius: 12px;
+            margin-top: 16px;
+        }
+
+        .product-showcase {
+            text-align: center;
+            margin: 32px 0;
+        }
+
+        .product-name {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .product-image {
+            width: 100%;
+            max-width: 500px;
+            height: 320px;
+            object-fit: contain;
+            border-radius: 16px;
+            background: white;
+            padding: 20px;
+        }
+
+        .price-table {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            margin: 24px 0;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 18px;
+        }
+
+        .price-row:last-child {
+            border-bottom: none;
+        }
+
+        .price-label {
+            color: #666;
+        }
+
+        .price-value {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .price-value.original {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .price-value.discount {
+            color: #E74C3C;
+        }
+
+        .final-price {
+            background: #333;
+            color: white;
+            border-radius: 12px;
+            padding: 20px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .final-label {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .final-amount {
+            font-size: 36px;
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body>
+    <div class="live-only-price">
+        <!-- 헤더 -->
+        <div class="header">
+            <div class="live-only-tag">LIVE ONLY</div>
+            <div class="main-title">라이브 단독가</div>
+            <div class="discount-badge">{{DISCOUNT_PERCENT}}%</div>
+        </div>
+
+        <!-- 제품 쇼케이스 -->
+        <div class="product-showcase">
+            <div class="product-name">{{PRODUCT_NAME}}</div>
+            <img src="{{PRODUCT_IMAGE}}" alt="제품" class="product-image">
+        </div>
+
+        <!-- 가격 테이블 -->
+        <div class="price-table">
+            <div class="price-row">
+                <span class="price-label">판매가</span>
+                <span class="price-value original">{{ORIGINAL_PRICE}}원</span>
+            </div>
+            <div class="price-row">
+                <span class="price-label">쿠폰할인가</span>
+                <span class="price-value">{{COUPON_PRICE}}원</span>
+            </div>
+            <div class="price-row">
+                <span class="price-label">라이브 특가 1시간한정</span>
+                <span class="price-value discount">-{{LIVE_DISCOUNT}}원</span>
+            </div>
+            <div class="price-row">
+                <span class="price-label">라이브 즉시 할인</span>
+                <span class="price-value discount">-{{INSTANT_DISCOUNT}}원</span>
+            </div>
+            <div class="price-row">
+                <span class="price-label">라이브 기간 적립 5%</span>
+                <span class="price-value discount">-{{POINT_DISCOUNT}}원</span>
+            </div>
+        </div>
+
+        <!-- 최종 가격 -->
+        <div class="final-price">
+            <span class="final-label">혜택가</span>
+            <span class="final-amount">{{FINAL_PRICE}}원</span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=750">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .mo-promo-banner {
+            width: 750px;
+            height: 1334px;
+            background: #C9C4A8;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 장식 도형들 */
+        .deco-1 { top: 80px; left: 100px; width: 60px; height: 60px; background: #F5E050; border-radius: 50%; }
+        .deco-2 { top: 150px; right: 80px; width: 100px; height: 100px; border: 5px solid #7FB3D5; border-radius: 50%; background: transparent; }
+        .deco-3 { top: 250px; left: 50px; width: 80px; height: 100px; background: #E8A85C; clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); }
+        .deco-4 { bottom: 200px; right: 60px; width: 50px; height: 50px; background: #F5E050; border-radius: 50%; }
+        .deco-5 { bottom: 350px; left: 80px; width: 80px; height: 80px; border: 5px solid #7FB3D5; border-radius: 50%; background: transparent; }
+        .deco-6 { top: 500px; right: 100px; width: 50px; height: 25px; border: 5px solid #E67E22; border-radius: 0 0 50px 50px; border-top: none; }
+        .deco-7 { bottom: 150px; left: 60px; width: 50px; height: 25px; border: 5px solid #82C341; border-radius: 50px 50px 0 0; border-bottom: none; }
+        .deco-8 { bottom: 100px; right: 150px; width: 70px; height: 70px; border: 5px solid #7FB3D5; border-radius: 50%; background: transparent; }
+
+        /* 중앙 콘텐츠 */
+        .content-center {
+            text-align: center;
+            z-index: 10;
+        }
+
+        .event-date {
+            font-size: 24px;
+            color: #666;
+            letter-spacing: 4px;
+            margin-bottom: 16px;
+        }
+
+        .event-title {
+            font-size: 72px;
+            font-weight: 800;
+            color: #333;
+            letter-spacing: 12px;
+            margin-bottom: 20px;
+        }
+
+        .event-subtitle {
+            font-size: 22px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="mo-promo-banner">
+        <!-- 장식 도형들 -->
+        <div class="decoration deco-1"></div>
+        <div class="decoration deco-2"></div>
+        <div class="decoration deco-3"></div>
+        <div class="decoration deco-4"></div>
+        <div class="decoration deco-5"></div>
+        <div class="decoration deco-6"></div>
+        <div class="decoration deco-7"></div>
+        <div class="decoration deco-8"></div>
+
+        <!-- 중앙 콘텐츠 -->
+        <div class="content-center">
+            <div class="event-date">{{EVENT_DATE}}</div>
+            <h1 class="event-title">{{EVENT_TITLE}}</h1>
+            <p class="event-subtitle">{{EVENT_SUBTITLE}}</p>
+        </div>
+    </div>
+</body>
+</html>

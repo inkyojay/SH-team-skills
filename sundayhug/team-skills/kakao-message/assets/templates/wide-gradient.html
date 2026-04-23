@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=800">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .wide-gradient {
+            width: 800px;
+            height: 600px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding: 60px;
+        }
+
+        /* 글래스모피즘 카드 */
+        .glass-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 48px;
+            border: 1px solid rgba(255,255,255,0.2);
+            width: 420px;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .image-section {
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .product-image {
+            width: 300px;
+            height: 400px;
+            object-fit: contain;
+            filter: drop-shadow(0 30px 60px rgba(0,0,0,0.3));
+        }
+
+        /* 장식 원 */
+        .deco-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+        }
+        .dc-1 { width: 200px; height: 200px; top: -50px; right: 200px; }
+        .dc-2 { width: 100px; height: 100px; bottom: 50px; right: 350px; }
+        .dc-3 { width: 60px; height: 60px; top: 100px; left: 500px; }
+    </style>
+</head>
+<body>
+    <div class="wide-gradient">
+        <div class="deco-circle dc-1"></div>
+        <div class="deco-circle dc-2"></div>
+        <div class="deco-circle dc-3"></div>
+
+        <div class="glass-card">
+            <div class="badge">{{BADGE_TEXT}}</div>
+            <h1 class="title">{{TITLE}}</h1>
+            <p class="subtitle">{{SUBTITLE}}</p>
+            <div class="cta-button">{{CTA_TEXT}}</div>
+        </div>
+
+        <div class="image-section">
+            <img src="{{PRODUCT_IMAGE}}" alt="제품" class="product-image">
+        </div>
+    </div>
+</body>
+</html>

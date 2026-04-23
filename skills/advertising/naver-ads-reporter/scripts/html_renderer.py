@@ -107,33 +107,201 @@ def _table_from_df(df: pd.DataFrame, columns: list[tuple[str, str, str]]) -> str
     """
 
 
+def _ad_table(df: pd.DataFrame) -> str:
+    """소재별 성과 테이블.
+    - 텍스트 소재(headline 있음): 제목·설명·캠페인명·클릭·비용
+    - 쇼핑/기타 소재(headline 없음): 광고그룹·캠페인 단위로 요약
+    """
+    if df.empty:
+        return '<p class="empty">소재 데이터 없음</p>'
+
+    has_type = "ad_type" in df.columns
+    has_headline = "ad_headline" in df.columns
+
+    # ── 1) 텍스트 소재 (headline 있는 것) ──
+    if has_headline:
+        text_df = df[df["ad_headline"].fillna("").str.strip() != ""]
+    else:
+        text_df = pd.DataFrame()
+
+    text_html = ""
+    if not text_df.empty:
+        group_cols = ["ad_id"]
+        for col in ["ad_headline", "ad_description", "campaign_name"]:
+            if col in text_df.columns:
+                group_cols.append(col)
+
+        agg = text_df.groupby(group_cols, as_index=False).agg(
+            impressions=("impressions", "sum"),
+            clicks=("clicks", "sum"),
+            cost=("cost", "sum"),
+        ).sort_values("cost", ascending=False)
+
+        agg["ctr"] = agg.apply(lambda r: round(r["clicks"] / r["impressions"] * 100, 2) if r["impressions"] else 0, axis=1)
+        agg["cpc"] = agg.apply(lambda r: round(r["cost"] / r["clicks"]) if r["clicks"] else 0, axis=1)
+
+        rows_html = []
+        for _, row in agg.head(30).iterrows():
+            headline = escape(str(row.get("ad_headline", "—") or "—"))
+            desc = escape(str(row.get("ad_description", "") or ""))
+            cmp = escape(str(row.get("campaign_name", "") or ""))
+            rows_html.append(f"""
+        <tr>
+          <td>
+            <div class="ad-headline">{headline}</div>
+            <div class="ad-desc">{desc}</div>
+            <div class="ad-campaign">{cmp}</div>
+          </td>
+          <td class="num">{_fmt_int(row['impressions'])}</td>
+          <td class="num">{_fmt_int(row['clicks'])}</td>
+          <td class="num">{_fmt_pct(row['ctr'])}</td>
+          <td class="num">{_fmt_money(row['cost'])}</td>
+          <td class="num">{_fmt_money(row['cpc'])}</td>
+        </tr>""")
+
+        text_html = f"""
+    <h3 style="font-size:14px;font-weight:600;margin:0 0 10px;color:var(--text)">📝 텍스트 소재 (비용 Top 30)</h3>
+    <table class="data-table ad-table">
+      <thead><tr>
+        <th>소재 (제목/설명/캠페인)</th>
+        <th>노출</th><th>클릭</th><th>CTR</th><th>비용</th><th>CPC</th>
+      </tr></thead>
+      <tbody>{"".join(rows_html)}</tbody>
+    </table>"""
+
+    # ── 2) 쇼핑/기타 소재 (headline 없는 것) ──
+    if has_headline:
+        shop_df = df[df["ad_headline"].fillna("").str.strip() == ""]
+    else:
+        shop_df = df
+
+    shop_html = ""
+    if not shop_df.empty:
+        group_cols_s = []
+        for col in ["adgroup_name", "campaign_name"]:
+            if col in shop_df.columns:
+                group_cols_s.append(col)
+        if not group_cols_s:
+            for col in ["adgroup_id", "campaign_id"]:
+                if col in shop_df.columns:
+                    group_cols_s.append(col)
+
+        if group_cols_s:
+            sagg = shop_df.groupby(group_cols_s, as_index=False).agg(
+                ad_count=("ad_id", "nunique"),
+                impressions=("impressions", "sum"),
+                clicks=("clicks", "sum"),
+                cost=("cost", "sum"),
+            ).sort_values("cost", ascending=False)
+
+            sagg["ctr"] = sagg.apply(lambda r: round(r["clicks"] / r["impressions"] * 100, 2) if r["impressions"] else 0, axis=1)
+
+            srows = []
+            for _, row in sagg.head(20).iterrows():
+                ag_label = escape(str(row.get("adgroup_name", row.get("adgroup_id", "")) or ""))
+                cmp_label = escape(str(row.get("campaign_name", row.get("campaign_id", "")) or ""))
+                srows.append(f"""
+        <tr>
+          <td>
+            <div class="ad-headline" style="font-size:12px">{ag_label}</div>
+            <div class="ad-campaign">{cmp_label}</div>
+          </td>
+          <td class="num">{_fmt_int(row['ad_count'])}</td>
+          <td class="num">{_fmt_int(row['impressions'])}</td>
+          <td class="num">{_fmt_int(row['clicks'])}</td>
+          <td class="num">{_fmt_pct(row['ctr'])}</td>
+          <td class="num">{_fmt_money(row['cost'])}</td>
+        </tr>""")
+
+            shop_html = f"""
+    <h3 style="font-size:14px;font-weight:600;margin:16px 0 10px;color:var(--text)">🛍️ 쇼핑검색광고 소재 (광고그룹별, 비용 Top 20)</h3>
+    <table class="data-table">
+      <thead><tr>
+        <th>광고그룹 / 캠페인</th>
+        <th>소재수</th><th>노출</th><th>클릭</th><th>CTR</th><th>비용</th>
+      </tr></thead>
+      <tbody>{"".join(srows)}</tbody>
+    </table>"""
+
+    if not text_html and not shop_html:
+        return '<p class="empty">집계된 소재 없음</p>'
+
+    return text_html + shop_html
+
+
+def _kw_chips(kw_by_adgroup: dict, adgroup_map: dict, campaign_map: dict, ag_campaign_map: dict) -> str:
+    """광고그룹별 키워드 목록 렌더링 (성과 없는 마스터 데이터 기반)."""
+    if not kw_by_adgroup:
+        return '<p class="empty">키워드 데이터 없음</p>'
+
+    blocks = []
+    for ag_id, kws in sorted(kw_by_adgroup.items(), key=lambda x: -len(x[1]))[:20]:
+        ag_name = adgroup_map.get(ag_id, ag_id)
+        cmp_id = ag_campaign_map.get(ag_id, "")
+        cmp_name = campaign_map.get(cmp_id, cmp_id)
+        chips = "".join(f'<span class="kw-chip">{escape(k)}</span>' for k in kws)
+        blocks.append(f"""
+        <div class="kw-group">
+          <div class="kw-group-header">
+            <span class="kw-ag">{escape(ag_name)}</span>
+            <span class="kw-cmp">{escape(cmp_name)}</span>
+            <span class="kw-count">{len(kws)}개</span>
+          </div>
+          <div class="kw-chips">{chips}</div>
+        </div>""")
+
+    return f'<div class="kw-groups">{"".join(blocks)}</div>'
+
+
 def render_report(
     df_ad: pd.DataFrame,
     date_from: str,
     date_to: str,
+    df_conv: Optional[pd.DataFrame] = None,
     df_shopping: Optional[pd.DataFrame] = None,
+    maps: Optional[dict] = None,
+    # 하위 호환
     keyword_map: Optional[dict] = None,
     campaign_map: Optional[dict] = None,
     output_path: Optional[str] = None,
 ) -> str:
     """
     메인 렌더 함수.
-    df_ad: AD 리포트 DataFrame
-    df_shopping: SHOPPING_PRODUCT 리포트 DataFrame (선택)
-    keyword_map/campaign_map: ID → 이름 매핑 딕셔너리
+    df_ad: AD 리포트 DataFrame (enrich_df 적용 후)
+    df_conv: AD_CONVERSION DataFrame (선택)
+    maps: build_full_maps() 반환값
     반환: 저장된 파일 경로
     """
+    if maps is None:
+        maps = {"campaign_map": campaign_map or {}, "adgroup_map": {},
+                "ad_map": {}, "keyword_map": keyword_map or {},
+                "kw_by_adgroup": {}, "ag_campaign_map": {}}
+
+    # 전환 데이터 JOIN (ad_id + date 기준)
+    if df_conv is not None and not df_conv.empty and "conversions" in df_conv.columns:
+        conv_agg = df_conv.groupby(["campaign_id", "adgroup_id", "ad_id"])[
+            ["conversions", "conversion_value"]
+        ].sum().reset_index()
+        df_ad = df_ad.merge(conv_agg, on=["campaign_id", "adgroup_id", "ad_id"], how="left")
+        df_ad["conversions"] = df_ad["conversions"].fillna(0)
+        df_ad["conversion_value"] = df_ad["conversion_value"].fillna(0)
+
     # 집계
     overall = summarize_overall(df_ad)
     camp_df = by_campaign(df_ad)
-    if campaign_map is not None and not camp_df.empty:
-        camp_df["campaign_name"] = camp_df["campaign_id"].map(campaign_map).fillna(camp_df["campaign_id"])
+    if "campaign_name" in df_ad.columns and not camp_df.empty:
+        cmp_name_map = df_ad.groupby("campaign_id")["campaign_name"].first().to_dict()
+        camp_df["campaign_name"] = camp_df["campaign_id"].map(cmp_name_map).fillna(camp_df["campaign_id"])
+    elif maps["campaign_map"] and not camp_df.empty:
+        camp_df["campaign_name"] = camp_df["campaign_id"].map(maps["campaign_map"]).fillna(camp_df["campaign_id"])
     else:
         camp_df["campaign_name"] = camp_df.get("campaign_id", "")
 
     daily_df = daily_trend(df_ad)
-    top_kw = top_keywords(df_ad, metric="cost", n=20, keyword_map=keyword_map)
-    wasted_kw = wasted_keywords(df_ad, keyword_map=keyword_map)
+    # maps["keyword_map"] 우선, 없으면 레거시 keyword_map 파라미터 사용
+    kw_map = maps.get("keyword_map") or keyword_map or {}
+    top_kw = top_keywords(df_ad, metric="cost", n=20, keyword_map=kw_map)
+    wasted_kw = wasted_keywords(df_ad, keyword_map=kw_map)
 
     if df_shopping is not None and not df_shopping.empty:
         product_df = product_roas_rank(df_shopping, top=20)
@@ -215,6 +383,17 @@ def render_report(
         ("conversions", "전환", "int"),
     ]
     wasted_html = _table_from_df(wasted_kw.head(30), wasted_cols)
+
+    # 소재별 성과 테이블
+    ad_table_html = _ad_table(df_ad)
+
+    # 광고그룹별 키워드 목록
+    kw_chips_html = _kw_chips(
+        maps.get("kw_by_adgroup", {}),
+        maps.get("adgroup_map", {}),
+        maps.get("campaign_map", {}),
+        maps.get("ag_campaign_map", {}),
+    )
 
     # 상품별 성과
     if not product_df.empty:
@@ -360,6 +539,76 @@ def render_report(
   .data-table td.num {{ text-align: right; font-variant-numeric: tabular-nums; }}
   .data-table tbody tr:hover {{ background: #FAFAFA; }}
 
+  /* ── 소재별 성과 ── */
+  .ad-table td:first-child {{ max-width: 380px; }}
+  .ad-headline {{
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 3px;
+  }}
+  .ad-desc {{
+    font-size: 12px;
+    color: var(--text-sub);
+    margin-bottom: 3px;
+    line-height: 1.4;
+  }}
+  .ad-campaign {{
+    display: inline-block;
+    font-size: 11px;
+    color: #fff;
+    background: var(--primary);
+    padding: 1px 8px;
+    border-radius: 20px;
+  }}
+
+  /* ── 키워드 목록 ── */
+  .kw-groups {{ display: flex; flex-direction: column; gap: 16px; }}
+  .kw-group {{
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }}
+  .kw-group-header {{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #F5F5F7;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+  }}
+  .kw-ag {{ color: var(--text); }}
+  .kw-cmp {{
+    font-size: 11px;
+    color: #fff;
+    background: #6FD5AA;
+    padding: 1px 8px;
+    border-radius: 20px;
+    font-weight: 500;
+  }}
+  .kw-count {{
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--text-sub);
+  }}
+  .kw-chips {{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 12px 14px;
+    background: var(--card-bg);
+  }}
+  .kw-chip {{
+    display: inline-block;
+    background: #EEF7FF;
+    color: #1A73E8;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 16px;
+    border: 1px solid #C8E0FF;
+  }}
+
   .tabs {{ display: flex; gap: 8px; margin-bottom: 16px; border-bottom: 1px solid var(--border); }}
   .tab {{
     padding: 10px 16px;
@@ -430,6 +679,11 @@ def render_report(
 </section>
 
 <section class="section">
+  <h2>✍️ 소재별 성과 (비용 Top 30)</h2>
+  {ad_table_html}
+</section>
+
+<section class="section">
   <h2>🔍 키워드 분석</h2>
   <div class="tabs">
     <button class="tab active" data-tab="top-cost">비용 Top 20</button>
@@ -442,6 +696,11 @@ def render_report(
 </section>
 
 {product_section}
+
+<section class="section">
+  <h2>🔑 광고그룹별 키워드 목록</h2>
+  {kw_chips_html}
+</section>
 
 <footer>
   <div class="disclaimer">

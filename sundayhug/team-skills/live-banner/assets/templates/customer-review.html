@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=720">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .customer-review {
+            width: 720px;
+            height: 1280px;
+            background: linear-gradient(180deg, #F8F4F0 0%, #EDE8E2 100%);
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            padding: 40px;
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .review-tag {
+            font-size: 14px;
+            color: #A38068;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .main-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #333;
+        }
+
+        .reviews-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .review-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .star-rating {
+            color: #FF9500;
+            font-size: 16px;
+        }
+
+        .reviewer-info {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .review-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 16px;
+        }
+
+        .review-images {
+            display: flex;
+            gap: 12px;
+        }
+
+        .review-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .review-image.large {
+            width: 100%;
+            max-width: 300px;
+            height: 200px;
+        }
+
+        /* 카드 내 이미지 레이아웃 변형 */
+        .review-card.with-side-image {
+            display: flex;
+            gap: 20px;
+        }
+
+        .review-card.with-side-image .review-content {
+            flex: 1;
+        }
+
+        .review-card.with-side-image .review-image {
+            width: 160px;
+            height: 160px;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="customer-review">
+        <!-- 헤더 -->
+        <div class="header">
+            <div class="review-tag">REVIEW</div>
+            <div class="main-title">실제 고객 후기</div>
+        </div>
+
+        <!-- 리뷰 카드들 -->
+        <div class="reviews-container">
+            <!-- 리뷰 1 -->
+            <div class="review-card with-side-image">
+                <div class="review-content">
+                    <div class="review-header">
+                        <span class="star-rating">{{STAR_1}}</span>
+                        <span class="reviewer-info">{{REVIEWER_1}} · {{DATE_1}}</span>
+                    </div>
+                    <p class="review-text">{{REVIEW_TEXT_1}}</p>
+                </div>
+                <img src="{{REVIEW_IMAGE_1}}" alt="리뷰 이미지" class="review-image">
+            </div>
+
+            <!-- 리뷰 2 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <span class="star-rating">{{STAR_2}}</span>
+                    <span class="reviewer-info">{{REVIEWER_2}} · {{DATE_2}}</span>
+                </div>
+                <p class="review-text">{{REVIEW_TEXT_2}}</p>
+                <div class="review-images">
+                    <img src="{{REVIEW_IMAGE_2_1}}" alt="리뷰 이미지" class="review-image">
+                    <img src="{{REVIEW_IMAGE_2_2}}" alt="리뷰 이미지" class="review-image">
+                </div>
+            </div>
+
+            <!-- 리뷰 3 -->
+            <div class="review-card with-side-image">
+                <div class="review-content">
+                    <div class="review-header">
+                        <span class="star-rating">{{STAR_3}}</span>
+                        <span class="reviewer-info">{{REVIEWER_3}} · {{DATE_3}}</span>
+                    </div>
+                    <p class="review-text">{{REVIEW_TEXT_3}}</p>
+                </div>
+                <img src="{{REVIEW_IMAGE_3}}" alt="리뷰 이미지" class="review-image">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

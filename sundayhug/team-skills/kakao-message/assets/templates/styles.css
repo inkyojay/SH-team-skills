@@ -1,0 +1,113 @@
+/* 카카오톡 메시지 배너 공통 스타일 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 카카오 색상 팔레트 */
+:root {
+    --kakao-yellow: #FEE500;
+    --kakao-brown: #3C1E1E;
+    --kakao-black: #191919;
+    --kakao-gray: #9E9E9E;
+    --kakao-light-gray: #F5F5F5;
+
+    /* 확장 색상 */
+    --accent-red: #FF5A5A;
+    --accent-blue: #5A9CFF;
+    --accent-green: #00C73C;
+    --accent-orange: #FF9500;
+    --accent-purple: #9B59B6;
+    --accent-pink: #FF6B9D;
+
+    /* 배경 색상 */
+    --bg-cream: #FFF9E6;
+    --bg-mint: #E8F5F0;
+    --bg-lavender: #F0E8FF;
+    --bg-peach: #FFF0E8;
+    --bg-sky: #E8F4FF;
+}
+
+/* 공통 배너 컨테이너 */
+.kakao-banner {
+    position: relative;
+    overflow: hidden;
+    font-family: 'Pretendard', -apple-system, sans-serif;
+}
+
+/* 뱃지 스타일 */
+.badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.badge-yellow {
+    background: var(--kakao-yellow);
+    color: var(--kakao-brown);
+}
+
+.badge-red {
+    background: var(--accent-red);
+    color: white;
+}
+
+.badge-outline {
+    background: transparent;
+    border: 2px solid currentColor;
+}
+
+/* 버튼 스타일 */
+.cta-button {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+}
+
+.cta-yellow {
+    background: var(--kakao-yellow);
+    color: var(--kakao-brown);
+}
+
+.cta-black {
+    background: var(--kakao-black);
+    color: white;
+}
+
+.cta-white {
+    background: white;
+    color: var(--kakao-black);
+}
+
+/* 가격 스타일 */
+.price-original {
+    text-decoration: line-through;
+    color: var(--kakao-gray);
+}
+
+.price-sale {
+    color: var(--accent-red);
+    font-weight: 800;
+}
+
+.discount-badge {
+    background: var(--accent-red);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 800;
+}

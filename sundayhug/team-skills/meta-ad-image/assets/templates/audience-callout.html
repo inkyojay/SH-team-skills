@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+  :root {
+    --accent-orange: #f0864a;
+    --text-dark: #2c2520;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1350px;
+    overflow: hidden;
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: #fff;
+  }
+
+  .ad-container {
+    width: 1080px;
+    height: 1350px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 상단 타겟 호명 */
+  .callout-bar {
+    background: var(--accent-orange);
+    padding: 56px 70px 48px;
+  }
+
+  .callout-text {
+    font-size: 42px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.45;
+    letter-spacing: -1px;
+  }
+
+  /* 제품 이미지 영역 */
+  .image-area {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* 하단 오버레이 */
+  .bottom-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 80px 70px 64px;
+    background: linear-gradient(
+      0deg,
+      rgba(0,0,0,0.72) 0%,
+      rgba(0,0,0,0.5) 50%,
+      transparent 100%
+    );
+  }
+
+  .bottom-text {
+    font-size: 40px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.5;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: #fff;
+    color: var(--text-dark);
+    font-size: 22px;
+    font-weight: 700;
+    padding: 14px 36px;
+    border-radius: 8px;
+  }
+</style>
+</head>
+<body>
+  <div class="ad-container">
+    <div class="callout-bar">
+      <div class="callout-text">{{CALLOUT_TEXT}}</div>
+    </div>
+
+    <div class="image-area">
+      <img class="product-image" src="{{IMAGE_PATH}}" alt="product">
+      <div class="bottom-overlay">
+        <div class="bottom-text">{{HEADLINE}}</div>
+        <div class="cta-button">{{CTA_TEXT}}</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

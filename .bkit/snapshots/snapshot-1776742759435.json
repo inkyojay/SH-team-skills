@@ -1,0 +1,461 @@
+{
+  "timestamp": "2026-04-21T03:39:19.434Z",
+  "reason": "compaction",
+  "status": {
+    "version": "2.0",
+    "lastUpdated": "2026-04-20T03:09:23.743Z",
+    "activeFeatures": [
+      "scratchpad",
+      "슬리핑백-reels",
+      "compositions",
+      "scripts",
+      "sundayhug",
+      "tmp",
+      "blog",
+      "룩북",
+      "pilot",
+      "phase2",
+      "products"
+    ],
+    "primaryFeature": "scratchpad",
+    "features": {
+      "scratchpad": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-02-05T08:01:27.499Z",
+          "lastUpdated": "2026-02-05T08:29:03.934Z"
+        },
+        "lastFile": "/private/tmp/claude-501/-Users-inkyo-Projects-team-skills/64e6a7ca-845d-4c7c-8942-267f20bd0257/scratchpad/create_overlays_v2.py"
+      },
+      "슬리핑백-reels": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-02-11T07:34:28.039Z",
+          "lastUpdated": "2026-02-11T07:38:58.794Z"
+        },
+        "lastFile": "/Users/inkyo/Projects/team-skills/output/영상/슬리핑백-reels/src/Root.tsx"
+      },
+      "compositions": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-02-11T07:37:13.755Z",
+          "lastUpdated": "2026-02-11T07:38:44.300Z"
+        },
+        "lastFile": "/Users/inkyo/Projects/team-skills/output/영상/슬리핑백-reels/src/compositions/ReelsB.tsx"
+      },
+      "scripts": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-04-07T23:39:10.278Z",
+          "lastUpdated": "2026-04-20T03:09:23.743Z"
+        },
+        "lastFile": "/Users/inkyo/Projects/team-skills/skills/advertising/meta-ad-factory/scripts/export_png.py"
+      },
+      "sundayhug": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-04-08T01:59:47.754Z",
+          "lastUpdated": "2026-04-08T01:59:47.754Z"
+        },
+        "lastFile": "/Users/inkyo/Projects/team-skills/output/상세페이지/sundayhug/pages/_pages-nav.js"
+      },
+      "tmp": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-04-08T02:49:13.391Z",
+          "lastUpdated": "2026-04-08T02:49:13.391Z"
+        },
+        "lastFile": "/tmp/convert_images_v2.py"
+      },
+      "blog": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-04-08T07:13:38.792Z",
+          "lastUpdated": "2026-04-08T07:13:38.792Z"
+        },
+        "lastFile": "/Users/inkyo/Projects/team-skills/output/상세페이지/sundayhug/blog/_blog-nav.js"
+      },
+      "룩북": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-04-09T11:02:30.452Z",
+          "lastUpdated": "2026-04-09T11:02:30.452Z"
+        },
+        "lastFile": "/Users/inkyo/Projects/team-skills/output/룩북/bulk-generate.sh"
+      },
+      "pilot": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-04-17T04:20:45.528Z",
+          "lastUpdated": "2026-04-17T04:43:52.766Z"
+        },
+        "lastFile": "/Users/inkyo/Projects/team-skills/output/이미지변형/sundayhug/pilot/_driver.py"
+      },
+      "phase2": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-04-17T05:18:13.917Z",
+          "lastUpdated": "2026-04-17T05:18:41.021Z"
+        },
+        "lastFile": "/Users/inkyo/Projects/team-skills/output/이미지변형/sundayhug/phase2/_driver.py"
+      },
+      "products": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-04-20T02:43:17.267Z",
+          "lastUpdated": "2026-04-20T03:05:50.828Z"
+        },
+        "lastFile": "/Users/inkyo/Projects/team-skills/skills/advertising/meta-ad-factory/scripts/products/all_products.py"
+      }
+    },
+    "pipeline": {
+      "currentPhase": 1,
+      "level": "Dynamic",
+      "phaseHistory": []
+    },
+    "session": {
+      "startedAt": "2026-02-05T07:34:53.323Z",
+      "onboardingCompleted": false,
+      "lastActivity": "2026-04-20T03:09:23.743Z"
+    },
+    "history": [
+      {
+        "timestamp": "2026-02-05T08:01:27.499Z",
+        "feature": "scratchpad",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-05T08:29:03.934Z",
+        "feature": "scratchpad",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:34:28.039Z",
+        "feature": "슬리핑백-reels",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:34:29.101Z",
+        "feature": "슬리핑백-reels",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:34:43.704Z",
+        "feature": "슬리핑백-reels",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:35:03.067Z",
+        "feature": "슬리핑백-reels",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:35:07.728Z",
+        "feature": "슬리핑백-reels",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:35:22.511Z",
+        "feature": "슬리핑백-reels",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:35:27.208Z",
+        "feature": "슬리핑백-reels",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:35:33.493Z",
+        "feature": "슬리핑백-reels",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:35:38.673Z",
+        "feature": "슬리핑백-reels",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:35:43.406Z",
+        "feature": "슬리핑백-reels",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:35:54.692Z",
+        "feature": "슬리핑백-reels",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:36:08.149Z",
+        "feature": "슬리핑백-reels",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:36:22.223Z",
+        "feature": "슬리핑백-reels",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:36:28.245Z",
+        "feature": "슬리핑백-reels",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:37:13.755Z",
+        "feature": "compositions",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:37:46.768Z",
+        "feature": "compositions",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:38:34.063Z",
+        "feature": "compositions",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:38:43.022Z",
+        "feature": "compositions",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:38:44.300Z",
+        "feature": "compositions",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-02-11T07:38:58.794Z",
+        "feature": "슬리핑백-reels",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-07T23:39:10.278Z",
+        "feature": "scripts",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-07T23:39:30.217Z",
+        "feature": "scripts",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-08T01:59:47.754Z",
+        "feature": "sundayhug",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-08T02:49:13.391Z",
+        "feature": "tmp",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-08T03:26:05.985Z",
+        "feature": "scripts",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-08T03:27:09.455Z",
+        "feature": "scripts",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-08T07:13:38.792Z",
+        "feature": "blog",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-09T11:02:30.452Z",
+        "feature": "룩북",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-14T00:53:38.675Z",
+        "feature": "scripts",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-17T04:20:45.528Z",
+        "feature": "pilot",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-17T04:43:31.185Z",
+        "feature": "pilot",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-17T04:43:36.091Z",
+        "feature": "pilot",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-17T04:43:40.913Z",
+        "feature": "pilot",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-17T04:43:52.766Z",
+        "feature": "pilot",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-17T05:18:13.917Z",
+        "feature": "phase2",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-17T05:18:41.021Z",
+        "feature": "phase2",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-20T02:43:17.267Z",
+        "feature": "products",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-20T02:52:02.053Z",
+        "feature": "products",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-20T03:03:44.557Z",
+        "feature": "products",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-20T03:04:48.036Z",
+        "feature": "products",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-20T03:04:57.406Z",
+        "feature": "products",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-20T03:05:04.149Z",
+        "feature": "products",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-20T03:05:40.208Z",
+        "feature": "products",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-20T03:05:50.828Z",
+        "feature": "products",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-04-20T03:09:23.743Z",
+        "feature": "scripts",
+        "phase": "do",
+        "action": "updated"
+      }
+    ]
+  }
+}
