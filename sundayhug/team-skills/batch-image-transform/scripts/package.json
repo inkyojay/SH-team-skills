@@ -1,8 +1,0 @@
-{
-  "name": "batch-image-transform",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "@google/genai": "^1.30.0"
-  }
-}

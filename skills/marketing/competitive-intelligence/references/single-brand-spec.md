@@ -101,7 +101,7 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 ## 파일 저장 규칙
 
 ```
-output/리포트/ci_{브랜드명}_{YYYYMMDD}.html
+~/Desktop/team-skills/리포트/ci_{브랜드명}_{YYYYMMDD}.html
 ```
 
 ## 차트 라이브러리

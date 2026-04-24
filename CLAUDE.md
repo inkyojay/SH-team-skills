@@ -13,13 +13,6 @@ team-skills/
 │   ├── brand/                  # 브랜드 관리
 │   ├── marketing/              # 마케팅 전략
 │   └── tools/                  # 유틸리티 도구
-├── output/                     # 모든 결과물 (작업 유형별)
-│   ├── 광고카피/               # 광고 카피 문서
-│   ├── 영상/                   # 영상 소재
-│   ├── 리포트/                 # 분석 리포트
-│   ├── 상세페이지/             # 상세페이지 HTML
-│   ├── 카드뉴스/               # 카드뉴스 이미지
-│   └── 기타/                   # 기타 결과물
 ├── agents/                     # AI 에이전트
 ├── commands/                   # 슬래시 커맨드
 ├── scripts/                    # 유틸리티 스크립트
@@ -94,18 +87,21 @@ python3 scripts/generate-catalog.py
 
 ## 결과물 저장 규칙
 
-**모든 스킬과 에이전트의 결과물은 반드시 `output/` 폴더에 저장합니다.**
+**모든 스킬과 에이전트의 결과물은 반드시 각 팀원 로컬 `~/Desktop/team-skills/` 폴더에 저장합니다.**
+(프로젝트 레포지토리에는 결과물을 저장하지 않음 — Git 용량 부담 방지)
 
 | 작업 유형 | 저장 경로 | 예시 |
 |----------|----------|------|
-| 광고 카피 | `output/광고카피/` | `output/광고카피/swaddle-strap-copy.md` |
-| 영상 소재 | `output/영상/` | `output/영상/reels-sleeping-bag.mp4` |
-| 분석 리포트 | `output/리포트/` | `output/리포트/competitor-analysis.md` |
-| 상세페이지 | `output/상세페이지/` | `output/상세페이지/product-landing.html` |
-| 카드뉴스 | `output/카드뉴스/` | `output/카드뉴스/sleeping-bag-tips/` |
-| 기타 | `output/기타/` | `output/기타/brand-guide.pdf` |
+| 광고 카피 | `~/Desktop/team-skills/광고카피/` | `~/Desktop/team-skills/광고카피/swaddle-strap-copy.md` |
+| 영상 소재 | `~/Desktop/team-skills/영상/` | `~/Desktop/team-skills/영상/reels-sleeping-bag.mp4` |
+| 분석 리포트 | `~/Desktop/team-skills/리포트/` | `~/Desktop/team-skills/리포트/competitor-analysis.md` |
+| 상세페이지 | `~/Desktop/team-skills/상세페이지/` | `~/Desktop/team-skills/상세페이지/product-landing.html` |
+| 카드뉴스 | `~/Desktop/team-skills/카드뉴스/` | `~/Desktop/team-skills/카드뉴스/sleeping-bag-tips/` |
+| 기타 | `~/Desktop/team-skills/기타/` | `~/Desktop/team-skills/기타/brand-guide.pdf` |
 
-> 개별 스킬 폴더 내에 output을 만들지 마세요. 항상 프로젝트 루트의 `output/`을 사용하세요.
+> 개별 스킬 폴더 내에 output을 만들지 마세요. 항상 사용자 Desktop의 `team-skills/` 하위에 저장하세요.
+> Python: `Path.home() / "Desktop" / "team-skills" / "리포트"`
+> 결과물 폴더가 없으면 스킬/스크립트가 자동 생성합니다 (`mkdir -p` 또는 `parents=True`).
 
 ## 카테고리 목록
 
@@ -161,20 +157,19 @@ export REDDIT_SECRET="your-secret"
 
 ## 브랜드별 작업 콘텐츠
 
-상세페이지, 브랜드 스토리 등 브랜드별 작업 콘텐츠는 `output/` 하위에 브랜드 폴더로 관리합니다.
+상세페이지, 브랜드 스토리 등 브랜드별 작업 콘텐츠는 각 팀원 Desktop 하위에 브랜드 폴더로 관리합니다.
 
 ```
-output/
+~/Desktop/team-skills/
 ├── 상세페이지/sundayhug/          # 상세페이지 HTML + images/
 ├── 브랜드가이드/sundayhug/pages/  # 브랜드 스토리 페이지
 └── cafe24-skins/sundayhug/        # 카페24 스킨
 ```
 
 상세페이지 작업 시:
-- **편집**: `output/상세페이지/sundayhug/` 에서 직접 HTML 편집
-- **프리뷰**: `cd output/상세페이지/sundayhug && python3 -m http.server 8080`
-- **CSS 빌드**: `detail-page-sections` 스킬의 scripts/ 활용
-- **이미지**: `output/상세페이지/sundayhug/images/` (상대경로로 참조)
+- **편집**: `~/Desktop/team-skills/상세페이지/sundayhug/` 에서 직접 HTML 편집
+- **프리뷰**: `cd ~/Desktop/team-skills/상세페이지/sundayhug && python3 -m http.server 8080`
+- **이미지**: `~/Desktop/team-skills/상세페이지/sundayhug/images/` (상대경로로 참조)
 
 ## 미디어 대시보드 (MCP 연동)
 
@@ -217,8 +212,8 @@ output/
 ### 광고 소재 제작 워크플로우
 
 1. 미디어 대시보드에서 소재 이미지 가져오기 (MCP)
-2. `meta-ad-image` 스킬로 광고 이미지 제작
-3. 결과물은 `output/광고카피/` 에 저장
+2. `meta-ad-factory` 스킬로 광고 이미지 벌크 제작
+3. 결과물은 `~/Desktop/team-skills/광고카피/` 에 저장
 
 ```
 "abc-crib 폴더에서 제품 사진 가져와서 메타 광고 만들어줘"

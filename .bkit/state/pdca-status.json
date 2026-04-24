@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-04-22T00:30:33.348Z",
+  "lastUpdated": "2026-04-24T08:03:16.303Z",
   "activeFeatures": [
     "scratchpad",
     "슬리핑백-reels",
@@ -64,9 +64,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-04-07T23:39:10.278Z",
-        "lastUpdated": "2026-04-22T00:30:33.348Z"
+        "lastUpdated": "2026-04-24T08:03:16.303Z"
       },
-      "lastFile": "/Users/inkyo/Projects/team-skills/skills/advertising/naver-ads-reporter/scripts/html_renderer.py"
+      "lastFile": "/Users/inkyo/Projects/team-skills/scripts/generate-catalog.py"
     },
     "sundayhug": {
       "phase": "do",
@@ -155,9 +155,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-04-20T02:43:17.267Z",
-        "lastUpdated": "2026-04-21T07:15:32.563Z"
+        "lastUpdated": "2026-04-24T06:03:39.504Z"
       },
-      "lastFile": "/Users/inkyo/Projects/team-skills/skills/advertising/meta-ad-factory/scripts/products/event_ads.py"
+      "lastFile": "/Users/inkyo/Projects/team-skills/skills/advertising/meta-ad-factory/scripts/products/swaddle_strap.py"
     }
   },
   "pipeline": {
@@ -168,7 +168,7 @@
   "session": {
     "startedAt": "2026-02-05T07:34:53.323Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-04-22T00:30:33.348Z"
+    "lastActivity": "2026-04-24T08:03:16.303Z"
   },
   "history": [
     {
@@ -605,6 +605,132 @@
     },
     {
       "timestamp": "2026-04-22T00:30:33.348Z",
+      "feature": "scripts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T05:45:12.218Z",
+      "feature": "scripts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T05:45:20.409Z",
+      "feature": "scripts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T05:45:27.161Z",
+      "feature": "products",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T05:45:34.578Z",
+      "feature": "products",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T05:45:49.529Z",
+      "feature": "products",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T05:46:12.088Z",
+      "feature": "products",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T06:03:39.504Z",
+      "feature": "products",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T06:19:43.722Z",
+      "feature": "scripts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T06:20:12.266Z",
+      "feature": "scripts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T06:25:59.304Z",
+      "feature": "scripts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T06:30:24.602Z",
+      "feature": "scripts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T06:34:09.300Z",
+      "feature": "scripts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T06:42:10.188Z",
+      "feature": "scripts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T06:42:25.119Z",
+      "feature": "scripts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T06:50:54.107Z",
+      "feature": "scripts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T06:52:28.400Z",
+      "feature": "scripts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T06:53:09.167Z",
+      "feature": "scripts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T06:53:25.463Z",
+      "feature": "scripts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T07:30:24.102Z",
+      "feature": "scripts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T08:02:55.739Z",
+      "feature": "scripts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-24T08:03:16.303Z",
       "feature": "scripts",
       "phase": "do",
       "action": "updated"

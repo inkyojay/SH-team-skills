@@ -249,7 +249,4 @@ For headlines and CTAs, provide 2-3 options:
 ## Related Skills
 
 - **copy-editing**: For polishing existing copy (use after your draft)
-- **page-cro**: If page structure/strategy needs work, not just copy
 - **email-sequence**: For email copywriting
-- **popup-cro**: For popup and modal copy
-- **ab-test-setup**: To test copy variations

@@ -33,7 +33,7 @@ model: sonnet
 | 카테고리 | 키워드 | 담당 |
 |----------|--------|------|
 | 콘텐츠 제작 | 상세페이지, 랜딩페이지, 카드뉴스 | page-builder, card-news-creator |
-| 광고 제작 | 메타 광고, 인스타 광고, 카카오 배너, 광고 이미지 | meta-ad-creator, meta-ad-image, kakao-message |
+| 광고 제작 | 메타 광고, 인스타 광고, 카카오 배너, 광고 이미지 | meta-ad-factory, kakao-message, smartstore-banner |
 | 영상 제작 | 릴스, 영상 편집, 세로 영상 | reels-editor-agent, remotion |
 | 브랜드 | 브랜드 분석, DNA, 무드보드, 로고 | brand-dna-extractor, brand-setup-wizard |
 | 마케팅 분석 | 경쟁사, 시장 조사, 벤치마킹 | competitor-analyzer, market-researcher |
@@ -69,8 +69,8 @@ model: sonnet
 
 #### 광고 제작
 ```
-"메타 광고 만들어줘" → meta-ad-creator 에이전트
-"인스타 광고 소재" → meta-ad-image 스킬
+"메타 광고 만들어줘" → meta-ad-factory 스킬
+"인스타 광고 소재" → meta-ad-factory 스킬
 "카카오 메시지 배너" → kakao-message 스킬
 "스마트스토어 배너" → smartstore-banner 스킬
 "라이브 배너" → live-banner 스킬

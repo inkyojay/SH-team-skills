@@ -297,6 +297,3 @@ Before launching campaigns, ensure proper tracking and account setup.
 ## Related Skills
 
 - **copywriting**: For landing page copy that converts ad traffic
-- **analytics-tracking**: For proper conversion tracking setup
-- **ab-test-setup**: For landing page testing to improve ROAS
-- **page-cro**: For optimizing post-click conversion rates

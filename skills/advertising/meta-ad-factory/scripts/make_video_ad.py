@@ -43,7 +43,7 @@ import urllib.request
 from pathlib import Path
 
 # ── 출력 경로 ──────────────────────────────────────────────────────────────────
-OUTPUT_BASE = Path("/Users/inkyo/Projects/team-skills/output/광고카피/sundayhug-meta-bulk")
+OUTPUT_BASE = Path.home() / "Desktop" / "team-skills" / "광고카피" / "sundayhug-meta-bulk"
 SCRIPTS_DIR = Path(__file__).resolve().parent
 
 # ── Kling API 기본값 ───────────────────────────────────────────────────────────

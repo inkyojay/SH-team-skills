@@ -267,7 +267,7 @@ MCP tool: search_shop
 - 경쟁사 신규 동향 테이블
 - 각 기회에 "Go/Hold" 액션 버튼
 
-파일 저장: `output/리포트/product-scout_{YYYYMMDD}.html`
+파일 저장: `~/Desktop/team-skills/리포트/product-scout_{YYYYMMDD}.html`
 
 ---
 

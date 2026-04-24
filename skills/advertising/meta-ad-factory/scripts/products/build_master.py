@@ -14,7 +14,7 @@ from collections import Counter
 from pathlib import Path
 
 
-ROOT = Path("/Users/inkyo/Projects/team-skills/output/광고카피/sundayhug-meta-bulk")
+ROOT = Path.home() / "Desktop" / "team-skills" / "광고카피" / "sundayhug-meta-bulk"
 
 
 def find_products() -> list[tuple[str, str, Path]]:

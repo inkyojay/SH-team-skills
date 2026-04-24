@@ -78,7 +78,7 @@ def main() -> None:
     ap.add_argument("--slug", "-s", action="append", help="특정 제품 슬러그만 재생성")
     args = ap.parse_args()
 
-    OUTPUT_BASE = Path("/Users/inkyo/Projects/team-skills/output/광고카피/sundayhug-meta-bulk")
+    OUTPUT_BASE = Path.home() / "Desktop" / "team-skills" / "광고카피" / "sundayhug-meta-bulk"
 
     all_cfgs: list[ProductConfig] = list(ALL_PRODUCTS) + list(ALL_EVENTS)
 

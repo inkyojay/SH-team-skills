@@ -218,7 +218,7 @@ engagement_rate = (avg_likes + avg_comments) / followers * 100
 
 #### 마크다운 리포트
 
-아래 형식으로 `output/리포트/YYYY-MM-DD_체험단-후보-분석.md` 에 저장:
+아래 형식으로 `~/Desktop/team-skills/리포트/YYYY-MM-DD_체험단-후보-분석.md` 에 저장:
 
 ```markdown
 # 체험단 후보 분석 리포트
@@ -277,7 +277,7 @@ engagement_rate = (avg_likes + avg_comments) / followers * 100
 
 #### CSV 내보내기
 
-함께 `output/리포트/YYYY-MM-DD_체험단-후보-분석.csv` 저장:
+함께 `~/Desktop/team-skills/리포트/YYYY-MM-DD_체험단-후보-분석.csv` 저장:
 
 ```
 username,followers,following,engagement_rate,child_age_code,child_age_label,child_age_evidence,category_match,sponsorship_count,score,grade,bio,contact,profile_url

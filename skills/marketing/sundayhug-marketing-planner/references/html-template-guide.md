@@ -243,7 +243,7 @@ document.querySelectorAll('.week-header').forEach(h => {
 
 ## 파일 저장 위치
 
-결과물은 항상 `output/` 디렉토리에 저장:
+결과물은 항상 `~/Desktop/team-skills/` 디렉토리에 저장 (각 팀원 로컬 Desktop):
 ```
-output/{제품명}-마케팅플랜.html
+~/Desktop/team-skills/{제품명}-마케팅플랜.html
 ```

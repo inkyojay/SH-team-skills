@@ -129,7 +129,7 @@ SKILL_TRANSLATIONS = {
 
     # Marketing (additional)
     "keyword-trend": "네이버 키워드 시즌 트렌드 분석",
-    "keyword-optimizer": "키워드 최적화 분석",
+    "keyword-optimizer": "네이버 키워드 최적화 + 시즌 트렌드 통합: 등급표(S/A/B/C/D) + 상품명 3안 + 태그 10개 + 월별 캘린더 + HTML 리포트",
     "new-product-planner": "신제품 기획 종합 도구 (시장조사~런칭 전략)",
     "gov-apply": "정부/기관 지원사업 신청서 대화형 작성 도구",
 
@@ -160,135 +160,241 @@ SKILL_TRANSLATIONS = {
 
 # 에이전트 한국어 번역
 AGENT_TRANSLATIONS = {
-    "brand-logo-finder": "브랜드 로고 검색 에이전트 - Brandfetch로 로고 검색 및 다운로드",
     "brand-setup-wizard": "새 브랜드 초기 설정 마법사 - 질문을 통해 브랜드 정보 수집",
     "brand-updater": "브랜드 정보 업데이트 - 제품, 경쟁사, 캠페인 등 수정",
     "competitor-analyzer": "경쟁사 실시간 분석 - 제품, 가격, 마케팅, SNS, 리뷰 조사",
     "content-quality-reviewer": "콘텐츠 품질 검토 - 마케팅 콘텐츠 리뷰 및 개선점 제안",
     "data-report-analyzer": "데이터 분석 리포트 생성 - CSV, 엑셀, JSON 파일 분석",
     "market-researcher": "시장 및 트렌드 조사 - 소비자 인사이트, 기회 영역 발굴",
-    "meta-ad-creator": "메타 광고 이미지 자동 제작 - 2~3개 스타일 생성",
-    "meta-ads-agent": "메타 광고 영상 제작 - 템플릿 선택부터 Remotion 프로젝트까지",
-    "reels-editor-agent": "릴스 영상 편집 - 9:16 세로형 변환 및 자막 추가",
+    "promotion-designer": "프로모션 디자인 실행 - .pen 파일 제작 (promotion-design 스킬에서 병렬 스폰)",
     "sundayhug-marketing-hub": "마케팅 총괄 오케스트레이터 - 스킬/에이전트 추천 및 워크플로우",
     "skill-orchestrator": "통합 오케스트레이터 - 사용자 의도 파악 및 스킬/에이전트 매칭",
 }
 
 # 스킬별 상세 정보 (사용 방법, 사례, 가능한 작업)
 SKILL_DETAILS = {
-    "page-builder": {
-        "desc": "상세페이지, 랜딩페이지, 제품 소개 페이지를 HTML로 제작합니다.",
+    # 광고
+    "meta-ad-factory": {
+        "desc": "메타(인스타/페북) 광고 소재를 벌크 자동 생성. 제품당 21개 크리에이티브(4 레이아웃 × 3 사이즈 × 3 톤) + 로컬 서버 기반 인터랙티브 편집(📥 단건 PNG / ✏️ 텍스트·스타일 편집 / 🖼 AI 이미지 교체).",
         "usecases": [
-            {"cmd": "상세페이지 만들어줘", "note": "기본 상세페이지 제작"},
-            {"cmd": "이 제품으로 랜딩페이지 만들어줘 [이미지]", "note": "이미지 기반 제작"},
-            {"cmd": "경쟁사 A 스타일로 상세페이지", "note": "레퍼런스 참고 제작"},
+            {"cmd": "메타 광고 만들어줘 [제품슬러그]", "note": "제품당 21개 소재 빌드"},
+            {"cmd": "python3 server.py --slug swaddle-strap", "note": "브라우저에서 편집/다운로드"},
+            {"cmd": "이미지 교체 / 카피 수정", "note": "preview-grid 각 카드 호버 버튼"},
         ],
-        "capabilities": ["HTML 상세페이지 제작", "반응형 디자인", "SEO 최적화", "이미지 배치"],
-        "output": "output/상세페이지/",
+        "capabilities": ["21개 소재 벌크 생성", "on-demand PNG 단건 다운로드", "텍스트+스타일(색/크기/굵기/배경) 편집", "Gemini AI 이미지 교체", "3개 사이즈(1:1/4:5/9:16)"],
+        "output": "~/Desktop/team-skills/광고카피/sundayhug-meta-bulk/",
     },
-    "card-news-creator": {
-        "desc": "인스타그램 스타일의 카드뉴스를 제작합니다. 슬라이드형 콘텐츠에 최적화되어 있습니다.",
+    "naver-ads-reporter": {
+        "desc": "네이버 검색광고 성과를 API로 조회해 캠페인/광고그룹/키워드/상품별 인터랙티브 HTML 리포트로 출력.",
         "usecases": [
-            {"cmd": "카드뉴스 만들어줘", "note": "기본 카드뉴스 제작"},
-            {"cmd": "이 주제로 5장짜리 카드뉴스", "note": "장수 지정"},
-            {"cmd": "육아 정보 카드뉴스 만들어줘", "note": "주제 지정"},
+            {"cmd": "네이버 광고 성과 리포트", "note": "기본 리포트 생성"},
+            {"cmd": "지난 주 네이버 광고 분석", "note": "기간 지정"},
+            {"cmd": "낭비 키워드 찾아줘", "note": "효율 분석"},
         ],
-        "capabilities": ["인스타그램 최적화", "슬라이드 구성", "텍스트/이미지 배치", "브랜드 컬러 적용"],
-        "output": "output/카드뉴스/",
+        "capabilities": ["노출/클릭/비용/전환 집계", "ROAS·CTR·CPC 계산", "WoW/MoM 비교", "이상치 탐지"],
+        "output": "~/Desktop/team-skills/리포트/",
     },
-    "meta-ad-image": {
-        "desc": "메타(인스타/페이스북) 광고용 이미지를 제작합니다. 다양한 템플릿을 활용합니다.",
+    # 마케팅 전략
+    "new-product-planner": {
+        "desc": "신제품 기획 종합 — 아이디어→시장조사→경쟁사→키워드→가격→마케팅→수익 시뮬레이션까지 13탭 HTML.",
         "usecases": [
-            {"cmd": "메타 광고 이미지 만들어줘", "note": "기본 광고 이미지"},
-            {"cmd": "이 제품 이미지로 인스타 광고 소재", "note": "이미지 기반"},
-            {"cmd": "페북 광고 배너 3종 만들어줘", "note": "여러 버전 제작"},
+            {"cmd": "신제품 기획해줘", "note": "전체 프로세스 대화형"},
+            {"cmd": "이 제품 시장 조사해줘", "note": "시장 분석"},
+            {"cmd": "신상품 수익 시뮬레이션", "note": "KPI 모델링"},
         ],
-        "capabilities": ["1080x1080 피드 광고", "1080x1920 스토리 광고", "다양한 레이아웃", "CTA 버튼 포함"],
-        "output": "output/광고카피/",
+        "capabilities": ["브레인스토밍", "VOC·경쟁사 분석", "키워드 검색량", "가격/마케팅 전략", "13탭 리포트"],
+        "output": "~/Desktop/team-skills/리포트/",
     },
-    "kakao-message": {
-        "desc": "카카오톡 비즈메시지용 배너를 제작합니다. 이미지형, 캐러셀형, 리스트형을 지원합니다.",
+    "sundayhug-marketing-planner": {
+        "desc": "썬데이허그 제품의 마케팅 전략을 USP→롱테일 키워드→채널별 액션플랜까지 자동 수립.",
         "usecases": [
-            {"cmd": "카카오 메시지 배너 만들어줘", "note": "기본 배너"},
-            {"cmd": "카톡 이미지형 배너", "note": "이미지형 제작"},
-            {"cmd": "알림톡 캐러셀 배너 3장", "note": "캐러셀형 제작"},
+            {"cmd": "마케팅 플랜 짜줘 [제품]", "note": "풀 플랜 생성"},
+            {"cmd": "이 제품 롱테일 키워드 30개", "note": "키워드 발굴"},
+            {"cmd": "주차별 액션플랜", "note": "캘린더 생성"},
         ],
-        "capabilities": ["이미지형 배너", "캐러셀형 배너", "리스트형 배너", "규격 자동 적용"],
-        "output": "output/광고카피/",
+        "capabilities": ["USP 자동 분석", "롱테일 키워드 30+", "채널별 콘텐츠 플랜", "비교 콘텐츠 전략"],
+        "output": "~/Desktop/team-skills/",
     },
-    "reels-editor": {
-        "desc": "영상을 인스타그램 릴스 포맷(9:16, 1080x1920)으로 편집합니다.",
+    "promotion-planner": {
+        "desc": "프로모션 기획 + 인터랙티브 HTML. 시즌 매칭 → 월별 테마 → 채널별 액션플랜 → KPI까지.",
         "usecases": [
-            {"cmd": "릴스 영상 편집해줘 [영상파일]", "note": "세로형 변환"},
-            {"cmd": "이 영상 릴스로 만들어줘", "note": "크롭 및 리사이즈"},
-            {"cmd": "자막 넣어서 릴스 만들어줘", "note": "자막 추가"},
+            {"cmd": "프로모션 기획해줘", "note": "기본 기획"},
+            {"cmd": "여름 시즌 프로모션", "note": "시즌 특화"},
+            {"cmd": "주차별 프로모션 플랜", "note": "상세 캘린더"},
         ],
-        "capabilities": ["9:16 세로 변환", "자막 추가", "인트로/아웃트로", "배경음악 추가"],
-        "output": "output/영상/",
+        "capabilities": ["시즌 이벤트 매칭", "프로모션 유형 선정", "주차별 액션플랜", "KPI 목표"],
+        "output": "~/Desktop/team-skills/리포트/",
     },
-    "brand-dna-extractor": {
-        "desc": "웹사이트 URL에서 브랜드 DNA를 추출하고 무드보드 및 리포트를 생성합니다.",
+    "competitive-intelligence": {
+        "desc": "경쟁사 분석 & 시장 모니터링. 단일 심층분석 또는 전체 시장 모니터링 두 모드 지원.",
         "usecases": [
-            {"cmd": "브랜드 분석해줘 [URL]", "note": "웹사이트 분석"},
-            {"cmd": "무드보드 만들어줘", "note": "무드보드 생성"},
-            {"cmd": "브랜드 DNA 리포트", "note": "상세 리포트"},
+            {"cmd": "경쟁사 분석해줘 [브랜드]", "note": "단일 브랜드 심층"},
+            {"cmd": "시장 모니터링 리포트", "note": "전체 시장"},
+            {"cmd": "경쟁사 가격 변동", "note": "가격 추적"},
         ],
-        "capabilities": ["브랜드 컬러 추출", "무드보드 생성", "톤앤매너 분석", "인터랙티브 리포트"],
-        "output": "output/리포트/",
+        "capabilities": ["제품 라인업·가격·프로모션", "리뷰/VOC 분석", "대비 비교", "트렌드 추적"],
+        "output": "~/Desktop/team-skills/리포트/",
     },
-    "competitor-analysis": {
-        "desc": "경쟁사를 분석하고 벤치마킹 리포트를 생성합니다.",
+    "trend-radar": {
+        "desc": "멀티소스 트렌드 데이터 수집·분석 (네이버/유튜브/인스타/레딧 등). 탭 구조 HTML 리포트.",
         "usecases": [
-            {"cmd": "경쟁사 분석해줘", "note": "경쟁사 리서치"},
-            {"cmd": "[브랜드명] 벤치마킹해줘", "note": "특정 브랜드 분석"},
-            {"cmd": "시장 조사해줘", "note": "시장 분석"},
+            {"cmd": "트렌드 분석해줘", "note": "종합 트렌드"},
+            {"cmd": "이번 시즌 뭐가 뜨나", "note": "시즌 트렌드"},
+            {"cmd": "육아 트렌드 리포트", "note": "카테고리 필터"},
         ],
-        "capabilities": ["경쟁사 제품 분석", "가격 비교", "마케팅 전략 분석", "SWOT 분석"],
-        "output": "output/리포트/",
+        "capabilities": ["멀티소스 수집", "탭별 리포트", "content-pipeline/product-scout 연동"],
+        "output": "~/Desktop/team-skills/리포트/",
     },
-    "copywriting": {
-        "desc": "마케팅 카피를 작성합니다. 랜딩페이지, 홈페이지, 광고 카피 등을 지원합니다.",
+    "product-scout": {
+        "desc": "데이터 기반 신상품 기회 탐색 & 소싱 매칭. Go/Hold 액션 버튼 내장.",
         "usecases": [
-            {"cmd": "광고 카피 써줘", "note": "광고 카피 작성"},
-            {"cmd": "랜딩페이지 카피라이팅", "note": "랜딩페이지용"},
-            {"cmd": "헤드라인 5개 만들어줘", "note": "헤드라인 다수 생성"},
+            {"cmd": "신상품 기회 찾아줘", "note": "기회 스코어링"},
+            {"cmd": "소싱 가능한 제품", "note": "매트릭스 출력"},
+            {"cmd": "경쟁사 신규 제품", "note": "동향 추적"},
         ],
-        "capabilities": ["헤드라인 작성", "바디카피 작성", "CTA 문구", "USP 정리"],
-        "output": "output/광고카피/",
+        "capabilities": ["기회 카드 TOP 10", "소싱 매트릭스", "경쟁사 동향", "Go/Hold 판단"],
+        "output": "~/Desktop/team-skills/리포트/",
+    },
+    "keyword-optimizer": {
+        "desc": "네이버 키워드 최적화 + 시즌 트렌드 통합 스킬. 제품 하나에 대해 ① 시드 키워드 발굴 → ② 검색량/경쟁도 API 조회 → ③ DataLab 월별 트렌드 → ④ S/A/B/C/D 등급 스코어링 → ⑤ 스마트스토어 상품명 3안 (SEO 규칙 준수) → ⑥ 네이버 태그사전 기반 상품태그 10개 추천 → ⑦ 월별 마케팅 캘린더 → ⑧ Chart.js 트렌드 그래프 포함 HTML 통합 리포트까지 자동 생성.",
+        "usecases": [
+            {"cmd": "[상품] 키워드 최적화 해줘", "note": "전체 플로우 실행 → HTML 리포트"},
+            {"cmd": "스마트스토어 상품명 추천", "note": "SEO 준수 3안 생성"},
+            {"cmd": "상품태그 10개 추천", "note": "태그사전 등록 가능성 판단"},
+        ],
+        "capabilities": [
+            "검색광고 API (시드 + 연관 키워드)",
+            "DataLab 월별 시즌 트렌드",
+            "S/A/B/C/D 등급 스코어링",
+            "스마트스토어 상품명 3안 (50자/수식어 금지)",
+            "상품태그 10개 + 대체 후보",
+            "월별 마케팅 캘린더",
+            "HTML 통합 리포트 (Chart.js)",
+        ],
+        "output": "~/Desktop/team-skills/리포트/YYYY-MM-DD_{상품}_키워드-최적화.html",
+    },
+    "keyword-trend": {
+        "desc": '"언제 마케팅"할지 — 네이버 DataLab으로 월별 시즌 트렌드 분석, 성수기/피크 파악.',
+        "usecases": [
+            {"cmd": "이 키워드 시즌 트렌드", "note": "월별 검색량"},
+            {"cmd": "성수기 찾아줘", "note": "피크 분석"},
+            {"cmd": "마케팅 타이밍 분석", "note": "시즌 전략"},
+        ],
+        "capabilities": ["DataLab 월별 트렌드", "성수기/비수기 파악", "피크 시점 매칭"],
+        "output": "~/Desktop/team-skills/리포트/",
+    },
+    "instagram-reviewer": {
+        "desc": "인스타그램 체험단 후보 발굴·검증. S~D 등급으로 참여율/자녀 연령 매칭 점수화.",
+        "usecases": [
+            {"cmd": "체험단 후보 찾아줘", "note": "해시태그 발굴"},
+            {"cmd": "[해시태그] 인플루언서", "note": "해시태그 기반"},
+            {"cmd": "체험단 검증", "note": "등급화"},
+        ],
+        "capabilities": ["해시태그 발굴", "유사 계정 추천", "S-D 등급 점수화", "자녀 연령 매칭"],
+        "output": "~/Desktop/team-skills/리포트/",
+    },
+    "content-pipeline": {
+        "desc": "Trend Radar 인사이트 기반 멀티채널 콘텐츠 자동 기획·생산 파이프라인.",
+        "usecases": [
+            {"cmd": "콘텐츠 파이프라인 돌려줘", "note": "트렌드→콘텐츠 자동화"},
+            {"cmd": "이 트렌드로 멀티채널 콘텐츠", "note": "여러 채널 동시"},
+        ],
+        "capabilities": ["트렌드 기반 기획", "멀티채널 자동 생산", "A/B 변형"],
+        "output": "~/Desktop/team-skills/",
+    },
+    # 브랜드
+    "product-analyzer": {
+        "desc": "제품 분석 리포트 — 상세페이지/리뷰/스펙을 분석해 마케팅 포인트 도출.",
+        "usecases": [
+            {"cmd": "제품 분석해줘 [URL]", "note": "상세페이지 분석"},
+            {"cmd": "USP 뽑아줘", "note": "소구점 추출"},
+            {"cmd": "제품 리뷰 분석", "note": "VOC 분석"},
+        ],
+        "capabilities": ["상세페이지 파싱", "USP 추출", "리뷰 감성 분석", "마케팅 포인트"],
+        "output": "~/Desktop/team-skills/리포트/",
+    },
+    # 유틸리티
+    "batch-image-transform": {
+        "desc": "Gemini AI로 상품 이미지 배경 교체/톤 변환을 배치로 일괄 처리. 3가지 모드(레퍼런스/HTML/프롬프트).",
+        "usecases": [
+            {"cmd": "이 이미지들 배경 카페로 바꿔줘", "note": "프롬프트 모드"},
+            {"cmd": "레퍼런스 이미지 스타일 적용", "note": "레퍼런스 모드"},
+            {"cmd": "상세페이지 컨셉으로 변환", "note": "HTML 모드"},
+        ],
+        "capabilities": ["Gemini Flash/Pro 사용", "3가지 입력 모드", "배치 처리", "4가지 비율"],
+        "output": "~/Desktop/team-skills/기타/",
+    },
+    "tone-match-local": {
+        "desc": "레퍼런스 이미지의 색감/톤/분위기를 상품 이미지에 일괄 적용. 구도·콘텐츠는 100% 보존.",
+        "usecases": [
+            {"cmd": "이 레퍼런스 톤으로 맞춰줘", "note": "톤 매칭"},
+            {"cmd": "색감 통일해줘", "note": "일괄 적용"},
+            {"cmd": "강도 70%로 톤 적용", "note": "강도 조절"},
+        ],
+        "capabilities": ["톤/색감 매칭", "0-100% 강도 조절", "구도 보존", "배치 처리"],
+        "output": "~/Desktop/team-skills/기타/",
+    },
+    "pdp-section-capture": {
+        "desc": "상세페이지 HTML을 디자인 단위 섹션별로 잘라 고해상도 PNG 시리즈로 출력. HTML 주석 기반.",
+        "usecases": [
+            {"cmd": "상세페이지 섹션별로 잘라줘", "note": "PNG 시리즈"},
+            {"cmd": "이 HTML 이미지로 변환", "note": "섹션 캡처"},
+        ],
+        "capabilities": ["주석 기반 섹션 분할", "supersampling 고해상도", "IntersectionObserver 라이브 캡처"],
+        "output": "~/Desktop/team-skills/상세페이지/",
+    },
+    # 문서 도구
+    "docx": {
+        "desc": "Word 문서 생성·편집·분석 도구. 템플릿 기반 자동 생성 지원.",
+        "usecases": [
+            {"cmd": "Word 문서 만들어줘", "note": "DOCX 생성"},
+            {"cmd": "이 문서 편집해줘 [파일]", "note": "기존 문서 편집"},
+        ],
+        "capabilities": ["DOCX 생성/편집", "표/목차/헤더", "템플릿 지원"],
+        "output": "~/Desktop/team-skills/기타/",
+    },
+    "xlsx": {
+        "desc": "Excel 스프레드시트 생성·편집·분석 도구. 수식·차트·피벗 지원.",
+        "usecases": [
+            {"cmd": "엑셀 분석해줘 [파일]", "note": "데이터 분석"},
+            {"cmd": "수익 시뮬레이션 엑셀", "note": "수식 생성"},
+        ],
+        "capabilities": ["수식/차트/피벗", "CSV 변환", "템플릿 보존"],
+        "output": "~/Desktop/team-skills/기타/",
+    },
+    "pptx": {
+        "desc": "PowerPoint 프레젠테이션 생성·편집·분석.",
+        "usecases": [
+            {"cmd": "PPT 만들어줘", "note": "새 프레젠테이션"},
+            {"cmd": "이 내용으로 피치덱", "note": "피치덱 생성"},
+        ],
+        "capabilities": ["슬라이드 생성/편집", "레이아웃/템플릿", "차트 삽입"],
+        "output": "~/Desktop/team-skills/기타/",
+    },
+    "pdf": {
+        "desc": "PDF 추출·생성·병합·분할·폼 처리.",
+        "usecases": [
+            {"cmd": "이 PDF 분석해줘", "note": "텍스트/표 추출"},
+            {"cmd": "PDF 병합해줘", "note": "여러 파일 합침"},
+        ],
+        "capabilities": ["텍스트/표 추출", "병합/분할", "폼 필드 채우기", "OCR"],
+        "output": "~/Desktop/team-skills/기타/",
+    },
+    "hwpx": {
+        "desc": "한글(HWP/HWPX) 문서 생성·읽기·편집.",
+        "usecases": [
+            {"cmd": "한글 문서 만들어줘", "note": "HWPX 생성"},
+            {"cmd": "이 한글 파일 읽어줘", "note": "내용 추출"},
+        ],
+        "capabilities": ["HWPX 생성/편집", "OWPML", "한컴 호환"],
+        "output": "~/Desktop/team-skills/기타/",
     },
 }
 
 # 에이전트별 상세 정보
 AGENT_DETAILS = {
-    "meta-ad-creator": {
-        "desc": "제품 이미지를 분석하고 2~3개 스타일의 메타 광고 이미지를 자동 생성합니다.",
-        "usecases": [
-            {"cmd": "광고 만들어줘 [이미지폴더]", "note": "폴더 내 이미지로 광고 생성"},
-            {"cmd": "메타 광고 제작", "note": "기본 광고 제작"},
-            {"cmd": "인스타 광고 소재 3종", "note": "여러 버전 생성"},
-        ],
-        "workflow": ["이미지 분석", "템플릿 선택", "광고 이미지 생성", "PNG 변환"],
-    },
-    "reels-editor-agent": {
-        "desc": "영상을 9:16 세로형으로 변환하고 자막, 인트로/아웃트로를 추가합니다.",
-        "usecases": [
-            {"cmd": "릴스 편집해줘 [영상파일]", "note": "영상 편집"},
-            {"cmd": "릴스 광고 만들어줘", "note": "광고용 릴스"},
-            {"cmd": "세로 영상으로 바꿔줘", "note": "포맷 변환"},
-        ],
-        "workflow": ["영상 분석", "크롭/리사이즈", "자막 생성", "인코딩"],
-    },
-    "competitor-analyzer": {
-        "desc": "웹 검색으로 경쟁 브랜드의 제품, 가격, 마케팅, SNS, 리뷰 데이터를 수집하고 분석합니다.",
-        "usecases": [
-            {"cmd": "경쟁사 분석해줘 [브랜드명]", "note": "특정 브랜드 분석"},
-            {"cmd": "벤치마킹 리포트 만들어줘", "note": "비교 리포트"},
-            {"cmd": "시장 조사해줘", "note": "시장 전체 조사"},
-        ],
-        "workflow": ["웹 검색", "데이터 수집", "분석", "리포트 생성"],
-    },
     "brand-setup-wizard": {
-        "desc": "새 브랜드의 초기 설정을 도와주는 마법사입니다. 질문을 통해 브랜드 정보를 수집합니다.",
+        "desc": "새 브랜드 초기 설정 마법사 — 질문을 통해 브랜드 정보를 수집하고 레퍼런스 파일 생성.",
         "usecases": [
             {"cmd": "브랜드 설정해줘", "note": "새 브랜드 설정"},
             {"cmd": "새 브랜드 추가", "note": "브랜드 추가"},
@@ -296,14 +402,75 @@ AGENT_DETAILS = {
         ],
         "workflow": ["질문 수집", "브랜드 정보 정리", "레퍼런스 파일 생성"],
     },
+    "brand-updater": {
+        "desc": "기존 브랜드의 제품·경쟁사·캠페인 등 특정 정보를 부분 수정.",
+        "usecases": [
+            {"cmd": "브랜드 수정해줘", "note": "부분 업데이트"},
+            {"cmd": "경쟁사 업데이트", "note": "경쟁사만 수정"},
+            {"cmd": "제품 추가해줘", "note": "제품 라인업 추가"},
+        ],
+        "workflow": ["변경 항목 선택", "사용자 입력 받기", "JSON/MD 부분 수정"],
+    },
+    "competitor-analyzer": {
+        "desc": "웹 검색으로 경쟁 브랜드의 제품·가격·마케팅·SNS·리뷰 데이터를 실시간 수집·분석.",
+        "usecases": [
+            {"cmd": "경쟁사 분석해줘 [브랜드명]", "note": "특정 브랜드 분석"},
+            {"cmd": "벤치마킹 리포트 만들어줘", "note": "비교 리포트"},
+            {"cmd": "시장 조사해줘", "note": "시장 전체 조사"},
+        ],
+        "workflow": ["웹 검색", "데이터 수집", "분석", "리포트 생성"],
+    },
+    "content-quality-reviewer": {
+        "desc": "생성된 마케팅 콘텐츠(상세페이지/광고/SNS)의 품질을 검토하고 개선점 제안.",
+        "usecases": [
+            {"cmd": "이 콘텐츠 검토해줘", "note": "품질 리뷰"},
+            {"cmd": "피드백 줘", "note": "개선 포인트"},
+            {"cmd": "품질 체크", "note": "체크리스트 기반"},
+        ],
+        "workflow": ["콘텐츠 파싱", "체크리스트 평가", "개선점 제시"],
+    },
+    "data-report-analyzer": {
+        "desc": "CSV/엑셀/JSON 데이터 파일을 읽어 분석하고 인사이트를 도출해 리포트 생성.",
+        "usecases": [
+            {"cmd": "데이터 분석해줘 [파일]", "note": "기본 분석"},
+            {"cmd": "매출 분석 리포트", "note": "재무 분석"},
+            {"cmd": "광고 성과 분석", "note": "성과 리포트"},
+        ],
+        "workflow": ["데이터 읽기", "통계 분석", "시각화", "인사이트 도출"],
+    },
+    "market-researcher": {
+        "desc": "시장/트렌드/소비자 인사이트를 웹 검색으로 조사. 베이비·육아 카테고리 특화.",
+        "usecases": [
+            {"cmd": "시장 조사해줘", "note": "종합 시장 분석"},
+            {"cmd": "트렌드 분석", "note": "트렌드 리포트"},
+            {"cmd": "기회 발굴", "note": "신규 기회 영역"},
+        ],
+        "workflow": ["키워드 기반 검색", "트렌드 수집", "인사이트 도출"],
+    },
+    "promotion-designer": {
+        "desc": "특정 채널/포맷의 프로모션 디자인을 .pen 파일로 제작. promotion-design 스킬에서 병렬 스폰.",
+        "usecases": [
+            {"cmd": "프로모션 디자인해줘", "note": "메인 스킬에서 호출"},
+        ],
+        "workflow": [".pen 파일 열기", "batch_design 명령", "결과 저장"],
+    },
     "skill-orchestrator": {
-        "desc": "사용자의 요청을 분석하여 가장 적합한 스킬이나 에이전트를 추천하고 연결합니다.",
+        "desc": "사용자 요청을 분석해 가장 적합한 스킬/에이전트를 추천하고 매칭.",
         "usecases": [
             {"cmd": "도와줘", "note": "무엇을 할 수 있는지 안내"},
             {"cmd": "뭐 할 수 있어?", "note": "가능한 작업 목록"},
             {"cmd": "마케팅 관련 작업해줘", "note": "의도 파악 후 매칭"},
         ],
         "workflow": ["의도 분석", "스킬/에이전트 매칭", "작업 위임", "결과 전달"],
+    },
+    "sundayhug-marketing-hub": {
+        "desc": "썬데이허그 마케팅 업무 총괄 오케스트레이터. 복합 워크플로우 설계 및 실행.",
+        "usecases": [
+            {"cmd": "마케팅 도와줘", "note": "종합 지원"},
+            {"cmd": "어떤 스킬 써야해?", "note": "스킬 추천"},
+            {"cmd": "캠페인 기획해줘", "note": "복합 캠페인"},
+        ],
+        "workflow": ["요청 분석", "복합 워크플로우 설계", "스킬 체인 실행"],
     },
 }
 
@@ -420,6 +587,13 @@ def parse_skill_md(skill_path: Path) -> dict:
         info["description"] = re.sub(r'^name:.*', '', info["description"]).strip()
         if len(info["description"]) > 80:
             info["description"] = info["description"][:80] + "..."
+        # HTML-safe: escape <, >, & and strip HTML comment markers that would break the page layout
+        info["description"] = (
+            info["description"]
+            .replace("&", "&amp;")
+            .replace("<", "&lt;")
+            .replace(">", "&gt;")
+        )
 
     return info
 
@@ -1364,7 +1538,7 @@ def generate_html_guide(skills: dict, agents: list, templates: list = None) -> s
         <span class="num">💡</span>
         <div class="content">
           <h4>결과물 위치</h4>
-          <p>모든 결과물은 <code>output/</code> 폴더에 저장됩니다.</p>
+          <p>모든 결과물은 각 팀원 로컬 <code>~/Desktop/team-skills/</code> 폴더에 저장됩니다.</p>
         </div>
       </div>
     </div>

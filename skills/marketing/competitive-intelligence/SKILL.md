@@ -169,7 +169,7 @@ python3 /path/to/scripts/naver_scraper.py --mode products --query "{브랜드명
 6. ⚔️ **vs 썬데이허그** — 가격/리뷰/마케팅 직접 비교
 7. 💡 **인사이트** — 배울 점, 기회, 대응 액션 아이템
 
-파일 저장: `output/리포트/ci_{브랜드명}_{YYYYMMDD}.html`
+파일 저장: `~/Desktop/team-skills/리포트/ci_{브랜드명}_{YYYYMMDD}.html`
 
 **리포트 디자인**:
 - 단일 HTML 파일 (외부 의존성 없음)

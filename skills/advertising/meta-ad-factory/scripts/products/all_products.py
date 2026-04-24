@@ -23,8 +23,8 @@ BRAND = "SUNDAY HUG"
 BRAND_KO = "썬데이허그"
 COLORS = {"primary": "#1D9E75", "secondary": "#F5F0EB", "accent": "#FF6B35"}
 
-DESKTOP = Path("/Users/inkyo/Desktop/상세페이지 local (최종본)")
-OUTPUT_BASE = Path("/Users/inkyo/Projects/team-skills/output/광고카피/sundayhug-meta-bulk")
+DESKTOP = Path.home() / "Desktop" / "상세페이지 local (최종본)"
+OUTPUT_BASE = Path.home() / "Desktop" / "team-skills" / "광고카피" / "sundayhug-meta-bulk"
 CDN = "https://sundayhugkr.cafe24.com/skin-skin69/pdp"
 
 

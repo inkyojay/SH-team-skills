@@ -1,6 +1,6 @@
 ---
 name: meta-ad-factory
-description: 메타(Facebook/Instagram) 광고 소재를 벌크로 자동 생성하는 스킬. 제품 URL + 이미지를 입력하면 ① USP 자동 분석 → ② 타겟/톤별 카피 매트릭스 생성 → ③ 메타 광고 규격별 HTML 크리에이티브 벌크 생성 → ④ 미리보기 그리드(PNG 다운로드 버튼 + 원본 사진 갤러리 내장) → ⑤ Playwright로 전체 PNG 변환까지 전체 파이프라인을 실행한다. 다음 상황에서 반드시 이 스킬을 사용한다: "메타 광고 만들어줘", "페이스북 광고 소재", "인스타 광고", "광고 크리에이티브", "광고 소재 벌크", "광고 배너 만들어줘", "SNS 광고 이미지", "퍼포먼스 마케팅 소재", "DA 소재 제작", "메타 광고 카피", "광고 에셋 생성", "A/B 테스트 소재", "리타겟팅 광고 소재" 요청 시. 제품 이미지(로컬/CDN URL)와 카피만 있으면 제품당 21개 광고 소재를 한 번에 생성 가능.
+description: 메타(Facebook/Instagram) 광고 소재를 벌크로 자동 생성하는 스킬. 제품 URL + 이미지를 입력하면 ① USP 자동 분석 → ② 타겟/톤별 카피 매트릭스 생성 → ③ 메타 광고 규격별 HTML 크리에이티브 벌크 생성 → ④ 로컬 FastAPI 서버 기반 인터랙티브 preview-grid (카드별 📥 단건 PNG on-demand / ✏️ 텍스트+스타일 편집[색상·크기·굵기·배경] / 🖼 Gemini AI 이미지 교체) → ⑤ 필요 시 Playwright 일괄 PNG 변환까지. 다음 상황에서 반드시 이 스킬을 사용한다: "메타 광고 만들어줘", "페이스북 광고 소재", "인스타 광고", "광고 크리에이티브", "광고 소재 벌크", "광고 배너 만들어줘", "SNS 광고 이미지", "퍼포먼스 마케팅 소재", "DA 소재 제작", "메타 광고 카피", "광고 에셋 생성", "A/B 테스트 소재", "리타겟팅 광고 소재" 요청 시. 제품 이미지(로컬/CDN URL)와 카피만 있으면 제품당 21개 광고 소재를 한 번에 생성, 브라우저에서 바로 편집·교체 가능.
 ---
 
 # Meta Ad Factory — 메타 광고 소재 벌크 생성 스킬
@@ -20,7 +20,8 @@ skills/advertising/meta-ad-factory/
 ├── SKILL.md                          ← 이 파일
 ├── scripts/
 │   ├── meta_ad_builder.py            ← 핵심 빌드 엔진 (직접 수정 금지)
-│   ├── export_png.py                 ← Playwright PNG 변환기
+│   ├── server.py                     ← 로컬 FastAPI (PNG/텍스트/AI 이미지 API)
+│   ├── export_png.py                 ← Playwright 일괄 PNG 변환기 (CLI)
 │   ├── rebuild_grids.py              ← preview-grid.html 단독 재생성
 │   └── products/
 │       ├── all_products.py           ← 제품 config 모음 (기존 16개)
@@ -34,7 +35,7 @@ skills/advertising/meta-ad-factory/
 └── output/  (→ 실제 출력은 OUTPUT_BASE 경로)
 ```
 
-**실제 출력 경로**: `/Users/inkyo/Projects/team-skills/output/광고카피/sundayhug-meta-bulk/{카테고리}/{제품슬러그}/`
+**실제 출력 경로**: `~/Desktop/team-skills/광고카피/sundayhug-meta-bulk/{카테고리}/{제품슬러그}/` (각 팀원 로컬 Desktop)
 
 ---
 
@@ -47,7 +48,7 @@ skills/advertising/meta-ad-factory/
 1. **제품명 & 슬러그** (예: `butterfly-swaddle-cotton-mesh`)
 2. **카테고리** (`newborn` / `sleeping-bags` / `sleep-products` / `daily-look` / `events`)
 3. **이미지 소스** (다음 중 하나):
-   - 로컬 파일: `/Users/inkyo/Desktop/상세페이지 최종본/{경로}/*.webp`
+   - 로컬 파일: `~/Desktop/상세페이지 최종본/{경로}/*.webp`
    - CDN URL: `https://sundayhugkr.cafe24.com/skin-skin69/pdp/{경로}.webp`
    - 상세 HTML에서 `<img src>` 추출
 4. **프로모션 정보** (선택): 이벤트 전용 광고의 경우 가격·날짜·혜택
@@ -145,44 +146,49 @@ output/.../product-slug/
 | benefit-stack | 4:5, 9:16 × 2톤 (info+urgency) | 4개 |
 | social-proof | 4:5, 9:16 × 1톤 (info) | 2개 |
 
-### STEP 3: preview-grid.html 확인
-
-브라우저에서 `previews/preview-grid.html` 열기:
+### STEP 3: 로컬 서버 시작 (인터랙티브 편집 모드)
 
 ```bash
-open "file:///Users/inkyo/Projects/team-skills/output/광고카피/sundayhug-meta-bulk/{카테고리}/{슬러그}/previews/preview-grid.html"
+cd skills/advertising/meta-ad-factory/scripts
+python3 server.py --slug swaddle-strap
+# → 브라우저가 자동으로 http://127.0.0.1:8765/preview/swaddle-strap 오픈
 ```
 
-**preview-grid 기능**:
-- **필터**: 사이즈(1:1/4:5/9:16) · 레이아웃 · 톤 별 필터링
-- **카드 클릭**: 선택/해제 (체크 표시)
-- **더블클릭 / Shift+클릭**: 전체 크기 모달로 확대 보기
-- **📥 PNG 다운로드**: 선택된 것만 다운 (선택 없으면 현재 필터 전체 다운)
-- **파일명 복사**: 선택한 파일명을 클립보드에 복사 (export_png.py --selected 용)
-- **📷 원본 사진 보기**: 광고 디자인 없는 소스 이미지 갤러리 (접기/펼치기)
-  - CDN 이미지: 바로 브라우저에 표시 + "⬇ 원본 다운로드"
-  - 로컬 이미지: file:// URL로 표시 + 다운로드
+**서버 옵션**:
+- `--slug <slug>` 특정 제품 자동 오픈 (생략 시 가장 최근 빌드된 제품)
+- `--port 8765` 포트 변경
+- `--no-open` 브라우저 자동 오픈 비활성화
 
-### STEP 4: PNG 변환 (Playwright)
+**서버 모드에서 preview-grid 기능**:
+- **🔍 필터**: 사이즈(1:1/4:5/9:16) · 레이아웃 · 톤
+- **체크박스 선택**: 카드 클릭 → 선택/해제
+- **모달 확대**: 더블클릭 / Shift+클릭
+- **📥 전체 PNG 다운로드** (헤더 버튼): 선택/필터된 카드를 on-demand로 PNG 생성 → 순차 다운로드
+- **카드별 호버 버튼** (왼쪽 상단):
+  - **📥** 이 소재만 PNG 다운로드 (~5초)
+  - **✏️** 텍스트 + 스타일 편집 모달
+    - 텍스트 수정 (헤드라인 / 서브텍스트 / CTA / 배지 / 리뷰)
+    - 필드별 **글자색** (color picker)
+    - 필드별 **글자 크기** (px 입력)
+    - 필드별 **글자 굵기** (Regular / Medium / Bold / Black)
+    - CTA · 배지 한정 **배경색** (color picker)
+    - 저장 시 원본 HTML 덮어쓰기 (해당 PNG 캐시 자동 무효화 → 재생성)
+  - **🖼** AI 이미지 교체 (프롬프트 입력 → Gemini로 20~30초 변환 → 자동 반영)
+- **📷 원본 사진 보기**: 소스 이미지 갤러리 (로컬 이미지는 `/src-image/{slug}/{key}` 로 서빙)
+- **안전장치**: 첫 편집 시 `{filename}.bak` 자동 생성 (복구용)
+
+### STEP 4 (선택): 대량 일괄 PNG 변환
+
+서버 없이 CLI로 21개를 한번에 받고 싶으면:
 
 ```bash
-# 단일 제품
-python3 export_png.py --product product-slug
-
-# 여러 제품
-python3 export_png.py --product slug-a --product slug-b
-
-# 선택된 소재만 (preview-grid에서 "파일명 복사" → selected.txt로 저장)
-python3 export_png.py --product product-slug --selected selected.txt
-
-# 전체 변환 + ZIP 패키징
-python3 export_png.py --all --zip
+python3 export_png.py --product swaddle-strap          # 단일 제품
+python3 export_png.py --product swaddle-strap --zip    # ZIP 패키징
+python3 export_png.py --all                             # 전체 제품 (수 분 소요)
 ```
 
-**PNG 출력**: `output/.../product-slug/final/*.png`
-- 1080×1080 (1:1 피드)
-- 1080×1350 (4:5 IG 피드)
-- 1080×1920 (9:16 릴스/스토리)
+**PNG 출력**: `~/Desktop/team-skills/광고카피/sundayhug-meta-bulk/{카테고리}/{슬러그}/final/*.png`
+- 1080×1080 (1:1 피드), 1080×1350 (4:5 IG), 1080×1920 (9:16 릴스)
 
 ### STEP 5: 마스터 대시보드 생성
 
@@ -270,10 +276,20 @@ right: 120px
 - [ ] 3개 톤(emotional/informational/urgency) 각 2~3개 카피 작성
 - [ ] `benefits` 4개 작성 (benefit-stack 레이아웃용)
 - [ ] `review` dict 작성 (social-proof 레이아웃용)
-- [ ] `python3 products/all_products.py {slug}` 빌드 실행
-- [ ] `preview-grid.html` 브라우저 확인 (21개 크리에이티브)
-- [ ] `python3 export_png.py --product {slug}` PNG 변환
-- [ ] 해상도 검증: `sips -g pixelWidth -g pixelHeight final/*.png`
+- [ ] `python3 products/{slug}.py` 빌드 실행 (HTML 21개만 생성, PNG는 서버에서 on-demand)
+- [ ] `python3 server.py --slug {slug}` 서버 시작 → 브라우저에서 확인/편집
+- [ ] 편집/이미지 교체 후 마음에 들면 카드의 📥 버튼으로 개별 PNG 다운로드
+- [ ] (선택) `python3 export_png.py --product {slug}` 일괄 PNG 필요 시
+
+## 서버 요구사항
+
+```bash
+pip install fastapi 'uvicorn[standard]' beautifulsoup4 python-multipart
+# playwright는 이미 설치됨 (일괄 변환용과 공유)
+```
+
+AI 이미지 교체는 `.env`에 `GEMINI_API_KEY`가 설정되어 있고 Node.js가 PATH에 있어야 함
+(`skills/batch-image-transform/scripts/batch-transform.mjs` 호출).
 
 ---
 

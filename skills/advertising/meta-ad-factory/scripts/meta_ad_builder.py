@@ -186,7 +186,7 @@ def _hero_image_html(spec: AdSpec, img_data: str, cfg: ProductConfig) -> str:
     badge_html = ""
     if badge:
         badge_html = f"""
-        <div style="position:absolute;top:{pad_top}px;right:{pad_x}px;background:{c['accent']};
+        <div data-editable="badge" style="position:absolute;top:{pad_top}px;right:{pad_x}px;background:{c['accent']};
           color:#fff;padding:12px 24px;border-radius:50px;font-weight:900;
           font-size:{fonts['badge']}px;z-index:3;letter-spacing:1px;">
           {escape(badge)}
@@ -202,20 +202,20 @@ def _hero_image_html(spec: AdSpec, img_data: str, cfg: ProductConfig) -> str:
 
     return f"""
     <div class="ad-container">
-      <img class="product" src="{img_data}" alt="{escape(cfg.product_name)}">
+      <img class="product" data-image-key="{spec.image_key}" src="{img_data}" alt="{escape(cfg.product_name)}">
       <div style="position:absolute;bottom:0;left:0;right:0;height:60%;
         background:linear-gradient(transparent,rgba(0,0,0,0.78));z-index:1;"></div>
       {brand_html}
       {badge_html}
       <div style="position:absolute;bottom:{pad_bottom}px;left:{pad_x}px;right:{pad_x}px;
         z-index:2;color:#fff;">
-        <p style="font-size:{fonts['subtext']}px;opacity:0.92;margin-bottom:12px;line-height:1.4;
+        <p data-editable="subtext" style="font-size:{fonts['subtext']}px;opacity:0.92;margin-bottom:12px;line-height:1.4;
           font-weight:500;">
           {escape(copy.subtext)}
         </p>
-        <h2 style="font-size:{fonts['headline']}px;font-weight:900;line-height:1.18;
+        <h2 data-editable="headline" style="font-size:{fonts['headline']}px;font-weight:900;line-height:1.18;
           margin-bottom:24px;letter-spacing:-0.5px;white-space:pre-line;">{escape(copy.headline)}</h2>
-        <div style="display:inline-block;background:{c['primary']};color:#fff;
+        <div data-editable="cta" style="display:inline-block;background:{c['primary']};color:#fff;
           padding:16px 40px;border-radius:10px;font-weight:700;
           font-size:{fonts['cta']}px;">
           {escape(copy.cta)}
@@ -234,14 +234,14 @@ def _split_vertical_html(spec: AdSpec, img_data: str, cfg: ProductConfig) -> str
     badge_html = ""
     if badge:
         badge_html = f"""
-          <div style="position:absolute;top:6%;right:6%;background:{c['accent']};
+          <div data-editable="badge" style="position:absolute;top:6%;right:6%;background:{c['accent']};
             color:#fff;padding:12px 26px;border-radius:50px;font-weight:900;
             font-size:{fonts['badge']}px;">{escape(badge)}</div>"""
 
     return f"""
     <div class="ad-container" style="display:flex;flex-direction:column;">
       <div style="flex:6;position:relative;overflow:hidden;">
-        <img class="product" src="{img_data}" alt="{escape(cfg.product_name)}">
+        <img class="product" data-image-key="{spec.image_key}" src="{img_data}" alt="{escape(cfg.product_name)}">
         {badge_html}
       </div>
       <div style="flex:4;display:flex;flex-direction:column;justify-content:center;
@@ -250,12 +250,12 @@ def _split_vertical_html(spec: AdSpec, img_data: str, cfg: ProductConfig) -> str
           font-weight:700;text-transform:uppercase;letter-spacing:3px;margin-bottom:16px;">
           {escape(cfg.brand)}
         </div>
-        <h2 style="font-size:{fonts['headline']}px;font-weight:900;color:#1a1a1a;
+        <h2 data-editable="headline" style="font-size:{fonts['headline']}px;font-weight:900;color:#1a1a1a;
           line-height:1.2;margin-bottom:16px;white-space:pre-line;">{escape(copy.headline)}</h2>
-        <p style="font-size:{fonts['subtext']}px;color:#555;line-height:1.5;margin-bottom:24px;">
+        <p data-editable="subtext" style="font-size:{fonts['subtext']}px;color:#555;line-height:1.5;margin-bottom:24px;">
           {escape(copy.subtext)}
         </p>
-        <div style="background:{c['primary']};color:#fff;padding:16px 44px;
+        <div data-editable="cta" style="background:{c['primary']};color:#fff;padding:16px 44px;
           border-radius:10px;font-weight:700;font-size:{fonts['cta']}px;">
           {escape(copy.cta)}
         </div>
@@ -291,19 +291,19 @@ def _benefit_stack_html(spec: AdSpec, img_data: str, cfg: ProductConfig) -> str:
     return f"""
     <div class="ad-container" style="display:flex;flex-direction:column;background:{c['secondary']};">
       <div style="flex:4;position:relative;overflow:hidden;">
-        <img class="product" src="{img_data}" alt="{escape(cfg.product_name)}">
+        <img class="product" data-image-key="{spec.image_key}" src="{img_data}" alt="{escape(cfg.product_name)}">
       </div>
       <div style="flex:6;padding:6% 8%;display:flex;flex-direction:column;justify-content:center;">
         <div style="font-size:{int(fonts['subtext']*0.85)}px;color:{c['primary']};
           font-weight:700;letter-spacing:3px;text-transform:uppercase;text-align:center;margin-bottom:12px;">
           {escape(cfg.brand)}
         </div>
-        <h2 style="font-size:{fonts['headline']}px;font-weight:900;color:#1a1a1a;
+        <h2 data-editable="headline" style="font-size:{fonts['headline']}px;font-weight:900;color:#1a1a1a;
           text-align:center;margin-bottom:28px;line-height:1.2;white-space:pre-line;">{escape(copy.headline)}</h2>
         <div style="display:flex;flex-direction:column;gap:20px;margin-bottom:28px;">
           {items_html}
         </div>
-        <div style="background:{c['primary']};color:#fff;padding:16px 40px;
+        <div data-editable="cta" style="background:{c['primary']};color:#fff;padding:16px 40px;
           border-radius:10px;font-weight:700;font-size:{fonts['cta']}px;text-align:center;">
           {escape(copy.cta)}
         </div>
@@ -326,22 +326,22 @@ def _social_proof_html(spec: AdSpec, img_data: str, cfg: ProductConfig) -> str:
         <div style="font-size:{int(fonts['headline']*0.8)}px;margin-bottom:10px;color:#FFB800;">
           ⭐⭐⭐⭐⭐
         </div>
-        <p style="font-size:{fonts['subtext']+4}px;color:#222;font-style:italic;
+        <p data-editable="review_text" style="font-size:{fonts['subtext']+4}px;color:#222;font-style:italic;
           line-height:1.55;font-weight:500;">
           "{escape(review.get('text',''))}"
         </p>
-        <p style="font-size:{int(fonts['subtext']*0.8)}px;color:#888;margin-top:10px;">
+        <p data-editable="review_name" style="font-size:{int(fonts['subtext']*0.8)}px;color:#888;margin-top:10px;">
           — {escape(review.get('name','리뷰어'))}
         </p>
       </div>
       <div style="flex:1;position:relative;overflow:hidden;border-radius:18px;
         margin-bottom:28px;box-shadow:0 8px 24px rgba(0,0,0,0.12);">
-        <img class="product" src="{img_data}" alt="{escape(cfg.product_name)}">
+        <img class="product" data-image-key="{spec.image_key}" src="{img_data}" alt="{escape(cfg.product_name)}">
       </div>
       <div style="text-align:center;">
-        <h2 style="font-size:{fonts['headline']}px;font-weight:900;color:#1a1a1a;
+        <h2 data-editable="headline" style="font-size:{fonts['headline']}px;font-weight:900;color:#1a1a1a;
           margin-bottom:18px;line-height:1.22;white-space:pre-line;">{escape(copy.headline)}</h2>
-        <div style="display:inline-block;background:{c['primary']};color:#fff;
+        <div data-editable="cta" style="display:inline-block;background:{c['primary']};color:#fff;
           padding:16px 44px;border-radius:10px;font-weight:700;
           font-size:{fonts['cta']}px;">{escape(copy.cta)}</div>
       </div>
@@ -520,6 +520,43 @@ h1{{font-size:22px;font-weight:900;margin-bottom:4px;}}
 .card.selected .checkbox{{background:{primary};border-color:{primary};color:#fff;}}
 .card.selected .checkbox::after{{content:"✓";}}
 
+/* Per-card action buttons (only visible when server mode) */
+.card-actions{{position:absolute;top:10px;left:10px;display:none;gap:6px;z-index:11;opacity:0;transition:opacity 0.15s;}}
+.server-mode .card-actions{{display:flex;}}
+.card:hover .card-actions{{opacity:1;}}
+.act-btn{{width:34px;height:34px;border:none;border-radius:50%;background:rgba(255,255,255,0.95);box-shadow:0 2px 6px rgba(0,0,0,0.2);cursor:pointer;font-size:16px;padding:0;display:flex;align-items:center;justify-content:center;}}
+.act-btn:hover{{background:#fff;transform:scale(1.1);}}
+.act-btn.loading{{background:{primary};color:#fff;animation:spin 1s linear infinite;}}
+@keyframes spin{{from{{transform:rotate(0);}}to{{transform:rotate(360deg);}}}}
+
+/* Edit / image-swap modals */
+.mf-modal{{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:2000;padding:20px;overflow:auto;align-items:center;justify-content:center;}}
+.mf-modal.active{{display:flex;}}
+.mf-modal-inner{{background:#fff;border-radius:12px;padding:28px;max-width:560px;width:100%;max-height:90vh;overflow:auto;position:relative;}}
+.mf-modal h3{{font-size:18px;margin-bottom:8px;}}
+.mf-modal .sub{{font-size:12px;color:#666;margin-bottom:20px;font-family:monospace;word-break:break-all;}}
+.mf-field{{margin-bottom:16px;}}
+.mf-field label{{display:block;font-size:12px;font-weight:700;color:#555;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;}}
+.mf-field textarea{{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:6px;font-family:'Noto Sans KR',sans-serif;font-size:14px;line-height:1.5;resize:vertical;min-height:60px;}}
+.mf-field input[type="text"]{{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:6px;font-family:'Noto Sans KR',sans-serif;font-size:14px;}}
+.mf-style-row{{display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap;}}
+.mf-style-row label{{color:#888;margin:0;text-transform:none;font-weight:600;letter-spacing:0;}}
+.mf-style-row input[type="color"]{{width:38px;height:30px;padding:0;border:1px solid #ddd;border-radius:4px;cursor:pointer;background:transparent;}}
+.mf-style-row input[type="number"]{{padding:6px 8px;border:1px solid #ddd;border-radius:4px;font-size:13px;}}
+.mf-style-row select{{border:1px solid #ddd;border-radius:4px;font-size:12px;background:#fff;}}
+.mf-actions{{display:flex;gap:8px;justify-content:flex-end;margin-top:20px;}}
+.mf-btn{{padding:10px 20px;border-radius:6px;border:none;font-weight:700;font-size:13px;cursor:pointer;}}
+.mf-btn.primary{{background:{primary};color:#fff;}}
+.mf-btn.ghost{{background:transparent;color:#555;border:1px solid #ccc;}}
+.mf-btn:disabled{{opacity:0.5;cursor:not-allowed;}}
+.mf-progress{{display:none;margin-top:16px;background:#f3f4f6;border-radius:8px;padding:12px;}}
+.mf-progress.on{{display:block;}}
+.mf-progress-bar{{height:6px;background:#e5e7eb;border-radius:3px;overflow:hidden;margin-bottom:8px;}}
+.mf-progress-fill{{height:100%;background:{primary};width:0;transition:width 0.3s;}}
+.mf-progress-msg{{font-size:12px;color:#555;}}
+.mf-toast{{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:12px 24px;border-radius:8px;font-size:13px;font-weight:600;z-index:3000;display:none;}}
+.mf-toast.on{{display:block;}}
+
 /* 원본 이미지 갤러리 */
 .img-section{{padding:24px 32px 48px;}}
 .img-section-title{{font-size:16px;font-weight:900;color:#1a1a1a;margin-bottom:4px;}}
@@ -604,6 +641,46 @@ h1{{font-size:22px;font-weight:900;margin-bottom:4px;}}
   </div>
 </div>
 
+<!-- Text edit modal -->
+<div class="mf-modal" id="mf-text-modal" onclick="mfCloseModal(event, 'mf-text-modal')">
+  <div class="mf-modal-inner" onclick="event.stopPropagation()">
+    <h3>✏️ 텍스트 편집</h3>
+    <div class="sub" id="mf-text-filename"></div>
+    <div id="mf-text-fields"></div>
+    <div class="mf-actions">
+      <button class="mf-btn ghost" onclick="mfCloseModal(null, 'mf-text-modal')">취소</button>
+      <button class="mf-btn primary" id="mf-text-save" onclick="mfSaveText()">저장</button>
+    </div>
+  </div>
+</div>
+
+<!-- Image swap modal -->
+<div class="mf-modal" id="mf-img-modal" onclick="mfCloseModal(event, 'mf-img-modal')">
+  <div class="mf-modal-inner" onclick="event.stopPropagation()">
+    <h3>🖼 AI 이미지 교체</h3>
+    <div class="sub" id="mf-img-filename"></div>
+    <div class="mf-field">
+      <label>원본 이미지</label>
+      <img id="mf-img-preview" style="max-width:100%;max-height:200px;border-radius:6px;border:1px solid #ddd;">
+      <div style="font-size:11px;color:#888;margin-top:4px;font-family:monospace;" id="mf-img-key"></div>
+    </div>
+    <div class="mf-field">
+      <label>변환 프롬프트 (한글/영문)</label>
+      <textarea id="mf-img-prompt" placeholder="예: 밝은 카페 인테리어를 배경으로 자연광이 드는 느낌으로 바꿔줘"></textarea>
+    </div>
+    <div class="mf-progress" id="mf-img-progress">
+      <div class="mf-progress-bar"><div class="mf-progress-fill" id="mf-img-fill"></div></div>
+      <div class="mf-progress-msg" id="mf-img-msg">Gemini 변환 중... (약 20-30초)</div>
+    </div>
+    <div class="mf-actions">
+      <button class="mf-btn ghost" onclick="mfCloseModal(null, 'mf-img-modal')">취소</button>
+      <button class="mf-btn primary" id="mf-img-submit" onclick="mfSubmitImg()">변환 시작</button>
+    </div>
+  </div>
+</div>
+
+<div class="mf-toast" id="mf-toast"></div>
+
 <script>
 const cards = document.querySelectorAll('.card');
 const filters = {{size:'all',layout:'all',tone:'all'}};
@@ -674,6 +751,63 @@ function copySelection(){{
   }});
 }}
 
+// ── Server mode detection ────────────────────────────────────────────────────
+const MF_SERVER = (location.protocol === 'http:' || location.protocol === 'https:');
+const MF_SLUG = document.querySelector('meta[name="mf-slug"]')?.content || '';
+if(MF_SERVER) document.body.classList.add('server-mode');
+
+// If opened via file://, rewrite source image URLs to local file:// URIs
+if(!MF_SERVER){{
+  document.querySelectorAll('img[data-file-uri]').forEach(img => {{
+    img.src = img.dataset.fileUri;
+  }});
+  document.querySelectorAll('a[data-file-uri]').forEach(a => {{
+    a.href = a.dataset.fileUri;
+  }});
+}}
+
+function mfToast(msg, ms){{
+  const t = document.getElementById('mf-toast');
+  if(!t) return;
+  t.textContent = msg;
+  t.classList.add('on');
+  setTimeout(()=>t.classList.remove('on'), ms||2500);
+}}
+
+async function mfRequestPng(filename){{
+  const res = await fetch('/api/png', {{
+    method:'POST', headers:{{'Content-Type':'application/json'}},
+    body: JSON.stringify({{slug: MF_SLUG, filename}})
+  }});
+  if(!res.ok) throw new Error('PNG 생성 실패: '+(await res.text()));
+  return await res.json();
+}}
+
+function mfTriggerDownload(url, name){{
+  const a = document.createElement('a');
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}}
+
+// Single card PNG download (server mode)
+async function mfDownloadOne(e, btn){{
+  e.stopPropagation();
+  const card = btn.closest('.card');
+  const name = card.dataset.name;
+  btn.classList.add('loading');
+  btn.textContent = '⏳';
+  try {{
+    const result = await mfRequestPng(name);
+    mfTriggerDownload(result.url, result.name);
+    mfToast(result.cached ? '다운로드 (캐시)' : `PNG 생성 완료 (${{result.elapsed}}s)`);
+  }} catch(err) {{
+    alert(err.message);
+  }} finally {{
+    btn.classList.remove('loading');
+    btn.textContent = '📥';
+  }}
+}}
+
 function downloadPNGs(allVisible){{
   let targets;
   if(allVisible || selected.size===0){{
@@ -685,19 +819,224 @@ function downloadPNGs(allVisible){{
   }}
   if(targets.length===0){{ alert('다운로드할 소재가 없습니다.'); return; }}
   const btn = document.querySelector('[onclick*="downloadPNGs"]');
-  if(btn) btn.textContent = '⏳ 다운로드 중...';
-  targets.forEach((name,i)=>{{
-    setTimeout(()=>{{
-      const stem = name.replace('.html','');
-      const a = document.createElement('a');
-      a.href = '../final/'+stem+'.png';
-      a.download = stem+'.png';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      if(i===targets.length-1 && btn) btn.textContent = '📥 PNG 다운로드';
-    }}, i*150);
+  if(btn) btn.textContent = '⏳ 생성/다운로드 중...';
+
+  if(MF_SERVER) {{
+    // Server mode: generate on-demand sequentially (avoid parallel load)
+    (async () => {{
+      for(let i=0; i<targets.length; i++){{
+        if(btn) btn.textContent = `⏳ ${{i+1}}/${{targets.length}} ...`;
+        try {{
+          const result = await mfRequestPng(targets[i]);
+          mfTriggerDownload(result.url, result.name);
+          await new Promise(r => setTimeout(r, 250));
+        }} catch(err){{
+          console.error(err);
+        }}
+      }}
+      if(btn) btn.textContent = '📥 PNG 다운로드';
+      mfToast(`${{targets.length}}개 다운로드 완료`);
+    }})();
+  }} else {{
+    // File:// fallback: download pre-generated PNG files
+    targets.forEach((name,i)=>{{
+      setTimeout(()=>{{
+        const stem = name.replace('.html','');
+        mfTriggerDownload('../final/'+stem+'.png', stem+'.png');
+        if(i===targets.length-1 && btn) btn.textContent = '📥 PNG 다운로드';
+      }}, i*150);
+    }});
+  }}
+}}
+
+// ── Text edit modal ──────────────────────────────────────────────────────────
+let _mfTextCard = null;
+
+function mfCloseModal(e, id){{
+  if(e && e.target.id !== id) return;
+  document.getElementById(id).classList.remove('active');
+}}
+
+function _mfRgbToHex(rgb){{
+  if(!rgb) return '';
+  const m = rgb.match(/rgba?\\((\\d+),\\s*(\\d+),\\s*(\\d+)/);
+  if(!m) return '';
+  const to2 = n => Number(n).toString(16).padStart(2,'0');
+  return '#' + to2(m[1]) + to2(m[2]) + to2(m[3]);
+}}
+
+async function mfOpenTextEdit(e, btn){{
+  e.stopPropagation();
+  if(!MF_SERVER){{ alert('편집 기능은 서버 모드에서만 작동합니다. server.py를 실행하세요.'); return; }}
+  const card = btn.closest('.card');
+  _mfTextCard = card;
+  document.getElementById('mf-text-filename').textContent = card.dataset.name;
+
+  // Load current HTML to extract editable fields
+  const iframe = card.querySelector('iframe');
+  const doc = iframe.contentDocument;
+  const fields = {{}};
+  if(doc){{
+    doc.querySelectorAll('[data-editable]').forEach(el=>{{
+      const k = el.dataset.editable;
+      const cs = iframe.contentWindow.getComputedStyle(el);
+      fields[k] = {{
+        html: el.innerHTML.trim(),
+        color: _mfRgbToHex(cs.color),
+        fontSize: parseInt(cs.fontSize) || 0,
+        fontWeight: cs.fontWeight || '400',
+        backgroundColor: _mfRgbToHex(cs.backgroundColor)
+      }};
+    }});
+  }}
+
+  const labels = {{
+    headline:'헤드라인', subtext:'서브텍스트', cta:'CTA 버튼',
+    badge:'배지', review_text:'리뷰 인용', review_name:'리뷰어'
+  }};
+  const hasBg = k => (k==='cta' || k==='badge');
+  const container = document.getElementById('mf-text-fields');
+  container.innerHTML = '';
+  Object.entries(fields).forEach(([k, v])=>{{
+    const plainV = v.html.replace(/<br\\s*\\/?>/gi,'\\n').replace(/<[^>]+>/g,'');
+    const rows = plainV.split('\\n').length + 1;
+    const div = document.createElement('div');
+    div.className = 'mf-field';
+    const bgRow = hasBg(k) ? `
+      <div class="mf-style-row">
+        <label style="min-width:60px;font-size:11px;margin:0;">배경</label>
+        <input type="color" data-style-bg="${{k}}" value="${{v.backgroundColor||'#1D9E75'}}">
+      </div>` : '';
+    div.innerHTML = `
+      <label>${{labels[k]||k}}</label>
+      <textarea data-field="${{k}}" rows="${{rows}}">${{plainV}}</textarea>
+      <div class="mf-style-row">
+        <label style="min-width:60px;font-size:11px;margin:0;">글자색</label>
+        <input type="color" data-style-color="${{k}}" value="${{v.color||'#ffffff'}}">
+        <label style="margin-left:12px;font-size:11px;min-width:48px;">크기(px)</label>
+        <input type="number" min="10" max="180" step="1" data-style-fs="${{k}}" value="${{v.fontSize||24}}" style="width:70px;">
+        <label style="margin-left:12px;font-size:11px;min-width:48px;">굵기</label>
+        <select data-style-fw="${{k}}" style="width:84px;padding:4px;">
+          <option value="400"${{v.fontWeight==='400'?' selected':''}}>Regular</option>
+          <option value="500"${{v.fontWeight==='500'?' selected':''}}>Medium</option>
+          <option value="700"${{v.fontWeight==='700'?' selected':''}}>Bold</option>
+          <option value="900"${{v.fontWeight==='900'?' selected':''}}>Black</option>
+        </select>
+      </div>${{bgRow}}`;
+    container.appendChild(div);
   }});
+  document.getElementById('mf-text-modal').classList.add('active');
+}}
+
+async function mfSaveText(){{
+  if(!_mfTextCard) return;
+  const btn = document.getElementById('mf-text-save');
+  btn.disabled = true; btn.textContent = '저장 중...';
+  const fields = [...document.querySelectorAll('#mf-text-fields textarea')].map(ta=>ta.dataset.field);
+  const patches = fields.map(f=>{{
+    const ta = document.querySelector(`#mf-text-fields textarea[data-field="${{f}}"]`);
+    const color = document.querySelector(`#mf-text-fields input[data-style-color="${{f}}"]`);
+    const fs = document.querySelector(`#mf-text-fields input[data-style-fs="${{f}}"]`);
+    const fw = document.querySelector(`#mf-text-fields select[data-style-fw="${{f}}"]`);
+    const bg = document.querySelector(`#mf-text-fields input[data-style-bg="${{f}}"]`);
+    const styles = {{}};
+    if(color && color.value) styles.color = color.value;
+    if(fs && fs.value) styles.fontSize = fs.value + 'px';
+    if(fw && fw.value) styles.fontWeight = fw.value;
+    if(bg && bg.value) styles.background = bg.value;
+    return {{
+      field: f,
+      html: ta.value.replace(/\\n/g,'<br>'),
+      styles
+    }};
+  }});
+  try {{
+    const res = await fetch('/api/save-text', {{
+      method:'POST', headers:{{'Content-Type':'application/json'}},
+      body: JSON.stringify({{slug: MF_SLUG, filename: _mfTextCard.dataset.name, patches}})
+    }});
+    if(!res.ok){{
+      let msg = res.status+' '+res.statusText;
+      try {{ const j = await res.json(); msg = j.detail || msg; }}
+      catch(_){{ try {{ const t = await res.text(); msg = t.slice(0,200); }} catch(__){{}} }}
+      throw new Error(msg);
+    }}
+    const iframe = _mfTextCard.querySelector('iframe');
+    iframe.src = iframe.src.split('?')[0] + '?t=' + Date.now();
+    mfToast('저장 완료');
+    document.getElementById('mf-text-modal').classList.remove('active');
+  }} catch(err){{
+    alert('저장 실패: '+err.message);
+  }} finally {{
+    btn.disabled = false; btn.textContent = '저장';
+  }}
+}}
+
+// ── Image swap modal ─────────────────────────────────────────────────────────
+let _mfImgCard = null;
+
+function mfOpenImgSwap(e, btn){{
+  e.stopPropagation();
+  if(!MF_SERVER){{ alert('AI 이미지 교체는 서버 모드에서만 작동합니다. server.py를 실행하세요.'); return; }}
+  const card = btn.closest('.card');
+  _mfImgCard = card;
+  document.getElementById('mf-img-filename').textContent = card.dataset.name;
+  document.getElementById('mf-img-key').textContent = 'image-key: ' + (card.dataset.imageKey || 'hero-main');
+  document.getElementById('mf-img-prompt').value = '';
+  document.getElementById('mf-img-progress').classList.remove('on');
+
+  const iframe = card.querySelector('iframe');
+  const doc = iframe.contentDocument;
+  const img = doc && doc.querySelector('img.product');
+  if(img){{
+    document.getElementById('mf-img-preview').src = img.src;
+  }}
+  document.getElementById('mf-img-modal').classList.add('active');
+}}
+
+async function mfSubmitImg(){{
+  if(!_mfImgCard) return;
+  const prompt = document.getElementById('mf-img-prompt').value.trim();
+  if(!prompt){{ alert('프롬프트를 입력해주세요.'); return; }}
+  const submit = document.getElementById('mf-img-submit');
+  submit.disabled = true; submit.textContent = '변환 중...';
+  const progress = document.getElementById('mf-img-progress');
+  const fill = document.getElementById('mf-img-fill');
+  progress.classList.add('on');
+
+  // Fake progress (Gemini does not stream)
+  let pct = 5;
+  fill.style.width = pct + '%';
+  const timer = setInterval(()=>{{
+    pct = Math.min(pct + 3, 90);
+    fill.style.width = pct + '%';
+  }}, 800);
+
+  try {{
+    const res = await fetch('/api/transform-image', {{
+      method:'POST', headers:{{'Content-Type':'application/json'}},
+      body: JSON.stringify({{
+        slug: MF_SLUG,
+        filename: _mfImgCard.dataset.name,
+        image_key: _mfImgCard.dataset.imageKey,
+        prompt
+      }})
+    }});
+    clearInterval(timer);
+    if(!res.ok) throw new Error(await res.text());
+    fill.style.width = '100%';
+    const data = await res.json();
+    const iframe = _mfImgCard.querySelector('iframe');
+    iframe.src = iframe.src + '?t=' + Date.now();
+    mfToast('이미지 변환 완료 ('+data.size_kb+'KB)');
+    setTimeout(()=>{{ document.getElementById('mf-img-modal').classList.remove('active'); }}, 600);
+  }} catch(err){{
+    clearInterval(timer);
+    alert('변환 실패: '+err.message);
+    progress.classList.remove('on');
+  }} finally {{
+    submit.disabled = false; submit.textContent = '변환 시작';
+  }}
 }}
 
 // ── 영상 광고 명령어 패널 ─────────────────────────────────────────────────────
@@ -745,8 +1084,13 @@ def build_card_html(spec: AdSpec, filename: str) -> str:
     iframe_h = size["h"]
     src = f"./{filename}.html"
     return f"""
-  <div class="card" data-name="{filename}.html" data-src="{src}" data-size="{spec.size_key}" data-layout="{spec.layout}" data-tone="{spec.copy.tone}">
+  <div class="card" data-name="{filename}.html" data-src="{src}" data-size="{spec.size_key}" data-layout="{spec.layout}" data-tone="{spec.copy.tone}" data-image-key="{spec.image_key}">
     <div class="checkbox"></div>
+    <div class="card-actions">
+      <button class="act-btn" title="PNG 단건 다운로드" onclick="mfDownloadOne(event, this)">📥</button>
+      <button class="act-btn" title="텍스트 편집" onclick="mfOpenTextEdit(event, this)">✏️</button>
+      <button class="act-btn" title="이미지 AI 교체" onclick="mfOpenImgSwap(event, this)">🖼</button>
+    </div>
     <div class="card-preview" style="width:{thumb_w}px;height:{thumb_h}px;">
       <iframe src="{src}" width="{iframe_w}" height="{iframe_h}" style="transform:scale({scale:.4f});"></iframe>
     </div>
@@ -780,12 +1124,15 @@ def _build_images_section(cfg: ProductConfig) -> str:
         s = str(src)
         if s.startswith(("http://", "https://")):
             img_src = s
+            file_uri = s
             dl_href = s
             dl_target = ' target="_blank"'
             img_arg = s
         else:
             abs_path = Path(s).resolve()
-            img_src = abs_path.as_uri()
+            file_uri = abs_path.as_uri()
+            # Server route (works when opened via http://); JS will fallback to file_uri for file:// mode
+            img_src = f"/src-image/{slug}/{key}"
             dl_href = img_src
             dl_target = ''
             img_arg = str(abs_path)
@@ -797,11 +1144,11 @@ def _build_images_section(cfg: ProductConfig) -> str:
 
         cards.append(f"""
   <div class="img-card" id="card_{card_id}">
-    <img src="{img_src}" alt="{escape(key)}" loading="lazy" onerror="this.style.background='#e5e7eb';this.alt='이미지 없음'">
+    <img src="{img_src}" data-file-uri="{file_uri}" alt="{escape(key)}" loading="lazy" onerror="this.style.background='#e5e7eb';this.alt='이미지 없음'">
     <div class="img-card-body">
       <div class="img-card-key">{escape(key)}</div>
       <div class="img-card-key" style="color:#aaa;font-size:10px;">{escape(filename)}</div>
-      <a class="img-card-dl" href="{dl_href}" download="{escape(filename)}"{dl_target}>⬇ 원본 다운로드</a>
+      <a class="img-card-dl" href="{dl_href}" data-file-uri="{file_uri}" download="{escape(filename)}"{dl_target}>⬇ 원본 다운로드</a>
       <div style="display:flex;gap:4px;margin-top:4px;">
         <button class="img-card-video" style="flex:1;" onclick="makeVideo('{card_id}','{img_arg_js}','{slug_js}','9:16')">🎬 9:16</button>
         <button class="img-card-video" style="flex:1;" onclick="makeVideo('{card_id}','{img_arg_js}','{slug_js}','1:1')">🎬 1:1</button>
@@ -917,6 +1264,19 @@ function showToast(msg){{
 def build_ads(cfg: ProductConfig, output_dir: Path) -> list[AdSpec]:
     previews = output_dir / "previews"
     previews.mkdir(parents=True, exist_ok=True)
+
+    # Write _sources.json so server.py can resolve /src-image/{slug}/{key}
+    sources_map = {}
+    for key, src in cfg.images.items():
+        s = str(src)
+        if s.startswith(("http://", "https://")):
+            sources_map[key] = {"type": "url", "url": s}
+        else:
+            sources_map[key] = {"type": "file", "path": str(Path(s).resolve())}
+    (previews / "_sources.json").write_text(
+        json.dumps(sources_map, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
 
     specs = plan_ads(cfg)
     cards_html = []

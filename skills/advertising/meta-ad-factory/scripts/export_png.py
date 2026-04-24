@@ -35,7 +35,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 
-ROOT = Path("/Users/inkyo/Projects/team-skills/output/광고카피/sundayhug-meta-bulk")
+ROOT = Path.home() / "Desktop" / "team-skills" / "광고카피" / "sundayhug-meta-bulk"
 
 SIZE_RE = re.compile(r"_(\d+)x(\d+)_")
 

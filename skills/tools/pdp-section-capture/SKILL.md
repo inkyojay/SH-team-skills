@@ -62,7 +62,7 @@ node /Users/inkyo/Projects/team-skills/skills/tools/pdp-section-capture/scripts/
 
 ## 적용된 규칙 (이게 깔끔한 결과의 비결)
 
-### 1. HTML 주석 = 섹션 라벨
+### 1. HTML 주석 = 섹션 라벨 (최우선)
 ```html
 <!-- HERO -->
 <div class="hero v">...</div>
@@ -73,6 +73,19 @@ node /Users/inkyo/Projects/team-skills/skills/tools/pdp-section-capture/scripts/
 → `01_HERO.png`, `07_FEAT-01-코튼-메쉬-통기성.png`
 
 직계 자식의 직전 형제 노드를 거슬러 올라가 가장 가까운 주석을 라벨로 사용. 콜론은 dash로, 공백도 dash로 sanitize.
+
+### 1-2. 주석 없는 페이지 자동 폴백 (class 기반)
+
+HTML에 `<!-- LABEL -->` 주석이 없어도 동작. 라벨 선택 우선순위:
+
+1. **HTML 주석 라벨** — 있으면 이것 우선
+2. **`KNOWN_SECTION_CLASSES`** — SundayHug PDP 시맨틱 클래스 (`hero`, `badge-bar`, `sec`, `feat`, `fi`, `cmp`, `eq`, `notice`, `rv-section`, `faq-list`, `final-cta`, `product-info`, `wash-sec`, `mid-cta` 등)
+3. **유틸리티 아닌 첫 클래스** — `SKIP_CLASSES` (`v`, `on`, `divider`, `soft`, `tight`, `inset`, `rev`, `center`, `tx-c` 등)를 건너뛴 첫 토큰
+4. **원시 첫 클래스** 또는 태그명 — 최후
+
+예: `<div class="sec soft v">` → `sec` (KNOWN에서 매칭)  
+예: `<div class="v feat">` → `feat` (KNOWN에서 매칭, `v` 스킵)  
+예: `<div class="v some-random">` → `some-random` (유틸 `v` 스킵)
 
 ### 2. `<div class="divider">` 자동 스킵 (장식 구분선)
 

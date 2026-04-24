@@ -180,7 +180,7 @@ description: |
 10. 주차별 액션플랜 + KPI (월 탭 + 주차 접기 + KPI 4열 그리드)
 
 ### 파일 저장
-결과물은 `output/` 디렉토리에 저장: `output/{제품명}-마케팅플랜.html`
+결과물은 `~/Desktop/team-skills/` 디렉토리에 저장: `~/Desktop/team-skills/{제품명}-마케팅플랜.html`
 
 ---
 

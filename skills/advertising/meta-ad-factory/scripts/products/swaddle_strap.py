@@ -15,7 +15,7 @@ from meta_ad_builder import (
 )
 
 
-IMAGES_DIR = Path("/Users/inkyo/Desktop/상세페이지 최종본/newborn/swaddle-strap/images")
+IMAGES_DIR = Path.home() / "Desktop" / "상세페이지 local (최종본)" / "newborn" / "swaddle-strap" / "images"
 
 
 CFG = ProductConfig(
@@ -201,8 +201,8 @@ CFG = ProductConfig(
 
 
 def main() -> None:
-    output_dir = Path(
-        "/Users/inkyo/Projects/team-skills/output/광고카피/sundayhug-meta-bulk/newborn/swaddle-strap"
+    output_dir = (
+        Path.home() / "Desktop" / "team-skills" / "광고카피" / "sundayhug-meta-bulk" / "newborn" / "swaddle-strap"
     )
     specs = build_ads(CFG, output_dir)
     print(f"✓ Generated {len(specs)} creatives")

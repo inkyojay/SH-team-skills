@@ -38,6 +38,21 @@ if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
 const SKIP_LABELS = new Set(['CONTENT', 'STYLES', '']);
 
+// Utility / modifier classes that are not meaningful section identifiers on their own.
+// When no HTML comment label is available, we'll skip these when picking a class-based fallback.
+const SKIP_CLASSES = new Set([
+  'v', 'on', 'divider', 'soft', 'tight', 'inset', 'rev', 'first', 'last', 'full',
+  'center', 'left', 'right', 'tx-c', 'tx-l', 'tx-r', 'hl',
+]);
+
+// SundayHug PDP semantic class prefixes. If present in the element's class list,
+// these are preferred over a generic first class token. Matches the KNOWN list
+// used by the Python variant of this skill.
+const KNOWN_SECTION_CLASSES = [
+  'hero', 'badge-bar', 'trust-bar', 'sec', 'feat', 'fi', 'cmp', 'eq', 'notice',
+  'rv-section', 'faq-list', 'final-cta', 'product-info', 'wash-sec', 'mid-cta',
+];
+
 const browser = await puppeteer.launch({
   headless: 'new',
   args: ['--no-sandbox', '--allow-file-access-from-files'],
@@ -190,13 +205,19 @@ for (const r of raw) {
   // skip elements with no label and no class (shouldn't happen but safe)
   if (!r.label && !r.cls) continue;
 
-  // pick label
+  // pick label — preference order:
+  //   1. HTML comment label (if useful)
+  //   2. First KNOWN_SECTION_CLASSES hit in element's class list
+  //   3. First non-utility class (not in SKIP_CLASSES)
+  //   4. Raw first class, or tagName as last resort
   let label;
+  const classes = r.cls.split(/\s+/).filter(Boolean);
   if (r.label && !isSkipLabel) {
     label = r.label;
   } else {
-    // fallback to first class name
-    label = (r.cls.split(/\s+/)[0] || r.tag);
+    const known = KNOWN_SECTION_CLASSES.find(k => classes.includes(k));
+    const meaningful = classes.find(c => !SKIP_CLASSES.has(c));
+    label = known || meaningful || classes[0] || r.tag;
   }
 
   groups.push({

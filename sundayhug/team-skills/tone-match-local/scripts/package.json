@@ -1,9 +1,0 @@
-{
-  "name": "batch-tone-match",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "@google/genai": "^1.30.0",
-    "sharp": "^0.33.0"
-  }
-}
