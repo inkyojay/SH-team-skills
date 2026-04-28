@@ -1,0 +1,10 @@
+# Synology에서 동기화하는 로컬 캐시 (sync_templates.py로 재생성)
+scripts/.template-cache/
+
+# Python
+__pycache__/
+*.pyc
+
+# 빌드 산출물 (Desktop으로 출력되므로 레포에는 들어올 일 없지만 안전망)
+output/
+*.bak
