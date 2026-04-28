@@ -1,0 +1,25 @@
+<!--=============================================================
+  SECTION: Host Recommendation (호스트 추천)
+  ORDER: 11
+  REQUIRED: 🔶 선택
+  BACKGROUND: warm
+  PURPOSE: 호스트의 감성적 1인칭 추천 메시지.
+
+  DATA REQUIRED:
+  - {{host_photo}}      : 호스트 사진 URL (64×64, 원형)
+  - {{host_quote_html}} : 추천 메시지
+  - {{host_name}}       : 호스트 이름
+  - {{host_role}}       : 역할
+=============================================================-->
+<div class="sec warm">
+  <div class="sec-label">Host's Pick</div>
+  <div class="sec-title">호스트가 직접 써보고<br>추천하는 이유</div>
+  <div class="host-rec">
+    <img class="host-rec-photo" src="{{host_photo}}" alt="호스트">
+    <div class="host-rec-quote">
+      {{host_quote_html}}
+      <div class="host-rec-name">{{host_name}}</div>
+      <div class="host-rec-role">{{host_role}}</div>
+    </div>
+  </div>
+</div>

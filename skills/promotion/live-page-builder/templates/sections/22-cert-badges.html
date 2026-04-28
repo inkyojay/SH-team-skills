@@ -1,0 +1,25 @@
+<!--=============================================================
+  SECTION: Cert Badges (인증 배지)
+  ORDER: 22
+  REQUIRED: 🔶 선택
+  BACKGROUND: warm
+  PURPOSE: KC인증, 무형광, 국내생산, OEKO-TEX 등 인증 배지 그리드.
+
+  DATA REQUIRED:
+  - {{#cert_items}} : 인증 배열 (3~4개)
+    각 항목: { icon_text, title, desc }
+    icon_text: 아이콘 텍스트 (예: "KC", "★")
+=============================================================-->
+<div class="sec warm">
+  <div class="sec-label tx-center">Certifications</div>
+  <div class="sec-title tx-center">안전과 품질을 인증합니다</div>
+  <div class="cert-badges">
+    {{#cert_items}}
+    <div class="cert-badge">
+      <div class="cert-badge-icon"><span style="font-family:var(--font-en);font-size:12px;font-weight:700;">{{icon_text}}</span></div>
+      <h4>{{title}}</h4>
+      <p>{{desc}}</p>
+    </div>
+    {{/cert_items}}
+  </div>
+</div>

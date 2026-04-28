@@ -1,0 +1,21 @@
+<!--=============================================================
+  SECTION: Quick Showcase (퀵 쇼케이스)
+  ORDER: 12
+  REQUIRED: ✅ 필수
+  BACKGROUND: white/warm 교차
+  PURPOSE: 핵심 셀링 포인트 3~4개를 좌우 교차 레이아웃으로.
+
+  DATA REQUIRED:
+  - {{#showcases}} : 3~4개 셀링 포인트 배열
+    각 항목: { num, image, title, desc, warm, rev }
+=============================================================-->
+{{#showcases}}
+<div class="quick-show {{?warm}}warm{{/warm}} {{?rev}}rev{{/rev}}">
+  <div class="quick-show-img"><img src="{{image}}" alt=""></div>
+  <div class="quick-show-body">
+    <div class="quick-show-num">{{num}}</div>
+    <div class="quick-show-title">{{title}}</div>
+    <div class="quick-show-desc">{{desc}}</div>
+  </div>
+</div>
+{{/showcases}}

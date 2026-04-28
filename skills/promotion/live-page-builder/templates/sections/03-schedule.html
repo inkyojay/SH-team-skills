@@ -1,0 +1,33 @@
+<!--=============================================================
+  SECTION: Schedule (방송 일정 안내)
+  ORDER: 03
+  REQUIRED: ✅ 필수
+  BACKGROUND: white
+  PURPOSE: 방송 날짜/시간/채널 정보를 3칸 카드로 안내.
+
+  DATA REQUIRED:
+  - {{schedule_date}}    : 날짜 (예: "3월 15일 (토)")
+  - {{schedule_time}}    : 시간 (예: "저녁 8:00")
+  - {{schedule_channel}} : 채널 (예: "네이버 쇼핑라이브")
+=============================================================-->
+<div class="sec">
+  <div class="sec-label tx-center">Schedule</div>
+  <div class="sec-title tx-center">라이브 방송 일정</div>
+  <div class="schedule-grid">
+    <div class="schedule-card">
+      <div class="schedule-card-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+      <h4>{{schedule_date}}</h4>
+      <p>방송 날짜</p>
+    </div>
+    <div class="schedule-card">
+      <div class="schedule-card-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <h4>{{schedule_time}}</h4>
+      <p>시작 시간</p>
+    </div>
+    <div class="schedule-card">
+      <div class="schedule-card-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg></div>
+      <h4>{{schedule_channel}}</h4>
+      <p>방송 채널</p>
+    </div>
+  </div>
+</div>

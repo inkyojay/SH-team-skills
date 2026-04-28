@@ -1,0 +1,40 @@
+<!--=============================================================
+  SECTION: Size & Spec (사이즈/스펙 테이블)
+  ORDER: 14
+  REQUIRED: 🔶 선택
+  BACKGROUND: warm
+  PURPOSE: 사이즈표와 소재 비교 테이블.
+
+  DATA REQUIRED:
+  - {{#size_headers}} : 사이즈 테이블 헤더 배열
+  - {{#size_rows}}    : 사이즈 테이블 데이터 배열
+  - {{#material_rows}}: 소재 비교 테이블 (선택)
+=============================================================-->
+<div class="sec warm">
+  <div class="sec-label">Size & Spec</div>
+  <div class="sec-title">사이즈 및 소재 정보</div>
+
+  <table class="sz-tbl">
+    <thead><tr>
+      {{#size_headers}}<th>{{.}}</th>{{/size_headers}}
+    </tr></thead>
+    <tbody>
+      {{#size_rows}}
+      <tr>{{#cells}}<td>{{.}}</td>{{/cells}}</tr>
+      {{/size_rows}}
+    </tbody>
+  </table>
+
+  <table class="mat-tbl" style="margin-top:28px;">
+    <thead><tr><th>소재</th><th>특징</th><th>구성</th></tr></thead>
+    <tbody>
+      {{#material_rows}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{feature}}</td>
+        <td>{{composition}}</td>
+      </tr>
+      {{/material_rows}}
+    </tbody>
+  </table>
+</div>
