@@ -1,0 +1,9 @@
+{
+  "name": "batch-image-openai",
+  "private": true,
+  "type": "module",
+  "description": "OpenAI gpt-image-2 batch image generation/edit",
+  "dependencies": {
+    "openai": "^4.78.0"
+  }
+}
