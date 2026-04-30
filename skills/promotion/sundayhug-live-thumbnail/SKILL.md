@@ -149,7 +149,7 @@ LIVE 일정 캡슐:
   position: absolute;
   left: 75px;
   top: 626px;
-  width: 575px;
+  width: 545px;
   height: 75px;
   display: block;
   border-radius: 38px;
@@ -188,11 +188,11 @@ LIVE 일정 캡슐:
 ```
 
 실측 기준:
-- 검정 캡슐: 575 x 75px
+- 검정 캡슐: 545 x 75px
 - LIVE PNG 배지: 71 x 48px
 - LIVE 왼쪽 여백: 57px
 - LIVE와 날짜 사이: 약 20px
-- 날짜 오른쪽 여백: 약 75px
+- 날짜 오른쪽 여백: 약 45px
 
 키커/타이틀:
 
@@ -355,7 +355,7 @@ ABC 아기침대 라이브 혜택
   - 수정: `live-badge.png` asset을 사용.
 
 - 검정 캡슐이 글씨 대비 좁음
-  - 수정: 캡슐 폭 575px 이상, 날짜 오른쪽 여백 60~80px 확보.
+  - 수정: 캡슐 폭 545px 안팎, 날짜 오른쪽 여백 40~50px 확보.
 
 - 상단 로고/캠페인 배지가 보임
   - 이 스타일에서는 제거한다. 정보는 하단에만 집중.
