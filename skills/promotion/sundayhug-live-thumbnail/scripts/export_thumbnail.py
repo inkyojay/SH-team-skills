@@ -92,7 +92,7 @@ def main() -> None:
     ap.add_argument("--date", default="5월 7일 (목) 오전 11시")
     ap.add_argument("--kicker", default="Blooming Days · Shopping Live")
     ap.add_argument("--title-line-1", default="ABC 아기침대 라이브 혜택")
-    ap.add_argument("--title-line-2", default="+ 전용 악세사리 쿠폰 공개")
+    ap.add_argument("--title-line-2", default="+ 전용 쿨매트 할인")
     ap.add_argument("--slug", default="sundayhug-live-thumbnail")
     args = ap.parse_args()
 

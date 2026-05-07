@@ -62,11 +62,12 @@ REPORT_COLUMNS = {
         "ad_id", "business_channel_id", "bsn_num", "pc_mobile_type",
         "impressions", "clicks", "cost", "conv_cnt", "avg_rank",
     ],
+    # 실제 TSV 16컬럼 기준 (검증 완료 2026-05-02)
+    # col7=slot_type, col8=hour, col9=media, col10=device, col11+=성과지표
     "AD_DETAIL": [
         "date", "customer_id", "campaign_id", "adgroup_id", "keyword_id",
-        "ad_id", "business_channel_id", "bsn_num", "pc_mobile_type",
-        "impressions", "clicks", "cost", "conv_cnt", "avg_rank",
-        "ctr", "avg_cpc",
+        "ad_id", "business_channel_id", "slot_type", "hour", "media",
+        "pc_mobile_type", "impressions", "clicks", "cost", "conv_cnt", "avg_rank",
     ],
     # AD_CONVERSION 13컬럼 (검증 완료)
     # col9=conv_session, col10=conv_type(string), col11=conversions, col12=conversion_value(원)

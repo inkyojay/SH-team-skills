@@ -277,12 +277,24 @@ def render_report(
                 "ad_map": {}, "keyword_map": keyword_map or {},
                 "kw_by_adgroup": {}, "ag_campaign_map": {}}
 
-    # 전환 데이터 JOIN (ad_id + date 기준)
+    # 전환 데이터 JOIN (date + ad_id 기준)
+    # 중요: date 없이 ad_id만으로 조인하면 여러 일자의 전환값이 각 일자/디바이스 row에
+    # 반복 합산되어 ROAS가 과대계상된다. 기본 리포트는 구매 전환(purchase) 기준으로 본다.
     if df_conv is not None and not df_conv.empty and "conversions" in df_conv.columns:
-        conv_agg = df_conv.groupby(["campaign_id", "adgroup_id", "ad_id"])[
+        conv_df = df_conv.copy()
+        if "conv_type" in conv_df.columns:
+            conv_df = conv_df[conv_df["conv_type"].astype(str).str.lower().eq("purchase")]
+        join_keys = [
+            k for k in [
+                "date", "campaign_id", "adgroup_id", "keyword_id", "ad_id",
+                "business_channel_id", "bsn_num", "pc_mobile_type",
+            ]
+            if k in df_ad.columns and k in conv_df.columns
+        ]
+        conv_agg = conv_df.groupby(join_keys)[
             ["conversions", "conversion_value"]
         ].sum().reset_index()
-        df_ad = df_ad.merge(conv_agg, on=["campaign_id", "adgroup_id", "ad_id"], how="left")
+        df_ad = df_ad.merge(conv_agg, on=join_keys, how="left")
         df_ad["conversions"] = df_ad["conversions"].fillna(0)
         df_ad["conversion_value"] = df_ad["conversion_value"].fillna(0)
 

@@ -1,7 +1,7 @@
 ---
 name: pdp-section-capture
-description: SundayHug PDP(상세페이지) HTML을 디자인 단위 섹션별로 잘라 고해상도 PNG 시리즈로 출력. HTML 주석(`<!-- HERO -->` 등)을 섹션 라벨로 인식하고, divider는 자동 스킵, 작은 brand-quote(.eq)는 앞 섹션에 자동 병합. 사용자가 (1) 상세페이지를 섹션별 이미지로 떨어뜨려달라거나, (2) Cafe24 업로드용 PNG 분할이 필요하거나, (3) 글씨 흐림 없이 supersampling으로 또렷한 섹션 이미지를 원할 때 사용. html-section-capture(Python/Playwright)와 달리 SundayHug의 `.pdp-absolute` + 주석 라벨링 + supersampling + 라이브 섹션 캡쳐로 특화됨.
-triggers: 상세페이지 캡쳐, PDP 캡쳐, 섹션 분리, Cafe24 PNG, supersampling, .pdp-absolute, 디테일 페이지 이미지화, detail page screenshot, section split, pdp section
+description: SundayHug PDP(상세페이지) HTML을 디자인 단위 섹션별로 잘라 고해상도 PNG 시리즈로 출력. HTML 주석(`<!-- HERO -->` 등)을 섹션 라벨로 인식하고, divider는 자동 스킵, 작은 brand-quote(.eq)는 앞 섹션에 자동 병합. 사용자가 (1) 상세페이지를 섹션별 이미지로 떨어뜨려달라거나, (2) Cafe24 업로드용 PNG 분할이 필요하거나, (3) 글씨 흐림 없이 supersampling으로 또렷한 섹션 이미지를 원할 때 사용. html-section-capture(Python/Playwright)와 달리 SundayHug의 `.pdp-absolute` + 주석 라벨링 + supersampling + 라이브 섹션 캡쳐로 특화됨. 부속 스크립트 to_jpg.py로 Cafe24 20MB 한도 대응 고해상도 JPG(jpg/ 서브폴더)도 동시 산출.
+triggers: 상세페이지 캡쳐, PDP 캡쳐, 섹션 분리, Cafe24 PNG, Cafe24 JPG, supersampling, .pdp-absolute, 디테일 페이지 이미지화, detail page screenshot, section split, pdp section, png to jpg, 20MB 초과
 ---
 
 # PDP Section Capture
@@ -59,6 +59,47 @@ node /Users/inkyo/Projects/team-skills/skills/tools/pdp-section-capture/scripts/
 - 파일명: `NN_<HTML주석라벨>.png` (한글/영문 혼용 OK)
 - 폭: `cssWidth × outScale` (600 × 3 = 1800px)
 - 높이: 각 섹션의 실제 비율 그대로
+
+## ★ 후공정: 자동 JPG 변환 (Cafe24 20MB 한도 대응)
+
+PNG 캡처 직후 `to_jpg.py`로 **고해상도 JPG**도 동시 생성. Cafe24 / 스마트스토어 / 쿠팡 모두 20MB 한도가 있어, 큰 섹션(특히 FEAT/INTRO)은 PNG로 한도 초과 가능. JPG는 평균 5~10배 압축됨.
+
+### 핵심 옵션 (글자 보존)
+
+- `quality=95` — 거의 무손실
+- `subsampling=0` (4:4:4) — **글자 색번짐 없음** (이게 핵심)
+- `optimize=True` + `progressive=True` — 점진 로딩 + 추가 압축
+- 해상도 그대로 유지 (1800px)
+- 한도 초과 시 자동 fallback: q=92 → 1500px 리사이즈 (보통 q=95에서 통과)
+
+### 단일 폴더
+
+```bash
+python3 /Users/inkyo/Projects/team-skills/skills/tools/pdp-section-capture/scripts/to_jpg.py \
+  "/path/to/{product}_sections"
+```
+
+→ `{product}_sections/jpg/*.jpg` 생성 (PNG 원본은 보존)
+
+### 여러 폴더 일괄 (병렬)
+
+```bash
+python3 /Users/inkyo/Projects/team-skills/skills/tools/pdp-section-capture/scripts/to_jpg.py \
+  --bulk "/Users/.../상세페이지 local (최종본)" \
+  --pattern "*_sections" \
+  --workers 4
+```
+
+→ 부모 폴더 안의 모든 `*_sections` 폴더에 대해 `jpg/` 서브폴더 자동 생성
+
+### 옵션
+
+| 옵션 | 기본값 | 설명 |
+|---|---|---|
+| `--quality` | 95 | JPEG 품질 (1~100, 권장 90~95) |
+| `--limit-mb` | 19 | 파일당 최대 MB (한도 대비 안전 마진) |
+| `--workers` | 4 | bulk 모드 병렬 워커 수 |
+| `--pattern` | `*_sections` | bulk 모드 폴더 패턴 |
 
 ## 적용된 규칙 (이게 깔끔한 결과의 비결)
 

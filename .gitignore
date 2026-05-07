@@ -21,6 +21,7 @@ node_modules/
 .cursor/
 .gemini/
 .opencode/
+.superpowers/
 
 # Python
 __pycache__/

@@ -25,10 +25,12 @@ Claude가 스킬 설명의 트리거 문구를 감지하면 자동 로딩됩니�
 
 스킬 실행 전에 다음을 설정:
 ```bash
-export NAVER_AD_CUSTOMER_ID="3216549"
-export NAVER_AD_API_KEY="0100000..."
-export NAVER_AD_SECRET_KEY="AQAAAAA..."
+export NAVER_CUSTOMER_ID="3216549"
+export NAVER_API_KEY="***"
+export NAVER_SECRET_KEY="***"
 ```
+
+참고: 로컬 `~/Projects/team-skills/.env`, `.env.local`, `.envrc`에는 위 `NAVER_*` 이름으로 저장되어 있다. README의 예전 `NAVER_AD_*` 이름과 혼동하지 않는다.
 
 ### B. 대화 중 Claude에게 직접 전달
 

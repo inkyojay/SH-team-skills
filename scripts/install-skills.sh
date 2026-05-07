@@ -16,6 +16,7 @@
 #   - video          (영상 제작)
 #   - brand          (브랜드 관리)
 #   - advertising    (광고)
+#   - promotion      (프로모션)
 #
 
 set -e
@@ -42,7 +43,7 @@ if [ $# -lt 2 ]; then
     echo "  $0 coreyhaines31/marketingskills marketing"
     echo "  $0 vercel-labs/agent-skills tools"
     echo ""
-    echo "카테고리: marketing, tools, content-creation, video, brand, advertising"
+    echo "카테고리: marketing, tools, content-creation, video, brand, advertising, promotion"
     exit 1
 fi
 
@@ -51,7 +52,7 @@ CATEGORY="$2"
 TARGET_DIR="$SKILLS_DIR/$CATEGORY"
 
 # 카테고리 유효성 검사
-VALID_CATEGORIES="marketing tools content-creation video brand advertising"
+VALID_CATEGORIES="marketing tools content-creation video brand advertising promotion"
 if [[ ! " $VALID_CATEGORIES " =~ " $CATEGORY " ]]; then
     echo -e "${RED}오류: 유효하지 않은 카테고리 '$CATEGORY'${NC}"
     echo "유효한 카테고리: $VALID_CATEGORIES"

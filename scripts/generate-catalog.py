@@ -32,8 +32,7 @@ CATEGORY_NAMES = {
     "brand": "브랜드 관리",
     "marketing": "마케팅 전략",
     "tools": "유틸리티 도구",
-    "design": "UI/UX 디자인",
-    "frontend": "프론트엔드",
+    "promotion": "프로모션",
     "documents": "문서 도구"
 }
 
@@ -44,8 +43,7 @@ CATEGORY_ICONS = {
     "brand": "🏷️",
     "marketing": "📊",
     "tools": "🔧",
-    "design": "🎨",
-    "frontend": "💻",
+    "promotion": "🎁",
     "documents": "📄"
 }
 
@@ -56,8 +54,7 @@ CATEGORY_COLORS = {
     "brand": "#2196F3",
     "marketing": "#FF9800",
     "tools": "#607D8B",
-    "design": "#E91E63",
-    "frontend": "#00BCD4",
+    "promotion": "#A38068",
     "documents": "#795548"
 }
 
@@ -156,6 +153,7 @@ SKILL_TRANSLATIONS = {
     "kakao-message": "카카오톡 비즈메시지 배너 제작",
     "live-banner": "쇼핑라이브 배너 제작 (네이버/카카오)",
     "smartstore-banner": "스마트스토어 배너 제작",
+    "event-page-campaign": "레퍼런스 이미지 기반 이벤트 페이지 제작 + 모바일 고해상도 JPG/섹션별 JPG/1:1 썸네일 출력",
 }
 
 # 에이전트 한국어 번역
@@ -225,6 +223,16 @@ SKILL_DETAILS = {
         "capabilities": ["시즌 이벤트 매칭", "프로모션 유형 선정", "주차별 액션플랜", "KPI 목표"],
         "output": "~/Desktop/team-skills/리포트/",
     },
+    "event-page-campaign": {
+        "desc": "레퍼런스 이미지 기반 이벤트 페이지 제작 워크플로우. 원본 HTML/CSS를 보존한 복사본 제작, 새 CSS/asset 적용, 모바일 줄바꿈 검수, 전체 모바일 JPG, 섹션별 JPG, 1:1 썸네일 출력까지 처리.",
+        "usecases": [
+            {"cmd": "이 이벤트 페이지를 이 레퍼런스 느낌으로 바꿔줘", "note": "원본 보존 + 새 컨셉 페이지 제작"},
+            {"cmd": "모바일 고해상도 JPG랑 섹션별 JPG로 출력해줘", "note": "Cafe24 업로드용 산출물"},
+            {"cmd": "이 톤으로 1:1 라이브 썸네일 만들어줘", "note": "정방형 썸네일 제작"},
+        ],
+        "capabilities": ["레퍼런스 이미지 톤 분석", "HTML/CSS 복사본 제작", "모바일 줄바꿈·overflow 검수", "고해상도 JPG 출력", "섹션별 JPG 분할", "1:1 썸네일"],
+        "output": "~/Desktop/team-skills/상세페이지/event-campaign/{campaign-slug}/",
+    },
     "competitive-intelligence": {
         "desc": "경쟁사 분석 & 시장 모니터링. 단일 심층분석 또는 전체 시장 모니터링 두 모드 지원.",
         "usecases": [
@@ -273,6 +281,26 @@ SKILL_DETAILS = {
         ],
         "output": "~/Desktop/team-skills/리포트/YYYY-MM-DD_{상품}_키워드-최적화.html",
     },
+    "bulk-keyword-strategy": {
+        "desc": "전제품 (PDP HTML 폴더) → 1회 실행으로 네이버 SEO 키워드 전략 일괄 생성. 검색광고 API + DataLab API + S/A/B/C/D 등급 + 50자 상품명 + 태그 10개를 xlsx 1개에 모음.",
+        "usecases": [
+            {"cmd": "전제품 키워드 전략 일괄 생성", "note": "기본 PDP 폴더 자동 스캔"},
+            {"cmd": "전체 상품명 한번에 만들어줘", "note": "xlsx 출력"},
+            {"cmd": "--single sleep-products/cooling-pad/cooling-mesh-dual-pad.html", "note": "단일 시범"},
+        ],
+        "capabilities": [
+            "PDP HTML 폴더 일괄 파싱 (~50+ 제품)",
+            "슬러그 dedup (다중 카테고리 표시)",
+            "카테고리별 시드 키워드 자동 도출",
+            "검색광고 API (월간 검색수 + 경쟁도)",
+            "DataLab 시즌성 + 피크 월",
+            "S/A/B/C/D 등급 + 시즌 보정",
+            "메인 키워드 1 + 보조 4 + 태그 10",
+            "50자 상품명 자동 생성 (브랜드실장 금기어 필터)",
+            "xlsx 7시트 (전제품 + 카테고리별 + Meta)",
+        ],
+        "output": "~/Desktop/team-skills/리포트/keyword-strategy/SundayHug-전제품-키워드-전략_{YYYY-MM-DD}.xlsx",
+    },
     "keyword-trend": {
         "desc": '"언제 마케팅"할지 — 네이버 DataLab으로 월별 시즌 트렌드 분석, 성수기/피크 파악.',
         "usecases": [
@@ -293,14 +321,16 @@ SKILL_DETAILS = {
         "capabilities": ["해시태그 발굴", "유사 계정 추천", "S-D 등급 점수화", "자녀 연령 매칭"],
         "output": "~/Desktop/team-skills/리포트/",
     },
-    "content-pipeline": {
-        "desc": "Trend Radar 인사이트 기반 멀티채널 콘텐츠 자동 기획·생산 파이프라인.",
+    # 콘텐츠 제작
+    "pdp-builder": {
+        "desc": "SundayHug 자사몰(Cafe24) 상세페이지(PDP)를 사용자와의 대화 + 타사 레퍼런스 분석 + 네이버 키워드 SEO로 자동 생성. 12개 PDP가 공유하는 마스터 styles.css와 톤앤매너를 그대로 따름. 5개 대표 예시 PDP가 동봉되어 매번 톤 학습.",
         "usecases": [
-            {"cmd": "콘텐츠 파이프라인 돌려줘", "note": "트렌드→콘텐츠 자동화"},
-            {"cmd": "이 트렌드로 멀티채널 콘텐츠", "note": "여러 채널 동시"},
+            {"cmd": "신제품 [제품명] 상세페이지 만들어줘", "note": "전체 워크플로우 시작"},
+            {"cmd": "레퍼런스: [URL] + [캡처 이미지]", "note": "타사 분석 + 키워드 SEO"},
+            {"cmd": "Cafe24 상세페이지 생성", "note": "결과는 sundayhug 폴더로"},
         ],
-        "capabilities": ["트렌드 기반 기획", "멀티채널 자동 생산", "A/B 변형"],
-        "output": "~/Desktop/team-skills/",
+        "capabilities": ["대화형 제품 정보 수집", "URL/소셜/이미지/텍스트 레퍼런스 분석", "keyword-optimizer 연동", "14개 섹션 스니펫 조립", "마스터 CSS 자동 동봉"],
+        "output": "~/Desktop/team-skills/상세페이지/sundayhug/{slug}/",
     },
     # 브랜드
     "product-analyzer": {
@@ -325,14 +355,24 @@ SKILL_DETAILS = {
         "output": "~/Desktop/team-skills/기타/",
     },
     "tone-match-local": {
-        "desc": "레퍼런스 이미지의 색감/톤/분위기를 상품 이미지에 일괄 적용. 구도·콘텐츠는 100% 보존.",
+        "desc": "레퍼런스 이미지의 색감/톤/분위기를 상품 이미지에 일괄 적용. 구도·콘텐츠는 100% 보존. 실행 전 항상 사용자에게 어떤 톤으로 변환할지 먼저 확인하고, 답이 모호하면 SundayHug 디폴트 브랜드 무드(references/default-mood/)로 자동 fallback.",
         "usecases": [
-            {"cmd": "이 레퍼런스 톤으로 맞춰줘", "note": "톤 매칭"},
-            {"cmd": "색감 통일해줘", "note": "일괄 적용"},
-            {"cmd": "강도 70%로 톤 적용", "note": "강도 조절"},
+            {"cmd": "이 폴더 우리 브랜드 톤으로 맞춰줘", "note": "디폴트 무드 자동 사용"},
+            {"cmd": "이 레퍼런스 톤으로 맞춰줘 [경로]", "note": "사용자 지정 레퍼런스"},
+            {"cmd": "강도 50%로 약하게 톤 적용", "note": "intensity 조절"},
         ],
-        "capabilities": ["톤/색감 매칭", "0-100% 강도 조절", "구도 보존", "배치 처리"],
+        "capabilities": ["사용자 톤 의도 사전 확인 (Step 0)", "디폴트 브랜드 무드 자동 fallback", "톤/색감 매칭", "0-100% 강도 조절", "구도 보존", "배치 처리"],
         "output": "~/Desktop/team-skills/기타/",
+    },
+    "pdp-capture-prep": {
+        "desc": "SundayHug PDP HTML·CSS를 이미지 캡처 최적화 상태로 일괄 변환. IntersectionObserver 기반 스크롤 리빌(.v/.on) 제거, 본문·라벨 폰트 키움(+2px), Cafe24 원격 CSS를 로컬 경로로 치환. pdp-section-capture 실행 전 전처리로 사용.",
+        "usecases": [
+            {"cmd": "이 PDP 캡처 최적화해줘", "note": "스크롤 리빌 제거 + 폰트 키움"},
+            {"cmd": "PDP 정적화", "note": "JS 없이 깔끔한 정적 렌더"},
+            {"cmd": "Cafe24 CSS 로컬화", "note": "원격 → 로컬 경로 치환"},
+        ],
+        "capabilities": ["IntersectionObserver 정리", "폰트 +2px", "Cafe24 CSS 로컬화", "정적 렌더 최적화"],
+        "output": "~/Desktop/team-skills/상세페이지/",
     },
     "pdp-section-capture": {
         "desc": "상세페이지 HTML을 디자인 단위 섹션별로 잘라 고해상도 PNG 시리즈로 출력. HTML 주석 기반.",

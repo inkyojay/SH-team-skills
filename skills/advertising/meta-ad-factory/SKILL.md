@@ -1,17 +1,29 @@
 ---
 name: meta-ad-factory
-description: 메타(Facebook/Instagram) 광고 소재를 벌크로 자동 생성하는 스킬. 제품 URL + 이미지를 입력하면 ① USP 자동 분석 → ② 타겟/톤별 카피 매트릭스 생성 → ③ 메타 광고 규격별 HTML 크리에이티브 벌크 생성 → ④ 로컬 FastAPI 서버 기반 인터랙티브 preview-grid (카드별 📥 단건 PNG on-demand / ✏️ 텍스트+스타일 편집[색상·크기·굵기·배경] / 🖼 Gemini AI 이미지 교체) → ⑤ 필요 시 Playwright 일괄 PNG 변환까지. 다음 상황에서 반드시 이 스킬을 사용한다: "메타 광고 만들어줘", "페이스북 광고 소재", "인스타 광고", "광고 크리에이티브", "광고 소재 벌크", "광고 배너 만들어줘", "SNS 광고 이미지", "퍼포먼스 마케팅 소재", "DA 소재 제작", "메타 광고 카피", "광고 에셋 생성", "A/B 테스트 소재", "리타겟팅 광고 소재" 요청 시. 제품 이미지(로컬/CDN URL)와 카피만 있으면 제품당 21개 광고 소재를 한 번에 생성, 브라우저에서 바로 편집·교체 가능.
+description: 메타(Facebook/Instagram) 광고 소재, 인스타 광고, SNS 광고 이미지, 광고 배너, 광고 크리에이티브, 광고 카피, A/B 테스트 소재, 리타겟팅 광고 소재, 레퍼런스 캡처 기반 광고 시안 제작 요청에 사용한다. 제품 URL·이미지·카피·레퍼런스를 바탕으로 편집 가능한 로컬 FastAPI preview-grid 대시보드를 만들고, 카드별 PNG 다운로드, 텍스트/크기/색/굵기 편집, Gemini AI 이미지 교체까지 지원한다.
 ---
 
 # Meta Ad Factory — 메타 광고 소재 벌크 생성 스킬
 
 ## 개요
 
-제품 이미지(로컬 파일 또는 CDN URL) + 카피 → Python 엔진으로 HTML 크리에이티브 자동 생성 → Playwright headless Chromium으로 픽셀 퍼펙트 PNG 변환
+제품 이미지(로컬 파일 또는 CDN URL) + 카피 + 레퍼런스 → HTML 크리에이티브 생성 → 로컬 FastAPI preview-grid에서 편집/이미지 교체 → 필요 시 Playwright PNG 변환
 
 **생성량**: 제품 1개당 **21개** 크리에이티브 (4 레이아웃 × 3 사이즈 × 3 톤, 스마트 조합)
 
 ---
+
+## 기본 운영 원칙
+
+앞으로 광고 제작 요청은 **편집 가능한 대시보드가 기본 결과물**이다. 정적인 `dashboard.html`이나 `python3 -m http.server`만으로 끝내지 않는다.
+
+- 사용자가 레퍼런스 캡처를 주면 먼저 시각 언어를 추출한다: 구도, 여백, 배경 질감, 카피 위계, 가격/혜택 표기, 하단 띠 배너, 제품 사진 배치.
+- 첫 시안은 보통 3개 이상 만든다: 1:1 가격/혜택형, 1:1 분할형, 9:16 스토리형을 기본값으로 삼고 제품·레퍼런스에 맞춰 조정한다.
+- 모든 개별 광고 HTML은 텍스트 노드에 `data-editable`을 붙이고, 교체 가능한 주 이미지에는 `data-image-key`를 붙인다.
+- AI 이미지 교체를 지원하려면 주 이미지를 가능하면 base64 `data:` URI로 HTML에 임베드한다. 원격 URL 이미지는 `/api/transform-image`에서 교체할 수 없다.
+- `preview-grid.html`은 `meta_ad_builder.py`의 `PREVIEW_GRID_TEMPLATE`, `build_card_html()`, `_build_images_section()` 구조를 재사용해 카드별 액션 버튼이 나오게 한다.
+- 사용자에게 보여줄 최종 URL은 항상 `server.py`가 여는 `http://127.0.0.1:{port}/preview/{slug}` 이다.
+- 정적 대시보드는 임시 공유/목록용으로만 허용한다. 정적 서버에서는 `/api/save-text`, `/api/transform-image`, `/api/png`가 동작하지 않는다.
 
 ## 핵심 파일 구조
 
@@ -57,6 +69,8 @@ skills/advertising/meta-ad-factory/
    - 이벤트 광고: `EVENT_COLORS = {"primary": "#C8A07C", "secondary": "#F5EADC", "accent": "#D4645C"}`
 
 ### STEP 1: ProductConfig 작성
+
+정형 벌크 광고(21개)가 필요하면 `ProductConfig`를 사용한다.
 
 `scripts/products/all_products.py` (기존 제품) 또는 `scripts/products/event_ads.py` (이벤트) 에 새 `ProductConfig`를 추가한다.
 
@@ -111,6 +125,23 @@ NEW_PRODUCT = ProductConfig(
 - `badge`: 짧은 강조 문구 (예: "KC인증", "-30%", "LIVE 한정")
 - `urgency_label`: urgency 레이아웃 상단 타이머 텍스트
 
+### STEP 1A: 레퍼런스 기반 빠른 시안 모드
+
+사용자가 "레퍼런스처럼", "덜 정형화되게", "일단 3개 시안"처럼 요청하면 `ProductConfig` 21종 벌크보다 빠른 시안 모드를 우선한다.
+
+1. 출력 폴더를 만든다: `~/Desktop/team-skills/광고카피/sundayhug-meta-bulk/{category}/{slug}/`
+2. `assets/`, `previews/`, `final/`를 만든다.
+3. 레퍼런스의 스타일을 반영한 개별 HTML을 3개 이상 만든다.
+   - 파일명 예: `01_hero-image_1080x1080_urgency.html`
+   - 각 HTML은 1080 기준 고정 캔버스(`.ad-container`)를 가진 완전한 HTML 문서여야 한다.
+   - 텍스트 편집 대상: `brand`, `eyebrow`, `headline`, `subtext`, `price`, `date`, `cta`, `badge`, `review_text`, `review_name` 등 의미 있는 키로 `data-editable` 지정
+   - 이미지 교체 대상: 대표 이미지 `img`에 `data-image-key="{image_key}"` 지정
+4. `meta_ad_builder.py`에서 `AdSpec`, `CopySet`, `PREVIEW_GRID_TEMPLATE`, `build_card_html()`, `_build_images_section()`를 불러와 `previews/preview-grid.html`을 생성한다.
+5. `previews/_sources.json`, `copy.csv`, `build-meta.json`을 함께 만든다.
+6. 서버로 열어 편집 기능까지 확인한 뒤 사용자에게 URL을 준다.
+
+이 모드는 "디자인 시안"을 빠르게 만들기 위한 기본값이다. PNG 파일은 필요할 때 카드별 📥 버튼 또는 `/api/png`로 생성한다.
+
 ### STEP 2: HTML 크리에이티브 빌드
 
 ```bash
@@ -149,8 +180,10 @@ output/.../product-slug/
 ### STEP 3: 로컬 서버 시작 (인터랙티브 편집 모드)
 
 ```bash
-cd skills/advertising/meta-ad-factory/scripts
-python3 server.py --slug swaddle-strap
+cd /Users/inkyo/Projects/team-skills/skills/advertising/meta-ad-factory/scripts
+
+# Python 3.10+ 필요. macOS 기본 python3가 3.9면 python3.12 또는 pyenv shim을 사용한다.
+/Users/inkyo/.pyenv/shims/python3.12 server.py --slug swaddle-strap --port 8765 --no-open
 # → 브라우저가 자동으로 http://127.0.0.1:8765/preview/swaddle-strap 오픈
 ```
 
@@ -158,6 +191,8 @@ python3 server.py --slug swaddle-strap
 - `--slug <slug>` 특정 제품 자동 오픈 (생략 시 가장 최근 빌드된 제품)
 - `--port 8765` 포트 변경
 - `--no-open` 브라우저 자동 오픈 비활성화
+
+**금지**: `python3 -m http.server`로 `dashboard.html`만 열고 완료하지 않는다. 그 방식은 정적 미리보기일 뿐이며, 텍스트 저장/이미지 교체/PNG 생성 API가 404가 된다.
 
 **서버 모드에서 preview-grid 기능**:
 - **🔍 필터**: 사이즈(1:1/4:5/9:16) · 레이아웃 · 톤
@@ -281,10 +316,31 @@ right: 120px
 - [ ] 편집/이미지 교체 후 마음에 들면 카드의 📥 버튼으로 개별 PNG 다운로드
 - [ ] (선택) `python3 export_png.py --product {slug}` 일괄 PNG 필요 시
 
+## 대시보드 검증 체크리스트
+
+사용자에게 "가능하다", "열어놨다", "완성됐다"라고 말하기 전 아래를 확인한다.
+
+```bash
+# 개별 HTML과 그리드에 편집/교체 훅이 있는지
+rg -n "data-editable|data-image-key|mfOpenTextEdit|mfOpenImgSwap|/api/save-text|/api/transform-image" \
+  ~/Desktop/team-skills/광고카피/sundayhug-meta-bulk/{category}/{slug}/previews
+
+# 서버 API가 붙어 있는지. GET 405는 정상이고, 404면 정적 서버를 잘못 띄운 것이다.
+curl -s -o /dev/null -w "%{http_code}\n" http://127.0.0.1:8765/api/save-text
+curl -s -o /dev/null -w "%{http_code}\n" http://127.0.0.1:8765/api/transform-image
+
+# PNG on-demand 생성 확인
+curl -s -X POST http://127.0.0.1:8765/api/png \
+  -H 'Content-Type: application/json' \
+  -d '{"slug":"{slug}","filename":"01_hero-image_1080x1080_urgency.html"}'
+```
+
+브라우저에서는 `http://127.0.0.1:8765/preview/{slug}`에서 카드 hover 버튼이 보이고, 텍스트 편집 모달에 글자색/크기(px)/굵기 컨트롤이 있으며, 이미지 교체 모달에 프롬프트 입력창과 `image-key`가 보여야 한다.
+
 ## 서버 요구사항
 
 ```bash
-pip install fastapi 'uvicorn[standard]' beautifulsoup4 python-multipart
+python3.12 -m pip install fastapi 'uvicorn[standard]' beautifulsoup4 python-multipart
 # playwright는 이미 설치됨 (일괄 변환용과 공유)
 ```
 

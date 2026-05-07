@@ -493,6 +493,101 @@ SPRING_PROMO = ProductConfig(
 
 
 # ---------------------------------------------------------------------------
+# Event Unit 6: ABC 아기침대 5/7 BLOOMING DAYS 라이브 (159,000원)
+# ---------------------------------------------------------------------------
+
+ABC_BED_LIVE_BLOOMING = ProductConfig(
+    brand=BRAND,
+    brand_name_ko=BRAND_KO,
+    product_name="ABC 접이식 아기침대 · 블루밍데이즈 LIVE",
+    product_slug="abc-bed-live-blooming",
+    category="events",
+    colors=EVENT_COLORS,
+    images={
+        # 카페24 스킨 로컬 이미지 + 기존 CDN 다양화
+        "crib-hero":      str(Path("/Users/inkyo/skin69/event/img/baby-crib-hero.webp")),
+        "crib-accent":    str(Path("/Users/inkyo/skin69/event/img/baby-crib-accent.webp")),
+        "main":           str(Path("/Users/inkyo/skin69/event/image/main.png")),
+        "lifestyle":      str(Path("/Users/inkyo/skin69/event/image/lifestyle.png")),
+        "exclusive":      str(Path("/Users/inkyo/skin69/event/image/exclusive-price.png")),
+        "hero-toddler":   f"{CDN}/abc/abc-v2/images/intro-02-toddler.webp",
+        "hero-mosquito":  f"{CDN}/abc/abc-mosquito-net/images/hero-01.webp",
+    },
+    tone_image_pools={
+        "emotional":     ["lifestyle", "main", "crib-accent", "hero-toddler"],
+        "informational": ["main", "exclusive", "crib-hero", "hero-mosquito"],
+        "urgency":       ["crib-hero", "exclusive", "main", "hero-toddler"],
+    },
+    copies={
+        "emotional": [
+            CopySet("emotional",
+                    "어디서든 펼치면\n우리 아기의 첫 침대",
+                    "5/7 블루밍데이즈 라이브에서\n가장 따뜻한 가격으로 만나요.",
+                    "라이브 보러가기",
+                    badge="5/7 LIVE"),
+            CopySet("emotional",
+                    "잠드는 순간이\n기억됩니다",
+                    "신생아부터 함께 자라는 ABC 접이식 침대.\n3면 메쉬 · 어디서든 안심.",
+                    "자세히 보기"),
+            CopySet("emotional",
+                    "포근한 일요일,\n가장 가까이",
+                    "썬데이허그 블루밍데이즈 단독 LIVE.\n5/7 (수) 오전 11시.",
+                    "라이브 일정 보기",
+                    badge="BLOOMING"),
+        ],
+        "informational": [
+            CopySet("informational",
+                    "라이브 한정\n28% OFF · 159,000원",
+                    "정상가 179,000원 → 라이브 164,000원\n참여 추가 5,000원 할인 = 159,000원.",
+                    "쿠폰 받으러 가기",
+                    badge="28% OFF"),
+            CopySet("informational",
+                    "5/7 (수) 11AM\n단독 LIVE",
+                    "라이브 한정가 + 선착순 사은품 + 실시간 Q&A.\n블루밍데이즈 단독 진행.",
+                    "혜택 모두 보기",
+                    badge="LIVE 단독"),
+            CopySet("informational",
+                    "KC인증 · 3면 메쉬\n접이식 아기침대",
+                    "신생아부터 사용 · 매트리스 포함 · 무료배송.\n4.87★ 실사용 리뷰 233건.",
+                    "스펙 확인하기",
+                    badge="KC인증"),
+        ],
+        "urgency": [
+            CopySet("urgency",
+                    "5/7 (수) 오전 11시\n라이브 한정 28% OFF!",
+                    "159,000원 라이브 특가 · 단 한 번의 LIVE\n방송 중에만 만날 수 있는 가격.",
+                    "알림 받기",
+                    badge="D-DAY",
+                    urgency_label="5/7 AM 11:00 LIVE"),
+            CopySet("urgency",
+                    "라이브 끝나면\n179,000원으로!",
+                    "단 한 번의 라이브 한정 28% OFF.\n참여 추가 5,000원 할인까지.",
+                    "지금 알림 받기",
+                    badge="단독 LIVE",
+                    urgency_label="5/7 ONLY · 11:00"),
+            CopySet("urgency",
+                    '"강.추.육.아.템"\n4.87★ 라이브 한정',
+                    "블루밍데이즈 단독 159,000원 · 선착순 사은품\n실시간 Q&A까지 그 자리에서.",
+                    "라이브 입장하기",
+                    badge="LIVE 한정",
+                    urgency_label="TODAY ONLY"),
+        ],
+    },
+    benefits=[
+        Benefit("🏷️", "라이브 28% OFF", "179,000원 → 159,000원"),
+        Benefit("🎁", "선착순 사은품", "라이브 시청자에게만"),
+        Benefit("💬", "실시간 Q&A", "담당자가 직접 답변"),
+        Benefit("✅", "KC 인증 · 3면 메쉬", "안심 소재 · 매트리스 포함"),
+    ],
+    review={
+        "text": '"강.추.육.아.템! 휴대성, 안정성, 견고함 모두 만족스러워요. 블루밍데이즈 라이브 가격이라 더 좋네요."',
+        "name": "jas*** · 4.87★ 233건 실사용 리뷰",
+    },
+    price_label="159,000원 (라이브 한정 28% OFF · 정상가 179,000원)",
+)
+
+
+# ---------------------------------------------------------------------------
 # Runner
 # ---------------------------------------------------------------------------
 
@@ -502,6 +597,7 @@ ALL_EVENTS = [
     REFLUX_ONEDAY,
     SWADDLE_POCKET_WELCOME,
     SPRING_PROMO,
+    ABC_BED_LIVE_BLOOMING,
 ]
 
 

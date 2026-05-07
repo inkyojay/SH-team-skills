@@ -104,8 +104,19 @@ GET {downloadUrl}  →  TSV 파일
 
 ### 실행 예시
 ```bash
-cd /mnt/skills/user/naver-ads-reporter
-python scripts/stat_report.py \
+# 로컬 team-skills 환경에서는 .env에 NAVER_CUSTOMER_ID/NAVER_API_KEY/NAVER_SECRET_KEY가 있음
+cd ~/Projects/team-skills
+set -a; source .env; set +a
+python3 skills/advertising/naver-ads-reporter/scripts/run_report.py \
+  --date-from 2026-04-14 \
+  --date-to 2026-04-20 \
+  --include-shopping \
+  --output /tmp/naver_ads_report_20260414_20260420.html
+```
+
+단일 Stat Report만 확인할 때:
+```bash
+python3 skills/advertising/naver-ads-reporter/scripts/stat_report.py \
   --customer-id $NAVER_CUSTOMER_ID \
   --api-key $NAVER_API_KEY \
   --secret-key $NAVER_SECRET_KEY \
@@ -182,6 +193,16 @@ python scripts/stat_report.py \
 - `400 invalid.signature` → 시그니처 생성 로직 재확인 (timestamp 단위: ms)
 - `401 unauthorized` → 키 만료 or 잘못됨 → 사용자에게 재확인
 - `429 rate limit` → 60초 대기 후 재시도, 3회 실패 시 포기
+- `400 code=10004 선택하신 조건에 지표가 확인되지 않습니다` → 당일/최근일 데이터가 아직 생성되지 않았거나 해당 리포트 타입 지표가 없음. 직전일까지 집계하고 누락 일자를 명시한다.
+- `400 code=11001 잘못된 파라미터 형식` on `SHOPPING_PRODUCT` → 현재 계정/리포트 타입 조합에서 상품 리포트가 거부될 수 있음. `AD` + `AD_CONVERSION` 기준으로 우선 분석하고 상품별 분석은 별도 검증한다.
+
+### 전환/ROAS 계산 주의
+- `AD_CONVERSION`은 `conv_type == "purchase"`만 구매 전환/구매 전환매출로 집계한다. `add_to_cart` 등 전체 전환을 섞으면 ROAS가 과대계상된다.
+- `AD`와 `AD_CONVERSION`을 조인할 때는 최소 `date + campaign_id + adgroup_id + keyword_id + ad_id + business_channel_id + bsn_num + pc_mobile_type`처럼 가능한 공통 키를 모두 사용한다. `ad_id` 또는 `campaign_id/adgroup_id/ad_id`만으로 조인하면 여러 날짜/디바이스의 전환값이 AD row마다 반복되어 ROAS가 크게 부풀 수 있다.
+- 사용자가 "네이버 광고 효율"을 묻는 경우 SAS 주문 `inflowPath` 분석보다 이 검색광고 API 리포트를 먼저 사용하고, 주문 유입경로 분석은 보조 검증으로만 사용한다.
+
+- `KEYWORD` StatReport는 계정/기간 조건에 따라 `400 code=11001`로 실패할 수 있음. 이 경우 `AD` 리포트의 `keyword_id`와 `/ncc/keywords` 마스터를 조인해 키워드형 광고만 분석하고, 쇼핑검색/지면형의 `keyword_id='-'`는 광고그룹/소재 단위로 해석한다.
+- `AD_DETAIL` TSV는 실제 16컬럼(`date, customer_id, campaign_id, adgroup_id, keyword_id, ad_id, business_channel_id, slot_type, hour, media, pc_mobile_type, impressions, clicks, cost, conv_cnt, avg_rank`)로 파싱한다. 예전 스키마처럼 media/device/hour를 누락하면 노출·클릭·비용 컬럼이 밀려 잘못 집계된다.
 
 ### 읽기 전용 원칙 (v1)
 이 스킬은 **읽기 전용**. 캠페인/광고그룹/키워드 생성·수정·삭제·상태변경

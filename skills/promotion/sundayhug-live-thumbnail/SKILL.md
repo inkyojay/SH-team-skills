@@ -116,7 +116,7 @@ html, body {
   height: 100%;
   object-fit: cover;
   object-position: 50% 0%;
-  filter: brightness(.88) contrast(.96) saturate(.92);
+  filter: brightness(.98) contrast(.98) saturate(.98);
 }
 ```
 
@@ -132,9 +132,9 @@ html, body {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(0,0,0,.10) 0%,
-    rgba(0,0,0,.10) 45%,
-    rgba(0,0,0,.18) 100%
+    rgba(0,0,0,.03) 0%,
+    rgba(0,0,0,.04) 48%,
+    rgba(0,0,0,.11) 100%
   );
 }
 ```
@@ -235,7 +235,7 @@ LIVE 일정 캡슐:
   </div>
 
   <div class="kicker">Blooming Days · Shopping Live</div>
-  <div class="title">ABC 아기침대 라이브 혜택<br>+ 전용 악세사리 쿠폰 공개</div>
+  <div class="title">ABC 아기침대 라이브 혜택<br>+ 전용 쿨매트 할인</div>
 </div>
 ```
 
@@ -341,7 +341,7 @@ python3 -m pip install --user pillow
 LIVE 5월 7일 (목) 오전 11시
 BLOOMING DAYS · SHOPPING LIVE
 ABC 아기침대 라이브 혜택
-+ 전용 악세사리 쿠폰 공개
++ 전용 쿨매트 할인
 ```
 
 ## 흔한 실패와 수정
@@ -361,4 +361,4 @@ ABC 아기침대 라이브 혜택
   - 이 스타일에서는 제거한다. 정보는 하단에만 집중.
 
 - 배경이 너무 어두움
-  - 하단 별도 gradient를 끄고 전체 overlay를 `rgba(0,0,0,.10~.18)` 정도로 낮춘다.
+  - lifestyle/cosleep 계열 배경은 침침해 보이지 않도록 기본 `brightness(.98)`와 약한 overlay(`.03 → .11`)를 쓴다. 텍스트 가독성이 부족할 때만 그림자를 먼저 강화하고, 전체 오버레이를 과하게 어둡게 하지 않는다.

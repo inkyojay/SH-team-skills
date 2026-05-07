@@ -1,7 +1,26 @@
 import { GoogleGenAI, Modality } from "@google/genai";
 import sharp from "sharp";
 import fs from "fs/promises";
+import { existsSync, readdirSync } from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const DEFAULT_REF_DIR = path.resolve(__dirname, "../references/default-mood");
+const DEFAULT_REF_EXTS = [".jpg", ".jpeg", ".png", ".webp"];
+
+function resolveDefaultReference() {
+  if (!existsSync(DEFAULT_REF_DIR)) return null;
+  try {
+    const entries = readdirSync(DEFAULT_REF_DIR);
+    const hit = entries.find(f =>
+      DEFAULT_REF_EXTS.includes(path.extname(f).toLowerCase()) && !f.startsWith(".")
+    );
+    return hit ? path.join(DEFAULT_REF_DIR, hit) : null;
+  } catch {
+    return null;
+  }
+}
 
 // ── Client ──────────────────────────────────────────────
 
@@ -224,7 +243,8 @@ function parseArgs() {
       case "--help":
         console.log(`Usage: node batch-tone-match.mjs [options]
 
-  --reference <path>    Reference image (tone source) [required]
+  --reference <path>    Reference image (tone source). Optional — falls back to
+                        ../references/default-mood/ (first image found) if omitted.
   --input <folder>      Product images folder [required]
   --output <folder>     Output folder (default: {input}-toned)
   --intensity <0-100>   Tone intensity (default: 70)
@@ -235,8 +255,14 @@ function parseArgs() {
   }
 
   if (!parsed.reference) {
-    console.error("[ERROR] --reference is required");
-    process.exit(1);
+    const def = resolveDefaultReference();
+    if (def) {
+      parsed.reference = def;
+      parsed.usedDefaultReference = true;
+    } else {
+      console.error("[ERROR] --reference is required (no default-mood reference found at " + DEFAULT_REF_DIR + ")");
+      process.exit(1);
+    }
   }
   if (!parsed.input) {
     console.error("[ERROR] --input is required");
@@ -257,6 +283,9 @@ async function main() {
   console.log("========================================\n");
 
   // 1. Load reference as raw buffer (will be cropped per-source later)
+  if (args.usedDefaultReference) {
+    console.log(`[Reference] Using DEFAULT brand-mood reference (no --reference passed)`);
+  }
   console.log(`[Reference] Loading ${args.reference}...`);
   const refBuffer = await fs.readFile(args.reference);
   const refMeta = await sharp(refBuffer).metadata();

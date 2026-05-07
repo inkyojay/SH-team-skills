@@ -29,7 +29,7 @@ echo -e "레포 경로: ${GREEN}${REPO_DIR}${NC}"
 DEFAULT_WORKSPACE="$HOME/ai 디자인"
 
 echo ""
-echo -e "${YELLOW}[1/5] 작업 디렉토리 설정${NC}"
+echo -e "${YELLOW}[1/6] 작업 디렉토리 설정${NC}"
 echo -e "프로모션 결과물(HTML, PNG 등)이 저장될 폴더입니다."
 echo -e "기본값: ${GREEN}${DEFAULT_WORKSPACE}${NC}"
 read -r -p "작업 디렉토리 경로 (Enter로 기본값 사용): " WORKSPACE_DIR
@@ -43,7 +43,7 @@ echo -e "  ✅ 작업 디렉토리: ${GREEN}${WORKSPACE_DIR}${NC}"
 # 2. Claude Code 커맨드 설치
 # ──────────────────────────────────────────────
 echo ""
-echo -e "${YELLOW}[2/5] Claude Code 슬래시 커맨드 설치${NC}"
+echo -e "${YELLOW}[2/6] Claude Code 슬래시 커맨드 설치${NC}"
 
 CLAUDE_COMMANDS_DIR="$HOME/.claude/commands"
 mkdir -p "$CLAUDE_COMMANDS_DIR"
@@ -67,10 +67,42 @@ done
 echo -e "  ✅ ${GREEN}${INSTALLED}개${NC} 슬래시 커맨드 설치 완료 → ${CLAUDE_COMMANDS_DIR}/"
 
 # ──────────────────────────────────────────────
-# 3. 스킬/에이전트 파일 경로 치환 (레포 내부)
+# 3. Claude Code/Codex 스킬 링크 설치
 # ──────────────────────────────────────────────
 echo ""
-echo -e "${YELLOW}[3/5] 스킬 파일 경로 설정${NC}"
+echo -e "${YELLOW}[3/6] Claude Code/Codex 스킬 링크 설치${NC}"
+
+CLAUDE_SKILLS_DIR="$HOME/.claude/skills"
+mkdir -p "$CLAUDE_SKILLS_DIR"
+
+EVENT_SKILL_SRC="$REPO_DIR/skills/promotion/event-page-campaign"
+EVENT_SKILL_DEST="$CLAUDE_SKILLS_DIR/event-page-campaign"
+
+if [ -d "$EVENT_SKILL_SRC" ]; then
+  ln -sfn "$EVENT_SKILL_SRC" "$EVENT_SKILL_DEST"
+  echo -e "  ✅ event-page-campaign → ${GREEN}${EVENT_SKILL_DEST}${NC}"
+else
+  echo -e "  ${YELLOW}⏭️  event-page-campaign 스킬 폴더가 없어 건너뜀${NC}"
+fi
+
+CODEX_SKILLS_DIR="${CODEX_HOME:-$HOME/.codex}/skills"
+mkdir -p "$CODEX_SKILLS_DIR"
+
+META_SKILL_SRC="$REPO_DIR/skills/advertising/meta-ad-factory"
+META_SKILL_DEST="$CODEX_SKILLS_DIR/meta-ad-factory"
+
+if [ -d "$META_SKILL_SRC" ]; then
+  ln -sfn "$META_SKILL_SRC" "$META_SKILL_DEST"
+  echo -e "  ✅ meta-ad-factory → ${GREEN}${META_SKILL_DEST}${NC}"
+else
+  echo -e "  ${YELLOW}⏭️  meta-ad-factory 스킬 폴더가 없어 건너뜀${NC}"
+fi
+
+# ──────────────────────────────────────────────
+# 4. 스킬/에이전트 파일 경로 치환 (레포 내부)
+# ──────────────────────────────────────────────
+echo ""
+echo -e "${YELLOW}[4/6] 스킬 파일 경로 설정${NC}"
 
 PATCHED=0
 # 플레이스홀더가 있는 모든 파일을 찾아서 치환
@@ -93,10 +125,10 @@ if command -v git &> /dev/null && [ -d "$REPO_DIR/.git" ]; then
 fi
 
 # ──────────────────────────────────────────────
-# 4. 설정 파일 저장 (나중에 업데이트 시 재사용)
+# 5. 설정 파일 저장 (나중에 업데이트 시 재사용)
 # ──────────────────────────────────────────────
 echo ""
-echo -e "${YELLOW}[4/5] 설정 저장${NC}"
+echo -e "${YELLOW}[5/6] 설정 저장${NC}"
 
 cat > "$REPO_DIR/.env.local" <<EOF
 # team-skills 로컬 설정 (setup.sh가 자동 생성)
@@ -109,10 +141,10 @@ EOF
 echo -e "  ✅ 설정 저장 → ${GREEN}.env.local${NC}"
 
 # ──────────────────────────────────────────────
-# 4. Python 의존성 확인
+# 6. Python 의존성 확인
 # ──────────────────────────────────────────────
 echo ""
-echo -e "${YELLOW}[5/5] 의존성 확인${NC}"
+echo -e "${YELLOW}[6/6] 의존성 확인${NC}"
 
 # Python 확인
 if command -v python3 &> /dev/null; then

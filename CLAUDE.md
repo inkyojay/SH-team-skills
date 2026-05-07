@@ -80,6 +80,17 @@ python3 scripts/generate-catalog.py
    ./scripts/update-docs.sh
    ```
 
+### Claude Code에서 스킬 바로 쓰기
+
+Claude Code 개인 스킬은 `~/.claude/skills/`에서 로드됩니다. 팀 저장소 스킬을 Claude Code에서 바로 쓰려면 원본 폴더를 심볼릭 링크로 연결합니다.
+
+```bash
+ln -sfn /Users/inkyo/Projects/team-skills/skills/promotion/event-page-campaign \
+  ~/.claude/skills/event-page-campaign
+```
+
+`./setup.sh`를 실행하면 위 링크가 자동으로 설치됩니다.
+
 ## 새 에이전트 추가하기
 
 1. `agents/` 폴더에 `.md` 파일 생성
@@ -112,6 +123,7 @@ python3 scripts/generate-catalog.py
 | 광고 | `advertising/` | 배너, 메타 광고, 인스타, 카카오 |
 | 브랜드 | `brand/` | 브랜드 분석, 제품 분석, 브랜드 가이드 |
 | 마케팅 | `marketing/` | CRO, 카피, 전략 |
+| 프로모션 | `promotion/` | 이벤트 페이지, 라이브 페이지, 썸네일 |
 | 도구 | `tools/` | 유틸리티, 스킬 생성 |
 
 ## API 키 설정 가이드
